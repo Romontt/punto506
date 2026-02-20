@@ -1,14 +1,14 @@
 [
   {
     "id": 1,
-    "nombre": "Taquería Torres",
+    "nombre": "Uy Ke Rico",
     "categoria": "Gastronomía",
-    "servicios_resumen": "Tacos, Gringas y Auténtico Sabor Mexicano",
-    "instagram": "https://www.instagram.com/taqueria.torres.guapiles/",
+    "servicios_resumen": "Especialistas en hamburguesas artesanales, costillas BBQ y parrillada al estilo Fast Food Grill.",
+    "instagram": "https://www.instagram.com/uykericocr/",
     "imagen": "img/uykerico.png",
-    "whatsapp": "50672522718",
-    "descripcion": "El punto de encuentro para los amantes de la cultura mexicana en Guápiles...",
-    "horario": "Martes a Domingo: 5:00 PM - 10:00 PM",
-    "direccion": "Guápiles, Pococí."
+    "whatsapp": "50689537426",
+    "descripcion": "El auténtico sabor del Fast Food Grill en Pococí. Especialistas en hamburguesas premium, costillas bañadas en salsa BBQ y parrilladas, elaboradas con ingredientes frescos y un toque artesanal único. Calidad y sabor superior para disfrutar donde quieras.",
+    "horario": "Jueves, Viernes y Sábados | 6:00 PM a 10:00 PM",
+    "direccion": "La Emilia, 100m Norte de la Panadería La Esquinita"
   }
 ]
