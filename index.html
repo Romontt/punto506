@@ -66,7 +66,10 @@
         .custom-scroll::-webkit-scrollbar { width: 4px; }
         .custom-scroll::-webkit-scrollbar-track { background: #080c14; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #10b981; }
+        
+        /* Ajuste para que el scroll horizontal sea invisible pero funcional */
         .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
 
         .tropical-header {
             background-color: #050a09;
@@ -77,22 +80,23 @@
 <body class="antialiased text-slate-100">
 
     <nav class="bg-[#050a09]/95 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between py-5 px-6 gap-6">
-            <div class="flex items-center gap-4">
-                <div class="w-10 h-10 border-2 border-[#10b981] rounded-full flex items-center justify-center bg-black/60 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-                    <span class="serif-title text-sm text-[#10b981] font-bold">506</span>
+        <div class="max-w-7xl mx-auto flex flex-row items-center justify-between h-16 md:h-24 px-4 md:px-6 gap-4">
+            
+            <div class="flex items-center gap-3 shrink-0">
+                <div class="w-8 h-8 md:w-10 md:h-10 border-2 border-[#10b981] rounded-full flex items-center justify-center bg-black/60 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+                    <span class="serif-title text-[10px] md:text-sm text-[#10b981] font-bold">506</span>
                 </div>
                 <div class="text-left">
-                    <h1 class="serif-title text-lg md:text-xl tracking-[0.2em] text-white uppercase font-black leading-none">Punto 506</h1>
-                    <p class="text-[#10b981] uppercase tracking-[0.4em] text-[8px] font-bold opacity-100 mt-1">Descubre. Conecta. Destaca.</p>
+                    <h1 class="serif-title text-sm md:text-xl tracking-[0.1em] md:tracking-[0.2em] text-white uppercase font-black leading-none">Punto 506</h1>
+                    <p class="text-[#10b981] uppercase tracking-[0.4em] text-[7px] md:text-[8px] font-bold opacity-100 mt-0.5 md:mt-1 hidden xs:block">Pococí Select</p>
                 </div>
             </div>
 
-            <div class="flex items-center gap-8 overflow-x-auto hide-scroll w-full md:w-auto justify-center">
-                <button data-cat="todos" class="filter-btn transition text-[10px] uppercase tracking-[0.3em] font-black text-[#10b981] border-b-2 border-[#10b981] pb-1 whitespace-nowrap">Todos</button>
-                <button data-cat="salud" class="filter-btn transition text-[10px] uppercase tracking-[0.3em] font-bold text-slate-300 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Salud</button>
-                <button data-cat="gastronomía" class="filter-btn transition text-[10px] uppercase tracking-[0.3em] font-bold text-slate-300 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Gastronomía</button>
-                <button data-cat="estética" class="filter-btn transition text-[10px] uppercase tracking-[0.3em] font-bold text-slate-300 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Estética</button>
+            <div class="flex items-center gap-4 md:gap-8 overflow-x-auto hide-scroll w-full md:w-auto justify-end md:justify-center py-1">
+                <button data-cat="todos" class="filter-btn transition text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-black text-[#10b981] border-b-2 border-[#10b981] pb-1 whitespace-nowrap">Todos</button>
+                <button data-cat="salud" class="filter-btn transition text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold text-slate-300 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Salud</button>
+                <button data-cat="gastronomía" class="filter-btn transition text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold text-slate-300 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Gastronomía</button>
+                <button data-cat="estética" class="filter-btn transition text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold text-slate-300 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Estética</button>
                 <div class="hidden md:block h-4 w-[1px] bg-white/20"></div>
                 <span class="hidden md:block text-[8px] uppercase tracking-[0.4em] font-black text-white/50 whitespace-nowrap">BY MONTZU CR</span>
             </div>
@@ -113,8 +117,8 @@
         </div>
     </header>
     
-    <main class="max-w-7xl mx-auto py-16 px-6">
-        <div class="flex items-center gap-4 mb-12">
+    <main class="max-w-7xl mx-auto py-12 md:py-16 px-6">
+        <div class="flex items-center gap-4 mb-8 md:mb-12">
             <div class="h-[1px] w-12 bg-[#10b981]/60"></div>
             <h2 class="serif-title text-xs md:text-sm text-white uppercase tracking-[0.5em]">Recomendaciones Select</h2>
         </div>
@@ -198,7 +202,6 @@
             const n = negociosRaw.find(item => item.id === id);
             if (!n) return;
 
-            // Lógica del Formulario
             const googleFormBase = "https://docs.google.com/forms/d/e/1FAIpQLSfuSPB2ZQBl9COJLLgRMBkZ72aqlr-bVO-Pb0c0H7UvS801hQ/viewform";
             const prefilledLink = `${googleFormBase}?usp=pp_url&entry.2100078616=${encodeURIComponent(n.nombre)}`;
 
