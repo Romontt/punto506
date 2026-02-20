@@ -4,65 +4,11 @@
     "nombre": "Taquería Torres",
     "categoria": "Gastronomía",
     "servicios_resumen": "Tacos, Gringas y Auténtico Sabor Mexicano",
+    "instagram": "https://www.instagram.com/taqueria.torres.guapiles/",
     "imagen": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?q=80&w=1000",
     "whatsapp": "50672522718",
-    "descripcion": "El punto de encuentro para los amantes de la cultura mexicana en Guápiles. Especialistas en tacos al pastor, gringas y carnes con el sazón tradicional que nos caracteriza.",
+    "descripcion": "El punto de encuentro para los amantes de la cultura mexicana en Guápiles...",
     "horario": "Martes a Domingo: 5:00 PM - 10:00 PM",
     "direccion": "Guápiles, Pococí."
-  },
-  {
-    "id": 2,
-    "nombre": "¡Uy Qué Rico!",
-    "categoria": "Gastronomía",
-    "servicios_resumen": "Postres, Repostería y Antojos Gourmet",
-    "imagen": "https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=1000",
-    "whatsapp": "50660600000",
-    "descripcion": "Endulzando momentos especiales con repostería artesanal. Desde postres clásicos hasta creaciones innovadoras que deleitan el paladar en cada bocado.",
-    "horario": "Consultar disponibilidad y pedidos especiales.",
-    "direccion": "Guápiles, Pococí."
-  },
-  {
-    "id": 3,
-    "nombre": "TropiHelados Gourmet",
-    "categoria": "Gastronomía",
-    "servicios_resumen": "Heladería Artesanal y Frutas Tropicales",
-    "imagen": "https://images.unsplash.com/photo-1501443762994-82bd5dabb892?q=80&w=1000",
-    "whatsapp": "50680000000",
-    "descripcion": "Una experiencia refrescante y sofisticada. Helados elaborados con ingredientes de primera calidad y combinaciones tropicales únicas en la zona.",
-    "horario": "Abierto todos los días de 11:00 AM - 7:00 PM",
-    "direccion": "Centro de Guápiles."
-  },
-  {
-    "id": 4,
-    "nombre": "María del Mar Estética & Spa",
-    "categoria": "Estética",
-    "servicios_resumen": "Cuidado Facial, Corporal y Relajación",
-    "imagen": "https://images.unsplash.com/photo-1544161515-4ae6ce6db874?q=80&w=1000",
-    "whatsapp": "50688000000",
-    "descripcion": "Santuario de bienestar dedicado al cuidado de tu piel y cuerpo. Ofrecemos tratamientos avanzados de estética facial y masajes terapéuticos en un ambiente exclusivo.",
-    "horario": "Lunes a Sábado bajo cita previa.",
-    "direccion": "Guápiles, Pococí."
-  },
-  {
-    "id": 5,
-    "nombre": "Brows by María del Mar",
-    "categoria": "Estética",
-    "servicios_resumen": "Diseño de Cejas, Pestañas y Microblading",
-    "imagen": "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?q=80&w=1000",
-    "whatsapp": "50688000000",
-    "descripcion": "Especialistas en el arte de la mirada. Realzamos tu belleza natural mediante técnicas precisas de diseño de cejas y micropigmentación de alta calidad.",
-    "horario": "Atención personalizada con cita previa.",
-    "direccion": "Guápiles, Pococí."
-  },
-  {
-    "id": 6,
-    "nombre": "Montiel Diseño y Foto",
-    "categoria": "Diseño",
-    "servicios_resumen": "Fotografía Profesional y Diseño Visual",
-    "imagen": "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=1000",
-    "whatsapp": "50670000000",
-    "descripcion": "Capturando momentos y creando marcas. Expertos en fotografía comercial, eventos y diseño gráfico que elevan la identidad visual de tu proyecto o negocio.",
-    "horario": "Lunes a Viernes: 8:00 AM - 6:00 PM",
-    "direccion": "Servicio en toda la zona de Pococí."
   }
 ]
