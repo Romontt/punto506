@@ -6,9 +6,21 @@
     "servicios_resumen": "Hamburguesas artesanales, costillas BBQ y papas especiales. Servicio exclusivo para llevar.",
     "instagram": "https://www.instagram.com/uykericocr/",
     "imagen": "img/uykerico.png",
-    "whatsapp": "50689537426",
-    "descripcion": "El auténtico sabor del Fast Food Grill en Pococí. Especialistas en hamburguesas premium, costillas bañadas en salsa BBQ y parrilladas, elaboradas con ingredientes frescos y un toque artesanal único. Calidad y sabor superior para disfrutar donde quieras.",
+    "whatsapp": "89537426",
+    "descripcion": "Una de las propuestas más sólidas de Fast Food Grill en Pococí. Destaca por el uso de pan artesanal en sus hamburguesas y costillas con un glaseado BBQ impecable. Es la opción ideal para quienes buscan una cena con sabor a parrilla real pero con la comodidad del servicio para llevar.",
     "horario": "Jueves, Viernes y Sábados | 6:00 PM a 10:00 PM",
     "direccion": "La Emilia, 100m Norte de la Panadería La Esquinita"
-  }
+  },
+  {
+  "id": 2,
+  "nombre": "María del Mar Venegas Estética & Spa",
+  "categoria": "Estética",
+  "servicios_resumen": "Estética Facial | Corporal| Terapias Spa| Nutrición",
+  "instagram": "https://www.instagram.com/mariadelmarvenegasesteticaspa/",
+  "imagen": "img/mariadelmar.jpg",
+  "whatsapp": "61928809",
+  "descripcion": "Un centro estético que se diferencia por traer a la zona técnicas de vanguardia como el drenaje brasileño y el peeling coreano. El enfoque aquí es el bienestar integral, ofreciendo un espacio de calma donde la tecnología estética y el cuidado personal se encuentran en un ambiente profesional.",
+  "horario": "Lunes a Sábado | Previa cita",
+  "direccion": "Costado Noreste de las Oficinas del PANI, Guápiles"
+  },
 ]
