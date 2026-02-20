@@ -1,29 +1,37 @@
 [
   {
     "id": 1,
-    "nombre": "Estética Premium",
-    "categoria": "Estética",
-    "gancho": "Transformación y estilo con atención de primer nivel.",
-    "tags": ["Cita Previa", "Tendencias", "Cabello"],
-    "whatsapp": "50600000000",
-    "imagen": "https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=800"
-  },
-  {
-    "id": 2,
-    "nombre": "Clínica Dental DentalCare",
+    "nombre": "CLÍNICA DENTAL DENTALCARE",
     "categoria": "Salud",
-    "gancho": "Tecnología avanzada y cuidado humano para tu sonrisa.",
-    "tags": ["Odontología", "Emergencias", "Guápiles"],
-    "whatsapp": "50600000000",
-    "imagen": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800"
-  },
-  {
-    "id": 3,
-    "nombre": "The Gastro Pub",
-    "categoria": "Gastronomía",
-    "gancho": "De la cena a la fiesta en un solo lugar.",
-    "tags": ["Cena", "Coctelería", "Música"],
-    "whatsapp": "50600000000",
-    "imagen": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=800"
+    "servicios_resumen": "Ortodoncia, Implantes y Estética Dental",
+    "imagen": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1000",
+    "whatsapp": "50688888888",
+    "descripcion": "Contamos con tecnología de punta y un equipo humano enfocado en tu salud oral.",
+    "horario": "Lunes a Viernes: 8am - 5pm",
+    "direccion": "Guápiles, contiguo a Coopealianza"
   }
+   {
+    "id": 1,
+    "nombre": "CLÍNICA DENTAL DENTALCARE",
+    "categoria": "Salud",
+    "servicios_resumen": "Ortodoncia, Implantes y Estética Dental",
+    "imagen": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1000",
+    "whatsapp": "50688888888",
+    "descripcion": "Contamos con tecnología de punta y un equipo humano enfocado en tu salud oral.",
+    "horario": "Lunes a Viernes: 8am - 5pm",
+    "direccion": "Guápiles, contiguo a Coopealianza"
+  }
+   {
+    "id": 1,
+    "nombre": "CLÍNICA DENTAL DENTALCARE",
+    "categoria": "Salud",
+    "servicios_resumen": "Ortodoncia, Implantes y Estética Dental",
+    "imagen": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1000",
+    "whatsapp": "50688888888",
+    "descripcion": "Contamos con tecnología de punta y un equipo humano enfocado en tu salud oral.",
+    "horario": "Lunes a Viernes: 8am - 5pm",
+    "direccion": "Guápiles, contiguo a Coopealianza"
+  }
+
+  
 ]
