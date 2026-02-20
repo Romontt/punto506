@@ -50,7 +50,6 @@
         .search-input:focus {
             background: rgba(255,255,255,0.07);
             border-bottom: 1px solid var(--p506-gold);
-            box-shadow: none;
             outline: none;
         }
 
@@ -68,39 +67,38 @@
 <body class="antialiased text-slate-200">
 
     <nav class="bg-[#0d1117]/95 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center py-5 px-6 gap-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between py-5 px-6 gap-6">
             <div class="flex items-center gap-4">
                 <div class="w-10 h-10 border-2 border-[#c29d5b] rounded-full flex items-center justify-center bg-black/60 shadow-[0_0_15px_rgba(194,157,91,0.2)]">
                     <span class="serif-title text-sm text-[#c29d5b] font-bold">506</span>
                 </div>
-                <div>
-                    <h1 class="serif-title text-lg md:text-xl tracking-[0.2em] text-white uppercase font-black">Punto 506</h1>
-                    <p class="text-[#c29d5b] uppercase tracking-[0.3em] text-[8px] font-bold opacity-80 leading-none">Pococí Select</p>
+                <div class="text-left">
+                    <h1 class="serif-title text-lg md:text-xl tracking-[0.2em] text-white uppercase font-black leading-none">Punto 506</h1>
+                    <p class="text-[#c29d5b] uppercase tracking-[0.4em] text-[8px] font-bold opacity-90 mt-1">Pococí Select</p>
                 </div>
             </div>
 
-            <div class="flex items-center overflow-x-auto gap-8 hide-scroll w-full md:w-auto justify-center">
+            <div class="flex items-center gap-8 overflow-x-auto hide-scroll w-full md:w-auto justify-center">
                 <button data-cat="todos" class="filter-btn transition text-[10px] uppercase tracking-[0.3em] font-black text-[#c29d5b] border-b-2 border-[#c29d5b] pb-1 whitespace-nowrap">Todos</button>
                 <button data-cat="salud" class="filter-btn transition text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Salud</button>
                 <button data-cat="gastronomía" class="filter-btn transition text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Gastronomía</button>
                 <button data-cat="estética" class="filter-btn transition text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Estética</button>
-                <div class="hidden lg:block h-4 w-[1px] bg-white/10"></div>
-                <span class="hidden lg:block text-[8px] uppercase tracking-[0.4em] font-black text-white/30 whitespace-nowrap">BY MONTZU CR</span>
+                <div class="hidden md:block h-4 w-[1px] bg-white/10"></div>
+                <span class="hidden md:block text-[8px] uppercase tracking-[0.4em] font-black text-white/30 whitespace-nowrap">BY MONTZU CR</span>
             </div>
         </div>
     </nav>
 
-    <header class="relative py-12 md:py-20 flex flex-col items-center justify-center text-center px-4 overflow-hidden border-b border-white/5 tropical-header">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0d1117]/50 to-[#0d1117]"></div>
-        
-        <div class="relative z-10 max-w-3xl w-full animate-fade-in">
-            <h2 class="serif-title text-[#c29d5b] text-[10px] md:text-[11px] tracking-[0.5em] mb-6 uppercase font-bold">Nuestro Propósito</h2>
-            <p class="text-white text-lg md:text-2xl font-light italic leading-relaxed mb-10 px-4">
-                "Fortalecemos el comercio local en Pococí conectando a la comunidad con servicios de calidad, creando una red de crecimiento para todos."
+    <header class="relative py-12 md:py-20 tropical-header border-b border-white/5 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#0d1117]"></div>
+        <div class="relative z-10 max-w-4xl mx-auto text-center px-6 animate-fade-in">
+            <h2 class="serif-title text-[#c29d5b] text-[10px] tracking-[0.6em] mb-6 uppercase font-bold">Nuestro Propósito</h2>
+            <p class="text-white text-lg md:text-2xl font-light italic leading-relaxed mb-10 opacity-90">
+                "Punto 506 es un espacio creado para fortalecer el comercio local en Pococí. Nuestra misión es conectar a la comunidad con servicios profesionales de calidad, sirviendo como una plataforma de crecimiento mutuo donde cada negocio tiene el potencial de destacar y cada usuario encuentra lo mejor de nuestra zona."
             </p>
             
-            <div class="max-w-md mx-auto relative px-4">
-                <input type="text" id="busqueda" placeholder="BUSCAR NEGOCIO O SERVICIO..." class="search-input w-full py-3 px-4 text-[11px] tracking-[0.2em] text-white placeholder:text-gray-500 focus:outline-none uppercase">
+            <div class="max-w-md mx-auto relative">
+                <input type="text" id="busqueda" placeholder="BUSCAR EXPERIENCIA..." class="search-input w-full py-3 px-4 text-[11px] tracking-[0.2em] text-white placeholder:text-gray-500 uppercase">
             </div>
         </div>
     </header>
@@ -108,7 +106,7 @@
     <main class="max-w-7xl mx-auto py-16 px-6">
         <div class="flex items-center gap-4 mb-12">
             <div class="h-[1px] w-12 bg-[#c29d5b]/60"></div>
-            <h2 class="serif-title text-xs md:text-sm text-white/80 uppercase tracking-[0.5em]">Recomendaciones del Directorio</h2>
+            <h2 class="serif-title text-xs md:text-sm text-white/80 uppercase tracking-[0.5em]">Recomendaciones Select</h2>
         </div>
         <div id="grid-negocios" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
     </main>
@@ -122,14 +120,15 @@
         </div>
     </div>
 
-    <footer class="bg-black py-12 px-6 border-t border-white/10">
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+    <footer class="bg-black py-20 px-6 border-t border-white/10">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
             <div class="text-center md:text-left">
-                <h2 class="serif-title text-xl text-[#c29d5b] tracking-widest uppercase">Punto 506</h2>
-                <p class="text-[8px] uppercase text-gray-500 font-bold tracking-[0.4em] mt-1 italic">Elevando el estándar comercial en Pococí.</p>
+                <h2 class="serif-title text-2xl text-[#c29d5b] tracking-widest uppercase">Punto 506</h2>
+                <p class="text-[9px] uppercase text-gray-500 font-bold tracking-[0.4em] mt-1">Pococí Select</p>
             </div>
+            <p class="text-[11px] text-gray-400 font-light italic max-w-[320px] text-center leading-relaxed opacity-80">"Elevando el estándar de los servicios profesionales en la zona de Pococí."</p>
             <div class="text-center md:text-right">
-                <p class="text-[8px] uppercase text-gray-500 mb-1 font-bold tracking-widest leading-none">Un proyecto de</p>
+                <p class="text-[8px] uppercase text-gray-500 mb-1 font-bold tracking-widest">Un proyecto de</p>
                 <h3 class="serif-title text-sm text-white tracking-[0.4em]">MONTZU CR</h3>
             </div>
         </div>
@@ -146,26 +145,31 @@
                 renderCards(negociosRaw);
                 initFilters();
             } catch (e) { 
-                document.getElementById('grid-negocios').innerHTML = '<p class="text-gray-500 text-center py-20 col-span-full uppercase text-[10px] tracking-widest font-bold">Cargando datos...</p>';
+                document.getElementById('grid-negocios').innerHTML = '<p class="text-gray-500 text-center py-20 col-span-full uppercase text-[10px] tracking-widest font-bold">Iniciando Directorio...</p>';
             }
         }
 
         function renderCards(lista) {
             const grid = document.getElementById('grid-negocios');
-            grid.innerHTML = lista.map((n, i) => `
-                <div class="group glass-card rounded-2xl overflow-hidden animate-fade-in" style="animation-delay: ${i*0.05}s">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="${n.imagen}" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-110 transition duration-1000" alt="${n.nombre}">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0d1117] via-transparent opacity-90"></div>
-                        <div class="absolute top-5 left-5 bg-[#c29d5b] text-black text-[8px] px-3 py-1 font-black tracking-[0.2em] rounded-full uppercase shadow-lg">${n.categoria}</div>
+            grid.style.opacity = '0';
+            
+            setTimeout(() => {
+                grid.innerHTML = lista.map((n, i) => `
+                    <div class="group glass-card rounded-2xl overflow-hidden animate-fade-in ${i === 0 && lista.length > 2 ? 'lg:col-span-2' : ''}" style="animation-delay: ${i*0.05}s">
+                        <div class="relative ${i === 0 && lista.length > 2 ? 'h-80' : 'h-64'} overflow-hidden">
+                            <img src="${n.imagen}" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-110 transition duration-1000" alt="${n.nombre}">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#0d1117] via-transparent opacity-90"></div>
+                            <div class="absolute top-5 left-5 bg-[#c29d5b] text-black text-[8px] px-3 py-1 font-black tracking-[0.2em] rounded-full uppercase shadow-lg">${n.categoria}</div>
+                        </div>
+                        <div class="p-8 text-center">
+                            <h3 class="business-title text-xl text-white mb-3 uppercase tracking-tight">${n.nombre}</h3>
+                            <p class="text-gray-300 text-[11px] mb-8 font-light uppercase tracking-[0.15em] h-10 line-clamp-2 leading-relaxed">${n.servicios_resumen}</p>
+                            <button onclick="verDetalle(${n.id})" class="w-full py-4 bg-[#c29d5b]/10 border border-[#c29d5b]/40 text-[#c29d5b] text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-[#c29d5b] hover:text-black transition duration-500 rounded-lg">Explorar Detalles</button>
+                        </div>
                     </div>
-                    <div class="p-8 text-center">
-                        <h3 class="business-title text-xl text-white mb-3 uppercase tracking-tight">${n.nombre}</h3>
-                        <p class="text-gray-300 text-[11px] mb-8 font-light uppercase tracking-[0.15em] h-10 line-clamp-2 leading-relaxed">${n.servicios_resumen}</p>
-                        <button onclick="verDetalle(${n.id})" class="w-full py-4 bg-[#c29d5b]/10 border border-[#c29d5b]/40 text-[#c29d5b] text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-[#c29d5b] hover:text-black transition duration-500 rounded-lg">Ver Detalles</button>
-                    </div>
-                </div>
-            `).join('');
+                `).join('');
+                grid.style.opacity = '1';
+            }, 300);
         }
 
         function verDetalle(id) {
@@ -182,18 +186,34 @@
                 <div class="p-8 md:p-12 -mt-12 relative z-10 bg-[#111827] rounded-t-[3rem]">
                     <span class="text-[#c29d5b] text-[11px] font-bold tracking-[0.5em] uppercase border-b border-[#c29d5b]/30 pb-1">${n.categoria}</span>
                     <h2 class="serif-title text-3xl md:text-4xl text-white mt-6 mb-8 uppercase tracking-widest font-bold">${n.nombre}</h2>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-12 font-light italic border-l-2 border-[#c29d5b] pl-6">${n.descripcion}</p>
+                    <div class="bg-white/[0.04] p-6 md:p-8 rounded-2xl mb-10 border border-white/10 text-left">
+                         <h4 class="text-[10px] uppercase tracking-[0.3em] font-bold text-[#c29d5b] mb-4">Servicios Principales</h4>
+                         <p class="text-gray-200 text-sm md:text-base leading-relaxed font-light">${n.servicios_resumen}</p>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-12 font-light italic border-l-2 border-[#c29d5b] pl-6 text-left">
+                        ${n.descripcion || 'Servicio de alta calidad seleccionado por Punto 506.'}
+                    </p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-white/10 pt-10 mb-12 text-left">
-                        <div>
-                            <span class="text-[#c29d5b] font-bold text-[10px] uppercase tracking-[0.3em] block mb-1">Horario</span>
-                            <span class="text-gray-300 text-xs font-light">${n.horario}</span>
+                        <div class="flex items-start gap-4">
+                            <div class="mt-1 text-[#c29d5b]">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div>
+                                <span class="text-[#c29d5b] font-bold text-[10px] uppercase tracking-[0.3em] block mb-1">Horario</span>
+                                <span class="text-gray-300 text-xs font-light">${n.horario}</span>
+                            </div>
                         </div>
-                        <div>
-                            <span class="text-[#c29d5b] font-bold text-[10px] uppercase tracking-[0.3em] block mb-1">Ubicación</span>
-                            <span class="text-gray-300 text-xs font-light">${n.direccion}</span>
+                        <div class="flex items-start gap-4">
+                            <div class="mt-1 text-[#c29d5b]">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div>
+                                <span class="text-[#c29d5b] font-bold text-[10px] uppercase tracking-[0.3em] block mb-1">Ubicación</span>
+                                <span class="text-gray-300 text-xs font-light">${n.direccion}</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex flex-col sm:flex-row gap-4 mb-12">
                         <a href="https://wa.me/${n.whatsapp}" target="_blank" class="w-full text-center py-5 bg-[#c29d5b] text-black text-[11px] font-black uppercase tracking-[0.2em] hover:bg-white transition duration-300 rounded-xl shadow-xl">WhatsApp Directo</a>
                         <a href="${n.instagram || '#'}" target="_blank" class="w-full text-center py-5 border border-white/20 text-white text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition duration-300 rounded-xl">Instagram</a>
                     </div>
@@ -207,6 +227,10 @@
             document.getElementById('modal-negocio').classList.add('hidden');
             document.body.style.overflow = 'auto';
         }
+
+        document.getElementById('modal-negocio').addEventListener('click', function(e) {
+            if (e.target === this) cerrarModal();
+        });
 
         function initFilters() {
             const input = document.getElementById('busqueda');
