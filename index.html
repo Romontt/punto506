@@ -7,11 +7,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* Ajuste de paleta: Verde Selva Profundo y acento Esmeralda */
         :root { 
             --p506-dark: #050a09; 
+            --p506-accent: #10b981; /* Verde Caribe */
             --p506-gold: #c29d5b; 
-            --p506-green-accent: #10b981; 
         }
         body { 
             font-family: 'Inter', sans-serif; 
@@ -36,7 +35,7 @@
         #grid-negocios { transition: opacity 0.5s ease-in-out; }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.03); 
+            background: rgba(30, 41, 59, 0.2); 
             backdrop-filter: blur(12px);
             border: 1px solid rgba(16, 185, 129, 0.15);
             box-shadow: 0 10px 30px -15px rgba(0,0,0,0.7);
@@ -45,11 +44,8 @@
             flex-direction: column;
             height: 100%;
         }
-        @media (min-width: 768px) {
-            .glass-card { background: rgba(255, 255, 255, 0.02); }
-        }
         .glass-card:hover {
-            border-color: var(--p506-green-accent);
+            border-color: var(--p506-accent);
             background: rgba(16, 185, 129, 0.05);
             transform: translateY(-8px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 15px rgba(16, 185, 129, 0.1);
@@ -63,18 +59,18 @@
         }
         .search-input:focus {
             background: rgba(255,255,255,0.07);
-            border-bottom: 1px solid var(--p506-green-accent);
+            border-bottom: 1px solid var(--p506-accent);
             outline: none;
         }
 
         .custom-scroll::-webkit-scrollbar { width: 4px; }
-        .custom-scroll::-webkit-scrollbar-track { background: #050a09; }
+        .custom-scroll::-webkit-scrollbar-track { background: #080c14; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #10b981; }
         .hide-scroll::-webkit-scrollbar { display: none; }
 
         .tropical-header {
             background-color: #050a09;
-            background-image: url("data:image/svg+xml,%3Csvg width='84' height='48' viewBox='0 0 84 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0c5.37 3.5 14.78 5.08 24 0 10.34-5.7 18.41-5.66 24 0 4.8 4.85 12.41 4.96 24 0 5.42-2.33 8.33-1 12 0v48H0V0z' fill='%2310b981' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='84' height='48' viewBox='0 0 84 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0c5.37 3.5 14.78 5.08 24 0 10.34-5.7 18.41-5.66 24 0 4.8 4.85 12.41 4.96 24 0 5.42-2.33 8.33-1 12 0v48H0V0z' fill='%2310b981' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
         }
     </style>
 </head>
@@ -202,43 +198,38 @@
             const n = negociosRaw.find(item => item.id === id);
             if (!n) return;
             document.getElementById('modal-content').innerHTML = `
-                <div class="relative h-72 md:h-96">
+                <div class="relative h-64 md:h-72">
                     <img src="${n.imagen}" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#0a1412] via-transparent"></div>
                 </div>
-                <div class="p-8 md:p-12 -mt-12 relative z-10 bg-[#0a1412] rounded-t-[3rem] animate-reveal">
-                    <span class="text-[#10b981] text-[11px] font-bold tracking-[0.5em] uppercase border-b border-[#10b981]/30 pb-1">${n.categoria}</span>
-                    <h2 class="serif-title text-3xl md:text-4xl text-white mt-6 mb-8 uppercase tracking-widest font-bold">${n.nombre}</h2>
-                    <div class="bg-white/[0.04] p-6 md:p-8 rounded-2xl mb-10 border border-white/10 text-left">
-                         <h4 class="text-[10px] uppercase tracking-[0.3em] font-bold text-[#10b981] mb-4">Servicios Principales</h4>
-                         <p class="text-gray-200 text-sm md:text-base leading-relaxed font-light">${n.servicios_resumen}</p>
+                <div class="p-6 md:p-10 -mt-10 relative z-10 bg-[#0a1412] rounded-t-[2.5rem] animate-reveal">
+                    <span class="text-[#10b981] text-[10px] font-bold tracking-[0.4em] uppercase border-b border-[#10b981]/30 pb-1">${n.categoria}</span>
+                    <h2 class="serif-title text-2xl md:text-3xl text-white mt-4 mb-6 uppercase tracking-widest font-bold">${n.nombre}</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-white/[0.03] p-5 rounded-xl border border-white/5">
+                             <h4 class="text-[9px] uppercase tracking-[0.2em] font-bold text-[#10b981] mb-2">Servicios</h4>
+                             <p class="text-gray-200 text-xs leading-relaxed font-light">${n.servicios_resumen}</p>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <div class="flex items-center gap-3 text-left">
+                                <div class="text-[#10b981] bg-[#10b981]/10 p-2 rounded-lg"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <div><p class="text-gray-300 text-[11px] leading-tight font-light">${n.horario}</p></div>
+                            </div>
+                            <div class="flex items-center gap-3 text-left">
+                                <div class="text-[#10b981] bg-[#10b981]/10 p-2 rounded-lg"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <div><p class="text-gray-300 text-[11px] leading-tight font-light">${n.direccion}</p></div>
+                            </div>
+                        </div>
                     </div>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-12 font-light italic border-l-2 border-[#10b981] pl-6 text-left">
+
+                    <p class="text-gray-400 text-xs leading-relaxed mb-8 font-light italic border-l-2 border-[#10b981] pl-4 text-left">
                         ${n.descripcion || 'Servicio de alta calidad seleccionado por Punto 506.'}
                     </p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-white/10 pt-10 mb-12 text-left">
-                        <div class="flex items-start gap-4">
-                            <div class="mt-1 text-[#10b981]">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            </div>
-                            <div>
-                                <span class="text-[#10b981] font-bold text-[10px] uppercase tracking-[0.3em] block mb-1">Horario</span>
-                                <span class="text-gray-300 text-xs font-light">${n.horario}</span>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="mt-1 text-[#10b981]">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            </div>
-                            <div>
-                                <span class="text-[#10b981] font-bold text-[10px] uppercase tracking-[0.3em] block mb-1">Ubicación</span>
-                                <span class="text-gray-300 text-xs font-light">${n.direccion}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col sm:flex-row gap-4 mb-12">
-                        <a href="https://wa.me/${n.whatsapp}" target="_blank" class="w-full text-center py-5 bg-[#10b981] text-black text-[11px] font-black uppercase tracking-[0.2em] hover:bg-white transition duration-300 rounded-xl shadow-xl">WhatsApp Directo</a>
-                        <a href="${n.instagram || '#'}" target="_blank" class="w-full text-center py-5 border border-white/20 text-white text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition duration-300 rounded-xl">Instagram</a>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <a href="https://wa.me/${n.whatsapp}" target="_blank" class="w-full text-center py-4 bg-[#10b981] text-black text-[10px] font-black uppercase tracking-[0.2em] hover:bg-white transition duration-300 rounded-xl">WhatsApp Directo</a>
+                        <a href="${n.instagram || '#'}" target="_blank" class="w-full text-center py-4 border border-white/10 text-white text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/10 transition duration-300 rounded-xl">Instagram</a>
                     </div>
                 </div>
             `;
