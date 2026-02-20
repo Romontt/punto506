@@ -15,7 +15,6 @@
         body { 
             font-family: 'Inter', sans-serif; 
             background-color: #0f172a;
-            /* Se redujo la opacidad del blanco (de 0.94 a 0.85) para que el fondo sea más claro y visible */
             background-image: linear-gradient(to bottom, rgba(248, 250, 252, 0.85), rgba(226, 232, 240, 0.85)), 
                               url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1600');
             background-attachment: fixed;
@@ -55,7 +54,7 @@
     </header>
     
     <nav class="bg-white/90 backdrop-blur-md border-b sticky top-0 z-50 shadow-sm">
-        <div class="max-w-6xl mx-auto flex justify-around items-center py-5 overflow-x-auto gap-8 px-4">
+        <div class="max-w-7xl mx-auto flex justify-around items-center py-5 overflow-x-auto gap-8 px-4">
             <button class="hover:text-[#c29d5b] transition text-xs md:text-sm uppercase tracking-[0.2em] font-bold text-[#c29d5b] border-b-2 border-[#c29d5b] pb-1">Todos</button>
             <button class="hover:text-[#c29d5b] transition text-xs md:text-sm uppercase tracking-[0.2em] font-medium text-slate-600 pb-1 border-b-2 border-transparent">Salud</button>
             <button class="hover:text-[#c29d5b] transition text-xs md:text-sm uppercase tracking-[0.2em] font-medium text-slate-600 pb-1 border-b-2 border-transparent">Gastronomía</button>
@@ -65,9 +64,10 @@
         </div>
     </nav>
 
-    <main class="max-w-6xl mx-auto py-20 px-6">
-        <h2 class="serif-title text-2xl mb-12 text-slate-800 border-l-4 border-[#c29d5b] pl-5 uppercase tracking-widest">Experiencias Curadas</h2>
-        <div id="grid-negocios" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"></div>
+    <main class="max-w-7xl mx-auto py-16 px-6">
+        <h2 class="serif-title text-2xl mb-10 text-slate-800 border-l-4 border-[#c29d5b] pl-5 uppercase tracking-widest">Experiencias Curadas</h2>
+        
+        <div id="grid-negocios" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
     </main>
 
     <footer class="bg-[#0f172a] text-white py-10 px-6 border-t border-[#c29d5b]/50">
@@ -92,15 +92,13 @@
                 const data = await response.json();
                 const grid = document.getElementById('grid-negocios');
                 grid.innerHTML = data.map(n => `
-                    <div class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-[#c29d5b]/10 hover:border-[#c29d5b]/40">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="${n.imagen}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="${n.nombre}">
-                            <div class="absolute top-4 left-4 bg-[#0f172a]/95 backdrop-blur-md text-[#c29d5b] text-[9px] px-3 py-1 font-bold tracking-widest rounded-sm uppercase border border-[#c29d5b]/20">${n.categoria}</div>
+                    <div class="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 border border-[#c29d5b]/10 hover:border-[#c29d5b]/40">
+                        <div class="relative h-48 overflow-hidden"> <img src="${n.imagen}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="${n.nombre}">
+                            <div class="absolute top-3 left-3 bg-[#0f172a]/95 backdrop-blur-md text-[#c29d5b] text-[8px] px-2 py-1 font-bold tracking-widest rounded-sm uppercase border border-[#c29d5b]/20">${n.categoria}</div>
                         </div>
-                        <div class="p-8 text-center bg-gradient-to-b from-white to-slate-50">
-                            <h3 class="business-title text-lg text-slate-900 mb-3 uppercase tracking-tight">${n.nombre}</h3>
-                            <p class="text-slate-500 text-xs mb-8 font-light leading-relaxed italic px-2">"${n.gancho}"</p>
-                            <a href="https://wa.me/${n.whatsapp}" class="inline-block w-full py-3 border border-[#c29d5b] text-[#c29d5b] text-[10px] font-bold uppercase tracking-widest hover:bg-[#c29d5b] hover:text-white transition duration-300 rounded-sm">Explorar Detalles</a>
+                        <div class="p-6 text-center bg-gradient-to-b from-white to-slate-50"> <h3 class="business-title text-base text-slate-900 mb-2 uppercase tracking-tight">${n.nombre}</h3>
+                            <p class="text-slate-500 text-[11px] mb-6 font-light leading-relaxed italic px-1 line-clamp-2">"${n.gancho}"</p>
+                            <a href="https://wa.me/${n.whatsapp}" class="inline-block w-full py-2.5 border border-[#c29d5b] text-[#c29d5b] text-[9px] font-bold uppercase tracking-widest hover:bg-[#c29d5b] hover:text-white transition duration-300 rounded-sm">Explorar Detalles</a>
                         </div>
                     </div>
                 `).join('');
