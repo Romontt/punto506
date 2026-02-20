@@ -11,81 +11,74 @@
         body { 
             font-family: 'Inter', sans-serif; 
             background-color: #080c14;
-            /* Fondo con textura de selva nocturna muy sutil */
+            /* Fondo inspirado en la exuberancia de Limón */
             background-image: linear-gradient(to bottom, rgba(8, 12, 20, 0.98), rgba(15, 23, 42, 0.95)), 
-                              url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&q=80&w=1600');
+                              url('https://images.unsplash.com/photo-1591140026214-7299097e3725?auto=format&fit=crop&q=80&w=1600');
             background-attachment: fixed; background-size: cover; background-position: center;
         }
         .serif-title { font-family: 'Cinzel', serif; }
         .business-title { font-family: 'Montserrat', sans-serif; }
         
-        /* Animaciones */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .animate-fade-in { animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 
-        /* Estilo de Tarjetas */
         .glass-card {
-            background: rgba(30, 41, 59, 0.3);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(194, 157, 91, 0.1);
+            background: rgba(30, 41, 59, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(194, 157, 91, 0.08);
             transition: all 0.4s ease;
         }
         .glass-card:hover {
             border-color: var(--p506-gold);
-            background: rgba(30, 41, 59, 0.5);
+            background: rgba(30, 41, 59, 0.45);
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
         .custom-scroll::-webkit-scrollbar { width: 4px; }
-        .custom-scroll::-webkit-scrollbar-track { background: #080c14; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #c29d5b; }
-        
         .hide-scroll::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="antialiased text-slate-300">
 
-    <header class="relative py-20 flex items-center justify-center text-white overflow-hidden border-b border-white/5">
-        <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&q=80&w=1600" class="absolute inset-0 w-full h-full object-cover opacity-20 scale-110" alt="Pococí">
-        <div class="absolute inset-0 bg-gradient-to-b from-[#080c14]/40 via-[#080c14] to-[#080c14]"></div>
+    <header class="relative py-12 flex items-center justify-center text-white overflow-hidden border-b border-white/5">
+        <img src="https://images.unsplash.com/photo-1544979592-7497171e5108?auto=format&fit=crop&q=80&w=1600" class="absolute inset-0 w-full h-full object-cover opacity-15 scale-105" alt="Costa Rica Caribbean">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#080c14] via-transparent"></div>
         
         <div class="relative z-10 text-center px-4 w-full max-w-4xl animate-fade-in">
-            <div class="mb-6 flex justify-center">
-                <div class="w-16 h-16 border-2 border-[#c29d5b] rounded-full flex items-center justify-center bg-black/40 backdrop-blur-md shadow-[0_0_20px_rgba(194,157,91,0.2)]">
-                    <span class="serif-title text-2xl text-[#c29d5b] font-bold">506</span>
+            <div class="mb-4 flex justify-center">
+                <div class="w-12 h-12 border border-[#c29d5b] rounded-full flex items-center justify-center bg-black/40 backdrop-blur-md">
+                    <span class="serif-title text-xl text-[#c29d5b] font-bold">506</span>
                 </div>
             </div>
-            <h1 class="serif-title text-4xl md:text-5xl tracking-[0.4em] mb-2 text-white uppercase font-black">Punto 506</h1>
-            <p class="text-[#c29d5b] uppercase tracking-[0.5em] text-[9px] md:text-[10px] font-bold mb-10 opacity-80">Descubre. Conecta. Destaca.</p>
+            <h1 class="serif-title text-3xl md:text-4xl tracking-[0.4em] mb-1 text-white uppercase font-black">Punto 506</h1>
+            <p class="text-[#c29d5b] uppercase tracking-[0.4em] text-[8px] md:text-[9px] font-bold mb-6 opacity-80">Descubre. Conecta. Destaca.</p>
             
-            <div class="max-w-md mx-auto relative">
-                <input type="text" id="busqueda" placeholder="Busca una experiencia en Guápiles..." class="w-full py-3 px-8 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl text-xs text-white placeholder:text-gray-500 focus:outline-none focus:border-[#c29d5b] transition-all">
+            <div class="max-w-xs mx-auto relative">
+                <input type="text" id="busqueda" placeholder="Buscar en Guápiles..." class="w-full py-2 px-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl text-xs text-white placeholder:text-gray-500 focus:outline-none focus:border-[#c29d5b] transition-all">
             </div>
         </div>
     </header>
     
     <nav class="bg-[#080c14]/95 backdrop-blur-xl border-b border-white/5 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto flex justify-center md:justify-around items-center py-6 overflow-x-auto gap-12 px-6 hide-scroll">
-            <button data-cat="todos" class="filter-btn transition text-[11px] uppercase tracking-[0.3em] font-black text-[#c29d5b] border-b-2 border-[#c29d5b] pb-2 whitespace-nowrap">Todos</button>
-            <button data-cat="salud" class="filter-btn transition text-[11px] uppercase tracking-[0.3em] font-bold text-gray-500 pb-2 border-b-2 border-transparent hover:text-white whitespace-nowrap">Salud</button>
-            <button data-cat="gastronomía" class="filter-btn transition text-[11px] uppercase tracking-[0.3em] font-bold text-gray-500 pb-2 border-b-2 border-transparent hover:text-white whitespace-nowrap">Gastronomía</button>
-            <button data-cat="estética" class="filter-btn transition text-[11px] uppercase tracking-[0.3em] font-bold text-gray-500 pb-2 border-b-2 border-transparent hover:text-white whitespace-nowrap">Estética</button>
-            <div class="hidden md:block h-4 w-[1px] bg-white/10"></div>
-            <span class="hidden md:block text-[10px] uppercase tracking-[0.4em] font-black text-white/30">BY MONTZU CR</span>
+        <div class="max-w-7xl mx-auto flex justify-center md:justify-around items-center py-5 overflow-x-auto gap-10 px-6 hide-scroll">
+            <button data-cat="todos" class="filter-btn transition text-[10px] uppercase tracking-[0.3em] font-black text-[#c29d5b] border-b-2 border-[#c29d5b] pb-1 whitespace-nowrap">Todos</button>
+            <button data-cat="salud" class="filter-btn transition text-[10px] uppercase tracking-[0.3em] font-bold text-gray-500 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Salud</button>
+            <button data-cat="gastronomía" class="filter-btn transition text-[10px] uppercase tracking-[0.3em] font-bold text-gray-500 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Gastronomía</button>
+            <button data-cat="estética" class="filter-btn transition text-[10px] uppercase tracking-[0.3em] font-bold text-gray-500 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Estética</button>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto py-20 px-6">
-        <div class="flex items-center gap-4 mb-16">
-            <div class="h-[1px] w-12 bg-[#c29d5b]"></div>
-            <h2 class="serif-title text-xl text-white uppercase tracking-[0.4em]">Experiencias Curadas</h2>
+    <main class="max-w-7xl mx-auto py-16 px-6">
+        <div class="flex items-center gap-4 mb-12">
+            <div class="h-[1px] w-10 bg-[#c29d5b]"></div>
+            <h2 class="serif-title text-lg text-white uppercase tracking-[0.3em]">Recomendaciones</h2>
         </div>
-        <div id="grid-negocios" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"></div>
+        <div id="grid-negocios" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
     </main>
 
     <div id="modal-negocio" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-black/95 backdrop-blur-md">
-        <div class="bg-[#0f172a] w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-white/10 shadow-2xl relative animate-fade-in custom-scroll">
+        <div class="bg-[#0f172a] w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-white/10 relative animate-fade-in custom-scroll">
             <button onclick="cerrarModal()" class="absolute top-6 right-6 z-20 bg-black/40 backdrop-blur-xl rounded-full p-2 text-white hover:bg-[#c29d5b] transition">
                 <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
@@ -93,16 +86,15 @@
         </div>
     </div>
 
-    <footer class="bg-black py-16 px-6 border-t border-white/5">
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+    <footer class="bg-black py-12 px-6 border-t border-white/5">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
             <div class="text-center md:text-left">
-                <h2 class="serif-title text-2xl text-[#c29d5b] tracking-widest uppercase">Punto 506</h2>
-                <p class="text-[9px] uppercase text-gray-600 font-bold tracking-[0.3em]">Pococí Select</p>
+                <h2 class="serif-title text-xl text-[#c29d5b] tracking-widest uppercase">Punto 506</h2>
+                <p class="text-[8px] uppercase text-gray-600 font-bold tracking-[0.3em]">Pococí Select</p>
             </div>
-            <p class="text-[10px] text-gray-500 font-light italic max-w-[300px] text-center leading-relaxed">"Elevando el estándar de los servicios profesionales en la zona de Pococí."</p>
+            <p class="text-[9px] text-gray-500 font-light italic max-w-[280px] text-center leading-relaxed">"Elevando el estándar de los servicios profesionales en la zona de Pococí."</p>
             <div class="text-center md:text-right">
-                <p class="text-[8px] uppercase text-gray-600 mb-1 font-bold tracking-widest">Un proyecto de</p>
-                <h3 class="serif-title text-sm text-white tracking-[0.3em]">MONTZU CR</h3>
+                <h3 class="serif-title text-[11px] text-white tracking-[0.3em]">BY MONTZU CR</h3>
             </div>
         </div>
     </footer>
@@ -118,7 +110,7 @@
                 renderCards(negociosRaw);
                 initFilters();
             } catch (e) { 
-                document.getElementById('grid-negocios').innerHTML = '<p class="text-gray-500 text-center py-20 col-span-full uppercase text-[10px] tracking-widest font-bold">Iniciando Directorio...</p>';
+                document.getElementById('grid-negocios').innerHTML = '<p class="text-gray-500 text-center py-20 col-span-full uppercase text-[10px] tracking-widest font-bold">Cargando directorio...</p>';
             }
         }
 
@@ -126,15 +118,15 @@
             const grid = document.getElementById('grid-negocios');
             grid.innerHTML = lista.map((n, i) => `
                 <div class="group glass-card rounded-2xl overflow-hidden animate-fade-in" style="animation-delay: ${i*0.1}s">
-                    <div class="relative h-60 overflow-hidden">
-                        <img src="${n.imagen}" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-110 transition duration-700" alt="${n.nombre}">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#080c14] via-transparent opacity-80"></div>
-                        <div class="absolute top-4 left-4 bg-[#c29d5b] text-black text-[8px] px-2 py-1 font-black tracking-widest rounded-sm uppercase">${n.categoria}</div>
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="${n.imagen}" class="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 group-hover:scale-110 transition duration-700" alt="${n.nombre}">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#080c14] via-transparent opacity-70"></div>
+                        <div class="absolute top-3 left-3 bg-[#c29d5b] text-black text-[7px] px-2 py-0.5 font-black tracking-widest rounded-sm uppercase">${n.categoria}</div>
                     </div>
-                    <div class="p-8 text-center">
-                        <h3 class="business-title text-lg text-white mb-3 uppercase tracking-tighter">${n.nombre}</h3>
-                        <p class="text-gray-400 text-[10px] mb-8 font-light uppercase tracking-[0.15em] h-10 line-clamp-2 leading-relaxed">${n.servicios_resumen}</p>
-                        <button onclick="verDetalle(${n.id})" class="w-full py-3 border border-[#c29d5b]/40 text-[#c29d5b] text-[9px] font-bold uppercase tracking-[0.3em] hover:bg-[#c29d5b] hover:text-black transition duration-500">Explorar Detalles</button>
+                    <div class="p-6 text-center">
+                        <h3 class="business-title text-base text-white mb-2 uppercase tracking-tighter">${n.nombre}</h3>
+                        <p class="text-gray-400 text-[9px] mb-6 font-light uppercase tracking-widest h-8 line-clamp-2">${n.servicios_resumen}</p>
+                        <button onclick="verDetalle(${n.id})" class="w-full py-2.5 border border-[#c29d5b]/30 text-[#c29d5b] text-[8px] font-bold uppercase tracking-[0.2em] hover:bg-[#c29d5b] hover:text-black transition duration-500">Ver Más</button>
                     </div>
                 </div>
             `).join('');
@@ -147,43 +139,42 @@
             const prefilledLink = `${googleFormBase}?usp=pp_url&entry.2100078616=${encodeURIComponent(n.nombre)}`;
 
             document.getElementById('modal-content').innerHTML = `
-                <div class="relative h-72">
+                <div class="relative h-64">
                     <img src="${n.imagen}" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent"></div>
                 </div>
-                <div class="p-10 -mt-12 relative z-10 bg-[#0f172a] rounded-t-[3rem]">
-                    <span class="text-[#c29d5b] text-[10px] font-bold tracking-[0.5em] uppercase">${n.categoria}</span>
-                    <h2 class="serif-title text-3xl text-white mt-3 mb-6 uppercase tracking-wider font-bold">${n.nombre}</h2>
+                <div class="p-8 -mt-10 relative z-10 bg-[#0f172a] rounded-t-[2.5rem]">
+                    <span class="text-[#c29d5b] text-[9px] font-bold tracking-[0.4em] uppercase">${n.categoria}</span>
+                    <h2 class="serif-title text-2xl text-white mt-2 mb-4 uppercase tracking-wider font-bold">${n.nombre}</h2>
                     
-                    <div class="bg-white/5 p-6 rounded-2xl mb-8 border border-white/5">
-                         <h4 class="text-[9px] uppercase tracking-[0.3em] font-bold text-[#c29d5b] mb-3">Servicios Principales</h4>
+                    <div class="bg-white/5 p-5 rounded-xl mb-6 border border-white/5">
+                         <h4 class="text-[8px] uppercase tracking-[0.2em] font-bold text-[#c29d5b] mb-2">Servicios</h4>
                          <p class="text-gray-300 text-sm leading-relaxed">${n.servicios_resumen}</p>
                     </div>
 
-                    <p class="text-gray-400 text-sm leading-relaxed mb-10 font-light italic border-l-2 border-[#c29d5b]/40 pl-6">
-                        ${n.descripcion || 'Servicio de alta calidad seleccionado por Punto 506.'}
+                    <p class="text-gray-400 text-sm leading-relaxed mb-8 font-light italic border-l border-[#c29d5b]/40 pl-5">
+                        ${n.descripcion || 'Servicio seleccionado por Punto 506.'}
                     </p>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-white/10 pt-8 mb-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-white/10 pt-6 mb-8">
                         <div>
-                            <span class="text-[#c29d5b] font-bold text-[9px] uppercase tracking-[0.3em] block mb-2">Horario</span>
+                            <span class="text-[#c29d5b] font-bold text-[8px] uppercase tracking-[0.2em] block mb-1">Horario</span>
                             <span class="text-gray-400 text-xs">${n.horario}</span>
                         </div>
                         <div>
-                            <span class="text-[#c29d5b] font-bold text-[9px] uppercase tracking-[0.3em] block mb-2">Ubicación</span>
+                            <span class="text-[#c29d5b] font-bold text-[8px] uppercase tracking-[0.2em] block mb-1">Ubicación</span>
                             <span class="text-gray-400 text-xs">${n.direccion}</span>
                         </div>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row gap-4 mb-10">
-                        <a href="${n.instagram || '#'}" target="_blank" class="flex-1 text-center py-4 border border-white/20 text-white text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-black transition duration-300 rounded-xl">Instagram</a>
-                        <a href="https://wa.me/${n.whatsapp}" target="_blank" class="flex-[1.5] text-center py-4 bg-[#c29d5b] text-black text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white transition duration-300 rounded-xl shadow-lg shadow-[#c29d5b]/10">WhatsApp Directo</a>
+                    <div class="flex flex-col sm:flex-row gap-3 mb-8">
+                        <a href="${n.instagram || '#'}" target="_blank" class="flex-1 text-center py-3.5 border border-white/10 text-white text-[9px] font-bold uppercase tracking-[0.1em] hover:bg-white hover:text-black transition duration-300 rounded-xl">Instagram</a>
+                        <a href="https://wa.me/${n.whatsapp}" target="_blank" class="flex-[1.5] text-center py-3.5 bg-[#c29d5b] text-black text-[9px] font-bold uppercase tracking-[0.1em] hover:bg-white transition duration-300 rounded-xl shadow-lg">WhatsApp Directo</a>
                     </div>
 
-                    <div class="bg-black/40 p-8 rounded-3xl border border-dashed border-white/10 text-center">
-                        <h4 class="text-[9px] font-black uppercase tracking-[0.3em] text-gray-500 mb-2">Buzón de Mejora Privado</h4>
-                        <p class="text-[10px] text-gray-400 mb-6 italic leading-relaxed">¿Cómo puede este local mejorar su servicio?</p>
-                        <a href="${prefilledLink}" target="_blank" class="text-[10px] font-bold text-[#c29d5b] uppercase tracking-widest border-b border-[#c29d5b] pb-1 hover:text-white hover:border-white transition">Enviar Sugerencia para ${n.nombre}</a>
+                    <div class="bg-black/40 p-6 rounded-2xl border border-dashed border-white/10 text-center">
+                        <p class="text-[9px] text-gray-400 mb-4 italic">¿Cómo puede este local mejorar?</p>
+                        <a href="${prefilledLink}" target="_blank" class="text-[9px] font-bold text-[#c29d5b] uppercase tracking-widest border-b border-[#c29d5b] pb-1">Enviar Sugerencia Privada</a>
                     </div>
                 </div>
             `;
@@ -225,8 +216,4 @@
         loadData();
     </script>
 </body>
-</html>
-
-</body>
-
 </html>
