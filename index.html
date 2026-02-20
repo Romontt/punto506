@@ -11,9 +11,9 @@
         body { 
             font-family: 'Inter', sans-serif; 
             background-color: #080c14;
-            /* AJUSTE: Gradiente más suave para que se vea la imagen de fondo */
+            /* AJUSTE: Imagen de fondo inspirada en la selva de Pococí */
             background-image: linear-gradient(to bottom, rgba(8, 12, 20, 0.85), rgba(15, 23, 42, 0.9)), 
-                              url('https://images.unsplash.com/photo-1581330093717-b0882e340794?auto=format&fit=crop&q=80&w=1600');
+                              url('https://images.unsplash.com/photo-1590691566403-13bd5113cc31?auto=format&fit=crop&q=80&w=1600');
             background-attachment: fixed; background-size: cover; background-position: center;
         }
         .serif-title { font-family: 'Cinzel', serif; }
@@ -47,7 +47,7 @@
 <body class="antialiased text-slate-300">
 
     <header class="relative py-12 flex items-center justify-center text-white overflow-hidden border-b border-white/5">
-        <img src="https://images.unsplash.com/photo-1541414779316-956a5084c0d4?auto=format&fit=crop&q=80&w=1600" class="absolute inset-0 w-full h-full object-cover opacity-40 scale-110" alt="Pococí">
+        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=1600" class="absolute inset-0 w-full h-full object-cover opacity-40 scale-110" alt="Pococí">
         <div class="absolute inset-0 bg-gradient-to-b from-[#080c14]/20 via-[#080c14]/60 to-[#080c14]"></div>
         
         <div class="relative z-10 text-center px-4 w-full max-w-4xl animate-fade-in">
@@ -196,7 +196,6 @@
             document.body.style.overflow = 'auto';
         }
 
-        // AJUSTE: Cerrar al tocar fuera del contenido del modal
         document.getElementById('modal-negocio').addEventListener('click', function(e) {
             if (e.target === this) cerrarModal();
         });
