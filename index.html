@@ -120,54 +120,68 @@
             `).join('');
         }
 
-        function verDetalle(id) {
-            const n = negociosRaw.find(item => item.id === id);
-            if (!n) return;
+       function verDetalle(id) {
+    const n = negociosRaw.find(item => item.id === id);
+    if (!n) return;
 
-            const content = document.getElementById('modal-content');
-            content.innerHTML = `
-                <div class="relative h-48 overflow-hidden"> 
-                    <img src="${n.imagen}" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent"></div>
-                </div>
-                <div class="p-8 -mt-8 relative z-10 bg-white rounded-t-3xl">
-                    <span class="text-[#c29d5b] text-[10px] font-bold tracking-[0.3em] uppercase">${n.categoria}</span>
-                    <h2 class="serif-title text-2xl text-slate-900 mt-2 mb-4 uppercase font-bold">${n.nombre}</h2>
-                    
-                    <div class="bg-slate-50 p-4 rounded-xl mb-6">
-                         <h4 class="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-2">Servicios</h4>
-                         <p class="text-slate-700 text-sm font-medium">${n.servicios_resumen}</p>
-                    </div>
+    const content = document.getElementById('modal-content');
+    
+    // AQUÍ pones el link de tu Google Form. 
+    // He añadido '?entry.123456789=' que es como Google identifica el campo del nombre del local.
+    const googleFormBase = "https://docs.google.com/forms/d/e/TU_ID_DE_FORMULARIO/viewform";
+    const prefilledLink = `${googleFormBase}?usp=pp_url&entry.ID_DE_PREGUNTA=${encodeURIComponent(n.nombre)}`;
 
-                    <p class="text-slate-600 text-sm leading-relaxed mb-8 font-light italic border-l-2 border-[#c29d5b]/30 pl-4">
-                        ${n.descripcion}
-                    </p>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-slate-100 pt-6">
-                        <div class="space-y-1">
-                            <span class="text-[#c29d5b] font-bold text-[10px] uppercase tracking-widest block">Horario</span>
-                            <span class="text-slate-500 text-xs">${n.horario}</span>
-                        </div>
-                        <div class="space-y-1">
-                            <span class="text-[#c29d5b] font-bold text-[10px] uppercase tracking-widest block">Ubicación</span>
-                            <span class="text-slate-500 text-xs">${n.direccion}</span>
-                        </div>
-                    </div>
-
-                    <div class="mt-10 flex flex-col sm:flex-row gap-3">
-                        <a href="${n.instagram || '#'}" target="_blank" class="flex-1 flex items-center justify-center gap-2 py-3.5 border-2 border-slate-900 text-slate-900 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-slate-900 hover:text-white transition duration-300 rounded-xl">
-                            Ver Instagram
-                        </a>
-                        <a href="https://wa.me/${n.whatsapp}" target="_blank" class="flex-[1.5] flex items-center justify-center gap-2 py-3.5 bg-[#c29d5b] text-white text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-slate-900 transition duration-300 rounded-xl shadow-lg shadow-[#c29d5b]/20">
-                            WhatsApp
-                        </a>
-                    </div>
-                </div>
-            `;
+    content.innerHTML = `
+        <div class="relative h-48 overflow-hidden"> 
+            <img src="${n.imagen}" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent"></div>
+        </div>
+        <div class="p-8 -mt-8 relative z-10 bg-white rounded-t-3xl">
+            <span class="text-[#c29d5b] text-[10px] font-bold tracking-[0.3em] uppercase">${n.categoria}</span>
+            <h2 class="serif-title text-2xl text-slate-900 mt-2 mb-4 uppercase font-bold">${n.nombre}</h2>
             
-            document.getElementById('modal-negocio').classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; 
-        }
+            <div class="bg-slate-50 p-4 rounded-xl mb-6">
+                 <h4 class="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-2">Servicios Principales</h4>
+                 <p class="text-slate-700 text-sm font-medium">${n.servicios_resumen}</p>
+            </div>
+
+            <p class="text-slate-600 text-sm leading-relaxed mb-8 font-light italic border-l-2 border-[#c29d5b]/30 pl-4">
+                ${n.descripcion || 'Servicio de alta calidad seleccionado por AXIS Pococí.'}
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-slate-100 pt-6 mb-8">
+                <div class="space-y-1">
+                    <span class="text-[#c29d5b] font-bold text-[10px] uppercase tracking-widest block">Horario</span>
+                    <span class="text-slate-500 text-xs">${n.horario}</span>
+                </div>
+                <div class="space-y-1">
+                    <span class="text-[#c29d5b] font-bold text-[10px] uppercase tracking-widest block">Ubicación</span>
+                    <span class="text-slate-500 text-xs">${n.direccion}</span>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 mb-8">
+                <a href="${n.instagram || '#'}" target="_blank" class="flex-1 flex items-center justify-center gap-2 py-3.5 border-2 border-slate-900 text-slate-900 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-slate-900 hover:text-white transition duration-300 rounded-xl">
+                    Ver Instagram
+                </a>
+                <a href="https://wa.me/${n.whatsapp}" target="_blank" class="flex-[1.5] flex items-center justify-center gap-2 py-3.5 bg-[#c29d5b] text-white text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-slate-900 transition duration-300 rounded-xl shadow-lg shadow-[#c29d5b]/20">
+                    WhatsApp Directo
+                </a>
+            </div>
+
+            <div class="bg-slate-50 p-6 rounded-2xl border border-dashed border-slate-300 text-center">
+                <h4 class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Buzón de Mejora Privado</h4>
+                <p class="text-[11px] text-slate-500 mb-4 italic">¿Cómo puede este local mejorar su servicio?</p>
+                <a href="${prefilledLink}" target="_blank" class="text-[10px] font-bold text-[#c29d5b] uppercase tracking-widest hover:underline">
+                    Enviar Sugerencia para ${n.nombre} →
+                </a>
+            </div>
+        </div>
+    `;
+    
+    document.getElementById('modal-negocio').classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; 
+}
 
         function cerrarModal() {
             document.getElementById('modal-negocio').classList.add('hidden');
