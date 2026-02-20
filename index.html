@@ -25,35 +25,29 @@
 </head>
 <body>
 
-   ¡Entendido! Vamos a corregir el tiro. Si el header está muy grande, se come toda la pantalla y distrae de lo que importa: los negocios. Vamos a compactarlo, ajustar el nombre y traducir el eslogan para que conecte mejor con la gente de la zona.
-
-Para la imagen, en lugar de jugárnosla con fotos de stock que no se parecen a Pococí, vamos a usar un fondo de color sólido "Azul Eje" con una textura elegante. Así el logo y el texto serán los protagonistas absolutos, muy al estilo de una app de lujo.
-
-Aquí tienes el código del Header compacto y en español:
-
-HTML
-    <header class="relative py-16 flex items-center justify-center text-white overflow-hidden bg-axis-blue">
-        <div class="absolute inset-0 opacity-20" style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
+  <header class="relative py-12 flex items-center justify-center text-white overflow-hidden bg-slate-900">
+        <img src="https://images.unsplash.com/photo-1542304291-b66042468e82?auto=format&fit=crop&q=80&w=1600" 
+             class="absolute inset-0 w-full h-full object-cover opacity-60" alt="Guápiles Pococí">
         
-        <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-transparent to-slate-900 opacity-60"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0f172a]/90 via-[#0f172a]/70 to-[#0f172a]"></div>
 
         <div class="relative z-10 text-center px-4 w-full max-w-4xl">
             <div class="mb-4 flex justify-center">
-                <div class="w-16 h-16 border border-axis-gold rounded-lg flex items-center justify-center bg-slate-900/40 backdrop-blur-md rotate-45 shadow-[0_0_15px_rgba(194,157,91,0.2)]">
-                    <span class="serif-title text-2xl text-axis-gold -rotate-45 font-bold">A</span>
+                <div class="w-12 h-12 border border-[#c29d5b] rounded flex items-center justify-center bg-slate-900/60 backdrop-blur-sm rotate-45 shadow-lg">
+                    <span class="serif-title text-xl text-[#c29d5b] -rotate-45 font-bold italic">A</span>
                 </div>
             </div>
             
-            <h1 class="serif-title text-4xl md:text-5xl tracking-[0.3em] mb-2 drop-shadow-lg text-white">AXIS</h1>
+            <h1 class="serif-title text-3xl md:text-4xl tracking-[0.3em] mb-1 text-white">AXIS</h1>
             
-            <p class="text-axis-gold uppercase tracking-[0.2em] text-[10px] md:text-xs font-medium mb-8 opacity-90">
+            <p class="text-[#c29d5b] uppercase tracking-[0.25em] text-[9px] md:text-[10px] font-semibold mb-6 opacity-95">
                 Descubre. Conecta. Destaca.
             </p>
             
-            <div class="max-w-lg mx-auto relative group">
+            <div class="max-w-md mx-auto relative">
                 <input type="text" placeholder="¿Qué buscas en Pococí?" 
-                       class="w-full py-3 px-6 rounded-sm bg-white/5 border border-white/20 backdrop-blur-md text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-axis-gold transition-all duration-300">
-                <div class="absolute right-4 top-1/2 -translate-y-1/2 text-axis-gold/70">
+                       class="w-full py-2.5 px-6 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs text-white placeholder:text-gray-400 focus:outline-none focus:border-[#c29d5b] transition-all">
+                <div class="absolute right-4 top-1/2 -translate-y-1/2 text-[#c29d5b]/80">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
