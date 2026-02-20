@@ -130,45 +130,53 @@
             `).join('');
         }
 
-        function initFilters() {
-            const searchInput = document.getElementById('busqueda');
-            const filterBtns = document.querySelectorAll('.filter-btn');
+       function initFilters() {
+    const searchInput = document.getElementById('busqueda');
+    const filterBtns = document.querySelectorAll('.filter-btn');
 
-            // Lógica del buscador
-            searchInput.addEventListener('input', (e) => {
-                const term = e.target.value.toLowerCase();
-                const filtered = negociosRaw.filter(n => 
-                    n.nombre.toLowerCase().includes(term) || 
-                    n.categoria.toLowerCase().includes(term) ||
-                    n.gancho.toLowerCase().includes(term)
-                );
+    // Función auxiliar para quitar tildes y normalizar texto
+    const normalizar = (texto) => {
+        return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    };
+
+    // Lógica del buscador mejorada
+    searchInput.addEventListener('input', (e) => {
+        const term = normalizar(e.target.value);
+        
+        const filtered = negociosRaw.filter(n => {
+            const nombre = normalizar(n.nombre);
+            const categoria = normalizar(n.categoria);
+            const gancho = normalizar(n.gancho);
+            
+            return nombre.includes(term) || 
+                   categoria.includes(term) ||
+                   gancho.includes(term);
+        });
+        renderCards(filtered);
+    });
+
+    // Lógica de botones de categoría (se mantiene igual, ya que son clics directos)
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const cat = btn.getAttribute('data-cat');
+            
+            filterBtns.forEach(b => {
+                b.classList.remove('text-[#c29d5b]', 'border-[#c29d5b]', 'font-bold');
+                b.classList.add('text-slate-600', 'border-transparent', 'font-medium');
+            });
+            btn.classList.add('text-[#c29d5b]', 'border-[#c29d5b]', 'font-bold');
+            btn.classList.remove('text-slate-600', 'border-transparent', 'font-medium');
+
+            if (cat === 'todos') {
+                renderCards(negociosRaw);
+            } else {
+                // También normalizamos aquí por si los datos del JSON varían en tildes
+                const filtered = negociosRaw.filter(n => normalizar(n.categoria) === normalizar(cat));
                 renderCards(filtered);
-            });
-
-            // Lógica de botones de categoría
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const cat = btn.getAttribute('data-cat');
-                    
-                    // Actualizar estilos de botones
-                    filterBtns.forEach(b => {
-                        b.classList.remove('text-[#c29d5b]', 'border-[#c29d5b]', 'font-bold');
-                        b.classList.add('text-slate-600', 'border-transparent', 'font-medium');
-                    });
-                    btn.classList.add('text-[#c29d5b]', 'border-[#c29d5b]', 'font-bold');
-                    btn.classList.remove('text-slate-600', 'border-transparent', 'font-medium');
-
-                    // Filtrar
-                    if (cat === 'todos') {
-                        renderCards(negociosRaw);
-                    } else {
-                        const filtered = negociosRaw.filter(n => n.categoria.toLowerCase() === cat);
-                        renderCards(filtered);
-                    }
-                });
-            });
-        }
-
+            }
+        });
+    });
+}
         loadAxisData();
     </script>
 </body>
