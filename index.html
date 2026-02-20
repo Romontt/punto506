@@ -13,24 +13,25 @@
         }
         body { 
             font-family: 'Inter', sans-serif; 
-            /* Fondo inspirado en el Zurquí/Pococí */
-            background-image: linear-gradient(to bottom, rgba(248, 250, 252, 0.92), rgba(226, 232, 240, 0.95)), 
-                              url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=1600');
+            background-color: #0f172a; /* Color de respaldo si falla la imagen */
+            /* Imagen de bosque nuboso (Estilo Zurquí) */
+            background-image: linear-gradient(to bottom, rgba(248, 250, 252, 0.94), rgba(226, 232, 240, 0.94)), 
+                              url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1600');
             background-attachment: fixed;
             background-size: cover;
+            background-position: center;
         }
         .serif-title { font-family: 'Cinzel', serif; }
         .business-title { font-family: 'Montserrat', sans-serif; }
         .bg-axis-blue { background-color: var(--axis-blue); }
         .text-axis-gold { color: var(--axis-gold); }
-        .border-axis-gold { border-color: var(--axis-gold); }
     </style>
 </head>
 <body>
 
     <header class="relative py-12 flex items-center justify-center text-white overflow-hidden bg-slate-900 shadow-2xl">
-        <img src="https://images.unsplash.com/photo-1542304291-b66042468e82?auto=format&fit=crop&q=80&w=1600" 
-             class="absolute inset-0 w-full h-full object-cover opacity-50" alt="Guápiles Pococí">
+        <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&q=80&w=1600" 
+             class="absolute inset-0 w-full h-full object-cover opacity-40" alt="Montañas Pococí">
         
         <div class="absolute inset-0 bg-gradient-to-b from-[#0f172a]/95 via-[#0f172a]/80 to-[#0f172a]"></div>
 
@@ -41,7 +42,7 @@
                 </div>
             </div>
             
-            <h1 class="serif-title text-3xl md:text-4xl tracking-[0.3em] mb-1 text-white">AXIS</h1>
+            <h1 class="serif-title text-3xl md:text-4xl tracking-[0.3em] mb-1 text-white uppercase">Axis</h1>
             
             <p class="text-[#c29d5b] uppercase tracking-[0.25em] text-[9px] md:text-[10px] font-semibold mb-6 opacity-95">
                 Descubre. Conecta. Destaca.
@@ -70,7 +71,7 @@
     </nav>
 
     <main class="max-w-6xl mx-auto py-20 px-6">
-        <h2 class="serif-title text-2xl mb-12 text-slate-800 border-l-4 border-axis-gold pl-5 uppercase tracking-widest">Experiencias Curadas</h2>
+        <h2 class="serif-title text-2xl mb-12 text-slate-800 border-l-4 border-[#c29d5b] pl-5 uppercase tracking-widest">Experiencias Curadas</h2>
         
         <div id="grid-negocios" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             </div>
@@ -79,11 +80,11 @@
     <footer class="bg-[#0f172a] text-white py-10 px-6 border-t border-[#c29d5b]/50">
         <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
             <div class="text-center md:text-left">
-                <h2 class="serif-title text-xl text-[#c29d5b] tracking-widest">AXIS</h2>
+                <h2 class="serif-title text-xl text-[#c29d5b] tracking-widest uppercase">Axis</h2>
                 <p class="text-[9px] tracking-[0.2em] uppercase text-gray-500 font-medium">Pococí Select</p>
             </div>
 
-            <p class="text-[11px] text-gray-400 font-light italic max-w-[280px] text-center leading-relaxed">
+            <p class="text-[11px] text-gray-400 font-light italic max-w-[280px] text-center leading-relaxed px-4">
                 "Elevando el estándar de los servicios profesionales en la zona de Pococí."
             </p>
 
@@ -106,10 +107,10 @@
                 const grid = document.getElementById('grid-negocios');
                 
                 grid.innerHTML = data.map(n => `
-                    <div class="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-[#c29d5b]/10 hover:border-[#c29d5b]/40">
+                    <div class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-[#c29d5b]/10 hover:border-[#c29d5b]/40">
                         <div class="relative h-64 overflow-hidden">
-                            <img src="${n.imagen}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="${n.nombre}">
-                            <div class="absolute top-4 left-4 bg-[#0f172a]/90 backdrop-blur-md text-[#c29d5b] text-[9px] px-3 py-1 font-bold tracking-widest rounded-sm uppercase border border-[#c29d5b]/20">
+                            <img src="${n.imagen}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="${n.nombre}">
+                            <div class="absolute top-4 left-4 bg-[#0f172a]/95 backdrop-blur-md text-[#c29d5b] text-[9px] px-3 py-1 font-bold tracking-widest rounded-sm uppercase border border-[#c29d5b]/20">
                                 ${n.categoria}
                             </div>
                         </div>
