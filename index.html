@@ -120,47 +120,55 @@
             `).join('');
         }
 
-        function verDetalle(id) {
-            const n = negociosRaw.find(item => item.id === id);
-            if (!n) return;
+       function verDetalle(id) {
+    const n = negociosRaw.find(item => item.id === id);
+    if (!n) return;
 
-            const content = document.getElementById('modal-content');
-            content.innerHTML = `
-                <div class="relative h-64 md:h-80 overflow-hidden">
-                    <img src="${n.imagen}" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent"></div>
+    const content = document.getElementById('modal-content');
+    content.innerHTML = `
+        <div class="relative h-48 overflow-hidden"> <img src="${n.imagen}" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent"></div>
+        </div>
+        <div class="p-8 -mt-8 relative z-10 bg-white rounded-t-3xl">
+            <span class="text-[#c29d5b] text-[10px] font-bold tracking-[0.3em] uppercase">${n.categoria}</span>
+            <h2 class="serif-title text-2xl text-slate-900 mt-2 mb-4 uppercase font-bold">${n.nombre}</h2>
+            
+            <div class="bg-slate-50 p-4 rounded-xl mb-6">
+                 <h4 class="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-2">Servicios</h4>
+                 <p class="text-slate-700 text-sm font-medium">${n.servicios_resumen}</p>
+            </div>
+
+            <p class="text-slate-600 text-sm leading-relaxed mb-8 font-light italic border-l-2 border-[#c29d5b]/30 pl-4">
+                ${n.descripcion}
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-slate-100 pt-6">
+                <div class="space-y-1">
+                    <span class="text-[#c29d5b] font-bold text-[10px] uppercase tracking-widest block">Horario</span>
+                    <span class="text-slate-500 text-xs">${n.horario}</span>
                 </div>
-                <div class="p-8 -mt-12 relative z-10 bg-white rounded-t-3xl">
-                    <span class="text-[#c29d5b] text-[10px] font-bold tracking-[0.3em] uppercase">${n.categoria}</span>
-                    <h2 class="serif-title text-2xl md:text-3xl text-slate-900 mt-2 mb-4 uppercase font-bold">${n.nombre}</h2>
-                    
-                    <div class="bg-slate-50 p-4 rounded-xl mb-6">
-                         <h4 class="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-2">Servicios</h4>
-                         <p class="text-slate-700 text-sm font-medium">${n.servicios_resumen}</p>
-                    </div>
-
-                    <p class="text-slate-600 text-sm leading-relaxed mb-8 font-light italic border-l-2 border-[#c29d5b]/30 pl-4">
-                        ${n.descripcion || 'Especialistas comprometidos con la excelencia en cada servicio brindado en la zona de Pococí.'}
-                    </p>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-slate-100 pt-6">
-                        <div class="space-y-1">
-                            <span class="text-[#c29d5b] font-bold text-[10px] uppercase tracking-widest block">Horario de Atención</span>
-                            <span class="text-slate-500 text-xs">${n.horario || 'Consultar directamente.'}</span>
-                        </div>
-                        <div class="space-y-1">
-                            <span class="text-[#c29d5b] font-bold text-[10px] uppercase tracking-widest block">Ubicación</span>
-                            <span class="text-slate-500 text-xs">${n.direccion || 'Guápiles, Pococí.'}</span>
-                        </div>
-                    </div>
-
-                    <div class="mt-10">
-                        <a href="https://wa.me/${n.whatsapp}" target="_blank" class="flex items-center justify-center gap-2 w-full py-4 bg-[#c29d5b] text-white text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-[#0f172a] transition duration-300 rounded-xl shadow-lg hover:shadow-[#c29d5b]/20">
-                            Reservar Cita / Contactar
-                        </a>
-                    </div>
+                <div class="space-y-1">
+                    <span class="text-[#c29d5b] font-bold text-[10px] uppercase tracking-widest block">Ubicación</span>
+                    <span class="text-slate-500 text-xs">${n.direccion}</span>
                 </div>
-            `;
+            </div>
+
+            <div class="mt-10 flex flex-col sm:flex-row gap-3">
+                <a href="${n.instagram || '#'}" target="_blank" class="flex-1 flex items-center justify-center gap-2 py-3.5 border-2 border-slate-900 text-slate-900 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-slate-900 hover:text-white transition duration-300 rounded-xl">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    Ver Instagram
+                </a>
+                <a href="https://wa.me/${n.whatsapp}" target="_blank" class="flex-[1.5] flex items-center justify-center gap-2 py-3.5 bg-[#c29d5b] text-white text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-slate-900 transition duration-300 rounded-xl shadow-lg shadow-[#c29d5b]/20">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.319 1.592 5.548 0 10.058-4.51 10.06-10.059.002-2.689-1.047-5.215-2.951-7.121-1.905-1.905-4.434-2.956-7.125-2.959-5.551 0-10.059 4.511-10.061 10.06-.001 2.105.549 4.158 1.594 5.928l-1.012 3.7 3.802-.996z"/></svg>
+                    WhatsApp
+                </a>
+            </div>
+        </div>
+    `;
+    
+    document.getElementById('modal-negocio').classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; 
+}
             
             document.getElementById('modal-negocio').classList.remove('hidden');
             document.body.style.overflow = 'hidden'; 
