@@ -1,37 +1,13 @@
 [
   {
     "id": 1,
-    "nombre": "CLÍNICA DENTAL DENTALCARE",
-    "categoria": "Salud",
-    "servicios_resumen": "Ortodoncia, Implantes y Estética Dental",
-    "imagen": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1000",
+    "nombre": "Estética Premium",
+    "categoria": "Estética",
+    "servicios_resumen": "Corte, Color y Tratamientos Capilares",
+    "imagen": "https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1000",
     "whatsapp": "50688888888",
-    "descripcion": "Contamos con tecnología de punta y un equipo humano enfocado en tu salud oral.",
-    "horario": "Lunes a Viernes: 8am - 5pm",
-    "direccion": "Guápiles, contiguo a Coopealianza"
+    "descripcion": "Somos un centro especializado en belleza integral, enfocado en resaltar tu mejor versión con productos de alta gama.",
+    "horario": "Lunes a Sábado: 9am - 7pm",
+    "direccion": "Guápiles, 100m este del Parque Central"
   }
-   {
-    "id": 1,
-    "nombre": "CLÍNICA DENTAL DENTALCARE",
-    "categoria": "Salud",
-    "servicios_resumen": "Ortodoncia, Implantes y Estética Dental",
-    "imagen": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1000",
-    "whatsapp": "50688888888",
-    "descripcion": "Contamos con tecnología de punta y un equipo humano enfocado en tu salud oral.",
-    "horario": "Lunes a Viernes: 8am - 5pm",
-    "direccion": "Guápiles, contiguo a Coopealianza"
-  }
-   {
-    "id": 1,
-    "nombre": "CLÍNICA DENTAL DENTALCARE",
-    "categoria": "Salud",
-    "servicios_resumen": "Ortodoncia, Implantes y Estética Dental",
-    "imagen": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1000",
-    "whatsapp": "50688888888",
-    "descripcion": "Contamos con tecnología de punta y un equipo humano enfocado en tu salud oral.",
-    "horario": "Lunes a Viernes: 8am - 5pm",
-    "direccion": "Guápiles, contiguo a Coopealianza"
-  }
-
-  
 ]
