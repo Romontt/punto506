@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,9 +19,14 @@
         .business-title { font-family: 'Montserrat', sans-serif; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        
+        /* Scrollbar estética para el modal */
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #c29d5b; border-radius: 10px; }
     </style>
 </head>
-<body>
+<body class="antialiased text-slate-900">
 
     <header class="relative py-12 flex items-center justify-center text-white overflow-hidden bg-slate-900 shadow-2xl">
         <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&q=80&w=1600" class="absolute inset-0 w-full h-full object-cover opacity-60" alt="Montañas Pococí">
@@ -33,7 +37,7 @@
                     <span class="serif-title text-xl text-[#c29d5b] -rotate-45 font-bold italic">A</span>
                 </div>
             </div>
-            <h1 class="serif-title text-3xl md:text-4xl tracking-[0.3em] mb-1 text-white uppercase">Axis</h1>
+            <h1 class="serif-title text-3xl md:text-4xl tracking-[0.3em] mb-1 text-white uppercase font-bold">Axis</h1>
             <p class="text-[#c29d5b] uppercase tracking-[0.25em] text-[9px] md:text-[10px] font-semibold mb-6">Descubre. Conecta. Destaca.</p>
             <div class="max-w-md mx-auto relative group">
                 <input type="text" id="busqueda" placeholder="Busca una experiencia en Guápiles..." class="w-full py-2.5 px-6 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs text-white placeholder:text-gray-400 focus:outline-none focus:border-[#c29d5b] focus:ring-1 focus:ring-[#c29d5b] transition-all duration-300">
@@ -48,7 +52,7 @@
             <button data-cat="gastronomía" class="filter-btn transition text-xs md:text-sm uppercase tracking-[0.2em] font-medium text-slate-600 pb-1 border-b-2 border-transparent hover:text-[#c29d5b]">Gastronomía</button>
             <button data-cat="estética" class="filter-btn transition text-xs md:text-sm uppercase tracking-[0.2em] font-medium text-slate-600 pb-1 border-b-2 border-transparent hover:text-[#c29d5b]">Estética</button>
             <div class="h-6 w-[1px] bg-slate-200 hidden md:block"></div>
-            <button class="text-[11px] md:text-xs uppercase tracking-[0.3em] font-black text-slate-900 pb-1">BY MONTZU CR</button>
+            <button class="text-[11px] md:text-xs uppercase tracking-[0.3em] font-black text-slate-900 pb-1 cursor-default">BY MONTZU CR</button>
         </div>
     </nav>
 
@@ -56,6 +60,17 @@
         <h2 class="serif-title text-2xl mb-10 text-slate-800 border-l-4 border-[#c29d5b] pl-5 uppercase tracking-widest">Experiencias Curadas</h2>
         <div id="grid-negocios" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
     </main>
+
+    <div id="modal-negocio" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-slate-900/90 backdrop-blur-sm transition-opacity duration-300">
+        <div class="bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl relative animate-fade-in custom-scroll">
+            <button onclick="cerrarModal()" class="absolute top-4 right-4 z-10 bg-white/80 backdrop-blur-md rounded-full p-2 text-slate-900 hover:bg-slate-200 transition shadow-md">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
 
     <footer class="bg-[#0f172a] text-white py-10 px-6 border-t border-[#c29d5b]/50 text-center md:text-left">
         <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
@@ -81,7 +96,10 @@
                 negociosRaw = await response.json();
                 renderCards(negociosRaw);
                 initFilters();
-            } catch (e) { console.error("Error", e); }
+            } catch (e) { 
+                console.error("Error cargando datos", e);
+                document.getElementById('grid-negocios').innerHTML = '<p class="text-slate-500 italic col-span-full text-center">Asegúrate de tener el archivo negocios.json creado.</p>';
+            }
         }
 
         function renderCards(lista) {
@@ -94,18 +112,76 @@
                         <div class="absolute top-3 left-3 bg-[#0f172a]/95 text-[#c29d5b] text-[8px] px-2 py-1 font-bold tracking-widest rounded-sm uppercase">${n.categoria}</div>
                     </div>
                     <div class="p-6 text-center">
-                        <h3 class="business-title text-base text-slate-900 mb-2 uppercase font-bold">${n.nombre}</h3>
-                        <p class="text-slate-500 text-[10px] mb-6 font-medium uppercase tracking-wider">${n.servicios_resumen}</p>
-                        <button onclick="alert('Próximamente: Detalle de ' + '${n.nombre}')" class="w-full py-2.5 border border-[#c29d5b] text-[#c29d5b] text-[9px] font-bold uppercase tracking-widest hover:bg-[#c29d5b] hover:text-white transition duration-300">Explorar Detalles</button>
+                        <h3 class="business-title text-base text-slate-900 mb-2 uppercase font-bold tracking-tight">${n.nombre}</h3>
+                        <p class="text-slate-500 text-[10px] mb-6 font-medium uppercase tracking-wider h-8 overflow-hidden line-clamp-2 leading-tight">${n.servicios_resumen}</p>
+                        <button onclick="verDetalle(${n.id})" class="w-full py-2.5 border border-[#c29d5b] text-[#c29d5b] text-[9px] font-bold uppercase tracking-widest hover:bg-[#c29d5b] hover:text-white transition duration-300 rounded-sm">Explorar Detalles</button>
                     </div>
                 </div>
             `).join('');
         }
 
+        function verDetalle(id) {
+            const n = negociosRaw.find(item => item.id === id);
+            if (!n) return;
+
+            const content = document.getElementById('modal-content');
+            content.innerHTML = `
+                <div class="relative h-64 md:h-80 overflow-hidden">
+                    <img src="${n.imagen}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent"></div>
+                </div>
+                <div class="p-8 -mt-12 relative z-10 bg-white rounded-t-3xl">
+                    <span class="text-[#c29d5b] text-[10px] font-bold tracking-[0.3em] uppercase">${n.categoria}</span>
+                    <h2 class="serif-title text-2xl md:text-3xl text-slate-900 mt-2 mb-4 uppercase font-bold">${n.nombre}</h2>
+                    
+                    <div class="bg-slate-50 p-4 rounded-xl mb-6">
+                         <h4 class="text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-2">Servicios</h4>
+                         <p class="text-slate-700 text-sm font-medium">${n.servicios_resumen}</p>
+                    </div>
+
+                    <p class="text-slate-600 text-sm leading-relaxed mb-8 font-light italic border-l-2 border-[#c29d5b]/30 pl-4">
+                        ${n.descripcion || 'Especialistas comprometidos con la excelencia en cada servicio brindado en la zona de Pococí.'}
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-slate-100 pt-6">
+                        <div class="space-y-1">
+                            <span class="text-[#c29d5b] font-bold text-[10px] uppercase tracking-widest block">Horario de Atención</span>
+                            <span class="text-slate-500 text-xs">${n.horario || 'Consultar directamente.'}</span>
+                        </div>
+                        <div class="space-y-1">
+                            <span class="text-[#c29d5b] font-bold text-[10px] uppercase tracking-widest block">Ubicación</span>
+                            <span class="text-slate-500 text-xs">${n.direccion || 'Guápiles, Pococí.'}</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-10">
+                        <a href="https://wa.me/${n.whatsapp}" target="_blank" class="flex items-center justify-center gap-2 w-full py-4 bg-[#c29d5b] text-white text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-[#0f172a] transition duration-300 rounded-xl shadow-lg hover:shadow-[#c29d5b]/20">
+                            Reservar Cita / Contactar
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('modal-negocio').classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function cerrarModal() {
+            document.getElementById('modal-negocio').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cerrar al clickear fuera
+        window.onclick = (e) => { if (e.target == document.getElementById('modal-negocio')) cerrarModal(); }
+
         function initFilters() {
             document.getElementById('busqueda').addEventListener('input', (e) => {
                 const t = normalizar(e.target.value);
-                renderCards(negociosRaw.filter(n => normalizar(n.nombre).includes(t) || normalizar(n.servicios_resumen).includes(t)));
+                renderCards(negociosRaw.filter(n => 
+                    normalizar(n.nombre).includes(t) || 
+                    normalizar(n.servicios_resumen).includes(t) ||
+                    normalizar(n.categoria).includes(t)
+                ));
             });
 
             document.querySelectorAll('.filter-btn').forEach(btn => {
