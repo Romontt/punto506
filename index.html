@@ -126,9 +126,8 @@
 
     const content = document.getElementById('modal-content');
     
-    // AQUÍ pones el link de tu Google Form. 
-    // He añadido '?entry.123456789=' que es como Google identifica el campo del nombre del local.
-    const googleFormBase = "https://docs.google.com/forms/d/e/TU_ID_DE_FORMULARIO/viewform";
+    
+    const googleFormBase = "https://forms.gle/tniFfgc4HAWhgoSf8";
     const prefilledLink = `${googleFormBase}?usp=pp_url&entry.ID_DE_PREGUNTA=${encodeURIComponent(n.nombre)}`;
 
     content.innerHTML = `
