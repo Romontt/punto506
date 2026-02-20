@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AXIS | El Eje de Pococí</title>
+    <title>AXIS | Pococí</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
@@ -11,53 +11,59 @@
         .serif { font-family: 'Playfair Display', serif; }
         .bg-axis-dark { background-color: #0f172a; }
         .text-axis-gold { color: #fbbf24; }
-        .border-axis-gold { border-color: #fbbf24; }
     </style>
 </head>
 <body class="bg-gray-50 text-slate-900">
 
-    <header class="bg-axis-dark text-white py-12 px-6 text-center border-b-4 border-axis-gold">
+    <header class="bg-axis-dark text-white py-12 px-6 text-center border-b-4 border-fbbf24">
         <h1 class="serif text-5xl md:text-7xl mb-2 tracking-tighter">AXIS</h1>
-        <p class="text-axis-gold uppercase tracking-[0.2em] text-sm font-light italic">Curaduría de Excelencia • Pococí</p>
+        <p class="text-axis-gold uppercase tracking-[0.2em] text-sm font-light">Curaduría de Excelencia • Pococí</p>
     </header>
 
-    <nav class="sticky top-0 bg-white shadow-sm py-4 overflow-x-auto whitespace-nowrap px-4 border-b">
-        <div class="max-w-5xl mx-auto flex gap-4 justify-start md:justify-center">
-            <button class="px-4 py-2 bg-axis-dark text-white rounded-full text-sm">Todos</button>
-            <button class="px-4 py-2 border border-slate-200 hover:border-axis-gold rounded-full text-sm transition">Gastronomía</button>
-            <button class="px-4 py-2 border border-slate-200 hover:border-axis-gold rounded-full text-sm transition">Salud</button>
-            <button class="px-4 py-2 border border-slate-200 hover:border-axis-gold rounded-full text-sm transition">Estética</button>
-            <button class="px-4 py-2 border border-slate-200 hover:border-axis-gold rounded-full text-sm transition">Servicios</button>
-        </div>
-    </nav>
-
     <main class="max-w-6xl mx-auto p-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
-                <div class="h-48 bg-slate-200 overflow-hidden">
-                    <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=800')"></div>
-                </div>
-                <div class="p-6">
-                    <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Salud</span>
-                    <h3 class="serif text-2xl mt-1 mb-2">Clínica Dental X</h3>
-                    <p class="text-slate-600 text-sm mb-4 italic">"Tecnología avanzada y cuidado humano para tu sonrisa."</p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="text-[10px] bg-slate-100 px-2 py-1 rounded">#Especialistas</span>
-                        <span class="text-[10px] bg-slate-100 px-2 py-1 rounded">#CitaPrevia</span>
-                    </div>
-                    <a href="#" class="block text-center py-3 bg-axis-dark text-white rounded-lg hover:bg-slate-800 transition font-bold text-sm">Contactar vía WhatsApp</a>
-                </div>
-            </div>
-
-            </div>
+        <div id="contenedor-negocios" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <p class="text-center col-span-full py-20 text-slate-400">Cargando experiencias...</p>
+        </div>
     </main>
 
-    <footer class="mt-20 py-10 bg-slate-100 text-center border-t border-slate-200">
-        <p class="text-xs text-slate-500 tracking-widest uppercase mb-2">Un proyecto de</p>
-        <h2 class="font-bold text-slate-800 tracking-tighter">MONTZU CR</h2>
-        <p class="text-[10px] mt-4 text-slate-400">AXIS © 2026 | Pococí, Costa Rica</p>
-    </footer>
+    <script>
+        // Función para cargar los negocios desde el JSON
+        async function cargarNegocios() {
+            try {
+                const respuesta = await fetch('negocios.json');
+                const negocios = await respuesta.json();
+                const contenedor = document.getElementById('contenedor-negocios');
+                contenedor.innerHTML = ''; // Limpiar mensaje de carga
 
+                negocios.forEach(negocio => {
+                    const card = `
+                        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition group">
+                            <div class="h-48 bg-slate-200 overflow-hidden">
+                                <div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition duration-500" style="background-image: url('${negocio.imagen}')"></div>
+                            </div>
+                            <div class="p-6">
+                                <span class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">${negocio.categoria}</span>
+                                <h3 class="serif text-2xl mt-1 mb-2">${negocio.nombre}</h3>
+                                <p class="text-slate-600 text-sm mb-4 italic">"${negocio.gancho}"</p>
+                                <div class="flex flex-wrap gap-2 mb-6">
+                                    ${negocio.tags.map(tag => `<span class="text-[10px] bg-slate-100 px-2 py-1 rounded">#${tag}</span>`).join('')}
+                                </div>
+                                <a href="https://wa.me/${negocio.whatsapp}" class="block text-center py-3 bg-axis-dark text-white rounded-lg hover:bg-slate-800 transition font-bold text-sm">Contactar</a>
+                            </div>
+                        </div>
+                    `;
+                    contenedor.innerHTML += card;
+                });
+            } catch (error) {
+                console.error('Error cargando los negocios:', error);
+            }
+        }
+
+        cargarNegocios();
+    </script>
+
+    <footer class="mt-20 py-10 bg-slate-100 text-center border-t border-slate-200">
+        <h2 class="font-bold text-slate-800 tracking-tighter uppercase">MontZu CR</h2>
+    </footer>
 </body>
 </html>
