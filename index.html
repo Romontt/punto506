@@ -173,9 +173,9 @@
             
             setTimeout(() => {
                 grid.innerHTML = lista.map((n, i) => `
-                    <div class="group glass-card overflow-hidden animate-reveal ${i === 0 && lista.length > 2 ? 'lg:col-span-2' : ''}" 
+                    <div class="group glass-card overflow-hidden animate-reveal"
                          style="animation-delay: ${i * 0.1}s">
-                        <div class="relative ${i === 0 && lista.length > 2 ? 'h-80' : 'h-64'} overflow-hidden">
+                        <div class="relative h-64 overflow-hidden">
                             <img src="${n.imagen}" class="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 group-hover:scale-105 transition duration-[1.5s]" alt="${n.nombre}">
                             <div class="absolute inset-0 bg-gradient-to-t from-[#050a09] via-transparent opacity-90"></div>
                             <div class="absolute top-6 left-6 text-[#10b981] text-[7px] font-black tracking-[0.4em] uppercase">${n.categoria}</div>
