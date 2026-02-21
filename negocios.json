@@ -22,5 +22,17 @@
   "descripcion": "Un centro estético que se diferencia por traer a la zona técnicas de vanguardia como el drenaje brasileño y el peeling coreano. El enfoque aquí es el bienestar integral, ofreciendo un espacio de calma donde la tecnología estética y el cuidado personal se encuentran en un ambiente profesional.",
   "horario": "Lunes a Sábado | Previa cita",
   "direccion": "Costado Noreste de las Oficinas del PANI, Guápiles"
-  }
+  },
+  {
+    "id": 3,
+    "nombre": "Brows by María del Mar",
+    "categoria": "Estética",
+    "servicios_resumen": "Diseño de cejas profesional, Depilación con hilo y cera, Laminado, Henna y Efecto Polvo.",
+    "instagram": "https://www.instagram.com/browsbymariadelmar/",
+    "imagen": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=2069&auto=format&fit=crop", 
+    "whatsapp": "+50661928809", 
+    "descripcion": "Especialista en el arte de la mirada desde 2015. Brows by María del Mar combina técnica avanzada y precisión artística para resaltar la belleza natural de cada cliente. Ubicado en el corazón de Guápiles, este estudio es el referente en diseño de cejas, ofreciendo desde servicios tradicionales de depilación hasta las últimas tendencias internacionales como el laminado y el efecto polvo.",
+    "horario": "Lunes a Sábado | Previa cita",
+    "direccion": "Costado Noreste de las Oficinas del PANI, Guápiles"
+}
 ]
