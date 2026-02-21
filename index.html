@@ -22,7 +22,6 @@
         }
         .serif-title { font-family: 'Cinzel', serif; letter-spacing: 0.2em; }
         .business-title { font-family: 'Montserrat', sans-serif; letter-spacing: 0.05em; }
-        /* Nueva clase para elegancia descriptiva */
         .elegant-italic { font-family: 'Baskervville', serif; font-style: italic; }
         
         @keyframes revealCard { 
@@ -36,7 +35,6 @@
         
         #grid-negocios { transition: opacity 0.5s ease-in-out; }
 
-        /* Isotipo mejorado: estilo emblema/sello */
         .iso-emblem {
             border: 1px solid rgba(16, 185, 129, 0.4);
             background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 80%);
@@ -50,6 +48,8 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
             box-shadow: 0 15px 35px -15px rgba(0,0,0,0.5);
             transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            display: flex;
+            flex-direction: column;
         }
         .glass-card:hover {
             border-color: var(--p506-accent);
@@ -124,7 +124,7 @@
     <main class="max-w-7xl mx-auto py-20 px-6">
         <div class="flex items-center gap-4 mb-16">
             <div class="h-[1px] w-10 bg-[#10b981]/40"></div>
-            <h2 class="serif-title text-[10px] text-white uppercase tracking-[0.6em]">Recomendaciones Select</h2>
+            <h2 id="categoria-titulo" class="serif-title text-[10px] text-white uppercase tracking-[0.6em]">Recomendaciones Select</h2>
         </div>
         <div id="grid-negocios" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"></div>
     </main>
@@ -153,7 +153,6 @@
     </footer>
 
     <script>
-        /* EL JAVASCRIPT SE MANTIENE 100% IGUAL AL ORIGINAL PARA NO PERDER FUNCIONALIDAD */
         let negociosRaw = [];
         const normalizar = (t) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
@@ -183,11 +182,11 @@
                         </div>
                         
                         <div class="p-8 text-center flex flex-col flex-grow">
-                            <div class="min-h-[3.5rem] flex items-center justify-center mb-4">
+                            <div class="min-h-[4rem] flex items-center justify-center mb-4">
                                 <h3 class="business-title text-lg text-white uppercase tracking-wider font-bold">${n.nombre}</h3>
                             </div>
                             
-                            <div class="min-h-[3rem] mb-10">
+                            <div class="min-h-[4rem] mb-6 flex items-center justify-center text-center">
                                 <p class="elegant-italic text-slate-400 text-[13px] leading-relaxed line-clamp-2">
                                     ${n.servicios_resumen}
                                 </p>
@@ -269,6 +268,8 @@
 
         function initFilters() {
             const input = document.getElementById('busqueda');
+            const tituloSeccion = document.getElementById('categoria-titulo');
+
             input.addEventListener('input', (e) => {
                 const t = normalizar(e.target.value);
                 const filtrados = negociosRaw.filter(n => 
@@ -282,6 +283,10 @@
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const cat = btn.getAttribute('data-cat');
+                    
+                    // Actualizar Título de la Sección
+                    tituloSeccion.innerText = cat === 'todos' ? 'Recomendaciones Select' : cat;
+
                     document.querySelectorAll('.filter-btn').forEach(b => {
                         b.classList.remove('text-[#10b981]', 'border-[#10b981]', 'font-black');
                         b.classList.add('text-slate-400', 'border-transparent');
