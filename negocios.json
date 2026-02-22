@@ -77,19 +77,19 @@
   "horario": "Lunes a Sábado | Previa cita",
   "direccion": "Frente a la delegación del Tránsito (Policía de Tránsito), Guápiles"
 },
-   {
-  "id": 7,
-  "nombre": "AC Medical & Esthetic Center",
-  "categoria": "Estética",
-  "etiquetas": ["Depilación Láser", "Medicina", "Nutrición", "Odontología", "Perforaciones"],
-  "servicios_resumen": "Especialistas en depilación láser Fyralaser, medicina general, odontología, nutrición y perforación humanizada.",
-  "instagram": "https://www.instagram.com/acmedicalcenter/",
-  "imagen": "img/acmedical.png",
-  "whatsapp": "+50672999737",
-  "descripcion": "Un centro integral que combina salud y belleza con tecnología de punta en Guápiles. Destacan por su sistema de depilación efectiva Fyralaser y una amplia gama de servicios profesionales que incluyen medicina, nutrición, odontología y perforación humanizada de orejas. Calidad médica y resultados estéticos en un solo lugar.",
-  "horario": "Lunes a Sábado | Previa cita",
-  "direccion": "Frente a la delegación del Tránsito (Policía de Tránsito), Guápiles"
-},
+  {
+    "id": 7,
+    "nombre": "AC Fitness Center",
+    "categoria": "Salud",
+    "etiquetas": ["Gimnasios", "Natación", "Yoga", "Fitness"],
+    "servicios_resumen": "Único gimnasio con piscina semi-olímpica, natación, cardio dance y yoga.",
+    "instagram": "https://www.instagram.com/acfitness_center/",
+    "imagen": "img/acfitness.png",
+    "whatsapp": "+50672048120",
+    "descripcion": "La propuesta de entrenamiento más completa en Guápiles. Se distingue por ser el único centro de acondicionamiento físico en la zona con piscina semi-olímpica, integrando la natación con disciplinas modernas como cardio dance, yoga y entrenamiento funcional. Ideal para quienes buscan variedad y profesionalismo en un solo lugar.",
+    "horario": "Consultar horarios de clases y piscina directamente",
+    "direccion": "300 mts sur de Pequeño mundo, Guápiles, Pococí."
+  },
   {
   "id":8,
   "nombre": "Centro Recreativo Aguas Claras",
@@ -102,5 +102,18 @@
   "descripcion": "⛱️ El balneario favorito de Guápiles para disfrutar en familia. Cuenta con amplias piscinas para adultos y niños equipadas con divertidos toboganes 💦. Además de la zona de piscinas, ofrece una experiencia completa con Restaurante😋, Heladería🍨 y Coctelería🍹🍻 para pasar un día inolvidable.",
   "horario": "Miércoles a Domingo | 9:00 AM a 5:00 PM",
   "direccion": "300 mts sur de Pequeño mundo, Guápiles, Pococí."
-}
+},
+  {
+  "id": 9,
+  "nombre": "AC Medical & Esthetic Center",
+  "categoria": "Estética",
+  "etiquetas": ["Depilación Láser", "Medicina", "Nutrición", "Odontología", "Perforaciones"],
+  "servicios_resumen": "Especialistas en depilación láser Fyralaser, medicina general, odontología, nutrición y perforación humanizada.",
+  "instagram": "https://www.instagram.com/acmedicalcenter/",
+  "imagen": "img/acmedical.png",
+  "whatsapp": "+50672999737",
+  "descripcion": "Un centro integral que combina salud y belleza con tecnología de punta en Guápiles. Destacan por su sistema de depilación efectiva Fyralaser y una amplia gama de servicios profesionales que incluyen medicina, nutrición, odontología y perforación humanizada de orejas. Calidad médica y resultados estéticos en un solo lugar.",
+  "horario": "Lunes a Sábado | Previa cita",
+  "direccion": "Frente a la delegación del Tránsito (Policía de Tránsito), Guápiles"
+},
 ]
