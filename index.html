@@ -25,6 +25,7 @@
         .business-title { font-family: 'Montserrat', sans-serif; letter-spacing: 0.05em; }
         .elegant-italic { font-family: 'Baskervville', serif; font-style: italic; }
         
+        /* Animación para el menú móvil */
         @keyframes scrollHint {
             0%, 100% { transform: translateX(0); }
             50% { transform: translateX(10px); }
@@ -65,23 +66,21 @@
 
         .search-container {
             position: relative;
-            background: rgba(212, 163, 115, 0.03);
-            border: 1px solid rgba(212, 163, 115, 0.15);
-            padding: 4px 16px;
-            border-radius: 2px;
-            transition: all 0.4s ease;
+            background: rgba(20, 15, 14, 0.6);
+            border: 1px solid rgba(212, 163, 115, 0.2);
+            padding: 8px 16px;
+            transition: all 0.5s ease;
         }
         .search-container:focus-within {
             border-color: var(--p506-accent);
-            background: rgba(212, 163, 115, 0.07);
-            box-shadow: 0 0 20px rgba(212, 163, 115, 0.1);
+            background: rgba(93, 28, 21, 0.2);
+            box-shadow: 0 0 15px rgba(212, 163, 115, 0.1);
         }
 
         .search-input {
             background: transparent;
             border: none;
             width: 100%;
-            transition: all 0.5s ease;
         }
         .search-input:focus {
             outline: none;
@@ -105,15 +104,15 @@
     <nav class="bg-[#130f0e]/95 backdrop-blur-2xl border-b border-[#5d1c15]/40 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between py-6 px-6 gap-6">
             <div class="flex items-center gap-5">
-                <div class="w-11 h-11 iso-emblem rounded-full flex items-center justify-center">
-                    <span class="serif-title text-[10px] text-[#d4a373] font-bold mt-0.5">506</span>
+                <div class="flex flex-col items-center gap-1">
+                    <div class="w-11 h-11 iso-emblem rounded-full flex items-center justify-center">
+                        <span class="serif-title text-[10px] text-[#d4a373] font-bold mt-0.5">506</span>
+                    </div>
+                    <span class="text-[6px] tracking-[0.3em] font-black text-[#F6A700]/60 uppercase">BY MONTZU CR</span>
                 </div>
                 <div class="text-left border-l border-[#d4a373]/20 pl-5">
                     <h1 class="serif-title text-xl md:text-2xl tracking-[0.3em] text-white uppercase font-normal leading-none">Punto 506</h1>
-                    <div class="flex flex-col mt-1">
-                        <span class="text-[#d4a373] uppercase tracking-[0.4em] text-[7px] font-black opacity-80">by MontZu CR</span>
-                        <p class="text-stone-500 uppercase tracking-[0.3em] text-[6px] font-bold mt-0.5">Descubre. Conecta. Destaca.</p>
-                    </div>
+                    <p class="text-[#d4a373] uppercase tracking-[0.5em] text-[7px] font-bold mt-2 opacity-80">Descubre. Conecta. Destaca.</p>
                 </div>
             </div>
 
@@ -136,14 +135,14 @@
         <div class="relative z-10 max-w-2xl mx-auto text-center px-6">
             <h2 class="serif-title text-[#d4a373] text-[9px] tracking-[0.8em] mb-4 uppercase font-bold">Nuestro Propósito</h2>
             <p class="elegant-italic text-white text-lg md:text-xl leading-relaxed mb-10 drop-shadow-md">
-                "Punto 506 es un espacio creado para fortalecer el comercio local en Pococí. Nuestra misión es conectar a la comunidad con servicios profesionales de calidad, sirviendo como una plataforma de crecimiento mutuo."
+                "Punto 506 es un espacio creado para fortalecer el comercio local en Pococí. Nuestra misión es conectar a la comunidad con servicios profesionales de calidad, sirviendo como una plataforma de crecimiento mutuo donde cada negocio tiene el potencial de destacar y cada usuario encuentra lo mejor de nuestra zona."
             </p>
             
             <div class="max-w-xs mx-auto search-container flex items-center gap-3">
-                <svg class="w-4 h-4 text-[#d4a373] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                <svg class="w-4 h-4 text-[#d4a373]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                <input type="text" id="busqueda" placeholder="BUSCAR EXPERIENCIA..." class="search-input py-2 text-[10px] tracking-[0.2em] text-white placeholder:text-stone-500 uppercase">
+                <input type="text" id="busqueda" placeholder="BUSCAR EXPERIENCIA..." class="search-input py-1 text-[10px] tracking-[0.3em] text-white placeholder:text-stone-500 uppercase">
             </div>
         </div>
     </header>
