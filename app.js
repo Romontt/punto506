@@ -10,33 +10,41 @@ function actualizarURL(categoria) {
     window.history.pushState({ path: nuevaUrl }, '', nuevaUrl);
 }
 
-// --- FUNCIONES PARA EL BOTÓN VER MÁS (AGREGADO) ---
+// --- FUNCIONES PARA EL BOTÓN VER MÁS (MODIFICADO PARA INDICADOR) ---
 function expandirGrid() {
     const wrapper = document.getElementById('wrapper-grid');
     const fade = document.getElementById('grid-fade');
     const btnContainer = document.getElementById('btn-ver-mas-container');
+    const indicador = document.getElementById('indicador-deslizar');
 
     if(wrapper) wrapper.classList.add('grid-expandido');
     if(fade) fade.classList.add('fade-hidden');
     if(btnContainer) btnContainer.classList.add('hidden');
+    if(indicador) indicador.classList.add('hidden');
 }
 
 function gestionarLimiteVisual(totalMostrados) {
     const wrapper = document.getElementById('wrapper-grid');
     const fade = document.getElementById('grid-fade');
     const btnContainer = document.getElementById('btn-ver-mas-container');
+    const indicador = document.getElementById('indicador-deslizar');
 
     if (!wrapper || !fade || !btnContainer) return;
 
-    if (categoriaActual === 'todos' && totalMostrados > 8) {
+    // Límite: 8 en desktop, 4 en móvil (2 filas de 2)
+    const limite = window.innerWidth < 640 ? 4 : 8;
+
+    if (categoriaActual === 'todos' && totalMostrados > limite) {
         wrapper.classList.remove('grid-expandido');
         wrapper.classList.add('grid-limitado');
         fade.classList.remove('fade-hidden');
         btnContainer.classList.remove('hidden');
+        if(indicador) indicador.classList.remove('hidden');
     } else {
         wrapper.classList.add('grid-expandido');
         fade.classList.add('fade-hidden');
         btnContainer.classList.add('hidden');
+        if(indicador) indicador.classList.add('hidden');
     }
 }
 
@@ -111,7 +119,7 @@ function renderCards(lista) {
         `).join('');
         grid.style.opacity = '1';
 
-        // --- LLAMADA A LA GESTIÓN DE LÍMITE (AGREGADO) ---
+        // --- LLAMADA A LA GESTIÓN DE LÍMITE ---
         gestionarLimiteVisual(listaFiltrada.length);
 
     }, 300);
