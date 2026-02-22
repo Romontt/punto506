@@ -5,6 +5,34 @@
     --p506-detail: #5d1c15; 
 }
 
+/* --- PRE-LOADER (PANTALLA DE CARGA) --- */
+#preloader {
+    position: fixed;
+    inset: 0;
+    background: var(--p506-bg);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+}
+
+.loader-logo {
+    animation: pulseLogo 2s ease-in-out infinite;
+}
+
+@keyframes pulseLogo {
+    0%, 100% { opacity: 0.5; transform: scale(0.95); filter: blur(2px); }
+    50% { opacity: 1; transform: scale(1); filter: blur(0px); }
+}
+
+#preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* --- ESTILOS BASE --- */
 body { 
     font-family: 'Inter', sans-serif; 
     background-color: var(--p506-bg);
@@ -24,16 +52,9 @@ body {
 }
 .scroll-hint { animation: scrollHint 1.5s ease-in-out infinite; }
 
-/* Animación de entrada elegante */
 @keyframes revealCard { 
-    0% { 
-        opacity: 0; 
-        transform: translateY(30px) scale(0.98); 
-    } 
-    100% { 
-        opacity: 1; 
-        transform: translateY(0) scale(1); 
-    } 
+    0% { opacity: 0; transform: translateY(30px) scale(0.98); } 
+    100% { opacity: 1; transform: translateY(0) scale(1); } 
 }
 
 .animate-reveal { 
@@ -49,8 +70,7 @@ body {
     box-shadow: inset 0 0 15px rgba(212, 163, 115, 0.1);
 }
 
-/* --- TARJETAS CON VIDA (MEJORADAS) --- */
-
+/* --- TARJETAS --- */
 .glass-card {
     position: relative;
     background: rgba(44, 30, 26, 0.4); 
@@ -60,10 +80,9 @@ body {
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Importante para el destello */
+    overflow: hidden;
 }
 
-/* Efecto Diamante (Shimmer) */
 .glass-card::after {
     content: "";
     position: absolute;
@@ -71,20 +90,12 @@ body {
     left: -150%;
     width: 50%;
     height: 100%;
-    background: linear-gradient(
-        to right,
-        transparent,
-        rgba(212, 163, 115, 0.1),
-        transparent
-    );
+    background: linear-gradient(to right, transparent, rgba(212, 163, 115, 0.1), transparent);
     transform: skewX(-25deg);
     transition: 0.7s;
 }
 
-.glass-card:hover::after {
-    left: 150%;
-    transition: 0.7s;
-}
+.glass-card:hover::after { left: 150%; }
 
 .glass-card:hover {
     border-color: rgba(212, 163, 115, 0.4);
@@ -93,29 +104,15 @@ body {
     box-shadow: 0 20px 40px -10px rgba(0,0,0,0.9);
 }
 
-/* Movimiento de textos internos */
-.glass-card h3, 
-.glass-card p, 
-.glass-card button {
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
+.glass-card h3, .glass-card p, .glass-card button { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
 .glass-card:hover h3 { transform: translateY(-3px); }
 .glass-card:hover p { transform: translateY(-5px); color: white; }
 .glass-card:hover button { transform: scale(1.02); }
 
-/* Efecto en la imagen */
-.glass-card img {
-    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s ease;
-}
+.glass-card img { transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s ease; }
+.glass-card:hover img { transform: scale(1.1); filter: saturate(1.2) brightness(1.1); }
 
-.glass-card:hover img {
-    transform: scale(1.1);
-    filter: saturate(1.2) brightness(1.1);
-}
-
-/* --- FIN MEJORAS TARJETAS --- */
-
+/* --- BUSCADOR SEXY --- */
 .search-container {
     position: relative;
     background: rgba(20, 15, 14, 0.6);
@@ -124,10 +121,21 @@ body {
     transition: all 0.5s ease;
 }
 
+.search-container svg {
+    transition: all 0.5s ease;
+}
+
+/* Micro-interacción: La lupa brilla y el contenedor se ilumina */
 .search-container:focus-within {
     border-color: var(--p506-accent);
     background: rgba(93, 28, 21, 0.2);
-    box-shadow: 0 0 15px rgba(212, 163, 115, 0.1);
+    box-shadow: 0 0 25px rgba(212, 163, 115, 0.15);
+}
+
+.search-container:focus-within svg {
+    color: var(--p506-accent);
+    filter: drop-shadow(0 0 5px var(--p506-accent));
+    transform: scale(1.2);
 }
 
 .search-input {
@@ -141,24 +149,18 @@ body {
     letter-spacing: 0.1em;
 }
 
+/* --- OTROS --- */
 .custom-scroll::-webkit-scrollbar { width: 3px; }
 .custom-scroll::-webkit-scrollbar-track { background: var(--p506-bg); }
 .custom-scroll::-webkit-scrollbar-thumb { background: var(--p506-accent); }
-
 .hide-scroll::-webkit-scrollbar { display: none; }
 .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
 
 .tropical-header {
     background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
 }
-/* Botón de ingreso con pulso sutil */
-.btn-ingreso-brillo {
-    position: relative;
-    overflow: hidden;
-}
 
-/* Podemos reusar el efecto diamante que creamos antes para este botón */
 .btn-ingreso-brillo:hover {
     box-shadow: 0 0 20px rgba(212, 163, 115, 0.2);
-    letter-spacing: 0.6em; /* Se expande un poquito al pasar el mouse */
+    letter-spacing: 0.6em;
 }
