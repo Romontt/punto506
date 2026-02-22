@@ -125,6 +125,7 @@ body {
     transition: all 0.5s ease;
 }
 
+/* Micro-interacción: La lupa brilla y el contenedor se ilumina */
 .search-container:focus-within {
     border-color: var(--p506-accent);
     background: rgba(93, 28, 21, 0.2);
@@ -162,31 +163,4 @@ body {
 .btn-ingreso-brillo:hover {
     box-shadow: 0 0 20px rgba(212, 163, 115, 0.2);
     letter-spacing: 0.6em;
-}
-
-/* --- NUEVAS CLASES PARA EL SISTEMA VER MÁS (NO BORRAR) --- */
-.grid-limitado {
-    max-height: 1100px; /* Ajuste para 2 filas aprox en desktop */
-    overflow: hidden;
-    transition: max-height 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.grid-expandido {
-    max-height: 10000px !important;
-}
-
-.fade-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 350px;
-    background: linear-gradient(to top, var(--p506-bg) 10%, transparent 100%);
-    pointer-events: none;
-    transition: opacity 0.8s ease;
-    z-index: 10;
-}
-
-.fade-hidden {
-    opacity: 0 !important;
 }
