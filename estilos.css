@@ -1,383 +1,192 @@
 :root { 
-
     --p506-bg: #130f0e; 
-
     --p506-wood: #2c1e1a;   
-
     --p506-accent: #d4a373; 
-
     --p506-detail: #5d1c15; 
-
 }
-
-
 
 /* --- PRE-LOADER (PANTALLA DE CARGA) --- */
-
 #preloader {
-
     position: fixed;
-
     inset: 0;
-
     background: var(--p506-bg);
-
     z-index: 9999;
-
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
-
     transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
-
 }
-
-
 
 .loader-logo {
-
     animation: pulseLogo 2s ease-in-out infinite;
-
 }
-
-
 
 @keyframes pulseLogo {
-
     0%, 100% { opacity: 0.5; transform: scale(0.95); filter: blur(2px); }
-
     50% { opacity: 1; transform: scale(1); filter: blur(0px); }
-
 }
-
-
 
 #preloader.fade-out {
-
     opacity: 0;
-
     visibility: hidden;
-
 }
-
-
 
 /* --- ESTILOS BASE --- */
-
 body { 
-
     font-family: 'Inter', sans-serif; 
-
     background-color: var(--p506-bg);
-
     background-image: 
-
         radial-gradient(circle at 50% 0%, rgba(212, 163, 115, 0.08) 0%, transparent 70%),
-
         url("https://www.transparenttextures.com/patterns/dark-linen.png");
-
     background-attachment: fixed;
-
 }
-
-
 
 .serif-title { font-family: 'Cinzel', serif; letter-spacing: 0.2em; }
-
 .business-title { font-family: 'Montserrat', sans-serif; letter-spacing: 0.05em; }
-
 .elegant-italic { font-family: 'Baskervville', serif; font-style: italic; }
 
-
-
 @keyframes scrollHint {
-
     0%, 100% { transform: translateX(0); }
-
     50% { transform: translateX(10px); }
-
 }
-
 .scroll-hint { animation: scrollHint 1.5s ease-in-out infinite; }
 
-
-
 @keyframes revealCard { 
-
     0% { opacity: 0; transform: translateY(30px) scale(0.98); } 
-
     100% { opacity: 1; transform: translateY(0) scale(1); } 
-
 }
-
-
 
 .animate-reveal { 
-
     opacity: 0;
-
     animation: revealCard 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
-
 }
-
-
 
 #grid-negocios { transition: opacity 0.5s ease-in-out; }
 
-
-
 .iso-emblem {
-
     border: 1px solid var(--p506-accent);
-
     background: repeating-conic-gradient(from 0deg, rgba(212, 163, 115, 0.05) 0deg 30deg, transparent 30deg 60deg);
-
     box-shadow: inset 0 0 15px rgba(212, 163, 115, 0.1);
-
 }
-
-
 
 /* --- TARJETAS --- */
-
 .glass-card {
-
     position: relative;
-
     background: rgba(44, 30, 26, 0.4); 
-
     backdrop-filter: blur(8px);
-
     border: 1px solid rgba(212, 163, 115, 0.1);
-
     box-shadow: 0 15px 35px -15px rgba(0,0,0,0.8);
-
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-
     display: flex;
-
     flex-direction: column;
-
     overflow: hidden;
-
 }
-
-
 
 .glass-card::after {
-
     content: "";
-
     position: absolute;
-
     top: 0;
-
     left: -150%;
-
     width: 50%;
-
     height: 100%;
-
     background: linear-gradient(to right, transparent, rgba(212, 163, 115, 0.1), transparent);
-
     transform: skewX(-25deg);
-
     transition: 0.7s;
-
 }
-
-
 
 .glass-card:hover::after { left: 150%; }
 
-
-
 .glass-card:hover {
-
     border-color: rgba(212, 163, 115, 0.4);
-
     background: rgba(44, 30, 26, 0.6);
-
     transform: translateY(-10px);
-
     box-shadow: 0 20px 40px -10px rgba(0,0,0,0.9);
-
 }
-
-
 
 .glass-card h3, .glass-card p, .glass-card button { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-
 .glass-card:hover h3 { transform: translateY(-3px); }
-
 .glass-card:hover p { transform: translateY(-5px); color: white; }
-
 .glass-card:hover button { transform: scale(1.02); }
 
-
-
 .glass-card img { transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s ease; }
-
 .glass-card:hover img { transform: scale(1.1); filter: saturate(1.2) brightness(1.1); }
 
-
-
 /* --- BUSCADOR SEXY --- */
-
 .search-container {
-
     position: relative;
-
     background: rgba(20, 15, 14, 0.6);
-
     border: 1px solid rgba(212, 163, 115, 0.2);
-
     padding: 8px 16px;
-
     transition: all 0.5s ease;
-
 }
-
-
 
 .search-container svg {
-
     transition: all 0.5s ease;
-
 }
-
-
 
 .search-container:focus-within {
-
     border-color: var(--p506-accent);
-
     background: rgba(93, 28, 21, 0.2);
-
     box-shadow: 0 0 25px rgba(212, 163, 115, 0.15);
-
 }
-
-
 
 .search-container:focus-within svg {
-
     color: var(--p506-accent);
-
     filter: drop-shadow(0 0 5px var(--p506-accent));
-
     transform: scale(1.2);
-
 }
-
-
 
 .search-input {
-
     background: transparent;
-
     border: none;
-
     width: 100%;
-
 }
-
-
 
 .search-input:focus {
-
     outline: none;
-
     letter-spacing: 0.1em;
-
 }
-
-
 
 /* --- OTROS --- */
-
 .custom-scroll::-webkit-scrollbar { width: 3px; }
-
 .custom-scroll::-webkit-scrollbar-track { background: var(--p506-bg); }
-
 .custom-scroll::-webkit-scrollbar-thumb { background: var(--p506-accent); }
-
 .hide-scroll::-webkit-scrollbar { display: none; }
-
 .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
 
-
-
 .tropical-header {
-
     background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
-
 }
-
-
 
 .btn-ingreso-brillo:hover {
-
     box-shadow: 0 0 20px rgba(212, 163, 115, 0.2);
-
     letter-spacing: 0.6em;
-
 }
-
-
 
 /* --- NUEVAS CLASES PARA EL SISTEMA VER MÁS (NO BORRAR) --- */
-
 .grid-limitado {
-
     max-height: 1100px; /* Ajuste para 2 filas aprox en desktop */
-
     overflow: hidden;
-
     transition: max-height 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-
 }
-
-
 
 .grid-expandido {
-
     max-height: 10000px !important;
-
 }
-
-
 
 .fade-overlay {
-
     position: absolute;
-
     bottom: 0;
-
     left: 0;
-
     right: 0;
-
     height: 350px;
-
     background: linear-gradient(to top, var(--p506-bg) 10%, transparent 100%);
-
     pointer-events: none;
-
     transition: opacity 0.8s ease;
-
     z-index: 10;
-
 }
 
-
-
 .fade-hidden {
-
     opacity: 0 !important;
-
 }
