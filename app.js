@@ -10,8 +10,22 @@ async function loadData() {
         negociosRaw = await response.json();
         renderCards(negociosRaw);
         initFilters();
+
+        // --- LÓGICA DEL PRELOADER ---
+        // Esperamos un momento para que la animación del logo luzca antes de desvanecer
+        setTimeout(() => {
+            const loader = document.getElementById('preloader');
+            if (loader) {
+                loader.classList.add('fade-out');
+            }
+        }, 800);
+
     } catch (e) { 
         document.getElementById('grid-negocios').innerHTML = '<p class="text-stone-600 text-center py-20 col-span-full uppercase text-[9px] tracking-[0.5em] font-bold italic">Preparando el cafecito...</p>';
+        
+        // Quitamos el preloader incluso si hay error
+        const loader = document.getElementById('preloader');
+        if (loader) loader.classList.add('fade-out');
     }
 }
 
@@ -50,16 +64,13 @@ function renderCards(lista) {
     }, 300);
 }
 
-// NUEVA FUNCIÓN: Crea los botoncitos de Masajes, Uñas, etc.
 function renderSubCategorias() {
     const contenedor = document.getElementById('sub-categorias');
     if (!contenedor) return;
     
     contenedor.innerHTML = '';
-    // Solo mostramos sub-categorías si hay una categoría principal seleccionada (que no sea 'todos')
     if (categoriaActual === 'todos') return;
 
-    // Extraemos las etiquetas únicas de los negocios que pertenecen a la categoría actual
     const etiquetas = [...new Set(
         negociosRaw
             .filter(n => normalizar(n.categoria) === normalizar(categoriaActual) && n.etiquetas)
@@ -69,12 +80,11 @@ function renderSubCategorias() {
     etiquetas.forEach(tag => {
         const btn = document.createElement('button');
         btn.innerText = tag.toUpperCase();
-        // Estilo elegante y minimalista
         const activo = etiquetaActual === tag;
         btn.className = `text-[9px] tracking-[0.3em] px-4 py-2 border transition-all duration-500 ${activo ? 'border-[#d4a373] text-[#d4a373] font-bold' : 'border-transparent text-stone-500 hover:text-stone-300'}`;
         
         btn.onclick = () => {
-            etiquetaActual = (etiquetaActual === tag) ? null : tag; // Si toca el mismo, se desactiva
+            etiquetaActual = (etiquetaActual === tag) ? null : tag;
             renderSubCategorias();
             aplicarFiltrosCombinados();
         };
@@ -82,7 +92,6 @@ function renderSubCategorias() {
     });
 }
 
-// FUNCIÓN CENTRALIZADA: Filtra por buscador, categoría y etiqueta al mismo tiempo
 function aplicarFiltrosCombinados() {
     const busqueda = normalizar(document.getElementById('busqueda').value);
     
@@ -112,11 +121,10 @@ function initFilters() {
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             categoriaActual = btn.getAttribute('data-cat');
-            etiquetaActual = null; // Reiniciamos sub-filtro al cambiar de categoría
+            etiquetaActual = null;
             
             tituloSeccion.innerText = categoriaActual === 'todos' ? 'Recomendaciones' : categoriaActual;
 
-            // Estética de botones principales
             document.querySelectorAll('.filter-btn').forEach(b => {
                 b.classList.remove('text-[#d4a373]', 'border-[#d4a373]', 'font-black');
                 b.classList.add('text-stone-500', 'border-transparent');
@@ -129,7 +137,6 @@ function initFilters() {
     });
 }
 
-// Funciones de Modal (Se mantienen igual)
 function verDetalle(id) {
     const n = negociosRaw.find(item => item.id === id);
     if (!n) return;
