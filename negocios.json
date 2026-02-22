@@ -50,5 +50,44 @@
     "descripcion": "Capturando momentos y construyendo marcas con una visión única. Montiel Diseño y Fotografía ofrece soluciones visuales integrales, desde la cobertura artística de eventos especiales y sesiones personalizadas hasta el desarrollo de logotipos que definen la esencia de su negocio. Profesionalismo y creatividad al servicio de su imagen.",
     "horario": "Lunes a Sábado: Bajo reserva",
     "direccion": "Guápiles, Pococí."
-  }
+  },
+  {
+  "id": 5,
+  "nombre": "Trámites de Licencia Costa Rica",
+  "categoria": "Servicios",
+  "etiquetas": ["Licencias", "Dictamen Médico", "Cosevi", "Alquiler de Vehículos"],
+  "servicios_resumen": "Alquiler de vehículos para pruebas en las 13 sedes, Dictamen Médico Digital y asesoría en trámites de licencia.",
+  "instagram": "https://www.instagram.com/tramites_licencia_costarica/",
+  "imagen": "img/tramites-licencia.png",
+  "whatsapp": "+50686776688",
+  "descripcion": "Todos tus trámites de licencia en un mismo lugar. Especialistas en facilitar el proceso de obtención y renovación de licencia. Ofrecen alquiler de vehículos (moto, carro, cuadraciclo) para pruebas de manejo en las 13 sedes de Cosevi, además de dictámenes médicos digitales autorizados. ¡Aprovechá sus promociones mensuales!",
+  "horario": "Lunes a Sábado | 8:00 AM a 5:00 PM",
+  "direccion": "Sede Guápiles: 300 mts sur de Pequeño Mundo"
+},
+  {
+  "id": 6,
+  "nombre": "AC Medical & Esthetic Center",
+  "categoria": "Salud",
+  "etiquetas": ["Depilación Láser", "Medicina", "Nutrición", "Odontología", "Perforaciones"],
+  "servicios_resumen": "Especialistas en depilación láser Fyralaser, medicina general, odontología, nutrición y perforación humanizada.",
+  "instagram": "https://www.instagram.com/acmedicalcenter/",
+  "imagen": "img/acmedical.png",
+  "whatsapp": "+50672999737",
+  "descripcion": "Un centro integral que combina salud y belleza con tecnología de punta en Guápiles. Destacan por su sistema de depilación efectiva Fyralaser y una amplia gama de servicios profesionales que incluyen medicina, nutrición, odontología y perforación humanizada de orejas. Calidad médica y resultados estéticos en un solo lugar.",
+  "horario": "Lunes a Sábado | Previa cita",
+  "direccion": "Frente a la delegación del Tránsito (Policía de Tránsito), Guápiles"
+},
+   {
+  "id": 7,
+  "nombre": "AC Medical & Esthetic Center",
+  "categoria": "Estética",
+  "etiquetas": ["Depilación Láser", "Medicina", "Nutrición", "Odontología", "Perforaciones"],
+  "servicios_resumen": "Especialistas en depilación láser Fyralaser, medicina general, odontología, nutrición y perforación humanizada.",
+  "instagram": "https://www.instagram.com/acmedicalcenter/",
+  "imagen": "img/acmedical.png",
+  "whatsapp": "+50672999737",
+  "descripcion": "Un centro integral que combina salud y belleza con tecnología de punta en Guápiles. Destacan por su sistema de depilación efectiva Fyralaser y una amplia gama de servicios profesionales que incluyen medicina, nutrición, odontología y perforación humanizada de orejas. Calidad médica y resultados estéticos en un solo lugar.",
+  "horario": "Lunes a Sábado | Previa cita",
+  "direccion": "Frente a la delegación del Tránsito (Policía de Tránsito), Guápiles"
+}
 ]
