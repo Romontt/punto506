@@ -4,15 +4,29 @@ let etiquetaActual = null;
 
 const normalizar = (t) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
+// --- NUEVA FUNCIÓN PARA SEO: URLS AMIGABLES ---
+function actualizarURL(categoria) {
+    const nuevaUrl = categoria === 'todos' ? window.location.pathname : `?categoria=${encodeURIComponent(categoria.toLowerCase())}`;
+    window.history.pushState({ path: nuevaUrl }, '', nuevaUrl);
+}
+
 async function loadData() {
     try {
         const response = await fetch('negocios.json');
         negociosRaw = await response.json();
+        
+        // Revisar si el usuario viene de un enlace directo a una categoría (ej: ?categoria=salud)
+        const params = new URLSearchParams(window.location.search);
+        const catParam = params.get('categoria');
+        if (catParam) {
+            categoriaActual = catParam;
+        }
+
         renderCards(negociosRaw);
         initFilters();
+        renderSubCategorias();
 
         // --- LÓGICA DEL PRELOADER ---
-        // Esperamos un momento para que la animación del logo luzca antes de desvanecer
         setTimeout(() => {
             const loader = document.getElementById('preloader');
             if (loader) {
@@ -22,23 +36,30 @@ async function loadData() {
 
     } catch (e) { 
         document.getElementById('grid-negocios').innerHTML = '<p class="text-stone-600 text-center py-20 col-span-full uppercase text-[9px] tracking-[0.5em] font-bold italic">Preparando el cafecito...</p>';
-        
-        // Quitamos el preloader incluso si hay error
         const loader = document.getElementById('preloader');
         if (loader) loader.classList.add('fade-out');
     }
 }
 
+// --- RENDERIZADO MEJORADO PARA GOOGLE (Uso de article y alt tags) ---
 function renderCards(lista) {
     const grid = document.getElementById('grid-negocios');
     grid.style.opacity = '0';
     
+    // Filtrar la lista según la categoría actual (útil para carga inicial con parámetros)
+    const listaFiltrada = categoriaActual === 'todos' 
+        ? lista 
+        : lista.filter(n => normalizar(n.categoria) === normalizar(categoriaActual));
+
     setTimeout(() => {
-        grid.innerHTML = lista.map((n, i) => `
-            <div class="group glass-card overflow-hidden animate-reveal"
-                 style="animation-delay: ${i * 0.15}s; animation-fill-mode: forwards;">
+        grid.innerHTML = listaFiltrada.map((n, i) => `
+            <article class="group glass-card overflow-hidden animate-reveal"
+                  style="animation-delay: ${i * 0.15}s; animation-fill-mode: forwards;">
                 <div class="relative h-64 overflow-hidden border-b border-[#d4a373]/10">
-                    <img src="${n.imagen}" class="w-full h-full object-cover sepia-[20%] group-hover:sepia-0 group-hover:scale-105 transition duration-[1.5s]" alt="${n.nombre}">
+                    <img src="${n.imagen}" 
+                         class="w-full h-full object-cover sepia-[20%] group-hover:sepia-0 group-hover:scale-105 transition duration-[1.5s]" 
+                         alt="Negocio ${n.nombre} en Pococí - Categoría ${n.categoria}"
+                         loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#130f0e] via-transparent opacity-90"></div>
                     <div class="absolute top-6 left-6 text-[#d4a373] text-[7px] font-black tracking-[0.4em] uppercase bg-[#130f0e]/60 px-2 py-1">${n.categoria}</div>
                 </div>
@@ -54,11 +75,13 @@ function renderCards(lista) {
                         </p>
                     </div>
 
-                    <button onclick="verDetalle(${n.id})" class="mt-auto w-full py-4 text-[#d4a373] text-[10px] font-bold uppercase tracking-[0.4em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition duration-500">
+                    <button onclick="verDetalle(${n.id})" 
+                            aria-label="Ver detalles de ${n.nombre}"
+                            class="mt-auto w-full py-4 text-[#d4a373] text-[10px] font-bold uppercase tracking-[0.4em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition duration-500">
                         Explorar Detalles
                     </button>
                 </div>
-            </div>
+            </article>
         `).join('');
         grid.style.opacity = '1';
     }, 300);
@@ -101,7 +124,6 @@ function aplicarFiltrosCombinados() {
                                  normalizar(n.categoria).includes(busqueda);
         
         const coincideCategoria = categoriaActual === 'todos' || normalizar(n.categoria) === normalizar(categoriaActual);
-        
         const coincideEtiqueta = !etiquetaActual || (n.etiquetas && n.etiquetas.includes(etiquetaActual));
 
         return coincideBusqueda && coincideCategoria && coincideEtiqueta;
@@ -119,22 +141,34 @@ function initFilters() {
     });
 
     document.querySelectorAll('.filter-btn').forEach(btn => {
+        const catValue = btn.getAttribute('data-cat');
+        
+        // Si el usuario carga la página con una categoría, marcar el botón como activo
+        if (normalizar(catValue) === normalizar(categoriaActual)) {
+            activarBoton(btn);
+            tituloSeccion.innerText = categoriaActual === 'todos' ? 'Recomendaciones' : categoriaActual;
+        }
+
         btn.addEventListener('click', () => {
-            categoriaActual = btn.getAttribute('data-cat');
+            categoriaActual = catValue;
             etiquetaActual = null;
             
             tituloSeccion.innerText = categoriaActual === 'todos' ? 'Recomendaciones' : categoriaActual;
 
-            document.querySelectorAll('.filter-btn').forEach(b => {
-                b.classList.remove('text-[#d4a373]', 'border-[#d4a373]', 'font-black');
-                b.classList.add('text-stone-500', 'border-transparent');
-            });
-            btn.classList.add('text-[#d4a373]', 'border-[#d4a373]', 'font-black');
-            
+            activarBoton(btn);
+            actualizarURL(categoriaActual); // SEO: Cambia la URL
             renderSubCategorias();
             aplicarFiltrosCombinados();
         });
     });
+}
+
+function activarBoton(btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('text-[#d4a373]', 'border-[#d4a373]', 'font-black');
+        b.classList.add('text-stone-500', 'border-transparent');
+    });
+    btn.classList.add('text-[#d4a373]', 'border-[#d4a373]', 'font-black');
 }
 
 function verDetalle(id) {
@@ -147,7 +181,7 @@ function verDetalle(id) {
 
     document.getElementById('modal-content').innerHTML = `
         <div class="relative h-72 md:h-80">
-            <img src="${n.imagen}" class="w-full h-full object-cover">
+            <img src="${n.imagen}" alt="${n.nombre}" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-[#1c1614] via-transparent"></div>
         </div>
         <div class="p-8 md:p-14 -mt-12 relative z-10 bg-[#1c1614] animate-reveal">
