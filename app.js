@@ -15,7 +15,7 @@ function expandirGrid() {
     const wrapper = document.getElementById('wrapper-grid');
     const fade = document.getElementById('grid-fade');
     const btnContainer = document.getElementById('btn-ver-mas-container');
-
+document.getElementById('scroll-indicator').classList.add('hidden');
     if(wrapper) wrapper.classList.add('grid-expandido');
     if(fade) fade.classList.add('fade-hidden');
     if(btnContainer) btnContainer.classList.add('hidden');
