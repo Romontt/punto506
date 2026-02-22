@@ -28,12 +28,14 @@ function gestionarLimiteVisual(totalMostrados) {
 
     if (!wrapper || !fade || !btnContainer) return;
 
+    // Solo limitamos si estamos en 'todos' y hay más de 8 negocios
     if (categoriaActual === 'todos' && totalMostrados > 8) {
         wrapper.classList.remove('grid-expandido');
         wrapper.classList.add('grid-limitado');
-        fade.classList.remove('fade-hidden');
-        btnContainer.classList.remove('hidden');
+        fade.classList.remove('fade-hidden'); // Mostrar el desvanecido
+        btnContainer.classList.remove('hidden'); // Mostrar el botón
     } else {
+        // Si hay pocos negocios o es una categoría específica, mostramos todo
         wrapper.classList.add('grid-expandido');
         fade.classList.add('fade-hidden');
         btnContainer.classList.add('hidden');
