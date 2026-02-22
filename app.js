@@ -18,7 +18,7 @@ async function loadData() {
             if (loader) {
                 loader.classList.add('fade-out');
             }
-        }, 800);
+        }, 950);
 
     } catch (e) { 
         document.getElementById('grid-negocios').innerHTML = '<p class="text-stone-600 text-center py-20 col-span-full uppercase text-[9px] tracking-[0.5em] font-bold italic">Preparando el cafecito...</p>';
