@@ -94,7 +94,19 @@
 
         <div id="sub-categorias" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-16 min-h-[40px]"></div>
 
-        <div id="grid-negocios" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"></div>
+        <div class="relative">
+            <div id="wrapper-grid" class="grid-limitado">
+                <div id="grid-negocios" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+                    </div>
+                <div id="grid-fade" class="fade-overlay fade-hidden"></div>
+            </div>
+
+            <div id="btn-ver-mas-container" class="flex justify-center mt-12 hidden">
+                <button onclick="expandirGrid()" id="btn-ver-mas" class="py-4 px-10 border border-[#d4a373] text-[#d4a373] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-500">
+                    Ver todas las experiencias
+                </button>
+            </div>
+        </div>
     </main>
 
     <div id="modal-negocio" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl">
