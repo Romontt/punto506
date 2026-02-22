@@ -4,7 +4,6 @@ let etiquetaActual = null;
 
 const normalizar = (t) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
-// --- NUEVA FUNCIÓN PARA SEO: URLS AMIGABLES ---
 function actualizarURL(categoria) {
     const nuevaUrl = categoria === 'todos' ? window.location.pathname : `?categoria=${encodeURIComponent(categoria.toLowerCase())}`;
     window.history.pushState({ path: nuevaUrl }, '', nuevaUrl);
@@ -15,7 +14,6 @@ async function loadData() {
         const response = await fetch('negocios.json');
         negociosRaw = await response.json();
         
-        // Revisar si el usuario viene de un enlace directo a una categoría (ej: ?categoria=salud)
         const params = new URLSearchParams(window.location.search);
         const catParam = params.get('categoria');
         if (catParam) {
@@ -26,12 +24,9 @@ async function loadData() {
         initFilters();
         renderSubCategorias();
 
-        // --- LÓGICA DEL PRELOADER ---
         setTimeout(() => {
             const loader = document.getElementById('preloader');
-            if (loader) {
-                loader.classList.add('fade-out');
-            }
+            if (loader) loader.classList.add('fade-out');
         }, 950);
 
     } catch (e) { 
@@ -41,12 +36,40 @@ async function loadData() {
     }
 }
 
-// --- RENDERIZADO MEJORADO PARA GOOGLE (Uso de article y alt tags) ---
+// --- NUEVA LÓGICA DE EXPANSIÓN ---
+function expandirGrid() {
+    const wrapper = document.getElementById('wrapper-grid');
+    const fade = document.getElementById('grid-fade');
+    const btnContainer = document.getElementById('btn-ver-mas-container');
+
+    wrapper.classList.add('grid-expandido');
+    fade.classList.add('fade-hidden');
+    btnContainer.classList.add('hidden');
+}
+
+function gestionarLimiteVisual(totalMostrados) {
+    const wrapper = document.getElementById('wrapper-grid');
+    const fade = document.getElementById('grid-fade');
+    const btnContainer = document.getElementById('btn-ver-mas-container');
+
+    // Solo limitamos si estamos en "todos" y hay más de 8 negocios
+    if (categoriaActual === 'todos' && totalMostrados > 8) {
+        wrapper.classList.remove('grid-expandido');
+        wrapper.classList.add('grid-limitado');
+        fade.classList.remove('fade-hidden');
+        btnContainer.classList.remove('hidden');
+    } else {
+        // Si hay filtro o pocos negocios, mostramos todo libremente
+        wrapper.classList.add('grid-expandido');
+        fade.classList.add('fade-hidden');
+        btnContainer.classList.add('hidden');
+    }
+}
+
 function renderCards(lista) {
     const grid = document.getElementById('grid-negocios');
     grid.style.opacity = '0';
     
-    // Filtrar la lista según la categoría actual (útil para carga inicial con parámetros)
     const listaFiltrada = categoriaActual === 'todos' 
         ? lista 
         : lista.filter(n => normalizar(n.categoria) === normalizar(categoriaActual));
@@ -54,11 +77,11 @@ function renderCards(lista) {
     setTimeout(() => {
         grid.innerHTML = listaFiltrada.map((n, i) => `
             <article class="group glass-card overflow-hidden animate-reveal"
-                  style="animation-delay: ${i * 0.15}s; animation-fill-mode: forwards;">
+                  style="animation-delay: ${i * 0.1}s; animation-fill-mode: forwards;">
                 <div class="relative h-64 overflow-hidden border-b border-[#d4a373]/10">
                     <img src="${n.imagen}" 
                          class="w-full h-full object-cover sepia-[20%] group-hover:sepia-0 group-hover:scale-105 transition duration-[1.5s]" 
-                         alt="Negocio ${n.nombre} en Pococí - Categoría ${n.categoria}"
+                         alt="Negocio ${n.nombre} en Pococí"
                          loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#130f0e] via-transparent opacity-90"></div>
                     <div class="absolute top-6 left-6 text-[#d4a373] text-[7px] font-black tracking-[0.4em] uppercase bg-[#130f0e]/60 px-2 py-1">${n.categoria}</div>
@@ -68,29 +91,27 @@ function renderCards(lista) {
                     <div class="min-h-[4rem] flex items-center justify-center mb-4">
                         <h3 class="business-title text-xl text-white uppercase tracking-wider font-bold">${n.nombre}</h3>
                     </div>
-                    
                     <div class="min-h-[4rem] mb-6 flex items-center justify-center text-center">
-                        <p class="elegant-italic text-stone-300 text-[15px] leading-relaxed line-clamp-2">
-                            ${n.servicios_resumen}
-                        </p>
+                        <p class="elegant-italic text-stone-300 text-[15px] leading-relaxed line-clamp-2">${n.servicios_resumen}</p>
                     </div>
-
                     <button onclick="verDetalle(${n.id})" 
-                            aria-label="Ver detalles de ${n.nombre}"
                             class="mt-auto w-full py-4 text-[#d4a373] text-[10px] font-bold uppercase tracking-[0.4em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition duration-500">
                         Explorar Detalles
                     </button>
                 </div>
             </article>
         `).join('');
+        
         grid.style.opacity = '1';
+        
+        // Ejecutar el control de visualización después de renderizar
+        gestionarLimiteVisual(listaFiltrada.length);
     }, 300);
 }
 
 function renderSubCategorias() {
     const contenedor = document.getElementById('sub-categorias');
     if (!contenedor) return;
-    
     contenedor.innerHTML = '';
     if (categoriaActual === 'todos') return;
 
@@ -105,7 +126,6 @@ function renderSubCategorias() {
         btn.innerText = tag.toUpperCase();
         const activo = etiquetaActual === tag;
         btn.className = `text-[9px] tracking-[0.3em] px-4 py-2 border transition-all duration-500 ${activo ? 'border-[#d4a373] text-[#d4a373] font-bold' : 'border-transparent text-stone-500 hover:text-stone-300'}`;
-        
         btn.onclick = () => {
             etiquetaActual = (etiquetaActual === tag) ? null : tag;
             renderSubCategorias();
@@ -117,46 +137,34 @@ function renderSubCategorias() {
 
 function aplicarFiltrosCombinados() {
     const busqueda = normalizar(document.getElementById('busqueda').value);
-    
     const filtrados = negociosRaw.filter(n => {
         const coincideBusqueda = normalizar(n.nombre).includes(busqueda) || 
                                  normalizar(n.servicios_resumen).includes(busqueda) ||
                                  normalizar(n.categoria).includes(busqueda);
-        
         const coincideCategoria = categoriaActual === 'todos' || normalizar(n.categoria) === normalizar(categoriaActual);
         const coincideEtiqueta = !etiquetaActual || (n.etiquetas && n.etiquetas.includes(etiquetaActual));
-
         return coincideBusqueda && coincideCategoria && coincideEtiqueta;
     });
-
     renderCards(filtrados);
 }
 
 function initFilters() {
     const input = document.getElementById('busqueda');
     const tituloSeccion = document.getElementById('categoria-titulo');
-
-    input.addEventListener('input', () => {
-        aplicarFiltrosCombinados();
-    });
+    input.addEventListener('input', () => aplicarFiltrosCombinados());
 
     document.querySelectorAll('.filter-btn').forEach(btn => {
         const catValue = btn.getAttribute('data-cat');
-        
-        // Si el usuario carga la página con una categoría, marcar el botón como activo
         if (normalizar(catValue) === normalizar(categoriaActual)) {
             activarBoton(btn);
             tituloSeccion.innerText = categoriaActual === 'todos' ? 'Recomendaciones' : categoriaActual;
         }
-
         btn.addEventListener('click', () => {
             categoriaActual = catValue;
             etiquetaActual = null;
-            
             tituloSeccion.innerText = categoriaActual === 'todos' ? 'Recomendaciones' : categoriaActual;
-
             activarBoton(btn);
-            actualizarURL(categoriaActual); // SEO: Cambia la URL
+            actualizarURL(categoriaActual);
             renderSubCategorias();
             aplicarFiltrosCombinados();
         });
@@ -174,7 +182,6 @@ function activarBoton(btn) {
 function verDetalle(id) {
     const n = negociosRaw.find(item => item.id === id);
     if (!n) return;
-
     const googleFormBase = "https://docs.google.com/forms/d/e/1FAIpQLSfuSPB2ZQBl9COJLLgRMBkZ72aqlr-bVO-Pb0c0H7UvS801hQ/viewform";
     const prefilledLink = `${googleFormBase}?usp=pp_url&entry.2100078616=${encodeURIComponent(n.nombre)}`;
     const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría solicitar más información.`);
@@ -187,7 +194,6 @@ function verDetalle(id) {
         <div class="p-8 md:p-14 -mt-12 relative z-10 bg-[#1c1614] animate-reveal">
             <span class="text-[#d4a373] text-[10px] font-bold tracking-[0.5em] uppercase border-b border-[#5d1c15] pb-1">${n.categoria}</span>
             <h2 class="serif-title text-3xl md:text-4xl text-white mt-6 mb-8 uppercase tracking-[0.2em] font-bold">${n.nombre}</h2>
-            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
                 <div class="space-y-4">
                      <h4 class="text-[9px] uppercase tracking-[0.3em] font-bold text-stone-500">Servicios Especializados</h4>
@@ -204,22 +210,14 @@ function verDetalle(id) {
                     </div>
                 </div>
             </div>
-
-            <p class="elegant-italic text-stone-300 text-base leading-relaxed mb-12 border-l border-[#5d1c15] pl-6">
-                ${n.descripcion || 'Servicio de alta calidad seleccionado por Punto 506.'}
-            </p>
-
+            <p class="elegant-italic text-stone-300 text-base leading-relaxed mb-12 border-l border-[#5d1c15] pl-6">${n.descripcion || 'Servicio de alta calidad.'}</p>
             <div class="flex flex-col sm:flex-row gap-4 mb-12">
                 <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" class="w-full text-center py-5 bg-[#d4a373] text-[#130f0e] text-[10px] font-black uppercase tracking-[0.3em] hover:bg-stone-200 transition duration-500">WhatsApp Directo</a>
                 <a href="${n.instagram || '#'}" target="_blank" class="w-full text-center py-5 border border-[#d4a373]/20 text-[#d4a373] text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-white/5 transition duration-500">Instagram</a>
             </div>
-
             <div class="bg-black/20 p-8 border border-dashed border-[#d4a373]/10 text-center">
-                <h4 class="text-[10px] font-black uppercase tracking-widest text-[#d4a373] mb-2">Buzón de Mejora Privado</h4>
-                <p class="elegant-italic text-[12px] text-stone-500 mb-6 leading-relaxed">Sus sugerencias se comparten de forma totalmente anónima.</p>
-                <a href="${prefilledLink}" target="_blank" class="inline-block text-[10px] font-bold text-[#d4a373]/80 uppercase tracking-[0.4em] hover:text-white transition-colors">
-                    Enviar Sugerencia para ${n.nombre} →
-                </a>
+                <h4 class="text-[10px] font-black uppercase tracking-widest text-[#d4a373] mb-2">Buzón de Mejora</h4>
+                <a href="${prefilledLink}" target="_blank" class="inline-block text-[10px] font-bold text-[#d4a373]/80 uppercase tracking-[0.4em] hover:text-white transition-colors">Enviar Sugerencia →</a>
             </div>
         </div>
     `;
