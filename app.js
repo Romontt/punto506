@@ -19,7 +19,7 @@ function renderCards(lista) {
     setTimeout(() => {
         grid.innerHTML = lista.map((n, i) => `
             <div class="group glass-card overflow-hidden animate-reveal"
-                 style="animation-delay: ${i * 0.1}s">
+                 style="animation-delay: ${i * 0.15}s; animation-fill-mode: forwards;">
                 <div class="relative h-64 overflow-hidden border-b border-[#d4a373]/10">
                     <img src="${n.imagen}" class="w-full h-full object-cover sepia-[20%] group-hover:sepia-0 group-hover:scale-105 transition duration-[1.5s]" alt="${n.nombre}">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#130f0e] via-transparent opacity-90"></div>
