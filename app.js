@@ -2,7 +2,7 @@ let negociosRaw = [];
 let categoriaActual = 'todos';
 let etiquetaActual = null;
 
-const normalizar = (t) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+const normalizar = (t) => t ? t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : "";
 
 // --- NUEVA FUNCIÓN PARA SEO: URLS AMIGABLES ---
 function actualizarURL(categoria) {
@@ -10,7 +10,7 @@ function actualizarURL(categoria) {
     window.history.pushState({ path: nuevaUrl }, '', nuevaUrl);
 }
 
-// --- FUNCIONES PARA EL BOTÓN VER MÁS (MODIFICADO PARA INDICADOR) ---
+// --- FUNCIONES PARA EL BOTÓN VER MÁS ---
 function expandirGrid() {
     const wrapper = document.getElementById('wrapper-grid');
     const fade = document.getElementById('grid-fade');
@@ -31,7 +31,6 @@ function gestionarLimiteVisual(totalMostrados) {
 
     if (!wrapper || !fade || !btnContainer) return;
 
-    // Límite: 8 en desktop, 4 en móvil (2 filas de 2)
     const limite = window.innerWidth < 640 ? 4 : 8;
 
     if (categoriaActual === 'todos' && totalMostrados > limite) {
@@ -48,9 +47,12 @@ function gestionarLimiteVisual(totalMostrados) {
     }
 }
 
+// --- CARGA DE DATOS DESDE JSON ---
 async function loadData() {
     try {
         const response = await fetch('negocios.json');
+        if (!response.ok) throw new Error('Error al cargar negocios.json');
+        
         negociosRaw = await response.json();
         
         const params = new URLSearchParams(window.location.search);
@@ -63,22 +65,28 @@ async function loadData() {
         initFilters();
         renderSubCategorias();
 
-        setTimeout(() => {
-            const loader = document.getElementById('preloader');
-            if (loader) {
-                loader.classList.add('fade-out');
-            }
-        }, 950);
+        // Quitar preloader siempre al finalizar
+        finalizarCarga();
 
     } catch (e) { 
-        document.getElementById('grid-negocios').innerHTML = '<p class="text-stone-600 text-center py-20 col-span-full uppercase text-[9px] tracking-[0.5em] font-bold italic">Preparando el cafecito...</p>';
+        console.error("Error en loadData:", e);
+        const grid = document.getElementById('grid-negocios');
+        if (grid) grid.innerHTML = '<p class="text-stone-600 text-center py-20 col-span-full uppercase text-[9px] tracking-[0.5em] font-bold italic">Actualizando información...</p>';
+        finalizarCarga();
+    }
+}
+
+function finalizarCarga() {
+    setTimeout(() => {
         const loader = document.getElementById('preloader');
         if (loader) loader.classList.add('fade-out');
-    }
+    }, 800);
 }
 
 function renderCards(lista) {
     const grid = document.getElementById('grid-negocios');
+    if (!grid) return;
+    
     grid.style.opacity = '0';
     
     const listaFiltrada = categoriaActual === 'todos' 
@@ -88,11 +96,11 @@ function renderCards(lista) {
     setTimeout(() => {
         grid.innerHTML = listaFiltrada.map((n, i) => `
             <article class="group glass-card overflow-hidden animate-reveal"
-                  style="animation-delay: ${i * 0.15}s; animation-fill-mode: forwards;">
+                  style="animation-delay: ${i * 0.1}s; animation-fill-mode: forwards;">
                 <div class="relative h-64 overflow-hidden border-b border-[#d4a373]/10">
                     <img src="${n.imagen}" 
                          class="w-full h-full object-cover sepia-[20%] group-hover:sepia-0 group-hover:scale-105 transition duration-[1.5s]" 
-                         alt="Negocio ${n.nombre} en Pococí - Categoría ${n.categoria}"
+                         alt="Negocio ${n.nombre}"
                          loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#130f0e] via-transparent opacity-90"></div>
                     <div class="absolute top-6 left-6 text-[#d4a373] text-[7px] font-black tracking-[0.4em] uppercase bg-[#130f0e]/60 px-2 py-1">${n.categoria}</div>
@@ -110,7 +118,6 @@ function renderCards(lista) {
                     </div>
 
                     <button onclick="verDetalle(${n.id})" 
-                            aria-label="Ver detalles de ${n.nombre}"
                             class="mt-auto w-full py-4 text-[#d4a373] text-[10px] font-bold uppercase tracking-[0.4em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition duration-500">
                         Explorar Detalles
                     </button>
@@ -118,10 +125,7 @@ function renderCards(lista) {
             </article>
         `).join('');
         grid.style.opacity = '1';
-
-        // --- LLAMADA A LA GESTIÓN DE LÍMITE ---
         gestionarLimiteVisual(listaFiltrada.length);
-
     }, 300);
 }
 
@@ -154,7 +158,8 @@ function renderSubCategorias() {
 }
 
 function aplicarFiltrosCombinados() {
-    const busqueda = normalizar(document.getElementById('busqueda').value);
+    const busquedaInput = document.getElementById('busqueda');
+    const busqueda = busquedaInput ? normalizar(busquedaInput.value) : "";
     
     const filtrados = negociosRaw.filter(n => {
         const coincideBusqueda = normalizar(n.nombre).includes(busqueda) || 
@@ -174,24 +179,22 @@ function initFilters() {
     const input = document.getElementById('busqueda');
     const tituloSeccion = document.getElementById('categoria-titulo');
 
-    input.addEventListener('input', () => {
-        aplicarFiltrosCombinados();
-    });
+    if (input) {
+        input.addEventListener('input', aplicarFiltrosCombinados);
+    }
 
     document.querySelectorAll('.filter-btn').forEach(btn => {
         const catValue = btn.getAttribute('data-cat');
         
         if (normalizar(catValue) === normalizar(categoriaActual)) {
             activarBoton(btn);
-            tituloSeccion.innerText = categoriaActual === 'todos' ? 'Recomendaciones' : categoriaActual;
+            if (tituloSeccion) tituloSeccion.innerText = categoriaActual === 'todos' ? 'Recomendaciones' : categoriaActual;
         }
 
         btn.addEventListener('click', () => {
             categoriaActual = catValue;
             etiquetaActual = null;
-            
-            tituloSeccion.innerText = categoriaActual === 'todos' ? 'Recomendaciones' : categoriaActual;
-
+            if (tituloSeccion) tituloSeccion.innerText = categoriaActual === 'todos' ? 'Recomendaciones' : categoriaActual;
             activarBoton(btn);
             actualizarURL(categoriaActual); 
             renderSubCategorias();
@@ -216,7 +219,10 @@ function verDetalle(id) {
     const prefilledLink = `${googleFormBase}?usp=pp_url&entry.2100078616=${encodeURIComponent(n.nombre)}`;
     const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría solicitar más información.`);
 
-    document.getElementById('modal-content').innerHTML = `
+    const modalContent = document.getElementById('modal-content');
+    if (!modalContent) return;
+
+    modalContent.innerHTML = `
         <div class="relative h-72 md:h-80">
             <img src="${n.imagen}" alt="${n.nombre}" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-[#1c1614] via-transparent"></div>
@@ -260,17 +266,28 @@ function verDetalle(id) {
             </div>
         </div>
     `;
-    document.getElementById('modal-negocio').classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
+    const modal = document.getElementById('modal-negocio');
+    if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
 }
 
 function cerrarModal() {
-    document.getElementById('modal-negocio').classList.add('hidden');
-    document.body.style.overflow = 'auto';
+    const modal = document.getElementById('modal-negocio');
+    if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
 }
 
-document.getElementById('modal-negocio').addEventListener('click', function(e) {
-    if (e.target === this) cerrarModal();
-});
+// Evento de cierre de modal
+const modalEl = document.getElementById('modal-negocio');
+if (modalEl) {
+    modalEl.addEventListener('click', (e) => {
+        if (e.target.id === 'modal-negocio') cerrarModal();
+    });
+}
 
+// Ejecutar carga inicial
 loadData();
