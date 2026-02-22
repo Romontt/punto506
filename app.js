@@ -114,7 +114,7 @@ function initFilters() {
             categoriaActual = btn.getAttribute('data-cat');
             etiquetaActual = null; // Reiniciamos sub-filtro al cambiar de categoría
             
-            tituloSeccion.innerText = categoriaActual === 'todos' ? 'Recomendaciones Select' : categoriaActual;
+            tituloSeccion.innerText = categoriaActual === 'todos' ? 'Recomendaciones' : categoriaActual;
 
             // Estética de botones principales
             document.querySelectorAll('.filter-btn').forEach(b => {
