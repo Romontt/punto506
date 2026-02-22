@@ -1,0 +1,94 @@
+:root { 
+    --p506-bg: #130f0e; 
+    --p506-wood: #2c1e1a;   
+    --p506-accent: #d4a373; 
+    --p506-detail: #5d1c15; 
+}
+
+body { 
+    font-family: 'Inter', sans-serif; 
+    background-color: var(--p506-bg);
+    background-image: 
+        radial-gradient(circle at 50% 0%, rgba(212, 163, 115, 0.08) 0%, transparent 70%),
+        url("https://www.transparenttextures.com/patterns/dark-linen.png");
+    background-attachment: fixed;
+}
+
+.serif-title { font-family: 'Cinzel', serif; letter-spacing: 0.2em; }
+.business-title { font-family: 'Montserrat', sans-serif; letter-spacing: 0.05em; }
+.elegant-italic { font-family: 'Baskervville', serif; font-style: italic; }
+
+@keyframes scrollHint {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+}
+.scroll-hint { animation: scrollHint 1.5s ease-in-out infinite; }
+
+@keyframes revealCard { 
+    from { opacity: 0; transform: translateY(15px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+.animate-reveal { 
+    opacity: 0;
+    animation: revealCard 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; 
+}
+
+#grid-negocios { transition: opacity 0.5s ease-in-out; }
+
+.iso-emblem {
+    border: 1px solid var(--p506-accent);
+    background: repeating-conic-gradient(from 0deg, rgba(212, 163, 115, 0.05) 0deg 30deg, transparent 30deg 60deg);
+    box-shadow: inset 0 0 15px rgba(212, 163, 115, 0.1);
+}
+
+.glass-card {
+    background: rgba(44, 30, 26, 0.4); 
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(212, 163, 115, 0.1);
+    box-shadow: 0 15px 35px -15px rgba(0,0,0,0.8);
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.glass-card:hover {
+    border-color: var(--p506-accent);
+    background: rgba(93, 28, 21, 0.08);
+    transform: translateY(-6px);
+}
+
+.search-container {
+    position: relative;
+    background: rgba(20, 15, 14, 0.6);
+    border: 1px solid rgba(212, 163, 115, 0.2);
+    padding: 8px 16px;
+    transition: all 0.5s ease;
+}
+
+.search-container:focus-within {
+    border-color: var(--p506-accent);
+    background: rgba(93, 28, 21, 0.2);
+    box-shadow: 0 0 15px rgba(212, 163, 115, 0.1);
+}
+
+.search-input {
+    background: transparent;
+    border: none;
+    width: 100%;
+}
+
+.search-input:focus {
+    outline: none;
+    letter-spacing: 0.1em;
+}
+
+.custom-scroll::-webkit-scrollbar { width: 3px; }
+.custom-scroll::-webkit-scrollbar-track { background: var(--p506-bg); }
+.custom-scroll::-webkit-scrollbar-thumb { background: var(--p506-accent); }
+
+.hide-scroll::-webkit-scrollbar { display: none; }
+.hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+
+.tropical-header {
+    background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
+}
