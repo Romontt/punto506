@@ -8,151 +8,170 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Montserrat:wght@700&family=Baskervville:italic&display=swap" rel="stylesheet">
     <style>
         :root { 
-            /* Paleta Rústica Refinada */
-            --p506-dark: #0d0c0b; 
-            --p506-accent: #c29d5b; /* Oro viejo / Bronce */
-            --p506-earth: #2a241e; 
-            --p506-cream: #f4f1ea;
+            /* Paleta Tropical-Luxury (Guápiles) */
+            --p506-jungle: #040d0a; /* Verde bosque casi negro */
+            --p506-leaf: #1a4d3c;   /* Verde follaje profundo */
+            --p506-bronze: #a67c52; /* Bronce/Madera vieja */
+            --p506-rain: rgba(166, 124, 82, 0.1);
         }
         body { 
             font-family: 'Inter', sans-serif; 
-            background-color: var(--p506-dark);
-            /* Textura sutil de papel/grano rústico */
+            background-color: var(--p506-jungle);
+            /* Textura que evoca la humedad y naturaleza del trópico */
             background-image: 
-                radial-gradient(circle at 20% 30%, rgba(194, 157, 91, 0.05) 0%, transparent 50%),
-                url("https://www.transparenttextures.com/patterns/dark-matter.png");
+                radial-gradient(circle at 50% 0%, rgba(26, 77, 60, 0.2) 0%, transparent 70%),
+                url("https://www.transparenttextures.com/patterns/dark-linen.png");
             background-attachment: fixed;
         }
-        .serif-title { font-family: 'Cinzel', serif; letter-spacing: 0.2em; }
-        .business-title { font-family: 'Montserrat', sans-serif; letter-spacing: 0.05em; }
+        .serif-title { font-family: 'Cinzel', serif; letter-spacing: 0.25em; }
+        .business-title { font-family: 'Montserrat', sans-serif; letter-spacing: 0.1em; }
         .elegant-italic { font-family: 'Baskervville', serif; font-style: italic; }
         
         @keyframes revealCard { 
-            from { opacity: 0; transform: translateY(15px); } 
-            to { opacity: 1; transform: translateY(0); } 
+            from { opacity: 0; transform: translateY(20px); filter: blur(5px); } 
+            to { opacity: 1; transform: translateY(0); filter: blur(0); } 
         }
         .animate-reveal { 
             opacity: 0;
-            animation: revealCard 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; 
+            animation: revealCard 1s cubic-bezier(0.22, 1, 0.36, 1) forwards; 
         }
-        
-        #grid-negocios { transition: opacity 0.5s ease-in-out; }
 
-        /* Emblema con toque bronceado */
+        /* Nav estilo Madera Noble */
+        nav {
+            background: rgba(4, 13, 10, 0.98);
+            border-bottom: 1px solid rgba(166, 124, 82, 0.2);
+        }
+
         .iso-emblem {
-            border: 1px solid rgba(194, 157, 91, 0.4);
-            background: radial-gradient(circle, rgba(194, 157, 91, 0.1) 0%, transparent 80%);
-            box-shadow: inset 0 0 10px rgba(194, 157, 91, 0.1);
+            border: 1px solid var(--p506-bronze);
+            background: linear-gradient(135deg, rgba(166, 124, 82, 0.2), transparent);
+            box-shadow: 0 0 15px rgba(166, 124, 82, 0.1);
         }
 
-        /* Tarjetas estilo "Madera Oscura / Vidrio Ahumado" */
+        /* Tarjetas con borde degradado bronce y fondo selva */
         .glass-card {
-            background: rgba(42, 36, 30, 0.4); 
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(194, 157, 91, 0.1);
-            box-shadow: 0 15px 35px -15px rgba(0,0,0,0.8);
-            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-            display: flex;
-            flex-direction: column;
+            background: linear-gradient(to bottom right, rgba(26, 77, 60, 0.05), rgba(4, 13, 10, 0.4));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(166, 124, 82, 0.15);
+            box-shadow: 0 20px 40px -20px rgba(0,0,0,0.9);
+            transition: all 0.5s ease;
         }
         .glass-card:hover {
-            border-color: var(--p506-accent);
-            background: rgba(42, 36, 30, 0.6);
-            transform: translateY(-6px);
+            border-color: var(--p506-bronze);
+            background: rgba(26, 77, 60, 0.1);
+            transform: translateY(-8px) scale(1.01);
         }
 
         .search-input {
             background: transparent;
             border: none;
-            border-bottom: 1px solid rgba(194, 157, 91, 0.3);
+            border-bottom: 1px solid var(--p506-bronze);
             text-align: center;
-            transition: all 0.5s ease;
+            color: #e2e8f0;
         }
         .search-input:focus {
-            border-bottom: 1px solid var(--p506-accent);
-            letter-spacing: 0.3em;
+            border-bottom-width: 2px;
+            letter-spacing: 0.4em;
             outline: none;
         }
 
-        .custom-scroll::-webkit-scrollbar { width: 3px; }
-        .custom-scroll::-webkit-scrollbar-track { background: var(--p506-dark); }
-        .custom-scroll::-webkit-scrollbar-thumb { background: var(--p506-accent); }
-        
-        .hide-scroll::-webkit-scrollbar { display: none; }
-        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+        /* Estética de los botones de filtro */
+        .filter-btn {
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        .filter-btn:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: var(--p506-bronze);
+            transition: all 0.4s ease;
+            transform: translateX(-50%);
+        }
+        .filter-btn:hover:after { width: 80%; }
 
-        /* Separador orgánico */
+        /* Header con patrón orgánico de hojas sutil */
         .tropical-header {
-            background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
-            background-opacity: 0.05;
+            background-image: url("https://www.transparenttextures.com/patterns/leaves.png");
+            background-opacity: 0.03;
         }
     </style>
 </head>
-<body class="antialiased text-slate-200">
+<body class="antialiased text-slate-300">
 
-    <nav class="bg-[#0d0c0b]/95 backdrop-blur-2xl border-b border-[#c29d5b]/10 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between py-6 px-6 gap-6">
-            <div class="flex items-center gap-5">
-                <div class="w-11 h-11 iso-emblem rounded-full flex items-center justify-center">
-                    <span class="serif-title text-[10px] text-[#c29d5b] font-bold mt-0.5">506</span>
+    <nav class="sticky top-0 z-50 py-5 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-6">
+                <div class="w-12 h-12 iso-emblem rounded-none rotate-45 flex items-center justify-center">
+                    <span class="serif-title text-[11px] text-[#a67c52] font-bold -rotate-45">506</span>
                 </div>
-                <div class="text-left border-l border-[#c29d5b]/20 pl-5">
-                    <h1 class="serif-title text-xl md:text-2xl tracking-[0.3em] text-white uppercase font-normal leading-none">Punto 506</h1>
-                    <p class="text-[#c29d5b] uppercase tracking-[0.5em] text-[7px] font-bold mt-2 opacity-80">Descubre. Conecta. Destaca.</p>
+                <div class="text-left border-l border-[#a67c52]/30 pl-6">
+                    <h1 class="serif-title text-2xl tracking-[0.4em] text-white font-normal leading-none">Punto 506</h1>
+                    <p class="text-[#a67c52] uppercase tracking-[0.6em] text-[8px] font-bold mt-2">Pococí · Select</p>
                 </div>
             </div>
 
-            <div class="flex items-center gap-8 overflow-x-auto hide-scroll w-full md:w-auto justify-start md:justify-center px-2">
-                <button data-cat="todos" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-black text-[#c29d5b] border-b border-[#c29d5b] pb-1 whitespace-nowrap">Todos</button>
-                <button data-cat="salud" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-slate-500 pb-1 border-b border-transparent hover:text-[#c29d5b] whitespace-nowrap">Salud</button>
-                <button data-cat="gastronomía" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-slate-500 pb-1 border-b border-transparent hover:text-[#c29d5b] whitespace-nowrap">Gastronomía</button>
-                <button data-cat="estética" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-slate-500 pb-1 border-b border-transparent hover:text-[#c29d5b] whitespace-nowrap">Estética</button>
-                <div class="hidden md:block h-4 w-[1px] bg-[#c29d5b]/20"></div>
-                <span class="hidden md:block text-[7px] uppercase tracking-[0.5em] font-black text-[#c29d5b]/30 whitespace-nowrap">BY MONTZU CR</span>
+            <div class="flex items-center gap-10 overflow-x-auto hide-scroll w-full md:w-auto justify-start md:justify-center px-4">
+                <button data-cat="todos" class="filter-btn text-[10px] uppercase tracking-[0.4em] font-black text-[#a67c52]">Todos</button>
+                <button data-cat="salud" class="filter-btn text-[10px] uppercase tracking-[0.4em] font-medium text-slate-500 hover:text-white">Salud</button>
+                <button data-cat="gastronomía" class="filter-btn text-[10px] uppercase tracking-[0.4em] font-medium text-slate-500 hover:text-white">Gastronomía</button>
+                <button data-cat="estética" class="filter-btn text-[10px] uppercase tracking-[0.4em] font-medium text-slate-500 hover:text-white">Estética</button>
+                <div class="hidden md:block w-[1px] h-4 bg-[#a67c52]/20"></div>
+                <span class="hidden md:block text-[8px] tracking-[0.5em] text-[#a67c52]/40 font-bold uppercase">Montzu CR</span>
             </div>
         </div>
     </nav>
 
-   <header class="relative py-16 md:py-20 tropical-header border-b border-[#c29d5b]/10 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#0d0c0b]"></div>
-        <div class="relative z-10 max-w-2xl mx-auto text-center px-6">
-            <h2 class="serif-title text-[#c29d5b] text-[8px] tracking-[0.8em] mb-4 uppercase font-bold opacity-60">Nuestro Propósito</h2>
-            <p class="elegant-italic text-[#f4f1ea]/80 text-base md:text-lg leading-relaxed mb-10">
-                "Punto 506 es un espacio creado para fortalecer el comercio local en Pococí. Nuestra misión es conectar a la comunidad con servicios profesionales de calidad, sirviendo como una plataforma de crecimiento mutuo."
+   <header class="relative py-20 md:py-28 tropical-header overflow-hidden border-b border-[#a67c52]/10">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#040d0a]/80 to-[#040d0a]"></div>
+        <div class="relative z-10 max-w-3xl mx-auto text-center px-6">
+            <div class="inline-block w-12 h-[1px] bg-[#a67c52] mb-8"></div>
+            <p class="elegant-italic text-white text-lg md:text-xl leading-relaxed mb-12 opacity-90 max-w-2xl mx-auto">
+                "Conectando la esencia de Pococí con el estándar de excelencia profesional que nuestra comunidad merece."
             </p>
-            <div class="max-w-xs mx-auto relative">
-                <input type="text" id="busqueda" placeholder="BUSCAR EXPERIENCIA..." class="search-input w-full py-1.5 text-[9px] tracking-[0.3em] text-white placeholder:text-slate-600 uppercase">
+            <div class="max-w-sm mx-auto">
+                <input type="text" id="busqueda" placeholder="EXPLORAR DESTINOS..." class="search-input w-full py-3 text-[10px] tracking-[0.5em] uppercase placeholder:text-slate-700">
             </div>
         </div>
     </header>
     
-    <main class="max-w-7xl mx-auto py-20 px-6">
-        <div class="flex items-center gap-4 mb-16">
-            <div class="h-[1px] w-10 bg-[#c29d5b]/40"></div>
-            <h2 id="categoria-titulo" class="serif-title text-[10px] text-[#c29d5b] uppercase tracking-[0.6em]">Recomendaciones Select</h2>
+    <main class="max-w-7xl mx-auto py-24 px-6">
+        <div class="flex items-center justify-between mb-20 border-b border-[#a67c52]/10 pb-6">
+            <h2 id="categoria-titulo" class="serif-title text-[11px] text-white uppercase tracking-[0.8em]">Select Directory</h2>
+            <div class="flex gap-1">
+                <div class="w-1 h-1 bg-[#a67c52] rounded-full"></div>
+                <div class="w-1 h-1 bg-[#a67c52]/50 rounded-full"></div>
+                <div class="w-1 h-1 bg-[#a67c52]/20 rounded-full"></div>
+            </div>
         </div>
-        <div id="grid-negocios" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"></div>
+        <div id="grid-negocios" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12"></div>
     </main>
 
-    <div id="modal-negocio" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-black/98 backdrop-blur-xl">
-        <div class="bg-[#161412] w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-none border border-[#c29d5b]/20 shadow-2xl relative custom-scroll">
-            <button onclick="cerrarModal()" class="absolute top-8 right-8 z-20 text-[#c29d5b]/40 hover:text-[#c29d5b] transition">
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" /></svg>
+    <div id="modal-negocio" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-[#040d0a]/98 backdrop-blur-md">
+        <div class="bg-[#08120f] w-full max-w-2xl max-h-[95vh] overflow-y-auto rounded-none border border-[#a67c52]/30 shadow-[0_0_100px_rgba(0,0,0,0.8)] relative custom-scroll">
+            <button onclick="cerrarModal()" class="absolute top-8 right-8 z-20 text-[#a67c52] hover:scale-110 transition">
+                <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
             <div id="modal-content"></div>
         </div>
     </div>
 
-    <footer class="bg-[#0d0c0b] py-24 px-6 border-t border-[#c29d5b]/10">
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+    <footer class="bg-black py-28 px-6 border-t border-[#a67c52]/10">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-16">
             <div class="text-center md:text-left">
-                <h2 class="serif-title text-xl text-[#c29d5b] tracking-[0.4em] uppercase">Punto 506</h2>
-                <p class="text-[8px] uppercase text-[#c29d5b]/50 font-bold tracking-[0.5em] mt-2">Pococí Select Directory</p>
+                <h2 class="serif-title text-2xl text-white tracking-[0.5em] uppercase">Punto 506</h2>
+                <div class="h-[1px] w-full bg-[#a67c52]/30 mt-4"></div>
+                <p class="text-[9px] uppercase text-[#a67c52] font-bold tracking-[0.6em] mt-4">Pococí Select Directory</p>
             </div>
-            <p class="elegant-italic text-[13px] text-slate-500 max-w-[320px] text-center leading-relaxed">"Elevando el estándar de los servicios profesionales en la zona de Pococí."</p>
-            <div class="text-center md:text-right">
-                <p class="text-[8px] uppercase text-slate-700 mb-1 font-bold tracking-widest">Un proyecto de</p>
-                <h3 class="serif-title text-xs text-[#c29d5b] tracking-[0.5em]">MONTZU CR</h3>
+            <div class="text-center">
+                <p class="elegant-italic text-sm text-slate-500 leading-relaxed italic">"Nuestra zona, nuestro talento, nuestro orgullo."</p>
+            </div>
+            <div class="text-center md:text-right space-y-2">
+                <p class="text-[9px] uppercase text-slate-700 font-bold tracking-widest">Desarrollado por</p>
+                <h3 class="serif-title text-sm text-[#a67c52] tracking-[0.6em]">MONTZU CR</h3>
             </div>
         </div>
     </footer>
@@ -168,7 +187,7 @@
                 renderCards(negociosRaw);
                 initFilters();
             } catch (e) { 
-                document.getElementById('grid-negocios').innerHTML = '<p class="text-[#c29d5b]/40 text-center py-20 col-span-full uppercase text-[9px] tracking-[0.5em] font-bold">Iniciando Directorio...</p>';
+                document.getElementById('grid-negocios').innerHTML = '<div class="col-span-full text-center py-20"><div class="animate-pulse text-[#a67c52] serif-title text-[10px] tracking-widest">Sincronizando con Pococí...</div></div>';
             }
         }
 
@@ -180,25 +199,19 @@
                 grid.innerHTML = lista.map((n, i) => `
                     <div class="group glass-card overflow-hidden animate-reveal"
                          style="animation-delay: ${i * 0.1}s">
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="${n.imagen}" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition duration-[1.5s]" alt="${n.nombre}">
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#0d0c0b] via-transparent opacity-90"></div>
-                            <div class="absolute top-6 left-6 text-[#c29d5b] text-[7px] font-black tracking-[0.4em] uppercase">${n.categoria}</div>
+                        <div class="relative h-72 overflow-hidden">
+                            <img src="${n.imagen}" class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-110 transition duration-[2s]" alt="${n.nombre}">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#040d0a] via-transparent opacity-80"></div>
+                            <div class="absolute bottom-6 left-8">
+                                <span class="text-[#a67c52] text-[8px] font-black tracking-[0.5em] uppercase bg-black/40 px-3 py-1 backdrop-blur-sm border-l border-[#a67c52]">${n.categoria}</span>
+                            </div>
                         </div>
                         
-                        <div class="p-8 text-center flex flex-col flex-grow">
-                            <div class="min-h-[4rem] flex items-center justify-center mb-4">
-                                <h3 class="business-title text-lg text-white uppercase tracking-wider font-bold">${n.nombre}</h3>
-                            </div>
-                            
-                            <div class="min-h-[4rem] mb-6 flex items-center justify-center text-center">
-                                <p class="elegant-italic text-slate-400 text-[13px] leading-relaxed line-clamp-2">
-                                    ${n.servicios_resumen}
-                                </p>
-                            </div>
-
-                            <button onclick="verDetalle(${n.id})" class="mt-auto w-full py-4 text-[#c29d5b] text-[9px] font-bold uppercase tracking-[0.4em] border border-[#c29d5b]/20 hover:bg-[#c29d5b] hover:text-black transition duration-500">
-                                Explorar Detalles
+                        <div class="p-10 text-center flex flex-col flex-grow">
+                            <h3 class="business-title text-base text-white uppercase font-bold mb-4">${n.nombre}</h3>
+                            <p class="elegant-italic text-slate-500 text-sm leading-relaxed mb-8 line-clamp-2">${n.servicios_resumen}</p>
+                            <button onclick="verDetalle(${n.id})" class="mt-auto group-hover:bg-[#a67c52] group-hover:text-black border border-[#a67c52]/30 py-4 text-[9px] uppercase tracking-[0.5em] transition duration-500">
+                                Ver Detalles
                             </button>
                         </div>
                     </div>
@@ -213,50 +226,47 @@
 
             const googleFormBase = "https://docs.google.com/forms/d/e/1FAIpQLSfuSPB2ZQBl9COJLLgRMBkZ72aqlr-bVO-Pb0c0H7UvS801hQ/viewform";
             const prefilledLink = `${googleFormBase}?usp=pp_url&entry.2100078616=${encodeURIComponent(n.nombre)}`;
-            
-            const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría solicitar más información.`);
+            const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría información.`);
 
             document.getElementById('modal-content').innerHTML = `
-                <div class="relative h-72 md:h-80">
+                <div class="relative h-80">
                     <img src="${n.imagen}" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#161412] via-transparent"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#08120f] to-transparent"></div>
                 </div>
-                <div class="p-8 md:p-14 -mt-12 relative z-10 bg-[#161412] animate-reveal">
-                    <span class="text-[#c29d5b] text-[9px] font-bold tracking-[0.5em] uppercase border-b border-[#c29d5b]/20 pb-1">${n.categoria}</span>
-                    <h2 class="serif-title text-2xl md:text-3xl text-white mt-6 mb-8 uppercase tracking-[0.2em] font-bold">${n.nombre}</h2>
+                <div class="p-10 md:p-16 -mt-16 relative z-10 bg-[#08120f] animate-reveal">
+                    <span class="text-[#a67c52] text-[10px] font-bold tracking-[0.6em] uppercase border-l-2 border-[#a67c52] pl-4">${n.categoria}</span>
+                    <h2 class="serif-title text-3xl text-white mt-8 mb-10 uppercase tracking-[0.3em] font-bold">${n.nombre}</h2>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
-                        <div class="space-y-4">
-                             <h4 class="text-[8px] uppercase tracking-[0.3em] font-bold text-[#c29d5b]/50">Servicios Especializados</h4>
-                             <p class="elegant-italic text-[#f4f1ea]/80 text-base leading-relaxed">${n.servicios_resumen}</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+                        <div class="space-y-6">
+                             <h4 class="text-[9px] uppercase tracking-[0.4em] font-bold text-[#a67c52]">Propuesta de Valor</h4>
+                             <p class="elegant-italic text-slate-200 text-lg leading-relaxed italic">${n.servicios_resumen}</p>
                         </div>
-                        <div class="flex flex-col gap-5 border-l border-white/5 pl-6">
-                            <div class="flex items-center gap-4">
-                                <div class="text-[#c29d5b] opacity-50"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                                <p class="text-slate-400 text-[10px] uppercase tracking-widest">${n.horario}</p>
+                        <div class="bg-black/20 p-8 border border-white/5 space-y-6">
+                            <div class="flex items-center gap-5">
+                                <div class="w-2 h-2 rounded-full bg-[#a67c52]"></div>
+                                <p class="text-slate-400 text-[11px] uppercase tracking-widest">${n.horario}</p>
                             </div>
-                            <div class="flex items-start gap-4">
-                                <div class="text-[#c29d5b] opacity-50"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                                <p class="text-slate-400 text-[10px] uppercase tracking-widest leading-relaxed">${n.direccion}</p>
+                            <div class="flex items-start gap-5">
+                                <div class="w-2 h-2 rounded-full bg-[#a67c52]"></div>
+                                <p class="text-slate-400 text-[11px] uppercase tracking-widest leading-relaxed">${n.direccion}</p>
                             </div>
                         </div>
                     </div>
 
-                    <p class="elegant-italic text-slate-400 text-sm leading-relaxed mb-12 border-l border-[#c29d5b]/30 pl-6">
-                        ${n.descripcion || 'Servicio de alta calidad seleccionado por Punto 506.'}
+                    <p class="elegant-italic text-slate-400 text-base leading-relaxed mb-16 border-t border-white/5 pt-10">
+                        ${n.descripcion || 'Servicio de excelencia seleccionado para nuestra plataforma local.'}
                     </p>
 
-                    <div class="flex flex-col sm:flex-row gap-4 mb-12">
-                       <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" class="w-full text-center py-5 bg-[#c29d5b] text-black text-[9px] font-black uppercase tracking-[0.3em] hover:bg-white transition duration-500">WhatsApp Directo</a>
-                        
-                        <a href="${n.instagram || '#'}" target="_blank" class="w-full text-center py-5 border border-[#c29d5b]/20 text-[#c29d5b] text-[9px] font-bold uppercase tracking-[0.3em] hover:bg-white/5 transition duration-500">Instagram</a>
+                    <div class="flex flex-col sm:flex-row gap-6 mb-16">
+                       <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" class="w-full text-center py-6 bg-[#a67c52] text-black text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white transition-all">WhatsApp Directo</a>
+                       <a href="${n.instagram || '#'}" target="_blank" class="w-full text-center py-6 border border-[#a67c52]/40 text-[#a67c52] text-[10px] font-bold uppercase tracking-[0.4em] hover:bg-white/5 transition-all">Instagram</a>
                     </div>
 
-                    <div class="bg-white/[0.01] p-8 border border-dashed border-[#c29d5b]/20 text-center">
-                        <h4 class="text-[9px] font-black uppercase tracking-widest text-[#c29d5b] mb-2">Buzón de Mejora Privado</h4>
-                        <p class="elegant-italic text-[11px] text-slate-500 mb-6 leading-relaxed">Sus sugerencias se comparten de forma totalmente anónima.</p>
-                        <a href="${prefilledLink}" target="_blank" class="inline-block text-[9px] font-bold text-[#c29d5b] uppercase tracking-[0.4em] hover:text-white transition-colors">
-                            Enviar Sugerencia para ${n.nombre} →
+                    <div class="bg-black p-10 text-center border-t border-[#a67c52]/20">
+                        <p class="elegant-italic text-xs text-slate-500 mb-6 italic">"Buzón Privado de Mejora continua para el comercio local."</p>
+                        <a href="${prefilledLink}" target="_blank" class="inline-block text-[10px] font-bold text-[#a67c52] uppercase tracking-[0.5em] border-b border-[#a67c52]/30 hover:border-[#a67c52]">
+                            Enviar Sugerencia →
                         </a>
                     </div>
                 </div>
@@ -291,13 +301,13 @@
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const cat = btn.getAttribute('data-cat');
-                    tituloSeccion.innerText = cat === 'todos' ? 'Recomendaciones Select' : cat;
+                    tituloSeccion.innerText = cat === 'todos' ? 'Select Directory' : cat;
 
                     document.querySelectorAll('.filter-btn').forEach(b => {
-                        b.classList.remove('text-[#c29d5b]', 'border-[#c29d5b]', 'font-black');
-                        b.classList.add('text-slate-500', 'border-transparent');
+                        b.classList.remove('text-[#a67c52]', 'font-black');
+                        b.classList.add('text-slate-500');
                     });
-                    btn.classList.add('text-[#c29d5b]', 'border-[#c29d5b]', 'font-black');
+                    btn.classList.add('text-[#a67c52]', 'font-black');
                     const filtrados = cat === 'todos' ? negociosRaw : negociosRaw.filter(n => normalizar(n.categoria) === normalizar(cat));
                     renderCards(filtrados);
                 });
