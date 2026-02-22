@@ -1,4 +1,7 @@
 let negociosRaw = [];
+let categoriaActual = 'todos';
+let etiquetaActual = null;
+
 const normalizar = (t) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
 async function loadData() {
@@ -47,6 +50,86 @@ function renderCards(lista) {
     }, 300);
 }
 
+// NUEVA FUNCIÓN: Crea los botoncitos de Masajes, Uñas, etc.
+function renderSubCategorias() {
+    const contenedor = document.getElementById('sub-categorias');
+    if (!contenedor) return;
+    
+    contenedor.innerHTML = '';
+    // Solo mostramos sub-categorías si hay una categoría principal seleccionada (que no sea 'todos')
+    if (categoriaActual === 'todos') return;
+
+    // Extraemos las etiquetas únicas de los negocios que pertenecen a la categoría actual
+    const etiquetas = [...new Set(
+        negociosRaw
+            .filter(n => normalizar(n.categoria) === normalizar(categoriaActual) && n.etiquetas)
+            .flatMap(n => n.etiquetas)
+    )];
+
+    etiquetas.forEach(tag => {
+        const btn = document.createElement('button');
+        btn.innerText = tag.toUpperCase();
+        // Estilo elegante y minimalista
+        const activo = etiquetaActual === tag;
+        btn.className = `text-[9px] tracking-[0.3em] px-4 py-2 border transition-all duration-500 ${activo ? 'border-[#d4a373] text-[#d4a373] font-bold' : 'border-transparent text-stone-500 hover:text-stone-300'}`;
+        
+        btn.onclick = () => {
+            etiquetaActual = (etiquetaActual === tag) ? null : tag; // Si toca el mismo, se desactiva
+            renderSubCategorias();
+            aplicarFiltrosCombinados();
+        };
+        contenedor.appendChild(btn);
+    });
+}
+
+// FUNCIÓN CENTRALIZADA: Filtra por buscador, categoría y etiqueta al mismo tiempo
+function aplicarFiltrosCombinados() {
+    const busqueda = normalizar(document.getElementById('busqueda').value);
+    
+    const filtrados = negociosRaw.filter(n => {
+        const coincideBusqueda = normalizar(n.nombre).includes(busqueda) || 
+                                 normalizar(n.servicios_resumen).includes(busqueda) ||
+                                 normalizar(n.categoria).includes(busqueda);
+        
+        const coincideCategoria = categoriaActual === 'todos' || normalizar(n.categoria) === normalizar(categoriaActual);
+        
+        const coincideEtiqueta = !etiquetaActual || (n.etiquetas && n.etiquetas.includes(etiquetaActual));
+
+        return coincideBusqueda && coincideCategoria && coincideEtiqueta;
+    });
+
+    renderCards(filtrados);
+}
+
+function initFilters() {
+    const input = document.getElementById('busqueda');
+    const tituloSeccion = document.getElementById('categoria-titulo');
+
+    input.addEventListener('input', () => {
+        aplicarFiltrosCombinados();
+    });
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            categoriaActual = btn.getAttribute('data-cat');
+            etiquetaActual = null; // Reiniciamos sub-filtro al cambiar de categoría
+            
+            tituloSeccion.innerText = categoriaActual === 'todos' ? 'Recomendaciones Select' : categoriaActual;
+
+            // Estética de botones principales
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('text-[#d4a373]', 'border-[#d4a373]', 'font-black');
+                b.classList.add('text-stone-500', 'border-transparent');
+            });
+            btn.classList.add('text-[#d4a373]', 'border-[#d4a373]', 'font-black');
+            
+            renderSubCategorias();
+            aplicarFiltrosCombinados();
+        });
+    });
+}
+
+// Funciones de Modal (Se mantienen igual)
 function verDetalle(id) {
     const n = negociosRaw.find(item => item.id === id);
     if (!n) return;
@@ -72,11 +155,11 @@ function verDetalle(id) {
                 <div class="flex flex-col gap-5 border-l border-[#d4a373]/20 pl-6">
                     <div class="flex items-center gap-4">
                         <div class="text-[#d4a373] opacity-50"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <p class="text-stone-300 text-[11px] uppercase tracking-widest">${n.horario}</p>
+                        <p class="text-stone-300 text-[11px] uppercase tracking-widest">${n.horario || 'Consultar Horario'}</p>
                     </div>
                     <div class="flex items-start gap-4">
                         <div class="text-[#d4a373] opacity-50"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <p class="text-stone-300 text-[11px] uppercase tracking-widest leading-relaxed">${n.direccion}</p>
+                        <p class="text-stone-300 text-[11px] uppercase tracking-widest leading-relaxed">${n.direccion || 'Ubicación en Pococí'}</p>
                     </div>
                 </div>
             </div>
@@ -86,8 +169,8 @@ function verDetalle(id) {
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 mb-12">
-               <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" class="w-full text-center py-5 bg-[#d4a373] text-[#130f0e] text-[10px] font-black uppercase tracking-[0.3em] hover:bg-stone-200 transition duration-500">WhatsApp Directo</a>
-               <a href="${n.instagram || '#'}" target="_blank" class="w-full text-center py-5 border border-[#d4a373]/20 text-[#d4a373] text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-white/5 transition duration-500">Instagram</a>
+                <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" class="w-full text-center py-5 bg-[#d4a373] text-[#130f0e] text-[10px] font-black uppercase tracking-[0.3em] hover:bg-stone-200 transition duration-500">WhatsApp Directo</a>
+                <a href="${n.instagram || '#'}" target="_blank" class="w-full text-center py-5 border border-[#d4a373]/20 text-[#d4a373] text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-white/5 transition duration-500">Instagram</a>
             </div>
 
             <div class="bg-black/20 p-8 border border-dashed border-[#d4a373]/10 text-center">
@@ -108,40 +191,8 @@ function cerrarModal() {
     document.body.style.overflow = 'auto';
 }
 
-function initFilters() {
-    const input = document.getElementById('busqueda');
-    const tituloSeccion = document.getElementById('categoria-titulo');
-
-    input.addEventListener('input', (e) => {
-        const t = normalizar(e.target.value);
-        const filtrados = negociosRaw.filter(n => 
-            normalizar(n.nombre).includes(t) || 
-            normalizar(n.servicios_resumen).includes(t) ||
-            normalizar(n.categoria).includes(t)
-        );
-        renderCards(filtrados);
-    });
-
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const cat = btn.getAttribute('data-cat');
-            tituloSeccion.innerText = cat === 'todos' ? 'Recomendaciones Select' : cat;
-
-            document.querySelectorAll('.filter-btn').forEach(b => {
-                b.classList.remove('text-[#d4a373]', 'border-[#d4a373]', 'font-black');
-                b.classList.add('text-stone-500', 'border-transparent');
-            });
-            btn.classList.add('text-[#d4a373]', 'border-[#d4a373]', 'font-black');
-            const filtrados = cat === 'todos' ? negociosRaw : negociosRaw.filter(n => normalizar(n.categoria) === normalizar(cat));
-            renderCards(filtrados);
-        });
-    });
-}
-
-// Cierre del modal al hacer click fuera
 document.getElementById('modal-negocio').addEventListener('click', function(e) {
     if (e.target === this) cerrarModal();
 });
 
-// Inicio de carga
 loadData();
