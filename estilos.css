@@ -151,3 +151,14 @@ body {
 .tropical-header {
     background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
 }
+/* Botón de ingreso con pulso sutil */
+.btn-ingreso-brillo {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Podemos reusar el efecto diamante que creamos antes para este botón */
+.btn-ingreso-brillo:hover {
+    box-shadow: 0 0 20px rgba(212, 163, 115, 0.2);
+    letter-spacing: 0.6em; /* Se expande un poquito al pasar el mouse */
+}
