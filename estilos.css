@@ -1,8 +1,9 @@
 :root { 
-    --p506-bg: #130f0e; 
-    --p506-wood: #2c1e1a;   
-    --p506-accent: #d4a373; 
-    --p506-detail: #5d1c15; 
+    --p506-bg: #f9f7f4;       /* Fondo hueso/crema claro */
+    --p506-wood: #e5ddd3;     /* Madera clara para detalles */
+    --p506-accent: #8d6e63;   /* Bronce/Marrón elegante para acentos */
+    --p506-detail: #5d1c15;   /* Rojo vino para contraste fino */
+    --p506-text: #2c1e1a;     /* Texto oscuro para legibilidad */
     --transition-premium: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -24,8 +25,8 @@
 }
 
 @keyframes pulseLogo {
-    0%, 100% { opacity: 0.6; transform: scale(0.98); filter: brightness(0.8); }
-    50% { opacity: 1; transform: scale(1.02); filter: brightness(1.2); }
+    0%, 100% { opacity: 0.6; transform: scale(0.98); filter: brightness(1.1); }
+    50% { opacity: 1; transform: scale(1.02); filter: brightness(0.9); }
 }
 
 #preloader.fade-out {
@@ -34,22 +35,21 @@
     pointer-events: none;
 }
 
-/* --- ISOTIPO ESTILO MONEDA (PUNTO 506) --- */
+/* --- ISOTIPO ESTILO MONEDA (VERSIÓN CLARA) --- */
 .iso-emblem {
-    /* Gradiente cónico para crear los rayos de madera oscuros */
     background: conic-gradient(
         from 0deg,
-        #2c1e1a 0deg 45deg,
-        #1c1614 45deg 90deg,
-        #2c1e1a 90deg 135deg,
-        #1c1614 135deg 180deg,
-        #2c1e1a 180deg 225deg,
-        #1c1614 225deg 270deg,
-        #2c1e1a 270deg 315deg,
-        #1c1614 315deg 360deg
+        #e5ddd3 0deg 45deg,
+        #f0e9e1 45deg 90deg,
+        #e5ddd3 90deg 135deg,
+        #f0e9e1 135deg 180deg,
+        #e5ddd3 180deg 225deg,
+        #f0e9e1 225deg 270deg,
+        #e5ddd3 270deg 315deg,
+        #f0e9e1 315deg 360deg
     );
     border: 1px solid var(--p506-accent);
-    box-shadow: inset 0 0 15px rgba(0,0,0,0.6), 0 0 15px rgba(212, 163, 115, 0.1);
+    box-shadow: inset 0 0 15px rgba(255,255,255,0.5), 0 5px 15px rgba(141, 110, 99, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -60,16 +60,17 @@
 body { 
     font-family: 'Inter', sans-serif; 
     background-color: var(--p506-bg);
+    color: var(--p506-text);
     background-image: 
-        radial-gradient(circle at 50% 0%, rgba(212, 163, 115, 0.08) 0%, transparent 70%),
-        url("https://www.transparenttextures.com/patterns/dark-linen.png");
+        radial-gradient(circle at 50% 0%, rgba(141, 110, 99, 0.1) 0%, transparent 70%),
+        url("https://www.transparenttextures.com/patterns/white-linen.png");
     background-attachment: fixed;
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
 
-.serif-title { font-family: 'Cinzel', serif; letter-spacing: 0.25em; }
-.business-title { font-family: 'Montserrat', sans-serif; letter-spacing: 0.05em; }
+.serif-title { font-family: 'Cinzel', serif; letter-spacing: 0.25em; color: var(--p506-text); }
+.business-title { font-family: 'Montserrat', sans-serif; letter-spacing: 0.05em; color: var(--p506-text); }
 .elegant-italic { font-family: 'Baskervville', serif; font-style: italic; }
 
 @keyframes revealCard { 
@@ -83,14 +84,21 @@ body {
 }
 
 /* --- NAVIGATION & MÓVIL OPTIMIZADO --- */
+nav {
+    background: rgba(249, 247, 244, 0.95) !important;
+    border-bottom: 1px solid rgba(141, 110, 99, 0.1) !important;
+}
+
 .filter-btn {
     transition: var(--transition-premium);
     position: relative;
-    opacity: 0.7;
+    opacity: 0.6;
+    color: var(--p506-text) !important;
 }
 
 .filter-btn:hover, .filter-btn.font-black {
     opacity: 1;
+    color: var(--p506-accent) !important;
 }
 
 /* Flechas animadas >>> */
@@ -121,7 +129,7 @@ body {
 .search-container {
     background: transparent !important;
     border: none !important;
-    border-bottom: 1px solid rgba(212, 163, 115, 0.1) !important;
+    border-bottom: 1px solid rgba(141, 110, 99, 0.2) !important;
     padding: 12px 0 !important;
     transition: var(--transition-premium);
     max-width: 280px;
@@ -137,7 +145,10 @@ body {
     letter-spacing: 0.4em !important;
     font-size: 9px !important;
     font-weight: 300;
+    color: var(--p506-text) !important;
 }
+
+.search-input::placeholder { color: rgba(44, 30, 26, 0.4); }
 
 /* --- PORTAL LANDING (CUADROS) --- */
 .portal-card {
@@ -145,8 +156,8 @@ body {
     height: 420px;
     overflow: hidden;
     cursor: pointer;
-    border: 1px solid rgba(212, 163, 115, 0.08);
-    background: #000;
+    border: 1px solid rgba(141, 110, 99, 0.1);
+    background: #e5ddd3;
     transition: var(--transition-premium);
 }
 
@@ -154,13 +165,13 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: saturate(0.2) brightness(0.4);
+    filter: saturate(0.5) brightness(0.9);
     transition: transform 2.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease;
 }
 
 .portal-card:hover img {
     transform: scale(1.1);
-    filter: saturate(0.8) brightness(0.6);
+    filter: saturate(1) brightness(1);
 }
 
 .portal-card-content {
@@ -170,17 +181,20 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     padding: 2.5rem;
-    background: linear-gradient(to top, var(--p506-bg) 0%, transparent 70%);
+    background: linear-gradient(to top, rgba(249, 247, 244, 0.9) 0%, transparent 70%);
 }
 
-/* --- TARJETAS DE RESULTADOS (ALINEACIÓN DE BOTÓN) --- */
+.portal-card-content h3 { color: var(--p506-text) !important; }
+
+/* --- TARJETAS DE RESULTADOS (VERSIÓN CLARA) --- */
 .glass-card {
     display: flex;
     flex-direction: column;
     height: 100%; 
-    background: rgba(28, 22, 20, 0.4); 
+    background: rgba(255, 255, 255, 0.7); 
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(212, 163, 115, 0.1);
+    border: 1px solid rgba(141, 110, 99, 0.15);
+    box-shadow: 0 10px 30px rgba(141, 110, 99, 0.05);
     transition: var(--transition-premium);
 }
 
@@ -190,11 +204,19 @@ body {
     flex-direction: column;
 }
 
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: var(--p506-accent);
+    transform: translateY(-5px);
+}
+
 .glass-card button {
     margin-top: auto; 
 }
 
 /* --- MODAL REFINADO --- */
+#modal-negocio .bg-\[\#1c1614\] { background-color: var(--p506-bg) !important; }
+
 #modal-content .grid {
     align-items: center; 
     gap: 2rem;
@@ -244,3 +266,9 @@ body {
 }
 
 .hidden { display: none !important; }
+
+/* Ajuste de Footer */
+footer {
+    background-color: #f0ede9 !important;
+    border-top: 2px solid var(--p506-detail) !important;
+}
