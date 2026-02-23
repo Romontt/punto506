@@ -34,7 +34,7 @@
     pointer-events: none;
 }
 
-/* --- ISOTIPO ESTILO MONEDA (PUNTO 506) --- */
+/* --- ISOTIPO ESTILO MONEDA --- */
 .iso-emblem {
     background: conic-gradient(
         from 0deg,
@@ -82,7 +82,7 @@ body {
     animation: revealCard 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
 }
 
-/* --- NAVIGATION & MÓVIL OPTIMIZADO --- */
+/* --- NAVIGATION & MÓVIL --- */
 .filter-btn {
     transition: var(--transition-premium);
     position: relative;
@@ -94,7 +94,6 @@ body {
     color: var(--p506-accent);
 }
 
-/* Flechas animadas >>> */
 .scroll-hint { 
     display: flex;
     gap: 2px;
@@ -110,15 +109,12 @@ body {
     color: var(--p506-accent);
 }
 
-.scroll-hint svg:nth-child(2) { animation-delay: 0.2s; }
-.scroll-hint svg:nth-child(3) { animation-delay: 0.4s; }
-
 @keyframes arrowFlicker {
     0%, 100% { opacity: 0.2; transform: translateX(0); }
     50% { opacity: 1; transform: translateX(3px); }
 }
 
-/* --- BUSCADOR SOFISTICADO --- */
+/* --- BUSCADOR --- */
 .search-container {
     background: transparent !important;
     border: none !important;
@@ -127,11 +123,6 @@ body {
     transition: var(--transition-premium);
     max-width: 280px;
     margin: 0 auto;
-}
-
-.search-container:focus-within {
-    border-bottom-color: var(--p506-accent) !important;
-    max-width: 320px;
 }
 
 .search-input {
@@ -149,7 +140,6 @@ body {
     cursor: pointer;
     border: 1px solid rgba(212, 163, 115, 0.1);
     background: #000;
-    transition: var(--transition-premium);
 }
 
 .portal-card img {
@@ -172,8 +162,8 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     padding: 2.5rem;
-    /* CORRECCIÓN: Gradiente más transparente para que el botón se vea perfecto */
-    background: linear-gradient(to top, rgba(19, 15, 14, 0.8) 0%, rgba(19, 15, 14, 0.2) 50%, transparent 100%);
+    /* Gradiente muy bajo solo para que el texto sea legible sin tapar la foto */
+    background: linear-gradient(to top, rgba(19, 15, 14, 0.7) 0%, transparent 40%);
     z-index: 10;
 }
 
@@ -203,49 +193,34 @@ body {
 .glass-card button {
     margin-top: auto; 
     position: relative;
-    z-index: 20; /* Asegura que el botón esté por encima */
+    z-index: 50; /* Z-index alto para estar siempre al frente */
 }
 
-/* --- MODAL REFINADO --- */
-#modal-content .grid {
-    align-items: center; 
-    gap: 2rem;
-}
-
-#modal-content .p-8 {
-    padding-top: 2rem !important; 
-}
-
-/* --- SISTEMA VER MÁS --- */
+/* --- SISTEMA VER MÁS (ARREGLADO) --- */
 .grid-limitado {
-    max-height: 1250px;
+    max-height: 1250px; /* Ajusta según cuántas filas quieras mostrar inicialmente */
     overflow: hidden;
     transition: max-height 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    mask-image: none !important; /* Eliminamos cualquier máscara */
+    -webkit-mask-image: none !important;
 }
 
 .grid-expandido { max-height: 30000px !important; }
 
+/* ELIMINADO: fade-overlay removido para que no tape los botones inferiores */
 .fade-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 300px;
-    background: linear-gradient(to top, var(--p506-bg) 20%, transparent 100%);
-    pointer-events: none;
-    z-index: 5;
+    display: none !important;
 }
 
-/* --- OPTIMIZACIÓN MÓVIL --- */
+/* --- MODAL --- */
+#modal-content .grid { align-items: center; gap: 2rem; }
+#modal-content .p-8 { padding-top: 2rem !important; }
+
+/* --- MÓVIL --- */
 @media (max-width: 768px) {
-    .portal-card { 
-        height: 240px; 
-    }
+    .portal-card { height: 240px; }
     .portal-card-content { padding: 1.5rem; }
-    .serif-title { letter-spacing: 0.15em; font-size: 0.9rem; }
     #grid-negocios { gap: 1rem !important; }
-    .glass-card .p-8 { padding: 1.2rem !important; }
-    .business-title { font-size: 0.95rem !important; }
 }
 
 .hidden { display: none !important; }
