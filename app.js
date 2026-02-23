@@ -267,5 +267,3 @@ function cerrarModal() {
 // Iniciar aplicación
 loadData();
 
-loadData();
-
