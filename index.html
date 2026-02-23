@@ -24,7 +24,7 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TFXFGHPZ"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     
-    <div id="preloader">
+    <div id="preloader" class="transition-opacity duration-500">
         <div class="flex flex-col items-center gap-4 loader-logo">
             <div class="w-20 h-20 iso-emblem rounded-full flex items-center justify-center border-2 border-[#d4a373]">
                 <span class="serif-title text-xl text-[#d4a373] font-bold">506</span>
@@ -53,7 +53,7 @@
 
             <div class="relative w-full md:w-auto overflow-hidden">
                 <div class="flex items-center gap-8 overflow-x-auto hide-scroll w-full md:w-auto justify-start md:justify-center px-2 py-2">
-                    <button data-cat="todos" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-black text-[#d4a373] border-b border-[#d4a373] pb-1 whitespace-nowrap">Todos</button>
+                    <button data-cat="todos" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-black text-[#d4a373] border-b border-[#d4a373] pb-1 whitespace-nowrap">Inicio</button>
                     <button data-cat="salud" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Salud</button>
                     <button data-cat="gastronomía" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Gastronomía</button>
                     <button data-cat="estética" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Estética</button>
@@ -86,8 +86,8 @@
     </header>
 
     <main class="max-w-7xl mx-auto py-20 px-6">
-        <div id="landing-categories" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20 animate-reveal">
-            </div>
+        <div id="landing-categories" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+        </div>
 
         <div id="section-results" class="hidden">
             <div class="flex items-center gap-4 mb-8">
