@@ -2,64 +2,75 @@ let negociosRaw = [];
 let categoriaActual = 'todos';
 let etiquetaActual = null;
 
-// --- CONFIGURACIÓN VISUAL PARA EL HERO DINÁMICO ---
-const CONFIG_VISUAL = {
-    'todos': {
-        titulo: 'Descubre. Conecta. Destaca.',
-        imagen: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070'
-    },
-    'gastronomía': {
-        titulo: 'Experiencias Gourmet',
-        imagen: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070'
-    },
-    'salud': {
-        titulo: 'Bienestar Integral',
-        imagen: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070'
-    },
-    'estética': {
-        titulo: 'Belleza & Estilo',
-        imagen: 'https://images.unsplash.com/photo-1560750588-73207b1ef5b8?q=80&w=2070'
-    },
-    'turismo': {
-        titulo: 'Recreación Familiar',
-        imagen: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2070'
-    },
-    'servicios': {
-        titulo: 'Soluciones Profesionales',
-        imagen: 'https://images.unsplash.com/photo-1454165833767-027ffea7025c?q=80&w=2070'
-    }
-};
-
 const normalizar = (t) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
-// --- FUNCIÓN PARA ACTUALIZAR EL HERO ---
-function actualizarHero(categoria) {
-    const config = CONFIG_VISUAL[normalizar(categoria)] || CONFIG_VISUAL['todos'];
-    const heroTitle = document.getElementById('hero-title');
-    const heroBg = document.getElementById('hero-bg');
+// --- CONFIGURACIÓN VISUAL (FONDO SEGÚN CATEGORÍA) ---
+const FONDOS_CATEGORIAS = {
+    'todos': 'https://www.transparenttextures.com/patterns/wood-pattern.png',
+    'gastronomía': 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1200',
+    'estética': 'https://images.unsplash.com/photo-1560750588-73207b1ef5b8?q=80&w=1200',
+    'salud': 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1200',
+    'servicios': 'https://images.unsplash.com/photo-1454165833767-027ffea7025c?q=80&w=1200',
+    'turismo': 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1200'
+};
 
-    if (heroTitle && heroBg) {
-        heroTitle.classList.add('opacity-0', 'translate-y-4');
-        setTimeout(() => {
-            heroTitle.innerText = config.titulo;
-            heroBg.style.backgroundImage = `url('${config.imagen}')`;
-            heroTitle.classList.remove('opacity-0', 'translate-y-4');
-        }, 400);
+// --- NUEVA FUNCIÓN: SELECCIONAR CATEGORÍA DESDE LANDING ---
+function seleccionarCategoria(cat) {
+    categoriaActual = cat;
+    etiquetaActual = null;
+
+    // 1. Switchear visibilidad de secciones
+    const landing = document.getElementById('landing-categories');
+    const resultados = document.getElementById('section-results');
+    const proposito = document.getElementById('purpose-card');
+    const header = document.getElementById('main-header');
+
+    if (landing) landing.classList.add('hidden');
+    if (resultados) resultados.classList.remove('hidden');
+    
+    // 2. Ajustar Header: Si es categoría específica, ocultamos misión y cambiamos fondo
+    if (proposito) {
+        proposito.style.display = (cat === 'todos') ? 'block' : 'none';
     }
+    
+    // Cambiar fondo del header dinámicamente
+    const fondoUrl = FONDOS_CATEGORIAS[normalizar(cat)] || FONDOS_CATEGORIAS['todos'];
+    header.style.backgroundImage = `linear-gradient(to bottom, rgba(19,15,14,0.7), #130f0e), url('${fondoUrl}')`;
+    header.style.backgroundSize = 'cover';
+    header.style.backgroundPosition = 'center';
+
+    // 3. Ejecutar lógica original
+    const btnNav = document.querySelector(`.filter-btn[data-cat="${cat}"]`);
+    if (btnNav) activarBoton(btnNav);
+    
+    document.getElementById('categoria-titulo').innerText = cat === 'todos' ? 'Recomendaciones' : cat;
+    
+    actualizarURL(cat);
+    renderSubCategorias();
+    aplicarFiltrosCombinados();
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// --- SEO: URLS AMIGABLES ---
+// Función para volver al inicio (Isotipo)
+function volverInicio() {
+    document.getElementById('landing-categories').classList.remove('hidden');
+    document.getElementById('section-results').classList.add('hidden');
+    document.getElementById('purpose-card').style.display = 'block';
+    const header = document.getElementById('main-header');
+    header.style.backgroundImage = `url('${FONDOS_CATEGORIAS['todos']}')`;
+    actualizarURL('todos');
+}
+
 function actualizarURL(categoria) {
     const nuevaUrl = categoria === 'todos' ? window.location.pathname : `?categoria=${encodeURIComponent(categoria.toLowerCase())}`;
     window.history.pushState({ path: nuevaUrl }, '', nuevaUrl);
 }
 
-// --- BOTÓN VER MÁS ---
 function expandirGrid() {
     const wrapper = document.getElementById('wrapper-grid');
     const fade = document.getElementById('grid-fade');
     const btnContainer = document.getElementById('btn-ver-mas-container');
-
     if(wrapper) wrapper.classList.add('grid-expandido');
     if(fade) fade.classList.add('fade-hidden');
     if(btnContainer) btnContainer.classList.add('hidden');
@@ -69,7 +80,6 @@ function gestionarLimiteVisual(totalMostrados) {
     const wrapper = document.getElementById('wrapper-grid');
     const fade = document.getElementById('grid-fade');
     const btnContainer = document.getElementById('btn-ver-mas-container');
-
     if (!wrapper || !fade || !btnContainer) return;
 
     if (categoriaActual === 'todos' && totalMostrados > 8) {
@@ -91,14 +101,16 @@ async function loadData() {
         
         const params = new URLSearchParams(window.location.search);
         const catParam = params.get('categoria');
+        
         if (catParam) {
-            categoriaActual = catParam;
+            // Si hay categoría en URL, entrar directo al catálogo
+            seleccionarCategoria(catParam);
+        } else {
+            // Si no hay categoría, asegurar que se vea la landing
+            document.getElementById('section-results').classList.add('hidden');
         }
 
-        renderCards(negociosRaw);
         initFilters();
-        renderSubCategorias();
-
         setTimeout(() => {
             const loader = document.getElementById('preloader');
             if (loader) loader.classList.add('fade-out');
@@ -111,9 +123,9 @@ async function loadData() {
     }
 }
 
-// --- RENDER CARDS (ESTILO BENTO HORIZONTAL) ---
 function renderCards(lista) {
     const grid = document.getElementById('grid-negocios');
+    if(!grid) return;
     grid.style.opacity = '0';
     
     const listaFiltrada = categoriaActual === 'todos' 
@@ -122,35 +134,38 @@ function renderCards(lista) {
 
     setTimeout(() => {
         grid.innerHTML = listaFiltrada.map((n, i) => `
-            <article onclick="verDetalle(${n.id})" class="glass-card group flex h-auto md:h-52 cursor-pointer overflow-hidden animate-reveal"
-                     style="animation-delay: ${i * 0.1}s; animation-fill-mode: forwards;">
-                
-                <div class="w-1/3 min-w-[120px] h-full overflow-hidden border-r border-white/5">
+            <article class="group glass-card overflow-hidden animate-reveal"
+                  style="animation-delay: ${i * 0.15}s; animation-fill-mode: forwards;">
+                <div class="relative h-64 overflow-hidden border-b border-[#d4a373]/10">
                     <img src="${n.imagen}" 
-                         class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[1s]" 
-                         alt="${n.nombre}" loading="lazy">
+                         class="w-full h-full object-cover sepia-[20%] group-hover:sepia-0 group-hover:scale-105 transition duration-[1.5s]" 
+                         alt="Negocio ${n.nombre} en Pococí - Categoría ${n.categoria}"
+                         loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#130f0e] via-transparent opacity-90"></div>
+                    <div class="absolute top-6 left-6 text-[#d4a373] text-[7px] font-black tracking-[0.4em] uppercase bg-[#130f0e]/60 px-2 py-1">${n.categoria}</div>
                 </div>
-
-                <div class="w-2/3 p-5 md:p-8 flex flex-col justify-center relative">
-                    <span class="text-[7px] tracking-[0.4em] text-[#d4a373] uppercase mb-2 font-black">${n.categoria}</span>
-                    <h3 class="serif-title text-white text-lg md:text-xl group-hover:text-[#d4a373] transition duration-500">${n.nombre}</h3>
-                    <p class="elegant-italic text-stone-400 text-[13px] mt-2 line-clamp-2 leading-relaxed">
-                        ${n.servicios_resumen}
-                    </p>
-                    
-                    <div class="absolute bottom-4 right-6 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-2 group-hover:translate-x-0">
-                        <svg class="w-4 h-4 text-[#d4a373]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                
+                <div class="p-8 text-center flex flex-col flex-grow">
+                    <div class="min-h-[4rem] flex items-center justify-center mb-4">
+                        <h3 class="business-title text-xl text-white uppercase tracking-wider font-bold">${n.nombre}</h3>
                     </div>
+                    
+                    <div class="min-h-[4rem] mb-6 flex items-center justify-center text-center">
+                        <p class="elegant-italic text-stone-300 text-[15px] leading-relaxed line-clamp-2">
+                            ${n.servicios_resumen}
+                        </p>
+                    </div>
+
+                    <button onclick="verDetalle(${n.id})" 
+                            aria-label="Ver detalles de ${n.nombre}"
+                            class="mt-auto w-full py-4 text-[#d4a373] text-[10px] font-bold uppercase tracking-[0.4em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition duration-500">
+                        Explorar Detalles
+                    </button>
                 </div>
             </article>
         `).join('');
-        
         grid.style.opacity = '1';
         gestionarLimiteVisual(listaFiltrada.length);
-        actualizarHero(categoriaActual);
-
     }, 300);
 }
 
@@ -183,7 +198,8 @@ function renderSubCategorias() {
 }
 
 function aplicarFiltrosCombinados() {
-    const busqueda = normalizar(document.getElementById('busqueda').value);
+    const inputBusqueda = document.getElementById('busqueda');
+    const busqueda = inputBusqueda ? normalizar(inputBusqueda.value) : "";
     
     const filtrados = negociosRaw.filter(n => {
         const coincideBusqueda = normalizar(n.nombre).includes(busqueda) || 
@@ -203,28 +219,21 @@ function initFilters() {
     const input = document.getElementById('busqueda');
     const tituloSeccion = document.getElementById('categoria-titulo');
 
-    input.addEventListener('input', () => {
-        aplicarFiltrosCombinados();
-    });
+    if(input) {
+        input.addEventListener('input', () => {
+            // Si el usuario escribe y estamos en la landing, activamos "todos" automáticamente para mostrar resultados
+            if(document.getElementById('section-results').classList.contains('hidden')) {
+                seleccionarCategoria('todos');
+            }
+            aplicarFiltrosCombinados();
+        });
+    }
 
     document.querySelectorAll('.filter-btn').forEach(btn => {
         const catValue = btn.getAttribute('data-cat');
         
-        if (normalizar(catValue) === normalizar(categoriaActual)) {
-            activarBoton(btn);
-            tituloSeccion.innerText = categoriaActual === 'todos' ? 'Recomendaciones' : categoriaActual;
-        }
-
         btn.addEventListener('click', () => {
-            categoriaActual = catValue;
-            etiquetaActual = null;
-            
-            tituloSeccion.innerText = categoriaActual === 'todos' ? 'Recomendaciones' : categoriaActual;
-
-            activarBoton(btn);
-            actualizarURL(categoriaActual); 
-            renderSubCategorias();
-            aplicarFiltrosCombinados();
+            seleccionarCategoria(catValue);
         });
     });
 }
