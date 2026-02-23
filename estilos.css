@@ -34,6 +34,28 @@
     pointer-events: none;
 }
 
+/* --- ISOTIPO ESTILO MONEDA (PUNTO 506) --- */
+.iso-emblem {
+    /* Gradiente cónico para crear los rayos de madera oscuros */
+    background: conic-gradient(
+        from 0deg,
+        #2c1e1a 0deg 45deg,
+        #1c1614 45deg 90deg,
+        #2c1e1a 90deg 135deg,
+        #1c1614 135deg 180deg,
+        #2c1e1a 180deg 225deg,
+        #1c1614 225deg 270deg,
+        #2c1e1a 270deg 315deg,
+        #1c1614 315deg 360deg
+    );
+    border: 1px solid var(--p506-accent);
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.6), 0 0 15px rgba(212, 163, 115, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
 /* --- ESTILOS BASE --- */
 body { 
     font-family: 'Inter', sans-serif; 
@@ -155,14 +177,13 @@ body {
 .glass-card {
     display: flex;
     flex-direction: column;
-    height: 100%; /* Obliga a todas a medir lo mismo */
+    height: 100%; 
     background: rgba(28, 22, 20, 0.4); 
     backdrop-filter: blur(12px);
     border: 1px solid rgba(212, 163, 115, 0.1);
     transition: var(--transition-premium);
 }
 
-/* Contenedor de contenido dentro de la card para empujar el botón abajo */
 .glass-card .p-8 {
     flex-grow: 1;
     display: flex;
@@ -170,17 +191,17 @@ body {
 }
 
 .glass-card button {
-    margin-top: auto; /* Esto alinea todos los botones al final */
+    margin-top: auto; 
 }
 
 /* --- MODAL REFINADO --- */
 #modal-content .grid {
-    align-items: center; /* Centra horario y dirección verticalmente */
+    align-items: center; 
     gap: 2rem;
 }
 
 #modal-content .p-8 {
-    padding-top: 2rem !important; /* Más compacto */
+    padding-top: 2rem !important; 
 }
 
 /* --- SISTEMA VER MÁS --- */
@@ -206,14 +227,13 @@ body {
 /* --- OPTIMIZACIÓN MÓVIL --- */
 @media (max-width: 768px) {
     .portal-card { 
-        height: 220px; /* Más pequeños para ver varios en pantalla */
+        height: 220px; 
     }
     
     .portal-card-content { padding: 1.2rem; }
     
     .serif-title { letter-spacing: 0.15em; font-size: 0.9rem; }
 
-    /* Ajuste para que se vean 2 columnas de negocios en móvil */
     #grid-negocios {
         gap: 0.75rem !important;
     }
