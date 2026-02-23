@@ -59,7 +59,6 @@
 body { 
     font-family: 'Inter', sans-serif; 
     background-color: var(--p506-bg);
-    /* Se aumentó la intensidad del gradiente superior para dar esa "luz" sutil */
     background-image: 
         radial-gradient(circle at 50% 0%, rgba(212, 163, 115, 0.15) 0%, transparent 75%),
         url("https://www.transparenttextures.com/patterns/dark-linen.png");
@@ -157,13 +156,15 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: saturate(0.3) brightness(0.5);
+    /* AJUSTE: Más brillo y color para que se vean claras */
+    filter: saturate(0.8) brightness(0.8); 
     transition: transform 2.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease;
 }
 
 .portal-card:hover img {
     transform: scale(1.05);
-    filter: saturate(0.7) brightness(0.6);
+    /* AJUSTE: Claridad total al pasar el mouse */
+    filter: saturate(1.1) brightness(1);
 }
 
 .portal-card-content {
@@ -176,12 +177,12 @@ body {
     background: linear-gradient(to top, var(--p506-bg) 0%, transparent 80%);
 }
 
-/* --- TARJETAS DE RESULTADOS (ALINEACIÓN DE BOTÓN) --- */
+/* --- TARJETAS DE RESULTADOS --- */
 .glass-card {
     display: flex;
     flex-direction: column;
     height: 100%; 
-    background: rgba(35, 28, 26, 0.6); /* Un poco más de cuerpo para que el texto resalte */
+    background: rgba(35, 28, 26, 0.6); 
     backdrop-filter: blur(12px);
     border: 1px solid rgba(212, 163, 115, 0.15);
     transition: var(--transition-premium);
@@ -238,17 +239,10 @@ body {
     .portal-card { 
         height: 240px; 
     }
-    
     .portal-card-content { padding: 1.5rem; }
-    
     .serif-title { letter-spacing: 0.15em; font-size: 0.9rem; }
-
-    #grid-negocios {
-        gap: 1rem !important;
-    }
-    
+    #grid-negocios { gap: 1rem !important; }
     .glass-card .p-8 { padding: 1.2rem !important; }
-    
     .business-title { font-size: 0.95rem !important; }
 }
 
