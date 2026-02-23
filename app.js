@@ -4,7 +4,7 @@ let etiquetaActual = null;
 
 const normalizar = (t) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
-// --- NUEVA FUNCIÓN: TRANSICIÓN ELEGANTE CON LOGO ---
+// --- TRANSICIÓN ELEGANTE CON LOGO ---
 function ejecutarTransicion(callback) {
     const loader = document.getElementById('preloader');
     if (loader) {
@@ -20,7 +20,7 @@ function ejecutarTransicion(callback) {
     }
 }
 
-// --- ACTUALIZACIÓN: VOLVER AL INICIO ---
+// --- VOLVER AL INICIO ---
 function volverInicio() {
     ejecutarTransicion(() => {
         categoriaActual = 'todos';
@@ -30,7 +30,6 @@ function volverInicio() {
         
         actualizarURL('todos');
         
-        // Resetear botones del nav (poner "Inicio" como activo)
         document.querySelectorAll('.filter-btn').forEach(btn => {
             if(btn.getAttribute('data-cat') === 'todos') activarBoton(btn);
         });
@@ -39,21 +38,22 @@ function volverInicio() {
     });
 }
 
-// --- ACTUALIZACIÓN: RENDERIZAR CUADROS (SIN "EXPLORAR TODO" Y FOTOS NUEVAS) ---
+// --- RENDERIZAR CUADROS DE CATEGORÍA ---
 function renderLanding() {
     const landing = document.getElementById('landing-categories');
     const resultados = document.getElementById('section-results');
     
+    if(!landing) return;
     landing.classList.remove('hidden');
-    resultados.classList.add('hidden');
+    if(resultados) resultados.classList.add('hidden');
 
-    // Imágenes optimizadas y corregidas
+    // Imágenes optimizadas - Se corrigió el ID de Turismo
     const categoriasConfig = [
         { id: 'salud', nombre: 'Salud & Bienestar', img: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1000' },
         { id: 'gastronomía', nombre: 'Gastronomía', img: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1000' },
         { id: 'estética', nombre: 'Estética & Imagen', img: 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=1000' },
         { id: 'servicios', nombre: 'Servicios Profesionales', img: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=1000' },
-        { id: 'turismo', nombre: 'Destinos & Turismo', img: 'https://images.unsplash.com/photo-1500835595367-999981670f48?auto=format&fit=crop&q=80&w=1000' }
+        { id: 'turismo', nombre: 'Destinos & Turismo', img: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=1000' }
     ];
 
     landing.innerHTML = categoriasConfig.map((cat, i) => `
@@ -62,7 +62,7 @@ function renderLanding() {
              style="animation-delay: ${i * 0.1}s">
             <img src="${cat.img}" alt="${cat.nombre}" loading="lazy">
             <div class="portal-card-content">
-                <div class="mb-2 h-px w-8 bg-[#d4a373]/50 transition-all duration-700 group-hover:w-16"></div>
+                <div class="mb-2 h-px w-8 bg-[#d4a373]/50"></div>
                 <h3 class="serif-title text-white text-lg tracking-[0.3em] uppercase">${cat.nombre}</h3>
             </div>
         </div>
@@ -133,6 +133,7 @@ async function loadData() {
         }
 
         initFilters();
+        actualizarFlechasNav();
 
         setTimeout(() => {
             const loader = document.getElementById('preloader');
@@ -147,19 +148,31 @@ async function loadData() {
     }
 }
 
+// Nueva función para inyectar las 3 flechas animadas en el Nav
+function actualizarFlechasNav() {
+    const hint = document.querySelector('.scroll-hint');
+    if(hint) {
+        hint.innerHTML = `
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/></svg>
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/></svg>
+        `;
+    }
+}
+
 function renderCards(listaFiltrada) {
     const landing = document.getElementById('landing-categories');
     const resultados = document.getElementById('section-results');
     const grid = document.getElementById('grid-negocios');
     
-    landing.classList.add('hidden');
-    resultados.classList.remove('hidden');
+    if(landing) landing.classList.add('hidden');
+    if(resultados) resultados.classList.remove('hidden');
     
     grid.style.opacity = '0';
 
     setTimeout(() => {
         grid.innerHTML = listaFiltrada.map((n, i) => `
-            <article class="group glass-card overflow-hidden animate-reveal"
+            <article class="group glass-card animate-reveal"
                   style="animation-delay: ${i * 0.08}s; animation-fill-mode: forwards;">
                 <div class="relative h-64 overflow-hidden border-b border-[#d4a373]/10">
                     <img src="${n.imagen}" 
@@ -270,43 +283,42 @@ function verDetalle(id) {
     const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría solicitar más información.`);
 
     document.getElementById('modal-content').innerHTML = `
-        <div class="relative h-80 md:h-[450px]">
+        <div class="relative h-72 md:h-[400px]">
             <img src="${n.imagen}" alt="${n.nombre}" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-[#1c1614] via-transparent"></div>
         </div>
-        <div class="p-8 md:p-16 -mt-20 relative z-10 bg-[#1c1614] rounded-t-3xl shadow-2xl">
-            <div class="flex flex-col items-center text-center mb-10">
-                <span class="text-[#d4a373] text-[10px] font-bold tracking-[0.6em] uppercase mb-4">${n.categoria}</span>
-                <h2 class="serif-title text-3xl md:text-5xl text-white uppercase tracking-[0.1em] font-light">${n.nombre}</h2>
-                <div class="h-1 w-12 bg-[#d4a373] mt-6"></div>
+        <div class="p-8 md:p-12 -mt-16 relative z-10 bg-[#1c1614]">
+            <div class="flex flex-col items-center text-center mb-8">
+                <span class="text-[#d4a373] text-[9px] font-bold tracking-[0.5em] uppercase mb-3">${n.categoria}</span>
+                <h2 class="serif-title text-2xl md:text-4xl text-white uppercase tracking-[0.1em] font-light">${n.nombre}</h2>
+                <div class="h-px w-10 bg-[#d4a373] mt-4"></div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
-                <div class="space-y-6">
-                     <h4 class="text-[10px] uppercase tracking-[0.4em] font-bold text-stone-500 border-b border-stone-800 pb-2">Propuesta de Valor</h4>
-                     <p class="elegant-italic text-white text-xl leading-relaxed italic">"${n.servicios_resumen}"</p>
-                     <p class="text-stone-400 text-sm leading-relaxed">${n.descripcion || 'Una experiencia curada minuciosamente por el equipo de Punto 506.'}</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 items-center">
+                <div class="space-y-4">
+                     <h4 class="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 border-b border-stone-800 pb-2">Propuesta de Valor</h4>
+                     <p class="elegant-italic text-white text-lg leading-relaxed italic">"${n.servicios_resumen}"</p>
+                     <p class="text-stone-400 text-xs leading-relaxed">${n.descripcion || 'Una experiencia curada minuciosamente por el equipo de Punto 506.'}</p>
                 </div>
-                <div class="bg-black/20 p-8 rounded-xl space-y-6 border border-white/5">
-                    <div class="flex items-center gap-5">
-                        <div class="text-[#d4a373]"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <p class="text-stone-300 text-[12px] uppercase tracking-[0.2em] font-medium">${n.horario || 'Horario bajo reserva'}</p>
+                <div class="bg-black/20 p-6 space-y-4 border border-white/5 flex flex-col justify-center">
+                    <div class="flex items-center gap-4">
+                        <div class="text-[#d4a373]"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <p class="text-stone-300 text-[11px] uppercase tracking-[0.15em]">${n.horario || 'Horario bajo reserva'}</p>
                     </div>
-                    <div class="flex items-start gap-5">
-                        <div class="text-[#d4a373]"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <p class="text-stone-300 text-[12px] uppercase tracking-[0.2em] leading-relaxed">${n.direccion || 'Ubicación Premium Pococí'}</p>
+                    <div class="flex items-start gap-4">
+                        <div class="text-[#d4a373]"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <p class="text-stone-300 text-[11px] uppercase tracking-[0.15em] leading-relaxed">${n.direccion || 'Ubicación Premium Pococí'}</p>
                     </div>
                 </div>
             </div>
 
-            <div class="flex flex-col sm:flex-row gap-6 mb-12">
-                <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" class="flex-1 text-center py-6 bg-[#d4a373] text-[#130f0e] text-[11px] font-black uppercase tracking-[0.4em] hover:bg-white transition-all duration-500 shadow-lg">Contactar Vía WhatsApp</a>
-                <a href="${n.instagram || '#'}" target="_blank" class="flex-1 text-center py-6 border border-[#d4a373]/30 text-[#d4a373] text-[11px] font-bold uppercase tracking-[0.4em] hover:bg-white/5 transition-all duration-500">Visitar Perfil</a>
+            <div class="flex flex-col sm:flex-row gap-4 mb-10">
+                <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" class="flex-1 text-center py-5 bg-[#d4a373] text-[#130f0e] text-[10px] font-black uppercase tracking-[0.3em] hover:bg-white transition-all duration-500">Contactar Vía WhatsApp</a>
+                <a href="${n.instagram || '#'}" target="_blank" class="flex-1 text-center py-5 border border-[#d4a373]/30 text-[#d4a373] text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-white/5 transition-all duration-500">Visitar Perfil</a>
             </div>
 
-            <div class="text-center pt-8 border-t border-white/5">
-                <p class="elegant-italic text-[13px] text-stone-500 mb-4 italic">¿Desea compartir una experiencia?</p>
-                <a href="${prefilledLink}" target="_blank" class="text-[10px] font-bold text-[#d4a373]/60 uppercase tracking-[0.5em] hover:text-white transition-all underline underline-offset-8">
+            <div class="text-center pt-6 border-t border-white/5">
+                <a href="${prefilledLink}" target="_blank" class="text-[9px] font-bold text-[#d4a373]/40 uppercase tracking-[0.4em] hover:text-white transition-all underline underline-offset-8">
                     Buzón de Sugerencias →
                 </a>
             </div>
