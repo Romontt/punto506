@@ -5,7 +5,7 @@
     --p506-detail: #5d1c15; 
 }
 
-/* --- PRE-LOADER (PANTALLA DE CARGA) --- */
+/* --- PRE-LOADER (MANTENIDO) --- */
 #preloader {
     position: fixed;
     inset: 0;
@@ -18,19 +18,12 @@
     transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
 }
 
-.loader-logo {
-    animation: pulseLogo 2s ease-in-out infinite;
-}
-
+.loader-logo { animation: pulseLogo 2s ease-in-out infinite; }
 @keyframes pulseLogo {
     0%, 100% { opacity: 0.5; transform: scale(0.95); filter: blur(2px); }
     50% { opacity: 1; transform: scale(1); filter: blur(0px); }
 }
-
-#preloader.fade-out {
-    opacity: 0;
-    visibility: hidden;
-}
+#preloader.fade-out { opacity: 0; visibility: hidden; }
 
 /* --- ESTILOS BASE --- */
 body { 
@@ -40,153 +33,160 @@ body {
         radial-gradient(circle at 50% 0%, rgba(212, 163, 115, 0.08) 0%, transparent 70%),
         url("https://www.transparenttextures.com/patterns/dark-linen.png");
     background-attachment: fixed;
+    color: #e5e5e5;
 }
 
 .serif-title { font-family: 'Cinzel', serif; letter-spacing: 0.2em; }
 .business-title { font-family: 'Montserrat', sans-serif; letter-spacing: 0.05em; }
 .elegant-italic { font-family: 'Baskervville', serif; font-style: italic; }
 
-@keyframes scrollHint {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(10px); }
+/* --- HEADER DINÁMICO (ESTILO MAC) --- */
+#main-hero {
+    background-color: #000;
 }
-.scroll-hint { animation: scrollHint 1.5s ease-in-out infinite; }
 
+#hero-bg {
+    transition: background-image 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 2s ease;
+    filter: brightness(0.6) saturate(0.8);
+}
+
+#main-hero:hover #hero-bg {
+    transform: scale(1.05);
+}
+
+#hero-title {
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- TARJETAS BENTO HORIZONTALES --- */
+.glass-card {
+    position: relative;
+    background: rgba(44, 30, 26, 0.2); 
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 4px; /* Bordes sutiles tipo Mac */
+}
+
+.glass-card:hover {
+    border-color: rgba(212, 163, 115, 0.3);
+    background: rgba(44, 30, 26, 0.4);
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 20px 40px -15px rgba(0,0,0,0.8);
+}
+
+/* Efecto de Brillo al Pasar (Mantenido) */
+.glass-card::after {
+    content: "";
+    position: absolute;
+    top: 0; left: -150%;
+    width: 50%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(212, 163, 115, 0.05), transparent);
+    transform: skewX(-25deg);
+    transition: 0.8s;
+}
+.glass-card:hover::after { left: 150%; }
+
+/* Responsive para Tarjetas (Vuelven a vertical en móvil) */
+@media (max-width: 768px) {
+    .glass-card {
+        flex-direction: column !important;
+        height: auto !important;
+    }
+    .glass-card > div:first-child {
+        width: 100% !important;
+        height: 200px !important;
+    }
+    .glass-card > div:last-child {
+        width: 100% !important;
+    }
+}
+
+/* --- NAVEGACIÓN PREMIUM --- */
+nav {
+    border-bottom: 1px solid rgba(212, 163, 115, 0.1);
+}
+
+.filter-btn {
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.filter-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background: var(--p506-accent);
+    transition: all 0.4s ease;
+    transform: translateX(-50%);
+}
+
+.filter-btn:hover::after, 
+.filter-btn.font-black::after {
+    width: 80%;
+}
+
+/* --- BUSCADOR --- */
+.search-container {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 99px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.search-container:focus-within {
+    background: rgba(0, 0, 0, 0.6);
+    border-color: var(--p506-accent);
+    width: 250px !important; /* Expansión suave */
+}
+
+/* --- ANIMACIONES (MANTENIDAS) --- */
 @keyframes revealCard { 
-    0% { opacity: 0; transform: translateY(30px) scale(0.98); } 
-    100% { opacity: 1; transform: translateY(0) scale(1); } 
+    0% { opacity: 0; transform: translateY(20px); } 
+    100% { opacity: 1; transform: translateY(0); } 
 }
 
 .animate-reveal { 
     opacity: 0;
-    animation: revealCard 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+    animation: revealCard 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
 }
 
-#grid-negocios { transition: opacity 0.5s ease-in-out; }
-
-.iso-emblem {
-    border: 1px solid var(--p506-accent);
-    background: repeating-conic-gradient(from 0deg, rgba(212, 163, 115, 0.05) 0deg 30deg, transparent 30deg 60deg);
-    box-shadow: inset 0 0 15px rgba(212, 163, 115, 0.1);
-}
-
-/* --- TARJETAS --- */
-.glass-card {
-    position: relative;
-    background: rgba(44, 30, 26, 0.4); 
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(212, 163, 115, 0.1);
-    box-shadow: 0 15px 35px -15px rgba(0,0,0,0.8);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.glass-card::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -150%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(to right, transparent, rgba(212, 163, 115, 0.1), transparent);
-    transform: skewX(-25deg);
-    transition: 0.7s;
-}
-
-.glass-card:hover::after { left: 150%; }
-
-.glass-card:hover {
-    border-color: rgba(212, 163, 115, 0.4);
-    background: rgba(44, 30, 26, 0.6);
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.9);
-}
-
-.glass-card h3, .glass-card p, .glass-card button { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-.glass-card:hover h3 { transform: translateY(-3px); }
-.glass-card:hover p { transform: translateY(-5px); color: white; }
-.glass-card:hover button { transform: scale(1.02); }
-
-.glass-card img { transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s ease; }
-.glass-card:hover img { transform: scale(1.1); filter: saturate(1.2) brightness(1.1); }
-
-/* --- BUSCADOR SEXY --- */
-.search-container {
-    position: relative;
-    background: rgba(20, 15, 14, 0.6);
-    border: 1px solid rgba(212, 163, 115, 0.2);
-    padding: 8px 16px;
-    transition: all 0.5s ease;
-}
-
-.search-container svg {
-    transition: all 0.5s ease;
-}
-
-.search-container:focus-within {
-    border-color: var(--p506-accent);
-    background: rgba(93, 28, 21, 0.2);
-    box-shadow: 0 0 25px rgba(212, 163, 115, 0.15);
-}
-
-.search-container:focus-within svg {
-    color: var(--p506-accent);
-    filter: drop-shadow(0 0 5px var(--p506-accent));
-    transform: scale(1.2);
-}
-
-.search-input {
-    background: transparent;
-    border: none;
-    width: 100%;
-}
-
-.search-input:focus {
-    outline: none;
-    letter-spacing: 0.1em;
-}
-
-/* --- OTROS --- */
-.custom-scroll::-webkit-scrollbar { width: 3px; }
-.custom-scroll::-webkit-scrollbar-track { background: var(--p506-bg); }
-.custom-scroll::-webkit-scrollbar-thumb { background: var(--p506-accent); }
-.hide-scroll::-webkit-scrollbar { display: none; }
-.hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
-
-.tropical-header {
-    background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
-}
-
-.btn-ingreso-brillo:hover {
-    box-shadow: 0 0 20px rgba(212, 163, 115, 0.2);
-    letter-spacing: 0.6em;
-}
-
-/* --- NUEVAS CLASES PARA EL SISTEMA VER MÁS (NO BORRAR) --- */
+/* --- SISTEMA VER MÁS (MANTENIDO) --- */
 .grid-limitado {
-    max-height: 1100px; /* Ajuste para 2 filas aprox en desktop */
+    max-height: 1200px; 
     overflow: hidden;
-    transition: max-height 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: max-height 1.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.grid-expandido {
-    max-height: 10000px !important;
-}
+.grid-expandido { max-height: 20000px !important; }
 
 .fade-overlay {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 350px;
-    background: linear-gradient(to top, var(--p506-bg) 10%, transparent 100%);
+    bottom: 0; left: 0; right: 0;
+    height: 400px;
+    background: linear-gradient(to top, var(--p506-bg) 15%, transparent 100%);
     pointer-events: none;
     transition: opacity 0.8s ease;
     z-index: 10;
 }
 
-.fade-hidden {
-    opacity: 0 !important;
+.fade-hidden { opacity: 0 !important; }
+
+/* --- EMBLEMA ISO --- */
+.iso-emblem {
+    background: linear-gradient(135deg, #1a1513 0%, #2c1e1a 100%);
+    border: 1px solid rgba(212, 163, 115, 0.2);
 }
+
+/* --- SCROLLBAR --- */
+.custom-scroll::-webkit-scrollbar { width: 4px; }
+.custom-scroll::-webkit-scrollbar-track { background: var(--p506-bg); }
+.custom-scroll::-webkit-scrollbar-thumb { background: var(--p506-accent); border-radius: 10px; }
+
+.hide-scroll::-webkit-scrollbar { display: none; }
+.hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
