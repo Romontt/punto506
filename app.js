@@ -4,17 +4,20 @@ let etiquetaActual = null;
 
 const normalizar = (t) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
-// --- LÓGICA DE HEADER DINÁMICO ---
+// --- LÓGICA DE HEADER Y SECCIONES DINÁMICAS ---
 function gestionarVisibilidadHeader(categoria) {
     const purposeCard = document.getElementById('purpose-card');
     const discoverTagline = document.getElementById('discover-tagline');
+    const growSection = document.getElementById('grow-network-section');
 
     if (categoria === 'todos') {
         if (purposeCard) purposeCard.classList.remove('hidden');
         if (discoverTagline) discoverTagline.classList.add('hidden');
+        if (growSection) growSection.classList.remove('hidden'); // Solo en inicio
     } else {
         if (purposeCard) purposeCard.classList.add('hidden');
         if (discoverTagline) discoverTagline.classList.remove('hidden');
+        if (growSection) growSection.classList.add('hidden'); // Ocultar en categorías
     }
 }
 
@@ -25,7 +28,6 @@ function ejecutarTransicion(callback) {
         loader.classList.remove('fade-out');
         setTimeout(() => {
             callback();
-            // Subir al inicio al cambiar de vista
             window.scrollTo({ top: 0, behavior: 'smooth' });
             setTimeout(() => {
                 loader.classList.add('fade-out');
@@ -165,13 +167,19 @@ async function loadData() {
 }
 
 function actualizarFlechasNav() {
-    const hint = document.querySelector('.scroll-hint');
-    if(hint) {
-        hint.innerHTML = `
-            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/></svg>
-            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/></svg>
-            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/></svg>
-        `;
+    const hint = document.querySelector('.scroll-hint-arrow');
+    const navScroll = document.getElementById('nav-categories');
+    
+    if(navScroll && hint) {
+        navScroll.addEventListener('scroll', () => {
+            // Ocultar flecha si el usuario ya deslizó hacia el final
+            const maxScroll = navScroll.scrollWidth - navScroll.clientWidth;
+            if (navScroll.scrollLeft >= maxScroll - 10) {
+                hint.style.opacity = '0';
+            } else {
+                hint.style.opacity = '1';
+            }
+        });
     }
 }
 
@@ -260,6 +268,7 @@ function aplicarFiltrosCombinados() {
 
     if (busqueda !== '' || categoriaActual !== 'todos') {
         renderCards(filtrados);
+        gestionarVisibilidadHeader(categoriaActual); // Asegura que se oculte la red
     } else {
         renderLanding();
     }
