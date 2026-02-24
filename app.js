@@ -4,6 +4,20 @@ let etiquetaActual = null;
 
 const normalizar = (t) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
+// --- LÓGICA DE HEADER DINÁMICO ---
+function gestionarVisibilidadHeader(categoria) {
+    const purposeCard = document.getElementById('purpose-card');
+    const discoverTagline = document.getElementById('discover-tagline');
+
+    if (categoria === 'todos') {
+        if (purposeCard) purposeCard.classList.remove('hidden');
+        if (discoverTagline) discoverTagline.classList.add('hidden');
+    } else {
+        if (purposeCard) purposeCard.classList.add('hidden');
+        if (discoverTagline) discoverTagline.classList.remove('hidden');
+    }
+}
+
 // --- TRANSICIÓN ELEGANTE CON LOGO ---
 function ejecutarTransicion(callback) {
     const loader = document.getElementById('preloader');
@@ -29,6 +43,7 @@ function volverInicio() {
         if (inputBusqueda) inputBusqueda.value = '';
         
         actualizarURL('todos');
+        gestionarVisibilidadHeader('todos'); // Resetear Header
         
         document.querySelectorAll('.filter-btn').forEach(btn => {
             if(btn.getAttribute('data-cat') === 'todos') activarBoton(btn);
@@ -46,8 +61,9 @@ function renderLanding() {
     if(!landing) return;
     landing.classList.remove('hidden');
     if(resultados) resultados.classList.add('hidden');
+    
+    gestionarVisibilidadHeader('todos'); // Asegurar estado en landing
 
-    // Imágenes optimizadas - Se corrigió el ID de Turismo
     const categoriasConfig = [
         { id: 'salud', nombre: 'Salud & Bienestar', img: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1000' },
         { id: 'gastronomía', nombre: 'Gastronomía', img: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1000' },
@@ -80,6 +96,7 @@ function seleccionarCategoria(id) {
         });
 
         actualizarURL(id);
+        gestionarVisibilidadHeader(id); // Cambiar Header
         renderSubCategorias();
         aplicarFiltrosCombinados();
     });
@@ -92,27 +109,22 @@ function actualizarURL(categoria) {
 
 function expandirGrid() {
     const wrapper = document.getElementById('wrapper-grid');
-    const fade = document.getElementById('grid-fade');
     const btnContainer = document.getElementById('btn-ver-mas-container');
     if(wrapper) wrapper.classList.add('grid-expandido');
-    if(fade) fade.classList.add('fade-hidden');
     if(btnContainer) btnContainer.classList.add('hidden');
 }
 
 function gestionarLimiteVisual(totalMostrados) {
     const wrapper = document.getElementById('wrapper-grid');
-    const fade = document.getElementById('grid-fade');
     const btnContainer = document.getElementById('btn-ver-mas-container');
-    if (!wrapper || !fade || !btnContainer) return;
+    if (!wrapper || !btnContainer) return;
 
     if (categoriaActual === 'todos' && totalMostrados > 8) {
         wrapper.classList.remove('grid-expandido');
         wrapper.classList.add('grid-limitado');
-        fade.classList.remove('fade-hidden');
         btnContainer.classList.remove('hidden');
     } else {
         wrapper.classList.add('grid-expandido');
-        fade.classList.add('fade-hidden');
         btnContainer.classList.add('hidden');
     }
 }
@@ -127,6 +139,7 @@ async function loadData() {
 
         if (catParam && catParam !== 'todos') {
             categoriaActual = catParam;
+            gestionarVisibilidadHeader(catParam);
             aplicarFiltrosCombinados();
         } else {
             renderLanding();
@@ -148,7 +161,6 @@ async function loadData() {
     }
 }
 
-// Nueva función para inyectar las 3 flechas animadas en el Nav
 function actualizarFlechasNav() {
     const hint = document.querySelector('.scroll-hint');
     if(hint) {
@@ -174,7 +186,7 @@ function renderCards(listaFiltrada) {
         grid.innerHTML = listaFiltrada.map((n, i) => `
             <article class="group glass-card animate-reveal"
                   style="animation-delay: ${i * 0.08}s; animation-fill-mode: forwards;">
-                <div class="relative h-64 overflow-hidden border-b border-[#d4a373]/10">
+                <div class="relative h-64 overflow-hidden">
                     <img src="${n.imagen}" 
                          class="w-full h-full object-cover sepia-[10%] group-hover:sepia-0 group-hover:scale-110 transition duration-[2s] ease-out" 
                          alt="${n.nombre}"
@@ -244,6 +256,7 @@ function aplicarFiltrosCombinados() {
     });
 
     if (busqueda !== '' || categoriaActual !== 'todos') {
+        gestionarVisibilidadHeader(categoriaActual !== 'todos' ? categoriaActual : 'busqueda');
         renderCards(filtrados);
     } else {
         renderLanding();
