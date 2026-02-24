@@ -82,7 +82,7 @@ body {
     animation: revealCard 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
 }
 
-/* --- HEADER OPTIMIZADO & TEXTURIZADO --- */
+/* --- HEADER & FOOTER TEXTURIZADO --- */
 .header-texture {
     position: relative;
     background-image: 
@@ -131,7 +131,7 @@ body {
     color: white;
 }
 
-/* --- PORTAL LANDING (CUADROS) --- */
+/* --- PORTAL LANDING --- */
 .portal-card {
     position: relative;
     height: 420px;
@@ -205,7 +205,6 @@ body {
     text-transform: uppercase;
     font-weight: 900;
     transition: all 0.4s ease;
-    z-index: 50;
 }
 
 /* --- ÁREA DE FEEDBACK EN MODAL --- */
@@ -216,6 +215,35 @@ body {
     margin-top: 2rem;
     text-align: center;
     border-radius: 16px;
+}
+
+/* --- FOOTER ESPECÍFICO --- */
+footer.header-texture {
+    background-position: center top;
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
+    border-top: 1px solid rgba(212, 163, 115, 0.1);
+    border-bottom: none;
+}
+
+footer a {
+    position: relative;
+    display: inline-block;
+}
+
+footer nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--p506-accent);
+    transition: width 0.4s ease;
+    opacity: 0.6;
+}
+
+footer nav a:hover::after {
+    width: 100%;
 }
 
 /* --- SISTEMA VER MÁS --- */
@@ -233,13 +261,14 @@ body {
 
 /* --- MÓVIL --- */
 @media (max-width: 768px) {
-    .header-texture { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+    .header-texture { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
     .portal-card { height: 260px; border-radius: 10px; }
     .portal-card-content { padding: 1.5rem; }
     .glass-card { border-radius: 20px; }
     #grid-negocios { gap: 1.5rem !important; }
     #purpose-card p { font-size: 0.75rem !important; }
     .search-container { max-width: 100%; }
+    footer { padding-top: 3rem !important; padding-bottom: 3rem !important; }
 }
 
 .hidden { display: none !important; }
