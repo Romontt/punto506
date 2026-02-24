@@ -82,15 +82,17 @@ body {
     animation: revealCard 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
 }
 
-/* --- HEADER & FOOTER (TEXTURA RAWPIXEL ESTÉTICA) --- */
+/* --- HEADER & FOOTER (TEXTURA DE GRANOS CSS - SIN IMAGEN PESADA) --- */
 .header-texture {
     position: relative;
-    /* Aplicamos la textura de Rawpixel con un fundido suave al fondo negro */
+    background-color: #130f0e;
+    /* Simulamos granos de café con patrones radiales sutiles para carga instantánea */
     background-image: 
-        linear-gradient(to bottom, rgba(19, 15, 14, 0.4) 0%, rgba(19, 15, 14, 0.95) 90%, var(--p506-bg) 100%),
-        url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2stcGYtc29tbWVyLTIwLWpveS0wNjg2LWwtcmV3LWNfMS5qcGc.jpg");
-    background-size: cover;
-    background-position: center top;
+        linear-gradient(to bottom, rgba(19, 15, 14, 0.6) 0%, var(--p506-bg) 100%),
+        radial-gradient(#2c1e1a 10%, transparent 11%),
+        radial-gradient(#2c1e1a 10%, transparent 11%);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+    background-position: 0 0, 0 0, 20px 20px;
     background-attachment: fixed;
     border-bottom: 1px solid rgba(212, 163, 115, 0.1);
 }
@@ -132,22 +134,25 @@ body {
     color: var(--p506-accent);
 }
 
-/* --- BUSCADOR --- */
+/* --- BUSCADOR OPTIMIZADO --- */
 .search-container {
-    background: transparent !important;
+    background: rgba(0, 0, 0, 0.2) !important;
+    backdrop-filter: blur(5px);
     border: none !important;
-    border-bottom: 1px solid rgba(212, 163, 115, 0.2) !important;
-    padding: 8px 0 !important;
+    border-bottom: 1.5px solid var(--p506-accent) !important;
+    padding: 8px 12px !important;
     transition: var(--transition-premium);
-    max-width: 250px;
+    max-width: 280px;
     margin: 0 auto;
+    border-radius: 4px 4px 0 0;
 }
 
 .search-input {
-    letter-spacing: 0.3em !important;
-    font-size: 10px !important;
-    font-weight: 300;
-    color: white;
+    letter-spacing: 0.2em !important;
+    font-size: 11px !important;
+    font-weight: 400;
+    color: white !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 /* --- PORTAL LANDING --- */
@@ -236,21 +241,26 @@ body {
     border-radius: 16px;
 }
 
-/* --- FOOTER (TEXTURA RAWPIXEL INVERTIDA) --- */
+/* --- FOOTER LEGIBLE --- */
 footer.header-texture {
     background-position: center bottom;
     background-image: 
-        linear-gradient(to top, rgba(19, 15, 14, 0.6) 0%, var(--p506-bg) 100%),
-        url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2stcGYtc29tbWVyLTIwLWpveS0wNjg2LWwtcmV3LWNfMS5qcGc.jpg");
+        linear-gradient(to top, rgba(19, 15, 14, 0.8) 0%, var(--p506-bg) 100%),
+        radial-gradient(#2c1e1a 10%, transparent 11%),
+        radial-gradient(#2c1e1a 10%, transparent 11%);
     box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
     border-top: 1px solid rgba(212, 163, 115, 0.1);
-    border-bottom: none;
     background-attachment: scroll;
+}
+
+footer a, footer p, footer h4 {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.9);
 }
 
 footer a {
     position: relative;
     display: inline-block;
+    color: #fff !important;
 }
 
 footer nav a::after {
@@ -262,7 +272,7 @@ footer nav a::after {
     height: 1px;
     background: var(--p506-accent);
     transition: width 0.4s ease;
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 footer nav a:hover::after {
