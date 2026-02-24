@@ -34,7 +34,7 @@
     pointer-events: none;
 }
 
-/* --- ISOTIPO ESTILO MONEDA (RESTAURADO) --- */
+/* --- ISOTIPO ESTILO MONEDA --- */
 .iso-emblem {
     background: conic-gradient(
         from 0deg,
@@ -82,12 +82,13 @@ body {
     animation: revealCard 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
 }
 
-/* --- HEADER & FOOTER (IMAGEN LOCAL Y LEGIBILIDAD) --- */
+/* --- HEADER & FOOTER (TEXTURA RAWPIXEL ESTÉTICA) --- */
 .header-texture {
     position: relative;
+    /* Aplicamos la textura de Rawpixel con un fundido suave al fondo negro */
     background-image: 
-        linear-gradient(to bottom, rgba(19, 15, 14, 0.7) 0%, rgba(19, 15, 14, 0.9) 100%),
-        url("img/fondoheader.jpg");
+        linear-gradient(to bottom, rgba(19, 15, 14, 0.4) 0%, rgba(19, 15, 14, 0.95) 90%, var(--p506-bg) 100%),
+        url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2stcGYtc29tbWVyLTIwLWpveS0wNjg2LWwtcmV3LWNfMS5qcGc.jpg");
     background-size: cover;
     background-position: center top;
     background-attachment: fixed;
@@ -131,25 +132,22 @@ body {
     color: var(--p506-accent);
 }
 
-/* --- BUSCADOR (OPTIMIZADO) --- */
+/* --- BUSCADOR --- */
 .search-container {
-    background: rgba(0, 0, 0, 0.3) !important;
-    backdrop-filter: blur(4px);
+    background: transparent !important;
     border: none !important;
-    border-bottom: 2px solid var(--p506-accent) !important;
-    padding: 10px 15px !important;
-    border-radius: 4px 4px 0 0;
+    border-bottom: 1px solid rgba(212, 163, 115, 0.2) !important;
+    padding: 8px 0 !important;
     transition: var(--transition-premium);
-    max-width: 300px;
+    max-width: 250px;
     margin: 0 auto;
 }
 
 .search-input {
-    letter-spacing: 0.2em !important;
-    font-size: 11px !important;
-    font-weight: 500;
-    color: white !important;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    letter-spacing: 0.3em !important;
+    font-size: 10px !important;
+    font-weight: 300;
+    color: white;
 }
 
 /* --- PORTAL LANDING --- */
@@ -238,32 +236,21 @@ body {
     border-radius: 16px;
 }
 
-/* --- FOOTER (RESTAURADO Y OPTIMIZADO) --- */
+/* --- FOOTER (TEXTURA RAWPIXEL INVERTIDA) --- */
 footer.header-texture {
     background-position: center bottom;
     background-image: 
-        linear-gradient(to top, rgba(19, 15, 14, 0.8) 0%, rgba(19, 15, 14, 0.95) 100%),
-        url("img/fondoheader.jpg");
+        linear-gradient(to top, rgba(19, 15, 14, 0.6) 0%, var(--p506-bg) 100%),
+        url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2stcGYtc29tbWVyLTIwLWpveS0wNjg2LWwtcmV3LWNfMS5qcGc.jpg");
     box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
-    border-top: 1px solid rgba(212, 163, 115, 0.2);
+    border-top: 1px solid rgba(212, 163, 115, 0.1);
+    border-bottom: none;
     background-attachment: scroll;
-}
-
-footer a, footer p, footer h4 {
-    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-}
-
-/* Contenedor invisible para mejorar lectura sin tapar el fondo de café */
-footer .grid div {
-    background: rgba(0,0,0,0.15); 
-    padding: 12px;
-    border-radius: 8px;
 }
 
 footer a {
     position: relative;
     display: inline-block;
-    color: #ffffff !important;
 }
 
 footer nav a::after {
@@ -275,7 +262,7 @@ footer nav a::after {
     height: 1px;
     background: var(--p506-accent);
     transition: width 0.4s ease;
-    opacity: 0.8;
+    opacity: 0.6;
 }
 
 footer nav a:hover::after {
@@ -307,7 +294,7 @@ footer nav a:hover::after {
     .glass-card { border-radius: 20px; }
     #grid-negocios { gap: 1.5rem !important; }
     #purpose-card p { font-size: 0.75rem !important; }
-    .search-container { max-width: 90%; }
+    .search-container { max-width: 100%; }
     footer { padding-top: 3rem !important; padding-bottom: 3rem !important; }
 }
 
