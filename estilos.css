@@ -82,13 +82,13 @@ body {
     animation: revealCard 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
 }
 
-/* --- HEADER & FOOTER (TEXTURA RAWPIXEL ESTÉTICA) --- */
+/* --- HEADER & FOOTER (IMAGEN LOCAL ELEGANTE) --- */
 .header-texture {
     position: relative;
-    /* Aplicamos la textura de Rawpixel con un fundido suave al fondo negro */
+    /* Usamos tu ruta local con un degradado premium */
     background-image: 
         linear-gradient(to bottom, rgba(19, 15, 14, 0.4) 0%, rgba(19, 15, 14, 0.95) 90%, var(--p506-bg) 100%),
-        url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2stcGYtc29tbWVyLTIwLWpveS0wNjg2LWwtcmV3LWNfMS5qcGc.jpg");
+        url("img/fondoheader.jpg"); /* Asegúrate que la extensión sea correcta */
     background-size: cover;
     background-position: center top;
     background-attachment: fixed;
@@ -236,12 +236,12 @@ body {
     border-radius: 16px;
 }
 
-/* --- FOOTER (TEXTURA RAWPIXEL INVERTIDA) --- */
+/* --- FOOTER (IMAGEN LOCAL INVERTIDA) --- */
 footer.header-texture {
     background-position: center bottom;
     background-image: 
         linear-gradient(to top, rgba(19, 15, 14, 0.6) 0%, var(--p506-bg) 100%),
-        url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2stcGYtc29tbWVyLTIwLWpveS0wNjg2LWwtcmV3LWNfMS5qcGc.jpg");
+        url("img/fondoheader.jpg");
     box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
     border-top: 1px solid rgba(212, 163, 115, 0.1);
     border-bottom: none;
