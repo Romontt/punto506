@@ -82,7 +82,7 @@ body {
     animation: revealCard 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
 }
 
-/* --- HEADER & FOOTER TEXTURIZADO --- */
+/* --- HEADER & FOOTER --- */
 .header-texture {
     position: relative;
     background-image: 
@@ -102,7 +102,23 @@ body {
     animation: revealCard 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* --- NAVIGATION & BUSCADOR --- */
+/* --- NAVIGATION MÓVIL & FLECHAS --- */
+.hide-scroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.hide-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-hint-arrow {
+    background: linear-gradient(to left, var(--p506-bg) 20%, transparent);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
 .filter-btn {
     transition: var(--transition-premium);
     position: relative;
@@ -114,6 +130,7 @@ body {
     color: var(--p506-accent);
 }
 
+/* --- BUSCADOR --- */
 .search-container {
     background: transparent !important;
     border: none !important;
@@ -269,6 +286,9 @@ footer nav a:hover::after {
     #purpose-card p { font-size: 0.75rem !important; }
     .search-container { max-width: 100%; }
     footer { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+    
+    /* Logo en móvil */
+    nav .serif-title.text-xl { font-size: 1.25rem; }
 }
 
 .hidden { display: none !important; }
