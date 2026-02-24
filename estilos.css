@@ -34,7 +34,7 @@
     pointer-events: none;
 }
 
-/* --- ISOTIPO ESTILO MONEDA --- */
+/* --- ISOTIPO ESTILO MONEDA (RESTAURADO) --- */
 .iso-emblem {
     background: conic-gradient(
         from 0deg,
@@ -82,10 +82,9 @@ body {
     animation: revealCard 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
 }
 
-/* --- HEADER & FOOTER (MEJORADO PARA LEGIBILIDAD) --- */
+/* --- HEADER & FOOTER (IMAGEN LOCAL Y LEGIBILIDAD) --- */
 .header-texture {
     position: relative;
-    /* Oscurecemos el overlay para que la barra de búsqueda y el menú resalten */
     background-image: 
         linear-gradient(to bottom, rgba(19, 15, 14, 0.7) 0%, rgba(19, 15, 14, 0.9) 100%),
         url("img/fondoheader.jpg");
@@ -132,12 +131,12 @@ body {
     color: var(--p506-accent);
 }
 
-/* --- BUSCADOR CORREGIDO --- */
+/* --- BUSCADOR (OPTIMIZADO) --- */
 .search-container {
-    background: rgba(0, 0, 0, 0.3) !important; /* Fondo sutil para separar de los granos de café */
+    background: rgba(0, 0, 0, 0.3) !important;
     backdrop-filter: blur(4px);
     border: none !important;
-    border-bottom: 2px solid var(--p506-accent) !important; /* Más grueso para que se vea */
+    border-bottom: 2px solid var(--p506-accent) !important;
     padding: 10px 15px !important;
     border-radius: 4px 4px 0 0;
     transition: var(--transition-premium);
@@ -150,7 +149,7 @@ body {
     font-size: 11px !important;
     font-weight: 500;
     color: white !important;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Sombra para leer sobre la imagen */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 /* --- PORTAL LANDING --- */
@@ -239,7 +238,7 @@ body {
     border-radius: 16px;
 }
 
-/* --- FOOTER CORREGIDO PARA LEGIBILIDAD --- */
+/* --- FOOTER (RESTAURADO Y OPTIMIZADO) --- */
 footer.header-texture {
     background-position: center bottom;
     background-image: 
@@ -250,21 +249,21 @@ footer.header-texture {
     background-attachment: scroll;
 }
 
-/* Añadimos un sutil contraste a los textos del footer */
 footer a, footer p, footer h4 {
     text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 }
 
+/* Contenedor invisible para mejorar lectura sin tapar el fondo de café */
 footer .grid div {
-    background: rgba(0,0,0,0.2); /* Crea un área más limpia bajo el texto */
-    padding: 10px;
+    background: rgba(0,0,0,0.15); 
+    padding: 12px;
     border-radius: 8px;
 }
 
 footer a {
     position: relative;
     display: inline-block;
-    color: #ffffff !important; /* Forzamos blanco puro para que no se pierda */
+    color: #ffffff !important;
 }
 
 footer nav a::after {
