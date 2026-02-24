@@ -82,13 +82,13 @@ body {
     animation: revealCard 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
 }
 
-/* --- HEADER & FOOTER (IMAGEN LOCAL ELEGANTE) --- */
+/* --- HEADER & FOOTER (MEJORADO PARA LEGIBILIDAD) --- */
 .header-texture {
     position: relative;
-    /* Usamos tu ruta local con un degradado premium */
+    /* Oscurecemos el overlay para que la barra de búsqueda y el menú resalten */
     background-image: 
-        linear-gradient(to bottom, rgba(19, 15, 14, 0.4) 0%, rgba(19, 15, 14, 0.95) 90%, var(--p506-bg) 100%),
-        url("img/fondoheader.jpg"); /* Asegúrate que la extensión sea correcta */
+        linear-gradient(to bottom, rgba(19, 15, 14, 0.7) 0%, rgba(19, 15, 14, 0.9) 100%),
+        url("img/fondoheader.jpg");
     background-size: cover;
     background-position: center top;
     background-attachment: fixed;
@@ -132,22 +132,25 @@ body {
     color: var(--p506-accent);
 }
 
-/* --- BUSCADOR --- */
+/* --- BUSCADOR CORREGIDO --- */
 .search-container {
-    background: transparent !important;
+    background: rgba(0, 0, 0, 0.3) !important; /* Fondo sutil para separar de los granos de café */
+    backdrop-filter: blur(4px);
     border: none !important;
-    border-bottom: 1px solid rgba(212, 163, 115, 0.2) !important;
-    padding: 8px 0 !important;
+    border-bottom: 2px solid var(--p506-accent) !important; /* Más grueso para que se vea */
+    padding: 10px 15px !important;
+    border-radius: 4px 4px 0 0;
     transition: var(--transition-premium);
-    max-width: 250px;
+    max-width: 300px;
     margin: 0 auto;
 }
 
 .search-input {
-    letter-spacing: 0.3em !important;
-    font-size: 10px !important;
-    font-weight: 300;
-    color: white;
+    letter-spacing: 0.2em !important;
+    font-size: 11px !important;
+    font-weight: 500;
+    color: white !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Sombra para leer sobre la imagen */
 }
 
 /* --- PORTAL LANDING --- */
@@ -236,21 +239,32 @@ body {
     border-radius: 16px;
 }
 
-/* --- FOOTER (IMAGEN LOCAL INVERTIDA) --- */
+/* --- FOOTER CORREGIDO PARA LEGIBILIDAD --- */
 footer.header-texture {
     background-position: center bottom;
     background-image: 
-        linear-gradient(to top, rgba(19, 15, 14, 0.6) 0%, var(--p506-bg) 100%),
+        linear-gradient(to top, rgba(19, 15, 14, 0.8) 0%, rgba(19, 15, 14, 0.95) 100%),
         url("img/fondoheader.jpg");
     box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
-    border-top: 1px solid rgba(212, 163, 115, 0.1);
-    border-bottom: none;
+    border-top: 1px solid rgba(212, 163, 115, 0.2);
     background-attachment: scroll;
+}
+
+/* Añadimos un sutil contraste a los textos del footer */
+footer a, footer p, footer h4 {
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+footer .grid div {
+    background: rgba(0,0,0,0.2); /* Crea un área más limpia bajo el texto */
+    padding: 10px;
+    border-radius: 8px;
 }
 
 footer a {
     position: relative;
     display: inline-block;
+    color: #ffffff !important; /* Forzamos blanco puro para que no se pierda */
 }
 
 footer nav a::after {
@@ -262,7 +276,7 @@ footer nav a::after {
     height: 1px;
     background: var(--p506-accent);
     transition: width 0.4s ease;
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 footer nav a:hover::after {
@@ -294,7 +308,7 @@ footer nav a:hover::after {
     .glass-card { border-radius: 20px; }
     #grid-negocios { gap: 1.5rem !important; }
     #purpose-card p { font-size: 0.75rem !important; }
-    .search-container { max-width: 100%; }
+    .search-container { max-width: 90%; }
     footer { padding-top: 3rem !important; padding-bottom: 3rem !important; }
 }
 
