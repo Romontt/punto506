@@ -69,7 +69,7 @@ body {
 }
 
 .serif-title { font-family: 'Cinzel', serif; letter-spacing: 0.25em; }
-.business-title { font-family: 'Montserrat', sans-serif; letter-spacing: 0.05em; }
+.business-title { font-family: 'Montserrat', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; }
 .elegant-italic { font-family: 'Baskervville', serif; font-style: italic; }
 
 @keyframes revealCard { 
@@ -82,7 +82,24 @@ body {
     animation: revealCard 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
 }
 
-/* --- NAVIGATION & MÓVIL --- */
+/* --- HEADER DINÁMICO & TEXTURIZADO --- */
+.header-texture {
+    background-image: 
+        linear-gradient(to bottom, rgba(19, 15, 14, 0.4), var(--p506-bg)),
+        url("https://www.transparenttextures.com/patterns/dark-linen.png");
+    backdrop-filter: blur(5px);
+}
+
+#purpose-card {
+    transition: all 0.8s ease;
+    border-radius: 4px;
+}
+
+#discover-tagline {
+    animation: revealCard 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --- NAVIGATION & BUSCADOR --- */
 .filter-btn {
     transition: var(--transition-premium);
     position: relative;
@@ -94,27 +111,6 @@ body {
     color: var(--p506-accent);
 }
 
-.scroll-hint { 
-    display: flex;
-    gap: 2px;
-    align-items: center;
-    background: linear-gradient(to left, var(--p506-bg), transparent);
-    padding-left: 20px;
-}
-
-.scroll-hint svg {
-    width: 8px;
-    height: 8px;
-    animation: arrowFlicker 1.5s infinite;
-    color: var(--p506-accent);
-}
-
-@keyframes arrowFlicker {
-    0%, 100% { opacity: 0.2; transform: translateX(0); }
-    50% { opacity: 1; transform: translateX(3px); }
-}
-
-/* --- BUSCADOR --- */
 .search-container {
     background: transparent !important;
     border: none !important;
@@ -138,6 +134,7 @@ body {
     height: 420px;
     overflow: hidden;
     cursor: pointer;
+    border-radius: 12px;
     border: 1px solid rgba(212, 163, 115, 0.1);
     background: #000;
 }
@@ -162,55 +159,65 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     padding: 2.5rem;
-    /* Gradiente muy bajo solo para que el texto sea legible sin tapar la foto */
-    background: linear-gradient(to top, rgba(19, 15, 14, 0.7) 0%, transparent 40%);
+    background: linear-gradient(to top, rgba(19, 15, 14, 0.8) 0%, transparent 50%);
     z-index: 10;
 }
 
-/* --- TARJETAS DE RESULTADOS --- */
+/* --- TARJETAS DE RESULTADOS (FINE & SLIM) --- */
 .glass-card {
     display: flex;
     flex-direction: column;
     height: 100%; 
-    background: rgba(35, 28, 26, 0.6); 
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(212, 163, 115, 0.15);
-    transition: var(--transition-premium);
+    background: rgba(30, 25, 23, 0.6); 
+    backdrop-filter: blur(15px);
+    border-radius: 24px; /* Más estilizada */
+    border: 1px solid rgba(212, 163, 115, 0.12);
+    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    overflow: hidden;
 }
 
 .glass-card .p-8 {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    padding: 2.2rem !important; /* Más aire */
 }
 
 .glass-card:hover {
     border-color: var(--p506-accent);
-    background: rgba(45, 35, 32, 0.8);
-    transform: translateY(-5px);
+    background: rgba(45, 35, 32, 0.7);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
 .glass-card button {
-    margin-top: auto; 
-    position: relative;
-    z-index: 50; /* Z-index alto para estar siempre al frente */
+    margin-top: 1.5rem; 
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    border: 1px solid rgba(212, 163, 115, 0.3);
+    background: transparent;
+    color: var(--p506-accent);
+    text-transform: uppercase;
+    font-weight: 900;
+    transition: all 0.4s ease;
+    z-index: 50;
 }
 
-/* --- SISTEMA VER MÁS (ARREGLADO) --- */
+.glass-card button:hover {
+    background: var(--p506-accent);
+    color: var(--p506-bg);
+}
+
+/* --- SISTEMA VER MÁS --- */
 .grid-limitado {
-    max-height: 1250px; /* Ajusta según cuántas filas quieras mostrar inicialmente */
+    max-height: 1250px;
     overflow: hidden;
     transition: max-height 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-    mask-image: none !important; /* Eliminamos cualquier máscara */
-    -webkit-mask-image: none !important;
 }
 
 .grid-expandido { max-height: 30000px !important; }
-
-/* ELIMINADO: fade-overlay removido para que no tape los botones inferiores */
-.fade-overlay {
-    display: none !important;
-}
 
 /* --- MODAL --- */
 #modal-content .grid { align-items: center; gap: 2rem; }
@@ -218,9 +225,10 @@ body {
 
 /* --- MÓVIL --- */
 @media (max-width: 768px) {
-    .portal-card { height: 240px; }
+    .portal-card { height: 260px; border-radius: 10px; }
     .portal-card-content { padding: 1.5rem; }
-    #grid-negocios { gap: 1rem !important; }
+    .glass-card { border-radius: 20px; }
+    #grid-negocios { gap: 1.5rem !important; }
 }
 
 .hidden { display: none !important; }
