@@ -25,12 +25,15 @@ function ejecutarTransicion(callback) {
         loader.classList.remove('fade-out');
         setTimeout(() => {
             callback();
+            // Subir al inicio al cambiar de vista
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             setTimeout(() => {
                 loader.classList.add('fade-out');
             }, 600);
         }, 500);
     } else {
         callback();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
@@ -43,7 +46,7 @@ function volverInicio() {
         if (inputBusqueda) inputBusqueda.value = '';
         
         actualizarURL('todos');
-        gestionarVisibilidadHeader('todos'); // Resetear Header
+        gestionarVisibilidadHeader('todos');
         
         document.querySelectorAll('.filter-btn').forEach(btn => {
             if(btn.getAttribute('data-cat') === 'todos') activarBoton(btn);
@@ -62,7 +65,7 @@ function renderLanding() {
     landing.classList.remove('hidden');
     if(resultados) resultados.classList.add('hidden');
     
-    gestionarVisibilidadHeader('todos'); // Asegurar estado en landing
+    gestionarVisibilidadHeader('todos');
 
     const categoriasConfig = [
         { id: 'salud', nombre: 'Salud & Bienestar', img: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1000' },
@@ -96,7 +99,7 @@ function seleccionarCategoria(id) {
         });
 
         actualizarURL(id);
-        gestionarVisibilidadHeader(id); // Cambiar Header
+        gestionarVisibilidadHeader(id);
         renderSubCategorias();
         aplicarFiltrosCombinados();
     });
@@ -256,7 +259,6 @@ function aplicarFiltrosCombinados() {
     });
 
     if (busqueda !== '' || categoriaActual !== 'todos') {
-        gestionarVisibilidadHeader(categoriaActual !== 'todos' ? categoriaActual : 'busqueda');
         renderCards(filtrados);
     } else {
         renderLanding();
@@ -330,10 +332,12 @@ function verDetalle(id) {
                 <a href="${n.instagram || '#'}" target="_blank" class="flex-1 text-center py-5 border border-[#d4a373]/30 text-[#d4a373] text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-white/5 transition-all duration-500">Visitar Perfil</a>
             </div>
 
-            <div class="text-center pt-6 border-t border-white/5">
-                <a href="${prefilledLink}" target="_blank" class="text-[9px] font-bold text-[#d4a373]/40 uppercase tracking-[0.4em] hover:text-white transition-all underline underline-offset-8">
-                    Buzón de Sugerencias →
+            <div class="feedback-container">
+                <p class="text-[10px] text-stone-400 uppercase tracking-[0.2em] mb-4">¿Deseas ayudarnos a elevar nuestro estándar?</p>
+                <a href="${prefilledLink}" target="_blank" class="inline-block text-[11px] font-bold text-[#d4a373] uppercase tracking-[0.4em] hover:text-white transition-all underline underline-offset-8 mb-4">
+                    Buzón de Mejora Continua →
                 </a>
+                <p class="text-[8px] text-stone-500 italic mt-2">Tu opinión es compartida de forma estrictamente anónima para garantizar la transparencia.</p>
             </div>
         </div>
     `;
