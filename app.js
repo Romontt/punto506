@@ -341,7 +341,7 @@ function verDetalle(id) {
             <div id="feedback-section" class="border-t border-white/5 pt-10">
                 <div id="form-wrapper">
                     <h3 class="text-[10px] text-stone-400 uppercase tracking-[0.3em] mb-6 text-center">¿Deseas ayudarnos a elevar nuestro estándar?</h3>
-                    <form id="feedback-form" action="https://formspree.io/f/tu_id_aqui" method="POST" class="space-y-4">
+                    <form id="feedback-form" action="https://formspree.io/f/mlgwzggv" method="POST" class="space-y-4">
                         <input type="hidden" name="Negocio" value="${n.nombre}">
                         <textarea name="comentario" required placeholder="Tu opinión es estrictamente anónima..." 
                             class="w-full bg-black/40 border border-[#d4a373]/20 p-4 text-white text-sm focus:outline-none focus:border-[#d4a373] transition-colors h-32"></textarea>
