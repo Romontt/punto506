@@ -172,7 +172,6 @@ function actualizarFlechasNav() {
     
     if(navScroll && hint) {
         navScroll.addEventListener('scroll', () => {
-            // Ocultar flecha si el usuario ya deslizó hacia el final
             const maxScroll = navScroll.scrollWidth - navScroll.clientWidth;
             if (navScroll.scrollLeft >= maxScroll - 10) {
                 hint.style.opacity = '0';
@@ -268,7 +267,7 @@ function aplicarFiltrosCombinados() {
 
     if (busqueda !== '' || categoriaActual !== 'todos') {
         renderCards(filtrados);
-        gestionarVisibilidadHeader(categoriaActual); // Asegura que se oculte la red
+        gestionarVisibilidadHeader(categoriaActual); 
     } else {
         renderLanding();
     }
@@ -302,8 +301,6 @@ function verDetalle(id) {
     const n = negociosRaw.find(item => item.id === id);
     if (!n) return;
 
-    const googleFormBase = "https://docs.google.com/forms/d/e/1FAIpQLSfuSPB2ZQBl9COJLLgRMBkZ72aqlr-bVO-Pb0c0H7UvS801hQ/viewform";
-    const prefilledLink = `${googleFormBase}?usp=pp_url&entry.2100078616=${encodeURIComponent(n.nombre)}`;
     const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría solicitar más información.`);
 
     document.getElementById('modal-content').innerHTML = `
@@ -336,20 +333,58 @@ function verDetalle(id) {
                 </div>
             </div>
 
-            <div class="flex flex-col sm:flex-row gap-4 mb-10">
+            <div class="flex flex-col sm:flex-row gap-4 mb-12">
                 <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" class="flex-1 text-center py-5 bg-[#d4a373] text-[#130f0e] text-[10px] font-black uppercase tracking-[0.3em] hover:bg-white transition-all duration-500">Contactar Vía WhatsApp</a>
                 <a href="${n.instagram || '#'}" target="_blank" class="flex-1 text-center py-5 border border-[#d4a373]/30 text-[#d4a373] text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-white/5 transition-all duration-500">Visitar Perfil</a>
             </div>
 
-            <div class="feedback-container">
-                <p class="text-[10px] text-stone-400 uppercase tracking-[0.2em] mb-4">¿Deseas ayudarnos a elevar nuestro estándar?</p>
-                <a href="${prefilledLink}" target="_blank" class="inline-block text-[11px] font-bold text-[#d4a373] uppercase tracking-[0.4em] hover:text-white transition-all underline underline-offset-8 mb-4">
-                    Buzón de Mejora Continua →
-                </a>
-                <p class="text-[8px] text-stone-500 italic mt-2">Tu opinión es compartida de forma estrictamente anónima para garantizar la transparencia.</p>
+            <div id="feedback-section" class="border-t border-white/5 pt-10">
+                <div id="form-wrapper">
+                    <h3 class="text-[10px] text-stone-400 uppercase tracking-[0.3em] mb-6 text-center">¿Deseas ayudarnos a elevar nuestro estándar?</h3>
+                    <form id="feedback-form" action="https://formspree.io/f/tu_id_aqui" method="POST" class="space-y-4">
+                        <input type="hidden" name="Negocio" value="${n.nombre}">
+                        <textarea name="comentario" required placeholder="Tu opinión es estrictamente anónima..." 
+                            class="w-full bg-black/40 border border-[#d4a373]/20 p-4 text-white text-sm focus:outline-none focus:border-[#d4a373] transition-colors h-32"></textarea>
+                        <button type="submit" class="w-full py-4 border border-[#d4a373] text-[#d4a373] text-[9px] font-black uppercase tracking-[0.4em] hover:bg-[#d4a373] hover:text-black transition-all">
+                            Enviar Sugerencia
+                        </button>
+                    </form>
+                </div>
+                <div id="success-message" class="hidden text-center py-8">
+                    <div class="text-[#d4a373] mb-4">
+                        <svg class="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <p class="text-white text-[11px] uppercase tracking-[0.3em] font-bold">¡Gracias por compartir tu opinión!</p>
+                    <p class="text-stone-500 text-[9px] mt-2 italic">Tu aporte nos ayuda a construir la mejor red comercial de Pococí.</p>
+                </div>
             </div>
         </div>
     `;
+
+    // Lógica de envío sin recarga
+    const form = document.getElementById('feedback-form');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = form.querySelector('button');
+        submitBtn.innerText = "ENVIANDO...";
+        submitBtn.disabled = true;
+
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            });
+            if (response.ok) {
+                document.getElementById('form-wrapper').classList.add('hidden');
+                document.getElementById('success-message').classList.remove('hidden');
+            }
+        } catch (error) {
+            submitBtn.innerText = "ERROR - REINTENTAR";
+            submitBtn.disabled = false;
+        }
+    });
+
     document.getElementById('modal-negocio').classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 }
