@@ -21,24 +21,7 @@
     <link rel="stylesheet" href="estilos.css">
 
     <style>
-        /* Estilos para el nuevo Formulario de Comentarios Premium */
-        .comment-area {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: rgba(212, 163, 115, 0.03);
-            border-top: 1px solid rgba(214, 163, 115, 0.1);
-        }
-        .glass-input {
-            background: rgba(255, 255, 255, 0.03) !important;
-            border: 1px solid rgba(214, 163, 115, 0.2) !important;
-            color: white !important;
-            transition: all 0.3s ease;
-        }
-        .glass-input:focus {
-            border-color: #d4a373 !important;
-            background: rgba(255, 255, 255, 0.05) !important;
-            outline: none;
-        }
+        /* Estilos base mantenidos para la experiencia premium */
         #form-status.success { color: #d4a373; font-style: italic; font-size: 12px; }
     </style>
 </head>
@@ -153,27 +136,6 @@
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
             <div id="modal-content"></div>
-
-            <div class="comment-area px-8 pb-10">
-                <h4 class="serif-title text-[#d4a373] text-[10px] tracking-[0.4em] uppercase mb-6">Comparte tu experiencia</h4>
-                <form id="comment-form" action="https://formspree.io/f/mlgwzggv" method="POST" class="space-y-4">
-                    <input type="hidden" name="Negocio" id="hidden-business-name">
-                    
-                    <input type="text" name="Nombre" placeholder="TU NOMBRE (OPCIONAL)" 
-                           class="w-full glass-input p-3 text-[10px] tracking-widest uppercase">
-                    
-                    <textarea name="Mensaje" required placeholder="¿QUÉ TE PARECIÓ ESTE LUGAR?" 
-                              class="w-full glass-input p-3 text-[10px] tracking-widest uppercase min-h-[100px]"></textarea>
-                    
-                    <div class="flex flex-col items-center gap-4">
-                        <button type="submit" id="submit-btn" 
-                                class="w-full py-3 border border-[#d4a373] text-[#d4a373] text-[9px] font-black uppercase tracking-[0.3em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-500">
-                            Enviar Comentario
-                        </button>
-                        <p id="form-status" class="hidden"></p>
-                    </div>
-                </form>
-            </div>
         </div>
     </div>
     
@@ -319,55 +281,6 @@
             if(btn) btn.click();
             window.scrollTo({ top: document.getElementById('section-results').offsetTop - 100, behavior: 'smooth' });
         }
-
-        // LÓGICA DEL FORMULARIO DE COMENTARIOS INTELIGENTE
-        const commentForm = document.getElementById('comment-form');
-        const status = document.getElementById('form-status');
-
-        // Escuchar cuando se abre un modal de negocio (Ajuste según tu app.js)
-        const observer = new MutationObserver(() => {
-            const modal = document.getElementById('modal-negocio');
-            if (!modal.classList.contains('hidden')) {
-                // Intentar capturar el nombre del negocio desde el h2 del modal
-                const businessName = document.querySelector('#modal-content h2')?.innerText || "Negocio Desconocido";
-                document.getElementById('hidden-business-name').value = businessName;
-                
-                // Resetear estado del form al abrir
-                commentForm.classList.remove('hidden');
-                status.classList.add('hidden');
-            }
-        });
-        observer.observe(document.getElementById('modal-negocio'), { attributes: true });
-
-        // Enviar formulario vía AJAX (Sin recargar)
-        commentForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById('submit-btn');
-            btn.innerText = "ENVIANDO...";
-            btn.disabled = true;
-
-            const data = new FormData(commentForm);
-            
-            try {
-                const response = await fetch(commentForm.action, {
-                    method: 'POST',
-                    body: data,
-                    headers: { 'Accept': 'application/json' }
-                });
-
-                if (response.ok) {
-                    commentForm.classList.add('hidden');
-                    status.innerText = "¡GRACIAS POR TU COMENTARIO! LO REVISAREMOS PRONTO.";
-                    status.classList.remove('hidden');
-                    status.className = "success font-bold tracking-widest text-center py-4";
-                } else {
-                    throw new Error();
-                }
-            } catch (error) {
-                btn.innerText = "ERROR AL ENVIAR";
-                btn.disabled = false;
-            }
-        });
     </script>
 </body>
 </html>
