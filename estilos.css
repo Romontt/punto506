@@ -55,7 +55,7 @@
     overflow: hidden;
 }
 
-/* --- ESTILOS BASE --- */
+/* --- ESTILOS BASE ACLARADOS --- */
 body { 
     font-family: 'Inter', sans-serif; 
     background-color: var(--p506-bg);
@@ -82,7 +82,7 @@ body {
     animation: revealCard 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
 }
 
-/* --- HEADER --- */
+/* --- HEADER ACLARADO --- */
 .header-texture {
     position: relative;
     background-color: #130f0e;
@@ -107,7 +107,7 @@ body {
     animation: revealCard 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* --- NAVIGATION --- */
+/* --- NAVIGATION MÓVIL & FLECHAS --- */
 .hide-scroll {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -135,7 +135,7 @@ body {
     color: var(--p506-accent);
 }
 
-/* --- BUSCADOR --- */
+/* --- BUSCADOR OPTIMIZADO --- */
 .search-container {
     background: rgba(40, 35, 30, 0.6) !important;
     backdrop-filter: blur(10px);
@@ -232,200 +232,38 @@ body {
     transition: all 0.4s ease;
 }
 
-/* --- RE-DISEÑO REFINADO DEL MODAL (ÚNICO SCROLL) --- */
+/* --- NUEVOS AJUSTES DE TAMAÑO DEL MODAL --- */
 #modal-negocio {
-    position: fixed;
-    inset: 0;
     z-index: 1000;
-    background: rgba(10, 8, 7, 0.95);
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(12px);
+    padding: 1rem;
     display: flex;
-    align-items: flex-start; 
+    align-items: center;
     justify-content: center;
-    overflow-y: auto; /* ÚNICO SCROLL AQUÍ */
-    padding: 2rem 1rem;
-}
-
-/* Personalización del scroll bar (estilo anterior) */
-#modal-negocio::-webkit-scrollbar {
-    width: 6px;
-}
-#modal-negocio::-webkit-scrollbar-track {
-    background: transparent;
-}
-#modal-negocio::-webkit-scrollbar-thumb {
-    background: var(--p506-accent);
-    border-radius: 10px;
 }
 
 #modal-content {
     width: 100%;
-    max-width: 850px;
+    max-width: 900px; /* Tamaño máximo equilibrado */
+    max-height: 90vh; /* No permite que el modal sea más alto que la pantalla */
+    overflow-y: auto; /* Permite scroll interno si el contenido es mucho */
     background-color: #1c1614;
-    border: 1px solid rgba(212, 163, 115, 0.15);
-    box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 1);
-    border-radius: 24px;
-    position: relative;
-    overflow: hidden; /* Esto corta el cuadro café de las esquinas */
-    margin: auto;
-}
-
-.modal-close-btn {
-    position: absolute;
-    top: 25px;
-    right: 25px;
-    z-index: 100;
-    background: rgba(19, 15, 14, 0.8);
-    backdrop-filter: blur(4px);
     border: 1px solid rgba(212, 163, 115, 0.2);
-    color: white;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.modal-close-btn:hover { background: var(--p506-accent); color: #130f0e; }
-
-.modal-image-container {
-    height: 350px;
-    width: 100%;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
     position: relative;
-    overflow: hidden;
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
 }
 
-.modal-image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+/* Personalización del scroll interno del modal */
+#modal-content::-webkit-scrollbar {
+    width: 4px;
 }
-
-.modal-image-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, transparent 30%, #1c1614 100%);
-}
-
-.modal-body-content {
-    padding: 0 3rem 4rem;
-    margin-top: -60px;
-    position: relative;
-    background-color: #1c1614;
-}
-
-.category-badge {
-    color: var(--p506-accent);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    display: block;
-}
-
-.modal-title {
-    font-size: 2.8rem;
-    color: white;
-    margin: 10px 0;
-}
-
-.accent-line {
-    width: 50px;
-    height: 2px;
+#modal-content::-webkit-scrollbar-thumb {
     background: var(--p506-accent);
-    margin: 1.5rem auto;
+    border-radius: 10px;
 }
 
-.modal-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 3rem;
-    margin-top: 3rem;
-    text-align: left;
-}
-
-.info-label {
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.3em;
-    color: #666;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    padding-bottom: 10px;
-    margin-bottom: 1.5rem;
-}
-
-.info-item {
-    display: flex;
-    align-items: start;
-    gap: 12px;
-    margin-bottom: 20px;
-    color: #ccc;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-}
-
-.info-item .icon { width: 18px; color: var(--p506-accent); flex-shrink: 0; }
-
-.action-buttons {
-    display: flex;
-    gap: 15px;
-    margin: 3rem 0;
-}
-
-.btn-whatsapp, .btn-instagram {
-    flex: 1;
-    padding: 18px;
-    border-radius: 14px;
-    font-size: 10px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.3em;
-    transition: all 0.4s ease;
-    text-align: center;
-}
-
-.btn-whatsapp { background: var(--p506-accent); color: #130f0e; }
-.btn-instagram { border: 1px solid rgba(212, 163, 115, 0.3); color: var(--p506-accent); }
-
-.modal-feedback {
-    background: rgba(0,0,0,0.2);
-    padding: 2.5rem;
-    border-radius: 18px;
-    border: 1px solid rgba(212, 163, 115, 0.05);
-}
-
-.feedback-title { font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 1.5rem; text-align: center; }
-.feedback-input { 
-    width: 100%; 
-    background: #130f0e; 
-    border: 1px solid rgba(212, 163, 115, 0.1); 
-    border-radius: 12px; 
-    padding: 15px; 
-    color: white; 
-    font-size: 13px; 
-    min-height: 100px;
-}
-.btn-submit { 
-    width: 100%; 
-    margin-top: 15px; 
-    padding: 15px; 
-    background: transparent; 
-    border: 1px solid var(--p506-accent); 
-    color: var(--p506-accent); 
-    border-radius: 12px; 
-    font-size: 9px; 
-    font-weight: bold; 
-    text-transform: uppercase; 
-    letter-spacing: 0.3em;
-}
-
-/* --- ÁREA DE FEEDBACK EXTERNA --- */
+/* --- ÁREA DE FEEDBACK --- */
 .feedback-container {
     background: rgba(212, 163, 115, 0.05);
     border: 1px dashed rgba(212, 163, 115, 0.2);
@@ -482,18 +320,11 @@ footer.header-texture {
     .search-container { max-width: 100%; }
     footer { padding-top: 3rem !important; padding-bottom: 3rem !important; }
 
-    /* Ajuste Modal Móvil */
-    #modal-negocio { padding: 1rem 0.5rem; }
-    #modal-content { 
-        border-radius: 20px; 
-        margin-top: 2rem;
+    /* Ajuste modal en móvil */
+    #modal-content {
+        max-height: 95vh;
+        margin-top: 5vh;
     }
-    .modal-image-container { height: 250px; }
-    .modal-body-content { padding: 0 1.5rem 3rem; }
-    .modal-title { font-size: 1.8rem; }
-    .modal-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .action-buttons { flex-direction: column; }
-    .modal-close-btn { top: 15px; right: 15px; }
 }
 
 .hidden { display: none !important; }
