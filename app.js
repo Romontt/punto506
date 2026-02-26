@@ -297,72 +297,77 @@ function activarBoton(btn) {
     btn.classList.add('text-[#d4a373]', 'border-[#d4a373]', 'font-black');
 }
 
+// --- FUNCIÓN VER DETALLE ACTUALIZADA (MODAL PREMIUM) ---
 function verDetalle(id) {
     const n = negociosRaw.find(item => item.id === id);
     if (!n) return;
 
     const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría solicitar más información.`);
 
-    // Estructura limpia para evitar doble scroll y elementos duplicados
+    // Inyectamos el contenido respetando el nuevo diseño de SCROLL ÚNICO y UNA SOLA EQUIS
     document.getElementById('modal-content').innerHTML = `
-        <div class="modal-inner-wrapper">
-            <button onclick="cerrarModal()" class="modal-close-btn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
-            </button>
-            
-            <div class="modal-image-container">
-                <img src="${n.imagen}" alt="${n.nombre}">
-                <div class="modal-image-overlay"></div>
+        <button onclick="cerrarModal()" class="modal-close-btn" aria-label="Cerrar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+
+        <div class="modal-image-container">
+            <img src="${n.imagen}" alt="${n.nombre}">
+            <div class="modal-image-overlay"></div>
+        </div>
+
+        <div class="modal-body-content">
+            <div class="text-center">
+                <span class="category-badge">${n.categoria}</span>
+                <h2 class="serif-title modal-title">${n.nombre}</h2>
+                <div class="accent-line"></div>
             </div>
 
-            <div class="modal-body-content">
-                <div class="text-center mb-8">
-                    <span class="category-badge">${n.categoria}</span>
-                    <h2 class="modal-title serif-title">${n.nombre}</h2>
-                    <div class="accent-line"></div>
-                </div>
-                
-                <div class="modal-grid">
-                    <div class="info-main">
-                         <h4 class="info-label">Propuesta de Valor</h4>
-                         <p class="elegant-italic text-white text-lg mb-4 italic">"${n.servicios_resumen}"</p>
-                         <p class="text-stone-400 text-xs leading-relaxed">${n.descripcion || 'Una experiencia curada minuciosamente por el equipo de Punto 506.'}</p>
-                    </div>
-                    <div class="info-side">
-                        <div class="info-item">
-                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            <span>${n.horario || 'Bajo reserva'}</span>
-                        </div>
-                        <div class="info-item">
-                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            <span>${n.direccion || 'Pococí, Costa Rica'}</span>
-                        </div>
-                    </div>
+            <div class="modal-grid">
+                <div>
+                    <h4 class="info-label">Propuesta de Valor</h4>
+                    <p class="elegant-italic text-white text-xl mb-6">"${n.servicios_resumen}"</p>
+                    <p class="text-stone-400 text-sm leading-relaxed">
+                        ${n.descripcion || 'Una experiencia curada minuciosamente por el equipo de Punto 506 para garantizar los más altos estándares de calidad en Pococí.'}
+                    </p>
                 </div>
 
-                <div class="action-buttons">
-                    <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" class="btn-whatsapp">WhatsApp</a>
-                    <a href="${n.instagram || '#'}" target="_blank" class="btn-instagram">Instagram</a>
+                <div class="modal-feedback">
+                    <h4 class="info-label">Información</h4>
+                    <div class="info-item">
+                        <div class="icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <span>${n.horario || 'Horario bajo reserva'}</span>
+                    </div>
+                    <div class="info-item">
+                        <div class="icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <span>${n.direccion || 'Ubicación Premium Pococí'}</span>
+                    </div>
                 </div>
+            </div>
 
-                <div id="feedback-section" class="modal-feedback">
-                    <div id="form-wrapper">
-                        <h3 class="feedback-title">¿Sugerencias para mejorar?</h3>
-                        <form id="feedback-form" action="https://formspree.io/f/mlgwzggv" method="POST" class="space-y-4">
-                            <input type="hidden" name="Negocio" value="${n.nombre}">
-                            <textarea name="comentario" required placeholder="Tu opinión es anónima..." class="feedback-input"></textarea>
-                            <button type="submit" class="btn-submit">Enviar Sugerencia</button>
-                        </form>
-                    </div>
-                    <div id="success-message" class="hidden feedback-success">
-                        <p>¡Gracias por tu opinión!</p>
-                    </div>
+            <div class="action-buttons">
+                <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" class="btn-whatsapp">Contactar WhatsApp</a>
+                <a href="${n.instagram || '#'}" target="_blank" class="btn-instagram">Ver Instagram</a>
+            </div>
+
+            <div id="feedback-section" class="modal-feedback mt-10">
+                <div id="form-wrapper">
+                    <h3 class="feedback-title">¿Deseas ayudarnos a elevar nuestro estándar?</h3>
+                    <form id="feedback-form" action="https://formspree.io/f/mlgwzggv" method="POST" class="space-y-4">
+                        <input type="hidden" name="Negocio" value="${n.nombre}">
+                        <textarea name="comentario" required placeholder="Tu opinión es estrictamente anónima..." class="feedback-input"></textarea>
+                        <button type="submit" class="btn-submit">Enviar Sugerencia Anónima</button>
+                    </form>
+                </div>
+                <div id="success-message" class="hidden text-center py-4">
+                    <p class="text-[#d4a373] text-[10px] font-bold tracking-widest uppercase">¡Gracias por tu aporte!</p>
                 </div>
             </div>
         </div>
     `;
 
-    // Lógica de envío de feedback
+    // Lógica de envío sin recarga
     const form = document.getElementById('feedback-form');
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -381,7 +386,7 @@ function verDetalle(id) {
                 document.getElementById('success-message').classList.remove('hidden');
             }
         } catch (error) {
-            submitBtn.innerText = "ERROR";
+            submitBtn.innerText = "ERROR - REINTENTAR";
             submitBtn.disabled = false;
         }
     });
@@ -395,6 +400,7 @@ function cerrarModal() {
     document.body.style.overflow = 'auto';
 }
 
+// Cerrar al hacer clic fuera del contenido
 document.getElementById('modal-negocio').addEventListener('click', function(e) {
     if (e.target === this) cerrarModal();
 });
