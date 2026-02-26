@@ -286,17 +286,40 @@ body {
     border-radius: 16px;
 }
 
-/* --- FOOTER --- */
+/* --- FOOTER (CON MEJORA DE CONTRASTE) --- */
 footer.header-texture {
     background-position: center top;
     background-image: 
-        linear-gradient(to top, rgba(19, 15, 14, 0.8) 0%, var(--p506-bg) 100%),
+        /* Reforzamos el degradado inferior para proteger la legibilidad */
+        linear-gradient(to top, rgba(19, 15, 14, 0.95) 0%, rgba(19, 15, 14, 0.6) 50%, var(--p506-bg) 100%),
         url("img/fondoheader.jpg");
     background-size: cover;
     background-attachment: scroll; 
     box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
     border-top: 1px solid rgba(212, 163, 115, 0.1);
     padding-top: 5rem !important;
+}
+
+/* Forzamos que los textos sobre la imagen se despeguen del fondo */
+footer p, footer nav a, footer h3, footer h2, footer span {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+}
+
+/* Corrección para los colores grisáceos de Tailwind en el footer */
+footer .text-stone-400, 
+footer .text-stone-500 {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+footer .text-stone-600, 
+footer .text-stone-700 {
+    color: rgba(255, 255, 255, 0.45) !important;
+}
+
+footer nav a:hover {
+    color: var(--p506-accent) !important;
+    transform: translateX(4px);
+    display: inline-block;
 }
 
 /* --- SISTEMA VER MÁS --- */
