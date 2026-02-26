@@ -15,6 +15,11 @@
     <meta name="keywords" content="Pococí, Guápiles, Cariari, comercio local, directorio Pococí, servicios Guápiles, Montzu CR">
     <link rel="canonical" href="https://punto506.montzucr.com/" />
 
+    <meta property="og:title" content="Punto 506 | Directorio Comercial de Pococí">
+    <meta property="og:description" content="Descubre el estándar preeminente del comercio en Guápiles y alrededores.">
+    <meta property="og:image" content="https://punto506.montzucr.com/img/og-preview.jpg"> <meta property="og:url" content="https://punto506.montzucr.com/">
+    <meta property="og:type" content="website">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Montserrat:wght@700&family=Baskervville:italic&display=swap" rel="stylesheet">
     
@@ -38,6 +43,10 @@
                 <span class="block text-[7px] tracking-[0.3em] font-bold text-[#d4a373]/60 uppercase mt-1">BY MONTZU CR</span>
             </div>
         </div>
+    </div>
+
+    <div id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
 
     <nav class="bg-[#130f0e]/95 backdrop-blur-2xl border-b border-[#5d1c15]/40 sticky top-0 z-50">
@@ -77,28 +86,28 @@
         </div>
     </nav>
 
-    <header id="main-header" class="relative py-8 md:py-12 header-texture border-b border-[#d4a373]/10 overflow-hidden transition-all duration-1000">
+    <header id="main-header" class="relative py-12 md:py-20 header-texture border-b border-[#d4a373]/10 overflow-hidden transition-all duration-1000">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#130f0e]"></div>
         <div class="relative z-10 max-w-4xl mx-auto text-center px-6">
             
-            <div id="purpose-card" class="bg-[#130f0e]/60 backdrop-blur-sm p-4 md:p-8 rounded-sm border border-[#d4a373]/5 mb-8 transition-all duration-700">
+            <div id="purpose-card" class="bg-[#130f0e]/60 backdrop-blur-sm p-4 md:p-8 rounded-sm border border-[#d4a373]/5 mb-10 transition-all duration-700">
                 <h2 class="serif-title text-[#d4a373] text-[11px] tracking-[0.8em] mb-4 uppercase font-bold">Nuestro Propósito</h2>
                 <p class="elegant-italic text-white text-base md:text-lg leading-relaxed drop-shadow-md">
                     "Punto 506 es un espacio creado para fortalecer el comercio local en Pococí. Nuestra misión es conectar a la comunidad con servicios profesionales de calidad, sirviendo como una plataforma de crecimiento mutuo donde cada negocio tiene el potencial de destacar y cada usuario encuentra lo mejor de nuestra zona."
                 </p>
             </div>
 
-            <div id="discover-tagline" class="hidden transition-all duration-700 mb-8">
+            <div id="discover-tagline" class="hidden transition-all duration-700 mb-10">
                 <h2 class="serif-title text-white text-xl md:text-3xl tracking-[0.4em] uppercase font-light">
                     Descubre. <span class="text-[#d4a373]">Conecta.</span> Destaca.
                 </h2>
             </div>
             
-            <div class="max-w-xs mx-auto search-container flex items-center justify-center gap-3">
-                <svg class="w-3 h-3 text-[#d4a373]/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            <div class="search-container flex items-center gap-4">
+                <svg class="w-4 h-4 text-[#d4a373]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                <input type="text" id="busqueda" placeholder="BUSCAR EXPERIENCIA..." class="search-input bg-transparent border-none outline-none text-[9px] tracking-[0.3em] text-white placeholder:text-stone-600 uppercase w-full text-center focus:ring-0">
+                <input type="text" id="busqueda" placeholder="¿QUÉ ESTÁS BUSCANDO?" class="search-input bg-transparent border-none outline-none text-white placeholder:text-stone-500 uppercase w-full focus:ring-0">
             </div>
         </div>
     </header>
@@ -276,6 +285,16 @@
             if(btn) btn.click();
             window.scrollTo({ top: document.getElementById('section-results').offsetTop - 100, behavior: 'smooth' });
         }
+
+        // Lógica para mostrar/ocultar el botón "Volver arriba"
+        window.onscroll = function() {
+            const btn = document.getElementById("back-to-top");
+            if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+                btn.classList.add("show");
+            } else {
+                btn.classList.remove("show");
+            }
+        };
     </script>
 </body>
 </html>
