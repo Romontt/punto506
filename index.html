@@ -27,9 +27,13 @@
 
     <style>
         #form-status.success { color: #d4a373; font-style: italic; font-size: 12px; }
+        /* Ajuste para asegurar que el modal no se desborde */
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #130f0e; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #d4a373; }
     </style>
 </head>
-<body class="antialiased text-stone-200">
+<body class="antialiased text-stone-200 bg-[#0a0807]">
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TFXFGHPZ"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     
@@ -139,7 +143,7 @@
     </main>
 
     <div id="modal-negocio" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl">
-        <div id="modal-content" class="custom-scroll">
+        <div id="modal-content" class="w-full max-w-4xl max-h-[90vh] overflow-y-auto custom-scroll bg-[#1c1614] border border-[#d4a373]/10 relative">
             </div>
     </div>
     
@@ -286,7 +290,6 @@
             window.scrollTo({ top: document.getElementById('section-results').offsetTop - 100, behavior: 'smooth' });
         }
 
-        // Lógica para mostrar/ocultar el botón "Volver arriba"
         window.onscroll = function() {
             const btn = document.getElementById("back-to-top");
             if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
