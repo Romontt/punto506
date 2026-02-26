@@ -233,17 +233,24 @@ body {
     transition: all 0.4s ease;
 }
 
-/* AJUSTE MODAL: Imagen compacta y título pegado */
+/* --- AJUSTES ESPECÍFICOS DEL MODAL --- */
+#modal-content {
+    max-width: 500px !important; /* Modal más estrecho y elegante */
+    margin: auto;
+}
+
 #modal-content img {
     width: 100% !important;
-    max-height: 200px !important; /* Más pequeño para que suba el texto */
+    max-height: 160px !important; /* Altura de logo, no de banner */
     object-fit: contain !important;
-    background: #000;
-    margin-bottom: -20px; /* Reduce espacio inferior del logo */
+    background: transparent !important; /* Quita el bloque negro */
+    margin-top: 20px;
+    margin-bottom: -15px !important; /* Pega el título a la imagen */
 }
 
 #modal-content .serif-title {
-    margin-top: 0 !important; /* Elimina espacio superior del título */
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
 
 /* --- ÁREA DE FEEDBACK --- */
@@ -299,9 +306,9 @@ footer.header-texture {
     .glass-card .p-8 { padding: 1rem !important; }
     .glass-card h3 { font-size: 0.9rem; }
 
-    /* Imagen aún más compacta en móvil */
     #modal-content img {
-        max-height: 150px !important;
+        max-height: 120px !important;
+        margin-bottom: -10px !important;
     }
 
     #purpose-card p { font-size: 0.85rem !important; }
