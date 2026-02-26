@@ -55,7 +55,7 @@
     overflow: hidden;
 }
 
-/* --- ESTILOS BASE ACLARADOS --- */
+/* --- ESTILOS BASE --- */
 body { 
     font-family: 'Inter', sans-serif; 
     background-color: var(--p506-bg);
@@ -82,7 +82,7 @@ body {
     animation: revealCard 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
 }
 
-/* --- HEADER ACLARADO --- */
+/* --- HEADER --- */
 .header-texture {
     position: relative;
     background-color: #130f0e;
@@ -107,28 +107,49 @@ body {
     animation: revealCard 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* --- NAVIGATION MÓVIL & MEJORA SCROLL INDICATOR --- */
-.hide-scroll {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-.hide-scroll::-webkit-scrollbar {
-    display: none;
-}
+/* --- NAVIGATION & SCROLL SYSTEM --- */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* Indicador de "hay más" a la derecha en móviles */
-.nav-scroll-container {
+/* Contenedor de etiquetas deslizable */
+#sub-categorias {
     position: relative;
-    mask-image: linear-gradient(to right, black 85%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    width: 100%;
+    margin-top: 1rem;
 }
 
-.scroll-hint-arrow {
-    background: linear-gradient(to left, var(--p506-bg) 20%, transparent);
-    height: 100%;
+/* Efecto de degradado para indicar scroll */
+.sub-scroll-hint {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    background: linear-gradient(to left, var(--p506-bg), transparent);
+    pointer-events: none;
+    z-index: 5;
+    transition: opacity 0.3s ease;
     display: flex;
     align-items: center;
-    padding-left: 20px;
+    justify-content: flex-end;
+    padding-right: 5px;
+}
+
+.sub-scroll-hint svg {
+    color: var(--p506-accent);
+    width: 15px;
+    opacity: 0.5;
+    animation: bounceRight 2s infinite;
+}
+
+@keyframes bounceRight {
+    0%, 20%, 50%, 80%, 100% {transform: translateX(0);}
+    40% {transform: translateX(-5px);}
+    60% {transform: translateX(-3px);}
+}
+
+.nav-scroll-container {
+    position: relative;
 }
 
 .filter-btn {
@@ -142,17 +163,17 @@ body {
     color: var(--p506-accent);
 }
 
-/* --- BUSCADOR PROMINENTE --- */
+/* --- BUSCADOR --- */
 .search-container {
     background: rgba(255, 255, 255, 0.05) !important;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(212, 163, 115, 0.3) !important;
     border-bottom: 2px solid var(--p506-accent) !important;
-    padding: 12px 20px !important; /* Más espacioso */
+    padding: 12px 20px !important;
     transition: var(--transition-premium);
-    max-width: 320px; /* Un poco más ancho */
+    max-width: 320px;
     margin: 0 auto;
-    border-radius: 8px; /* Redondeado premium */
+    border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
@@ -205,7 +226,7 @@ body {
     z-index: 10;
 }
 
-/* --- TARJETAS DE RESULTADOS (JERARQUÍA Y HOVER) --- */
+/* --- TARJETAS DE RESULTADOS --- */
 .glass-card {
     display: flex;
     flex-direction: column;
@@ -225,29 +246,13 @@ body {
     padding: 1.5rem !important;
 }
 
-/* Placeholder Premium para imágenes faltantes */
-.img-placeholder {
-    background: var(--p506-wood);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-.img-placeholder::after {
-    content: '506';
-    font-family: 'Cinzel';
-    color: rgba(212, 163, 115, 0.1);
-    font-size: 5rem;
-}
-
 .glass-card:hover {
     border-color: var(--p506-accent);
     background: rgba(60, 50, 45, 0.8);
-    transform: translateY(-12px); /* Elevación más marcada */
+    transform: translateY(-12px);
     box-shadow: 0 30px 60px rgba(0,0,0,0.5);
 }
 
-/* Micro-interacción botón Explorar */
 .glass-card button {
     margin-top: auto !important;
     border-radius: 12px;
@@ -260,13 +265,6 @@ body {
     text-transform: uppercase;
     font-weight: 900;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.glass-card:hover button {
-    background: var(--p506-accent);
-    color: var(--p506-bg);
-    transform: scale(1.05);
-    letter-spacing: 0.3em;
 }
 
 /* --- BOTÓN VOLVER ARRIBA --- */
@@ -287,14 +285,10 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: all 0.4s ease;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
-#back-to-top.show {
-    opacity: 1;
-    visibility: visible;
-}
+#back-to-top.show { opacity: 1; visibility: visible; }
 
-/* --- AJUSTES DE MODAL --- */
+/* --- MODAL --- */
 #modal-negocio {
     z-index: 1000;
     backdrop-filter: blur(15px);
@@ -312,76 +306,18 @@ body {
     overflow-y: auto;
     background-color: #1c1614;
     border: 1px solid rgba(212, 163, 115, 0.2);
-    box-shadow: 0 25px 50px rgba(0,0,0,0.7);
-    position: relative;
     border-radius: 8px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--p506-accent) transparent;
 }
 
-/* Forzar relleno compacto dentro del modal */
-#modal-content .p-6, #modal-content .p-8, #modal-content .p-10 {
-    padding: 1.5rem !important;
-}
-
-@media (min-width: 768px) {
-    #modal-content .md\:p-10, #modal-content .md\:p-12 {
-        padding: 2rem !important;
-    }
-}
-
-/* Personalización del scroll interno */
-#modal-content::-webkit-scrollbar { width: 4px; }
-#modal-content::-webkit-scrollbar-track { background: transparent; }
-#modal-content::-webkit-scrollbar-thumb { 
-    background: var(--p506-accent); 
-    border-radius: 10px; 
-}
-
-/* --- ÁREA DE FEEDBACK --- */
-.feedback-container {
-    background: rgba(212, 163, 115, 0.05);
-    border: 1px dashed rgba(212, 163, 115, 0.2);
-    padding: 2rem;
-    margin-top: 2rem;
-    text-align: center;
-    border-radius: 16px;
-}
-
-/* --- FOOTER (MEJORADO) --- */
+/* --- FOOTER --- */
 footer.header-texture {
-    background-position: center top;
     background-image: 
         linear-gradient(to top, rgba(19, 15, 14, 0.98) 0%, rgba(19, 15, 14, 0.8) 50%, var(--p506-bg) 100%),
         url("img/fondoheader.jpg");
-    background-size: cover;
-    background-attachment: scroll; 
-    box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
-    border-top: 1px solid rgba(212, 163, 115, 0.1);
     padding-top: 5rem !important;
 }
 
-footer p, footer nav a, footer h3, footer h2, footer span {
-    text-shadow: 0 2px 4px rgba(0,0,0,1);
-}
-
-/* Corrección de contraste crítica para footer */
-footer .text-stone-400, 
-footer .text-stone-500 {
-    color: #e5e7eb !important; /* Stone-200 equivalente */
-    opacity: 0.9;
-}
-
-footer .text-stone-600, 
-footer .text-stone-700 {
-    color: #9ca3af !important; /* Stone-400 equivalente */
-}
-
-footer nav a:hover {
-    color: var(--p506-accent) !important;
-    transform: translateX(6px);
-    display: inline-block;
-}
+footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
 
 /* --- SISTEMA VER MÁS --- */
 .grid-limitado {
@@ -389,43 +325,19 @@ footer nav a:hover {
     overflow: hidden;
     transition: max-height 1.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
 .grid-expandido { max-height: 30000px !important; }
 
-/* --- RESPONSIVE / MÓVIL --- */
+/* --- RESPONSIVE --- */
 @media (max-width: 768px) {
-    .header-texture { 
-        padding-top: 2rem !important; 
-        padding-bottom: 2rem !important;
-        background-attachment: scroll;
-    }
-
     #grid-negocios { 
         display: grid !important;
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
         gap: 0.75rem !important; 
     }
-
-    .portal-card { height: 260px; border-radius: 10px; }
-    .portal-card-content { padding: 1rem; }
-    
-    .glass-card { border-radius: 16px; }
-    .glass-card .p-8 { padding: 1rem !important; }
-    .glass-card h3 { font-size: 0.9rem; }
-
-    #purpose-card p { font-size: 0.85rem !important; }
-    .search-container { max-width: 100%; padding: 10px 15px !important; }
-    
-    #modal-content {
-        max-height: 85vh;
-        width: 92%;
-    }
-    
-    #back-to-top {
-        bottom: 20px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
+    .portal-card { height: 260px; }
+    #sub-categorias {
+        /* Graduación visual en móvil */
+        mask-image: linear-gradient(to right, black 80%, transparent 100%);
     }
 }
 
