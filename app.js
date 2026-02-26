@@ -202,7 +202,7 @@ function renderCards(listaFiltrada) {
                          alt="${n.nombre}"
                          loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#130f0e] via-transparent opacity-80"></div>
-                    <div class="absolute top-6 left-6 text-[#d4a373] text-[7px] font-black tracking-[0.4em] uppercase bg-[#130f0e]/80 backdrop-blur-md px-3 py-1.5 border border-[#d4a373]/20">${n.categoria}</div>
+                    <div class="absolute top-4 left-4 md:top-6 md:left-6 text-[#d4a373] text-[7px] font-black tracking-[0.4em] uppercase bg-[#130f0e]/80 backdrop-blur-md px-3 py-1.5 border border-[#d4a373]/20">${n.categoria}</div>
                 </div>
                 <div class="p-8 text-center flex flex-col flex-grow">
                     <h3 class="business-title text-xl text-white uppercase tracking-wider font-bold mb-4 group-hover:text-[#d4a373] transition-colors duration-500">${n.nombre}</h3>
@@ -211,7 +211,8 @@ function renderCards(listaFiltrada) {
                     </p>
                     <button onclick="verDetalle(${n.id})" 
                             class="mt-auto w-full py-4 text-[#d4a373] text-[9px] font-bold uppercase tracking-[0.5em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-700">
-                        Detalles Exclusivos
+                        <span class="hidden md:inline">Detalles Exclusivos</span>
+                        <span class="md:hidden">Ver Más</span>
                     </button>
                 </div>
             </article>
@@ -233,7 +234,6 @@ function renderSubCategorias() {
             .flatMap(n => n.etiquetas)
     )];
 
-    // Crear estructura de scroll para móvil
     contenedorBase.className = "relative w-full overflow-hidden";
     
     const scrollContainer = document.createElement('div');
@@ -261,7 +261,6 @@ function renderSubCategorias() {
     contenedorBase.appendChild(scrollContainer);
     contenedorBase.appendChild(hint);
 
-    // Lógica de flecha para el scroll de subcategorías
     scrollContainer.addEventListener('scroll', () => {
         const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
         hint.style.opacity = (scrollContainer.scrollLeft >= maxScroll - 10) ? '0' : '1';
@@ -330,34 +329,34 @@ function verDetalle(id) {
         <div class="relative h-48 md:h-64 overflow-hidden">
             <img src="${n.imagen}" alt="${n.nombre}" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-[#1c1614] via-transparent to-black/20"></div>
-            <button onclick="cerrarModal()" class="absolute top-6 right-6 z-50 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-all">
+            <button onclick="cerrarModal()" class="absolute top-4 right-4 md:top-6 md:right-6 z-50 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-all">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
         </div>
         
-        <div class="p-8 md:p-12 -mt-10 relative z-10 bg-[#1c1614]">
-            <div class="text-center mb-10">
+        <div class="p-6 md:p-12 -mt-10 relative z-10 bg-[#1c1614]">
+            <div class="text-center mb-8 md:mb-10">
                 <span class="text-[#d4a373] text-[10px] font-black tracking-[0.5em] uppercase block mb-3">${n.categoria}</span>
-                <h2 class="serif-title text-3xl md:text-4xl text-white uppercase tracking-[0.1em]">${n.nombre}</h2>
-                <div class="h-px w-16 bg-[#d4a373] mx-auto mt-6"></div>
+                <h2 class="serif-title text-2xl md:text-4xl text-white uppercase tracking-[0.1em]">${n.nombre}</h2>
+                <div class="h-px w-16 bg-[#d4a373] mx-auto mt-4 md:mt-6"></div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 mb-8 md:mb-12">
                 <div class="space-y-6">
                      <div>
                         <h4 class="text-[9px] uppercase tracking-[0.4em] font-black text-stone-500 mb-3">La Experiencia</h4>
-                        <p class="elegant-italic text-white text-lg leading-relaxed italic border-l-2 border-[#d4a373]/30 pl-4">"${n.servicios_resumen}"</p>
+                        <p class="elegant-italic text-white text-base md:text-lg leading-relaxed italic border-l-2 border-[#d4a373]/30 pl-4">"${n.servicios_resumen}"</p>
                      </div>
-                     <div>
+                     <div class="hidden md:block">
                         <p class="text-stone-400 text-sm leading-relaxed">${n.descripcion || 'Una propuesta curada bajo los estándares de exclusividad de Punto 506.'}</p>
                      </div>
                 </div>
                 
-                <div class="bg-black/30 p-6 border border-[#d4a373]/10 space-y-6 w-fit h-fit">
+                <div class="bg-black/30 p-5 md:p-6 border border-[#d4a373]/10 space-y-4 md:space-y-6 w-full md:w-fit h-fit">
                     <div class="flex items-start gap-4">
                         <div class="text-[#d4a373] mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div>
-                            <span class="block text-[8px] text-stone-500 uppercase tracking-widest mb-1">Horarios de Atención</span>
+                            <span class="block text-[8px] text-stone-500 uppercase tracking-widest mb-1">Horarios</span>
                             <p class="text-stone-200 text-xs font-medium uppercase tracking-wider">${n.horario || 'Consultar disponibilidad'}</p>
                         </div>
                     </div>
@@ -371,20 +370,26 @@ function verDetalle(id) {
                 </div>
             </div>
 
-            <div class="flex flex-col sm:flex-row gap-4 mb-12">
+            <div class="flex gap-4 mb-10 md:mb-12">
                 <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" 
-                   class="flex-1 text-center py-5 bg-[#d4a373] text-[#130f0e] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white transition-all">WhatsApp</a>
+                   class="flex-1 modal-btn-icon flex items-center justify-center gap-3 py-4 md:py-5 bg-[#d4a373] text-[#130f0e] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white transition-all">
+                   <svg class="w-5 h-5 md:w-4 md:h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.431 5.63 1.432h.006c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                   <span class="hidden md:inline">WhatsApp</span>
+                </a>
                 <a href="${n.instagram || '#'}" target="_blank" 
-                   class="flex-1 text-center py-5 border border-[#d4a373]/30 text-[#d4a373] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-[#d4a373]/5 transition-all">Instagram Oficial</a>
+                   class="flex-1 modal-btn-icon flex items-center justify-center gap-3 py-4 md:py-5 border border-[#d4a373]/30 text-[#d4a373] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-[#d4a373]/5 transition-all">
+                   <svg class="w-5 h-5 md:w-4 md:h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.332 3.608 1.308.975.975 1.245 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.332 2.633-1.308 3.608-.975.975-2.242 1.245-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.332-3.608-1.308-.975-.975-1.245-2.242-1.308-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.332-2.633 1.308-3.608.975-.975 2.242-1.245 3.608-1.308 1.266-.058 1.646-.07 4.85-.07zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                   <span class="hidden md:inline">Instagram Oficial</span>
+                </a>
             </div>
 
-            <div class="border-t border-white/5 pt-10">
+            <div class="border-t border-white/5 pt-8 md:pt-10">
                 <div id="form-wrapper">
-                    <h3 class="text-[9px] text-stone-500 uppercase tracking-[0.4em] mb-6 text-center italic">¿Cómo fue tu experiencia? Tu feedback es valioso</h3>
+                    <h3 class="text-[9px] text-stone-500 uppercase tracking-[0.4em] mb-6 text-center italic">Feedback Anónimo</h3>
                     <form id="feedback-form" action="https://formspree.io/f/mlgwzggv" method="POST" class="max-w-xl mx-auto space-y-4">
                         <input type="hidden" name="Negocio" value="${n.nombre}">
-                        <textarea name="comentario" required placeholder="Escribe aquí tu sugerencia de forma anónima..." 
-                            class="w-full bg-black/50 border border-white/10 p-4 text-white text-xs focus:outline-none focus:border-[#d4a373] transition-colors h-28 resize-none"></textarea>
+                        <textarea name="comentario" required placeholder="Escribe aquí tu sugerencia..." 
+                            class="w-full bg-black/50 border border-white/10 p-4 text-white text-xs focus:outline-none focus:border-[#d4a373] transition-colors h-24 md:h-28 resize-none"></textarea>
                         <button type="submit" class="w-full py-4 border border-[#d4a373] text-[#d4a373] text-[9px] font-black uppercase tracking-[0.5em] hover:bg-[#d4a373] hover:text-black transition-all">
                             Enviar Comentarios
                         </button>
@@ -398,7 +403,6 @@ function verDetalle(id) {
         </div>
     `;
 
-    // Lógica Feedback
     const form = document.getElementById('feedback-form');
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
