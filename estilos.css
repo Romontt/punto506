@@ -219,7 +219,7 @@ body {
 }
 
 .glass-card button {
-    margin-top: auto !important; 
+    margin-top: auto !important;
     border-radius: 12px;
     padding: 10px;
     font-size: 7px;
@@ -232,24 +232,27 @@ body {
     transition: all 0.4s ease;
 }
 
-/* --- AJUSTES DE MODAL COMPACTO --- */
+/* --- AJUSTE MODAL COMPACTO --- */
+/* He reducido el ancho máximo para que se vea más pequeño sin perder el estilo original */
 #modal-content {
-    max-width: 440px !important; /* Modal más estrecho */
+    max-width: 420px !important; 
     width: 90% !important;
     margin: auto;
+    background-color: transparent !important; /* Evita cuadros blancos */
 }
 
 #modal-content img {
     width: 100% !important;
-    max-height: 150px !important; /* Imagen un poco más pequeña */
+    height: auto !important;
+    max-height: 180px !important; /* Imagen un poco más pequeña y controlada */
     object-fit: contain !important;
-    margin-bottom: -15px !important; /* Acerca el título a la imagen */
-    padding: 10px;
+    margin-bottom: -5px !important;
+    background: transparent !important;
 }
 
 #modal-content .serif-title {
     margin-top: 0 !important;
-    padding-top: 0 !important;
+    padding-top: 10px !important;
 }
 
 /* --- ÁREA DE FEEDBACK --- */
@@ -306,8 +309,7 @@ footer.header-texture {
     .glass-card h3 { font-size: 0.9rem; }
 
     #modal-content img {
-        max-height: 120px !important; /* Más pequeña en móvil */
-        margin-bottom: -10px !important;
+        max-height: 140px !important; /* Más pequeño para móviles */
     }
 
     #purpose-card p { font-size: 0.85rem !important; }
