@@ -218,9 +218,8 @@ body {
     box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
-/* AJUSTE: Botón alineado al fondo */
 .glass-card button {
-    margin-top: auto !important; /* Esto los alinea todos abajo */
+    margin-top: auto !important;
     border-radius: 12px;
     padding: 10px;
     font-size: 7px;
@@ -231,6 +230,37 @@ body {
     text-transform: uppercase;
     font-weight: 900;
     transition: all 0.4s ease;
+}
+
+/* --- NUEVOS AJUSTES DE TAMAÑO DEL MODAL --- */
+#modal-negocio {
+    z-index: 1000;
+    backdrop-filter: blur(12px);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#modal-content {
+    width: 100%;
+    max-width: 900px; /* Tamaño máximo equilibrado */
+    max-height: 90vh; /* No permite que el modal sea más alto que la pantalla */
+    overflow-y: auto; /* Permite scroll interno si el contenido es mucho */
+    background-color: #1c1614;
+    border: 1px solid rgba(212, 163, 115, 0.2);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    position: relative;
+}
+
+/* Personalización del scroll interno del modal */
+#modal-content::-webkit-scrollbar {
+    width: 4px;
+}
+#modal-content::-webkit-scrollbar-thumb {
+    background: var(--p506-accent);
+    border-radius: 10px;
 }
 
 /* --- ÁREA DE FEEDBACK --- */
@@ -289,6 +319,12 @@ footer.header-texture {
     #purpose-card p { font-size: 0.85rem !important; }
     .search-container { max-width: 100%; }
     footer { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+
+    /* Ajuste modal en móvil */
+    #modal-content {
+        max-height: 95vh;
+        margin-top: 5vh;
+    }
 }
 
 .hidden { display: none !important; }
