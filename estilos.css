@@ -245,8 +245,8 @@ body {
 
 #modal-content {
     width: 100%;
-    max-width: 550px; /* Tamaño reducido de 800px a 550px para ser más pequeño */
-    max-height: 80vh;  /* Reducido para que no sature la pantalla */
+    max-width: 550px; 
+    max-height: 80vh;  
     overflow-y: auto;
     background-color: #1c1614;
     border: 1px solid rgba(212, 163, 115, 0.2);
