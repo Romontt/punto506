@@ -332,16 +332,16 @@ function verDetalle(id) {
                      </div>
                 </div>
                 
-                <div class="bg-black/30 p-8 border border-[#d4a373]/10 space-y-6">
+                <div class="bg-black/30 p-6 border border-[#d4a373]/10 space-y-6 w-fit h-fit">
                     <div class="flex items-start gap-4">
-                        <div class="text-[#d4a373] mt-1"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div class="text-[#d4a373] mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div>
                             <span class="block text-[8px] text-stone-500 uppercase tracking-widest mb-1">Horarios de Atención</span>
                             <p class="text-stone-200 text-xs font-medium uppercase tracking-wider">${n.horario || 'Consultar disponibilidad'}</p>
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
-                        <div class="text-[#d4a373] mt-1"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div class="text-[#d4a373] mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div>
                             <span class="block text-[8px] text-stone-500 uppercase tracking-widest mb-1">Ubicación</span>
                             <p class="text-stone-200 text-xs font-medium uppercase tracking-wider leading-relaxed">${n.direccion || 'Distrito Premium, Pococí'}</p>
