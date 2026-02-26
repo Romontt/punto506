@@ -337,11 +337,11 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
     }
 
     /* NUEVO: Contenedor de subcategorías como franja deslizable */
-    #sub-categorias {
-        margin-top: 0.5rem !important;
-        margin-bottom: 1rem !important;
-        padding: 0 !important;
-    }
+   #sub-categorias {
+    margin-top: 0.2px !important;    /* Elimina cualquier espacio superior */
+    margin-bottom: 0.5rem !important; /* Controla la distancia con los negocios de abajo */
+    padding-top: 0px !important;   /* Elimina relleno interno superior */
+}
 
     #subcat-scroll {
         mask-image: linear-gradient(to right, black 80%, transparent 100%);
@@ -350,8 +350,10 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
     }
 
     /* Reducir espacio entre elementos en móvil */
-    #categoria-titulo { margin-bottom: 0.5rem !important; }
-    
+#categoria-titulo { 
+    margin-bottom: 0.25rem !important; /* Estaba en 0.5rem, lo bajamos a la mitad */
+    margin-top: 0.5rem !important;    /* Si también hay espacio arriba, redúcelo aquí */
+}
     .portal-card { height: 260px; border-radius: 10px; }
     .portal-card-content { padding: 1rem; }
     
