@@ -350,7 +350,13 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
     }
 
     /* Reducir espacio entre elementos en móvil */
-    #categoria-titulo { margin-bottom: 0.5rem !important; }
+   #categoria-titulo { 
+        margin-top: 0px !important;
+        margin-bottom: 0px !important; 
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        line-height: 1 !important; /* Reduce el alto de línea del texto */
+    }}
     
     .portal-card { height: 260px; border-radius: 10px; }
     .portal-card-content { padding: 1rem; }
