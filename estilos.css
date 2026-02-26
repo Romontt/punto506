@@ -107,7 +107,7 @@ body {
     animation: revealCard 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* --- NAVIGATION MÓVIL & MEJORA SCROLL INDICATOR --- */
+/* --- NAVIGATION & ETIQUETAS (Mejorado) --- */
 .hide-scroll {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -122,23 +122,37 @@ body {
     -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
 }
 
-.scroll-hint-arrow {
-    background: linear-gradient(to left, var(--p506-bg) 20%, transparent);
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-}
-
 .filter-btn {
     transition: var(--transition-premium);
     position: relative;
-    opacity: 0.7;
+    opacity: 0.6;
+    font-size: 14px !important; /* Más grandes en PC */
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding-bottom: 4px;
 }
 
-.filter-btn:hover, .filter-btn.font-black {
+.filter-btn:hover {
     opacity: 1;
     color: var(--p506-accent);
+}
+
+/* Efecto de subrayado dorado para la etiqueta activa */
+.filter-btn.font-black {
+    opacity: 1 !important;
+    color: var(--p506-accent) !important;
+}
+
+.filter-btn.font-black::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    width: 50%;
+    height: 2px;
+    background: var(--p506-accent);
+    box-shadow: 0 0 8px var(--p506-accent);
+    border-radius: 2px;
 }
 
 /* --- BUSCADOR PROMINENTE --- */
@@ -202,6 +216,15 @@ body {
     padding: 2.5rem;
     background: linear-gradient(to top, rgba(19, 15, 14, 0.8) 0%, transparent 60%);
     z-index: 10;
+}
+
+/* --- SECCIÓN RESULTADOS (Espacios PC) --- */
+#section-results {
+    padding-top: 1.5rem !important;
+}
+
+#categoria-titulo {
+    margin-bottom: 0.5rem !important;
 }
 
 /* --- TARJETAS DE RESULTADOS --- */
@@ -330,28 +353,47 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
         background-attachment: scroll;
     }
 
-    #grid-negocios { 
-        display: grid !important;
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 0.75rem !important; 
+    /* 1. Pegar Header a Título */
+    #section-results {
+        padding-top: 0.8rem !important;
     }
 
-    /* NUEVO: Contenedor de subcategorías como franja deslizable */
+    /* 2. Pegar Título a Etiquetas */
+    #categoria-titulo { 
+        margin-top: 0.2rem !important;
+        margin-bottom: 0px !important; 
+        padding-bottom: 0px !important;
+    }
+    
+    #categoria-titulo h2 { line-height: 1 !important; }
+
+    /* 3. Etiquetas más grandes y compactas en móvil */
     #sub-categorias {
-        margin-top: 0.5rem !important;
-        margin-bottom: 1rem !important;
+        margin-top: -5px !important; 
+        margin-bottom: 0.8rem !important;
         padding: 0 !important;
+    }
+
+    .filter-btn {
+        font-size: 12px !important; /* Más legible */
+        letter-spacing: 0.05em;
+        white-space: nowrap;
     }
 
     #subcat-scroll {
         mask-image: linear-gradient(to right, black 80%, transparent 100%);
         -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
-        padding-bottom: 5px;
+        padding-bottom: 8px;
     }
 
-    /* Reducir espacio entre elementos en móvil */
-    #categoria-titulo { margin-bottom: 0.5rem !important; }
-    
+    /* 4. Galería de negocios */
+    #grid-negocios { 
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 0.75rem !important; 
+        margin-top: 0px !important;
+    }
+
     .portal-card { height: 260px; border-radius: 10px; }
     .portal-card-content { padding: 1rem; }
     
