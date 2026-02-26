@@ -82,19 +82,21 @@ body {
     animation: revealCard 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
 }
 
-/* --- HEADER & FOOTER (TEXTURA DE GRANOS CSS - SIN IMAGEN PESADA) --- */
+/* --- HEADER CON IMAGEN --- */
 .header-texture {
     position: relative;
     background-color: #130f0e;
-    /* Simulamos granos de café con patrones radiales sutiles para carga instantánea */
+    /* Imagen de fondo */
     background-image: 
-        linear-gradient(to bottom, rgba(19, 15, 14, 0.6) 0%, var(--p506-bg) 100%),
-        radial-gradient(#2c1e1a 10%, transparent 11%),
-        radial-gradient(#2c1e1a 10%, transparent 11%);
-    background-size: 100% 100%, 40px 40px, 40px 40px;
-    background-position: 0 0, 0 0, 20px 20px;
-    background-attachment: fixed;
+        linear-gradient(to bottom, rgba(19, 15, 14, 0.7) 0%, var(--p506-bg) 100%),
+        url("fondoheader.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Efecto Parallax */
     border-bottom: 1px solid rgba(212, 163, 115, 0.1);
+    /* Header un poco más pequeño */
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
 }
 
 #purpose-card {
@@ -136,8 +138,8 @@ body {
 
 /* --- BUSCADOR OPTIMIZADO --- */
 .search-container {
-    background: rgba(0, 0, 0, 0.2) !important;
-    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(10px);
     border: none !important;
     border-bottom: 1.5px solid var(--p506-accent) !important;
     padding: 8px 12px !important;
@@ -241,16 +243,17 @@ body {
     border-radius: 16px;
 }
 
-/* --- FOOTER LEGIBLE --- */
+/* --- FOOTER CON IMAGEN --- */
 footer.header-texture {
-    background-position: center bottom;
+    background-position: center top;
     background-image: 
-        linear-gradient(to top, rgba(19, 15, 14, 0.8) 0%, var(--p506-bg) 100%),
-        radial-gradient(#2c1e1a 10%, transparent 11%),
-        radial-gradient(#2c1e1a 10%, transparent 11%);
+        linear-gradient(to top, rgba(19, 15, 14, 0.9) 0%, var(--p506-bg) 100%),
+        url("fondoheader.jpg");
+    background-size: cover;
+    background-attachment: scroll; /* El footer suele verse mejor con scroll para dispositivos móviles */
     box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
     border-top: 1px solid rgba(212, 163, 115, 0.1);
-    background-attachment: scroll;
+    padding-top: 5rem !important;
 }
 
 footer a, footer p, footer h4 {
@@ -295,9 +298,9 @@ footer nav a:hover::after {
 /* --- MÓVIL --- */
 @media (max-width: 768px) {
     .header-texture { 
-        padding-top: 1.5rem !important; 
-        padding-bottom: 1.5rem !important;
-        background-attachment: scroll;
+        padding-top: 2rem !important; 
+        padding-bottom: 2rem !important;
+        background-attachment: scroll; /* Desactivamos parallax en móvil para rendimiento */
     }
     .portal-card { height: 260px; border-radius: 10px; }
     .portal-card-content { padding: 1.5rem; }
