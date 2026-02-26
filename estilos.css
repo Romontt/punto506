@@ -89,7 +89,7 @@ body {
     /* Imagen de fondo */
     background-image: 
         linear-gradient(to bottom, rgba(19, 15, 14, 0.7) 0%, var(--p506-bg) 100%),
-        url("img/fondoheader.png");
+        url("img/fondoheader.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* Efecto Parallax */
@@ -248,7 +248,7 @@ footer.header-texture {
     background-position: center top;
     background-image: 
         linear-gradient(to top, rgba(19, 15, 14, 0.9) 0%, var(--p506-bg) 100%),
-        url("img/fondoheader.png");
+        url("img/fondoheader.jpg");
     background-size: cover;
     background-attachment: scroll; /* El footer suele verse mejor con scroll para dispositivos móviles */
     box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
