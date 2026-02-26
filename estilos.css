@@ -220,7 +220,7 @@ body {
 
 /* AJUSTE: Botón alineado al fondo */
 .glass-card button {
-    margin-top: auto !important; /* Esto los alinea todos abajo */
+    margin-top: auto !important; 
     border-radius: 12px;
     padding: 10px;
     font-size: 7px;
@@ -231,6 +231,14 @@ body {
     text-transform: uppercase;
     font-weight: 900;
     transition: all 0.4s ease;
+}
+
+/* --- AJUSTE IMAGEN DEL MODAL --- */
+#modal-content img {
+    width: 100% !important;
+    max-height: 300px !important; /* Altura controlada */
+    object-fit: cover !important; /* Evita que se deforme */
+    border-radius: 12px;
 }
 
 /* --- ÁREA DE FEEDBACK --- */
@@ -285,6 +293,11 @@ footer.header-texture {
     .glass-card { border-radius: 16px; }
     .glass-card .p-8 { padding: 1rem !important; }
     .glass-card h3 { font-size: 0.9rem; }
+
+    /* Imagen aún más compacta en móvil */
+    #modal-content img {
+        max-height: 200px !important;
+    }
 
     #purpose-card p { font-size: 0.85rem !important; }
     .search-container { max-width: 100%; }
