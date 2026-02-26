@@ -88,25 +88,48 @@ body {
 }
 #purpose-card {
     transition: all 0.8s ease;
-    border-radius: 4px;
-    background: rgba(19, 15, 14, 0.7) !important;
-    /* Ajustes para hacer el modal más pequeño */
-    max-width: 620px !important;
-    width: 90% !important;
-    max-height: 85vh !important;
-    margin: 1.5rem auto !important;
+    border-radius: 8px;
+    background: rgba(19, 15, 14, 0.75) !important;
+    
+    /* Fuerza tamaños más pequeños en PC */
+    max-width: 580px !important;
+    width: 580px !important;
+    min-width: 320px !important;
+    max-height: 82vh !important;
+    margin: 2rem auto !important;
+    padding: 1.8rem 2rem !important;
     overflow-y: auto !important;
-    padding: 1.5rem !important;       /* ← reducido de valores implícitos grandes */
     box-sizing: border-box;
+    position: relative;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.6);
 }
-#purpose-card h1, #purpose-card h2 {
-    font-size: 1.6rem;                /* ← tamaños más moderados */
-    margin-bottom: 0.8rem;
+
+/* Control de títulos y textos internos */
+#purpose-card h1,
+#purpose-card h2,
+#purpose-card .serif-title,
+#purpose-card .business-title {
+    font-size: 1.55rem !important;
+    margin: 0.6rem 0 1rem !important;
+    line-height: 1.2;
 }
-#purpose-card p {
-    font-size: 0.95rem !important;
-    line-height: 1.45;
+
+#purpose-card p,
+#purpose-card li,
+#purpose-card span {
+    font-size: 0.94rem !important;
+    line-height: 1.5;
 }
+
+/* Reduce padding/margin en contenedores internos si existen */
+#purpose-card > div,
+#purpose-card .container,
+#purpose-card .row,
+#purpose-card .col-12 {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
 #discover-tagline {
     animation: revealCard 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -210,7 +233,7 @@ body {
 }
 /* AJUSTE: Botón alineado al fondo */
 .glass-card button {
-    margin-top: auto !important; /* Esto los alinea todos abajo */
+    margin-top: auto !important;
     border-radius: 12px;
     padding: 10px;
     font-size: 7px;
@@ -264,26 +287,29 @@ footer.header-texture {
     }
     .portal-card { height: 260px; border-radius: 10px; }
     .portal-card-content { padding: 1rem; }
-   
+  
     .glass-card { border-radius: 16px; }
     .glass-card .p-8 { padding: 1rem !important; }
     .glass-card h3 { font-size: 0.9rem; }
-    
+   
     /* Modal más pequeño y adaptado en móvil */
     #purpose-card {
-        max-width: 92% !important;
-        width: 92% !important;
+        max-width: 94% !important;
+        width: 94% !important;
         margin: 1rem auto !important;
-        padding: 1.2rem !important;
-    }
-    #purpose-card h1, #purpose-card h2 {
-        font-size: 1.35rem;
-    }
-    #purpose-card p {
-        font-size: 0.9rem !important;
+        padding: 1.3rem 1.4rem !important;
+        max-height: 92vh !important;
     }
     
-    #purpose-card { max-height: 90vh !important; }
+    #purpose-card h1,
+    #purpose-card h2 {
+        font-size: 1.4rem !important;
+    }
+    
+    #purpose-card p {
+        font-size: 0.92rem !important;
+    }
+    
     footer { padding-top: 3rem !important; padding-bottom: 3rem !important; }
 }
 .hidden { display: none !important; }
