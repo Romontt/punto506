@@ -103,39 +103,7 @@ body {
     background: rgba(19, 15, 14, 0.7) !important;
 }
 
-#discover-tagline {
-    animation: revealCard 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* --- NAVIGATION MÓVIL & FLECHAS --- */
-.hide-scroll {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-.hide-scroll::-webkit-scrollbar {
-    display: none;
-}
-
-.scroll-hint-arrow {
-    background: linear-gradient(to left, var(--p506-bg) 20%, transparent);
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-}
-
-.filter-btn {
-    transition: var(--transition-premium);
-    position: relative;
-    opacity: 0.7;
-}
-
-.filter-btn:hover, .filter-btn.font-black {
-    opacity: 1;
-    color: var(--p506-accent);
-}
-
-/* --- BUSCADOR OPTIMIZADO --- */
+/* --- NAVIGATION MÓVIL & BUSCADOR --- */
 .search-container {
     background: rgba(40, 35, 30, 0.6) !important;
     backdrop-filter: blur(10px);
@@ -146,49 +114,6 @@ body {
     max-width: 280px;
     margin: 0 auto;
     border-radius: 4px 4px 0 0;
-}
-
-.search-input {
-    letter-spacing: 0.2em !important;
-    font-size: 11px !important;
-    font-weight: 400;
-    color: white !important;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-}
-
-/* --- PORTAL LANDING --- */
-.portal-card {
-    position: relative;
-    height: 420px;
-    overflow: hidden;
-    cursor: pointer;
-    border-radius: 12px;
-    border: 1px solid rgba(212, 163, 115, 0.15);
-    background: #1c1614;
-}
-
-.portal-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: saturate(0.9) brightness(0.9); 
-    transition: transform 2.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease;
-}
-
-.portal-card:hover img {
-    transform: scale(1.05);
-    filter: saturate(1.1) brightness(1.1);
-}
-
-.portal-card-content {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 2.5rem;
-    background: linear-gradient(to top, rgba(19, 15, 14, 0.8) 0%, transparent 60%);
-    z-index: 10;
 }
 
 /* --- TARJETAS DE RESULTADOS --- */
@@ -204,20 +129,6 @@ body {
     overflow: hidden;
 }
 
-.glass-card .p-8 {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 1.5rem !important;
-}
-
-.glass-card:hover {
-    border-color: var(--p506-accent);
-    background: rgba(60, 50, 45, 0.8);
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-}
-
 .glass-card button {
     margin-top: auto !important;
     border-radius: 12px;
@@ -229,37 +140,34 @@ body {
     color: var(--p506-accent);
     text-transform: uppercase;
     font-weight: 900;
-    transition: all 0.4s ease;
 }
 
-/* --- AJUSTE: MODAL COMPACTO Y TÍTULO CERCANO --- */
+/* --- ⚡ AJUSTE MODAL: MÁS PEQUEÑO Y TÍTULO CERCA ⚡ --- */
 #modal-content {
-    max-width: 420px !important; /* Más pequeño que el estándar */
-    width: 90% !important;
+    max-width: 400px !important; /* Lo hace más estrecho y pequeño */
+    width: 85% !important;
     margin: auto;
+    padding: 0 !important; /* Quita espacio interno para que la imagen pegue arriba */
+    overflow: hidden;
 }
 
 #modal-content img {
     width: 100% !important;
     height: auto !important;
-    max-height: 200px !important; 
-    object-fit: contain !important;
-    margin-bottom: -15px !important; /* Acerca el título a la imagen */
+    display: block !important;
+    object-fit: cover !important; /* Evita que se vea aire o cuadros negros a los lados */
+    margin: 0 !important;
+}
+
+#modal-content .p-6, 
+#modal-content .p-8 {
+    padding-top: 10px !important; /* Acerca el bloque de texto a la imagen */
 }
 
 #modal-content .serif-title {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-}
-
-/* --- ÁREA DE FEEDBACK --- */
-.feedback-container {
-    background: rgba(212, 163, 115, 0.05);
-    border: 1px dashed rgba(212, 163, 115, 0.2);
-    padding: 2rem;
-    margin-top: 2rem;
-    text-align: center;
-    border-radius: 16px;
+    margin-top: 0 !important; /* Elimina margen superior del título */
+    padding-top: 5px !important;
+    line-height: 1.2;
 }
 
 /* --- FOOTER --- */
@@ -269,49 +177,19 @@ footer.header-texture {
         linear-gradient(to top, rgba(19, 15, 14, 0.8) 0%, var(--p506-bg) 100%),
         url("img/fondoheader.jpg");
     background-size: cover;
-    background-attachment: scroll; 
-    box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
-    border-top: 1px solid rgba(212, 163, 115, 0.1);
     padding-top: 5rem !important;
 }
 
-/* --- SISTEMA VER MÁS --- */
-.grid-limitado {
-    max-height: 1400px;
-    overflow: hidden;
-    transition: max-height 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.grid-expandido { max-height: 30000px !important; }
-
 /* --- MÓVIL --- */
 @media (max-width: 768px) {
-    .header-texture { 
-        padding-top: 2rem !important; 
-        padding-bottom: 2rem !important;
-        background-attachment: scroll;
-    }
-
     #grid-negocios { 
         display: grid !important;
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
         gap: 0.75rem !important; 
     }
-
-    .portal-card { height: 260px; border-radius: 10px; }
-    .portal-card-content { padding: 1rem; }
-    
-    .glass-card { border-radius: 16px; }
-    .glass-card .p-8 { padding: 1rem !important; }
-    .glass-card h3 { font-size: 0.9rem; }
-
     #modal-content {
-        max-width: 320px !important; /* Ajuste para móviles */
+        max-width: 320px !important; /* Aún más pequeño en móvil */
     }
-
-    #purpose-card p { font-size: 0.85rem !important; }
-    .search-container { max-width: 100%; }
-    footer { padding-top: 3rem !important; padding-bottom: 3rem !important; }
 }
 
 .hidden { display: none !important; }
