@@ -329,12 +329,12 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
 /* 1. ELIMINAR ESPACIO ENTRE HEADER Y SALUD */
 #section-results { 
     padding-top: 0px !important; 
-    margin-top: -45px !important;
+    margin-top: -45px !important; /* Sube la sección para pegar SALUD al header */
 }
 
 /* 2. ELIMINAR ESPACIO ENTRE SALUD Y ETIQUETAS */
 #categoria-titulo { 
-    margin-bottom: -15px !important; 
+    margin-bottom: -15px !important; /* Sube las etiquetas hacia el título */
     padding-top: 0px !important; 
 }
 
@@ -356,6 +356,7 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
 
 #subcat-scroll button:hover { opacity: 1; color: var(--p506-accent); }
 
+/* Efecto subrayado dorado en etiqueta activa */
 #subcat-scroll button.bg-white, 
 #subcat-scroll button.text-black {
     background-color: transparent !important;
@@ -374,9 +375,7 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
     box-shadow: 0 0 8px var(--p506-accent);
 }
 
-/* =============================================
-   --- RESPONSIVE / MÓVIL (OPTIMIZACIONES PREMIUM) --- 
-   ============================================= */
+/* --- RESPONSIVE / MÓVIL --- */
 @media (max-width: 768px) {
     .header-texture { 
         padding-top: 2rem !important; 
@@ -384,11 +383,11 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
     }
 
     #section-results { 
-        margin-top: -45px !important; /* Forzamos pegado al header en móvil */
+        margin-top: -25px !important; /* Ajuste menor para móvil */
     }
 
     #categoria-titulo { 
-        margin-bottom: -15px !important; 
+        margin-bottom: -10px !important; 
     }
     
     #categoria-titulo h2 { line-height: 1 !important; font-size: 1.25rem; }
@@ -398,77 +397,12 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
         padding: 6px 10px !important;
     }
 
-    /* 1. Optimización del Grid y Tarjetas */
     #grid-negocios { 
         display: grid !important;
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
         gap: 0.75rem !important; 
-        margin-top: 0rem !important; /* Pegado a etiquetas */
-        padding: 0 5px;
+        margin-top: 0.5rem !important;
     }
-
-    /* Reducción de altura y limpieza de aire */
-    .glass-card .relative.h-64 {
-        height: 110px !important; /* Altura compacta para logo */
-    }
-
-    .glass-card .p-8 {
-        padding: 0.75rem !important; /* Padding ultra-reducido */
-    }
-
-    /* Tipografía Estilizada */
-    .business-title { 
-        font-weight: 500 !important; 
-        font-size: 11px !important; 
-        letter-spacing: 0.05em !important;
-        margin-bottom: 0.25rem !important;
-    }
-
-    .elegant-italic {
-        font-size: 10px !important;
-        line-height: 1.2 !important;
-        margin-bottom: 0.75rem !important;
-    }
-
-    .glass-card button {
-        padding: 6px !important;
-        font-size: 7px !important;
-        border-radius: 6px;
-    }
-
-    /* 2. Rediseño del Modal */
-    #modal-content {
-        max-height: 90vh;
-        width: 95%;
-    }
-
-    #modal-content .p-8.md\:p-12 {
-        padding: 1.5rem !important;
-    }
-
-    #modal-content h2.serif-title {
-        font-size: 1.4rem !important;
-        font-weight: 400 !important;
-        letter-spacing: 0.1em !important;
-    }
-
-    /* Botones de acción rápidos (Iconos) */
-    .modal-actions-container {
-        display: flex !important;
-        gap: 0.75rem !important;
-        margin-bottom: 1.5rem !important;
-    }
-
-    .modal-btn-icon {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 12px !important;
-    }
-    
-    /* Ocultar textos específicos en botones de modal si existen */
-    .modal-btn-icon span { display: none; }
 }
 
 .hidden { display: none !important; }
