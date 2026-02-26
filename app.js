@@ -13,11 +13,11 @@ function gestionarVisibilidadHeader(categoria) {
     if (categoria === 'todos') {
         if (purposeCard) purposeCard.classList.remove('hidden');
         if (discoverTagline) discoverTagline.classList.add('hidden');
-        if (growSection) growSection.classList.remove('hidden'); // Solo en inicio
+        if (growSection) growSection.classList.remove('hidden'); 
     } else {
         if (purposeCard) purposeCard.classList.add('hidden');
         if (discoverTagline) discoverTagline.classList.remove('hidden');
-        if (growSection) growSection.classList.add('hidden'); // Ocultar en categorías
+        if (growSection) growSection.classList.add('hidden'); 
     }
 }
 
@@ -303,59 +303,59 @@ function verDetalle(id) {
 
     const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría solicitar más información.`);
 
+    // Ajuste de tamaño en el contenedor principal y en la imagen para evitar scroll excesivo
     document.getElementById('modal-content').innerHTML = `
-        <div class="relative h-72 md:h-[400px]">
+        <div class="relative h-56 md:h-80 overflow-hidden">
             <img src="${n.imagen}" alt="${n.nombre}" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-[#1c1614] via-transparent"></div>
+            <button onclick="cerrarModal()" class="absolute top-4 right-4 z-50 text-white/50 hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
         </div>
-        <div class="p-8 md:p-12 -mt-16 relative z-10 bg-[#1c1614]">
-            <div class="flex flex-col items-center text-center mb-8">
-                <span class="text-[#d4a373] text-[9px] font-bold tracking-[0.5em] uppercase mb-3">${n.categoria}</span>
-                <h2 class="serif-title text-2xl md:text-4xl text-white uppercase tracking-[0.1em] font-light">${n.nombre}</h2>
-                <div class="h-px w-10 bg-[#d4a373] mt-4"></div>
+        <div class="p-6 md:p-10 -mt-12 relative z-10 bg-[#1c1614] max-w-4xl mx-auto">
+            <div class="flex flex-col items-center text-center mb-6">
+                <span class="text-[#d4a373] text-[9px] font-bold tracking-[0.5em] uppercase mb-2">${n.categoria}</span>
+                <h2 class="serif-title text-2xl md:text-3xl text-white uppercase tracking-[0.1em] font-light">${n.nombre}</h2>
+                <div class="h-px w-10 bg-[#d4a373] mt-3"></div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 items-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 items-start">
                 <div class="space-y-4">
-                     <h4 class="text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 border-b border-stone-800 pb-2">Propuesta de Valor</h4>
-                     <p class="elegant-italic text-white text-lg leading-relaxed italic">"${n.servicios_resumen}"</p>
-                     <p class="text-stone-400 text-xs leading-relaxed">${n.descripcion || 'Una experiencia curada minuciosamente por el equipo de Punto 506.'}</p>
+                     <h4 class="text-[8px] uppercase tracking-[0.4em] font-bold text-stone-500 border-b border-stone-800 pb-2">Propuesta de Valor</h4>
+                     <p class="elegant-italic text-white text-base leading-relaxed italic">"${n.servicios_resumen}"</p>
+                     <p class="text-stone-400 text-[11px] leading-relaxed">${n.descripcion || 'Una experiencia curada minuciosamente por el equipo de Punto 506.'}</p>
                 </div>
-                <div class="bg-black/20 p-6 space-y-4 border border-white/5 flex flex-col justify-center">
-                    <div class="flex items-center gap-4">
+                <div class="bg-black/20 p-5 space-y-4 border border-white/5 flex flex-col justify-center rounded-sm">
+                    <div class="flex items-center gap-3">
                         <div class="text-[#d4a373]"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <p class="text-stone-300 text-[11px] uppercase tracking-[0.15em]">${n.horario || 'Horario bajo reserva'}</p>
+                        <p class="text-stone-300 text-[10px] uppercase tracking-[0.15em]">${n.horario || 'Horario bajo reserva'}</p>
                     </div>
-                    <div class="flex items-start gap-4">
+                    <div class="flex items-start gap-3">
                         <div class="text-[#d4a373]"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <p class="text-stone-300 text-[11px] uppercase tracking-[0.15em] leading-relaxed">${n.direccion || 'Ubicación Premium Pococí'}</p>
+                        <p class="text-stone-300 text-[10px] uppercase tracking-[0.15em] leading-relaxed">${n.direccion || 'Ubicación Premium Pococí'}</p>
                     </div>
                 </div>
             </div>
 
-            <div class="flex flex-col sm:flex-row gap-4 mb-12">
-                <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" class="flex-1 text-center py-5 bg-[#d4a373] text-[#130f0e] text-[10px] font-black uppercase tracking-[0.3em] hover:bg-white transition-all duration-500">Contactar Vía WhatsApp</a>
-                <a href="${n.instagram || '#'}" target="_blank" class="flex-1 text-center py-5 border border-[#d4a373]/30 text-[#d4a373] text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-white/5 transition-all duration-500">Visitar Perfil</a>
+            <div class="flex flex-col sm:flex-row gap-3 mb-10">
+                <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" class="flex-1 text-center py-4 bg-[#d4a373] text-[#130f0e] text-[9px] font-black uppercase tracking-[0.3em] hover:bg-white transition-all duration-500">WhatsApp</a>
+                <a href="${n.instagram || '#'}" target="_blank" class="flex-1 text-center py-4 border border-[#d4a373]/30 text-[#d4a373] text-[9px] font-bold uppercase tracking-[0.3em] hover:bg-white/5 transition-all duration-500">Instagram</a>
             </div>
 
-            <div id="feedback-section" class="border-t border-white/5 pt-10">
+            <div id="feedback-section" class="border-t border-white/5 pt-8">
                 <div id="form-wrapper">
-                    <h3 class="text-[10px] text-stone-400 uppercase tracking-[0.3em] mb-6 text-center">¿Deseas ayudarnos a elevar nuestro estándar?</h3>
-                    <form id="feedback-form" action="https://formspree.io/f/mlgwzggv" method="POST" class="space-y-4">
+                    <h3 class="text-[9px] text-stone-500 uppercase tracking-[0.3em] mb-4 text-center">¿Sugerencias para mejorar?</h3>
+                    <form id="feedback-form" action="https://formspree.io/f/mlgwzggv" method="POST" class="space-y-3">
                         <input type="hidden" name="Negocio" value="${n.nombre}">
-                        <textarea name="comentario" required placeholder="Tu opinión es estrictamente anónima..." 
-                            class="w-full bg-black/40 border border-[#d4a373]/20 p-4 text-white text-sm focus:outline-none focus:border-[#d4a373] transition-colors h-32"></textarea>
-                        <button type="submit" class="w-full py-4 border border-[#d4a373] text-[#d4a373] text-[9px] font-black uppercase tracking-[0.4em] hover:bg-[#d4a373] hover:text-black transition-all">
-                            Enviar Sugerencia
+                        <textarea name="comentario" required placeholder="Tu opinión es anónima..." 
+                            class="w-full bg-black/40 border border-[#d4a373]/10 p-3 text-white text-xs focus:outline-none focus:border-[#d4a373] transition-colors h-24"></textarea>
+                        <button type="submit" class="w-full py-3 border border-[#d4a373] text-[#d4a373] text-[8px] font-black uppercase tracking-[0.4em] hover:bg-[#d4a373] hover:text-black transition-all">
+                            Enviar
                         </button>
                     </form>
                 </div>
-                <div id="success-message" class="hidden text-center py-8">
-                    <div class="text-[#d4a373] mb-4">
-                        <svg class="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                    <p class="text-white text-[11px] uppercase tracking-[0.3em] font-bold">¡Gracias por compartir tu opinión!</p>
-                    <p class="text-stone-500 text-[9px] mt-2 italic">Tu aporte nos ayuda a construir la mejor red comercial de Pococí.</p>
+                <div id="success-message" class="hidden text-center py-6">
+                    <p class="text-[#d4a373] text-[10px] uppercase tracking-[0.3em] font-bold">¡Gracias por tu opinión!</p>
                 </div>
             </div>
         </div>
@@ -380,7 +380,7 @@ function verDetalle(id) {
                 document.getElementById('success-message').classList.remove('hidden');
             }
         } catch (error) {
-            submitBtn.innerText = "ERROR - REINTENTAR";
+            submitBtn.innerText = "ERROR";
             submitBtn.disabled = false;
         }
     });
