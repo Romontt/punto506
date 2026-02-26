@@ -352,7 +352,7 @@ function verDetalle(id) {
 
             <div class="flex flex-col sm:flex-row gap-4 mb-12">
                 <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" 
-                   class="flex-1 text-center py-5 bg-[#d4a373] text-[#130f0e] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white transition-all">WhatsApp Concierge</a>
+                   class="flex-1 text-center py-5 bg-[#d4a373] text-[#130f0e] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white transition-all">WhatsApp</a>
                 <a href="${n.instagram || '#'}" target="_blank" 
                    class="flex-1 text-center py-5 border border-[#d4a373]/30 text-[#d4a373] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-[#d4a373]/5 transition-all">Instagram Oficial</a>
             </div>
