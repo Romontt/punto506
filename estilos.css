@@ -107,13 +107,20 @@ body {
     animation: revealCard 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* --- NAVIGATION MÓVIL & FLECHAS --- */
+/* --- NAVIGATION MÓVIL & MEJORA SCROLL INDICATOR --- */
 .hide-scroll {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 .hide-scroll::-webkit-scrollbar {
     display: none;
+}
+
+/* Indicador de "hay más" a la derecha en móviles */
+.nav-scroll-container {
+    position: relative;
+    mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
 }
 
 .scroll-hint-arrow {
@@ -135,23 +142,30 @@ body {
     color: var(--p506-accent);
 }
 
-/* --- BUSCADOR OPTIMIZADO --- */
+/* --- BUSCADOR PROMINENTE --- */
 .search-container {
-    background: rgba(40, 35, 30, 0.6) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
     backdrop-filter: blur(10px);
-    border: none !important;
-    border-bottom: 1.5px solid var(--p506-accent) !important;
-    padding: 8px 12px !important;
+    border: 1px solid rgba(212, 163, 115, 0.3) !important;
+    border-bottom: 2px solid var(--p506-accent) !important;
+    padding: 12px 20px !important; /* Más espacioso */
     transition: var(--transition-premium);
-    max-width: 280px;
+    max-width: 320px; /* Un poco más ancho */
     margin: 0 auto;
-    border-radius: 4px 4px 0 0;
+    border-radius: 8px; /* Redondeado premium */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.search-container:focus-within {
+    border-color: var(--p506-accent) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    transform: scale(1.02);
 }
 
 .search-input {
     letter-spacing: 0.2em !important;
-    font-size: 11px !important;
-    font-weight: 400;
+    font-size: 12px !important;
+    font-weight: 600;
     color: white !important;
     text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
@@ -191,7 +205,7 @@ body {
     z-index: 10;
 }
 
-/* --- TARJETAS DE RESULTADOS --- */
+/* --- TARJETAS DE RESULTADOS (JERARQUÍA Y HOVER) --- */
 .glass-card {
     display: flex;
     flex-direction: column;
@@ -211,28 +225,76 @@ body {
     padding: 1.5rem !important;
 }
 
+/* Placeholder Premium para imágenes faltantes */
+.img-placeholder {
+    background: var(--p506-wood);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.img-placeholder::after {
+    content: '506';
+    font-family: 'Cinzel';
+    color: rgba(212, 163, 115, 0.1);
+    font-size: 5rem;
+}
+
 .glass-card:hover {
     border-color: var(--p506-accent);
     background: rgba(60, 50, 45, 0.8);
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    transform: translateY(-12px); /* Elevación más marcada */
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
 }
 
+/* Micro-interacción botón Explorar */
 .glass-card button {
     margin-top: auto !important;
     border-radius: 12px;
-    padding: 10px;
-    font-size: 7px;
-    letter-spacing: 0.2em;
+    padding: 12px;
+    font-size: 8px;
+    letter-spacing: 0.25em;
     border: 1px solid rgba(212, 163, 115, 0.4);
     background: transparent;
     color: var(--p506-accent);
     text-transform: uppercase;
     font-weight: 900;
-    transition: all 0.4s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* --- AJUSTES DE MODAL (REFINADO Y COMPACTO) --- */
+.glass-card:hover button {
+    background: var(--p506-accent);
+    color: var(--p506-bg);
+    transform: scale(1.05);
+    letter-spacing: 0.3em;
+}
+
+/* --- BOTÓN VOLVER ARRIBA --- */
+#back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    background: var(--p506-accent);
+    color: var(--p506-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+#back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- AJUSTES DE MODAL --- */
 #modal-negocio {
     z-index: 1000;
     backdrop-filter: blur(15px);
@@ -286,12 +348,11 @@ body {
     border-radius: 16px;
 }
 
-/* --- FOOTER (CON MEJORA DE CONTRASTE) --- */
+/* --- FOOTER (MEJORADO) --- */
 footer.header-texture {
     background-position: center top;
     background-image: 
-        /* Reforzamos el degradado inferior para proteger la legibilidad */
-        linear-gradient(to top, rgba(19, 15, 14, 0.95) 0%, rgba(19, 15, 14, 0.6) 50%, var(--p506-bg) 100%),
+        linear-gradient(to top, rgba(19, 15, 14, 0.98) 0%, rgba(19, 15, 14, 0.8) 50%, var(--p506-bg) 100%),
         url("img/fondoheader.jpg");
     background-size: cover;
     background-attachment: scroll; 
@@ -300,25 +361,25 @@ footer.header-texture {
     padding-top: 5rem !important;
 }
 
-/* Forzamos que los textos sobre la imagen se despeguen del fondo */
 footer p, footer nav a, footer h3, footer h2, footer span {
-    text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+    text-shadow: 0 2px 4px rgba(0,0,0,1);
 }
 
-/* Corrección para los colores grisáceos de Tailwind en el footer */
+/* Corrección de contraste crítica para footer */
 footer .text-stone-400, 
 footer .text-stone-500 {
-    color: rgba(255, 255, 255, 0.8) !important;
+    color: #e5e7eb !important; /* Stone-200 equivalente */
+    opacity: 0.9;
 }
 
 footer .text-stone-600, 
 footer .text-stone-700 {
-    color: rgba(255, 255, 255, 0.45) !important;
+    color: #9ca3af !important; /* Stone-400 equivalente */
 }
 
 footer nav a:hover {
     color: var(--p506-accent) !important;
-    transform: translateX(4px);
+    transform: translateX(6px);
     display: inline-block;
 }
 
@@ -353,11 +414,18 @@ footer nav a:hover {
     .glass-card h3 { font-size: 0.9rem; }
 
     #purpose-card p { font-size: 0.85rem !important; }
-    .search-container { max-width: 100%; }
+    .search-container { max-width: 100%; padding: 10px 15px !important; }
     
     #modal-content {
         max-height: 85vh;
         width: 92%;
+    }
+    
+    #back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
     }
 }
 
