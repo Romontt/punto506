@@ -218,8 +218,9 @@ body {
     box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
+/* AJUSTE: Botón alineado al fondo */
 .glass-card button {
-    margin-top: auto !important;
+    margin-top: auto !important; /* Esto los alinea todos abajo */
     border-radius: 12px;
     padding: 10px;
     font-size: 7px;
@@ -230,26 +231,6 @@ body {
     text-transform: uppercase;
     font-weight: 900;
     transition: all 0.4s ease;
-}
-
-/* --- AJUSTE MODAL (SOLO ESTO SE CAMBIÓ) --- */
-#modal-content {
-    max-width: 480px !important; /* Estrecha el modal para que no sobre espacio */
-    width: 90% !important;
-    margin: auto;
-}
-
-#modal-content img {
-    width: 100% !important;
-    height: auto !important;
-    max-height: 220px !important; /* Altura máxima controlada para el logo */
-    object-fit: contain !important; /* Imagen completa sin estirar */
-    margin-bottom: -10px !important; /* Acerca el título a la imagen */
-}
-
-#modal-content .serif-title {
-    margin-top: 0 !important;
-    padding-top: 10px !important;
 }
 
 /* --- ÁREA DE FEEDBACK --- */
@@ -304,10 +285,6 @@ footer.header-texture {
     .glass-card { border-radius: 16px; }
     .glass-card .p-8 { padding: 1rem !important; }
     .glass-card h3 { font-size: 0.9rem; }
-
-    #modal-content img {
-        max-height: 160px !important; /* Logo más pequeño en móvil */
-    }
 
     #purpose-card p { font-size: 0.85rem !important; }
     .search-container { max-width: 100%; }
