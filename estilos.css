@@ -323,22 +323,23 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
 .animate-bounce-x { animation: bounce-x 1.5s infinite; }
 
 /* =============================================
-   --- AJUSTE ETIQUETAS Y ESPACIOS (NUEVO) --- 
+   --- AJUSTE ETIQUETAS Y ESPACIOS (CORREGIDO) --- 
    ============================================= */
 
-/* 1. ESPACIOS EN PC */
-#section-results { padding-top: 1.5rem !important; }
-#categoria-titulo { margin-bottom: 0px !important; }
-#sub-categorias { margin-top: 0px !important; margin-bottom: 1rem !important; }
+/* 1. ESPACIOS REDUCIDOS */
+#section-results { padding-top: 0px !important; margin-top: -10px; }
+#categoria-titulo { margin-bottom: 0px !important; padding-top: 10px; }
+#sub-categorias { margin-top: 0px !important; margin-bottom: 0.5rem !important; }
 
-/* 2. ESTILO ETIQUETAS (ENCIMA DE NEGOCIOS) */
+/* 2. ESTILO ETIQUETAS (TAMAÑO EQUILIBRADO) */
 #subcat-scroll button {
-    font-size: 14px !important; /* Más grandes */
-    font-weight: 700 !important;
-    letter-spacing: 0.05em;
+    font-size: 13px !important; /* Ajustado de 14px a 13px */
+    font-weight: 600 !important;
+    letter-spacing: 0.03em;
     position: relative;
     transition: all 0.3s ease;
     opacity: 0.6;
+    padding: 8px 16px !important;
 }
 
 #subcat-scroll button:hover { opacity: 1; color: var(--p506-accent); }
@@ -346,7 +347,7 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
 /* Efecto subrayado dorado en etiqueta activa */
 #subcat-scroll button.bg-white, 
 #subcat-scroll button.text-black {
-    background-color: transparent !important; /* Quitamos el fondo blanco */
+    background-color: transparent !important;
     color: var(--p506-accent) !important;
     opacity: 1 !important;
 }
@@ -354,12 +355,12 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
 #subcat-scroll button.bg-white::after {
     content: '';
     position: absolute;
-    bottom: -2px;
-    left: 15%;
-    width: 70%;
+    bottom: 2px;
+    left: 20%;
+    width: 60%;
     height: 2px;
     background: var(--p506-accent);
-    box-shadow: 0 0 10px var(--p506-accent);
+    box-shadow: 0 0 8px var(--p506-accent);
 }
 
 /* --- RESPONSIVE / MÓVIL --- */
@@ -367,56 +368,39 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
     .header-texture { 
         padding-top: 2rem !important; 
         padding-bottom: 2rem !important;
-        background-attachment: scroll;
     }
 
-    /* Reducir espacio entre elementos en móvil */
-    #section-results { padding-top: 0.8rem !important; }
+    #section-results { padding-top: 0px !important; margin-top: -5px; }
 
     #categoria-titulo { 
         margin-top: 0px !important;
-        margin-bottom: 0px !important; 
+        margin-bottom: 2px !important; 
         padding-bottom: 2px !important;
     }
     
-    #categoria-titulo h2 { line-height: 1 !important; }
+    #categoria-titulo h2 { line-height: 1 !important; font-size: 1.25rem; }
 
-    /* Etiquetas en móvil */
     #sub-categorias {
-        margin-top: -5px !important; /* Sube las etiquetas hacia el título */
-        margin-bottom: 0.8rem !important;
-        padding: 0 !important;
+        margin-top: 0px !important; 
+        margin-bottom: 0.5rem !important;
     }
 
     #subcat-scroll button {
-        font-size: 12px !important; /* Más legibles en móvil */
-        padding: 6px 12px !important;
-    }
-
-    #subcat-scroll {
-        mask-image: linear-gradient(to right, black 80%, transparent 100%);
-        -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
-        padding-bottom: 5px;
+        font-size: 11px !important; /* Ajustado para móvil */
+        padding: 6px 10px !important;
     }
 
     #grid-negocios { 
         display: grid !important;
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
         gap: 0.75rem !important; 
-        margin-top: 0px !important;
+        margin-top: 0.5rem !important;
     }
 
     .portal-card { height: 260px; border-radius: 10px; }
-    .portal-card-content { padding: 1rem; }
-    
     .glass-card { border-radius: 16px; }
     .glass-card .p-8 { padding: 1rem !important; }
-    .glass-card h3 { font-size: 0.9rem; }
-
     .search-container { max-width: 100%; padding: 10px 15px !important; }
-    
-    #modal-content { width: 92%; max-height: 85vh; }
-    #back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
 }
 
 .hidden { display: none !important; }
