@@ -55,7 +55,7 @@
     overflow: hidden;
 }
 
-/* --- ESTILOS BASE ACLARADOS --- */
+/* --- ESTILOS BASE --- */
 body { 
     font-family: 'Inter', sans-serif; 
     background-color: var(--p506-bg);
@@ -82,7 +82,7 @@ body {
     animation: revealCard 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
 }
 
-/* --- HEADER ACLARADO --- */
+/* --- HEADER --- */
 .header-texture {
     position: relative;
     background-color: #130f0e;
@@ -107,7 +107,7 @@ body {
     animation: revealCard 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* --- NAVIGATION MÓVIL & FLECHAS --- */
+/* --- NAVIGATION --- */
 .hide-scroll {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -135,7 +135,7 @@ body {
     color: var(--p506-accent);
 }
 
-/* --- BUSCADOR OPTIMIZADO --- */
+/* --- BUSCADOR --- */
 .search-container {
     background: rgba(40, 35, 30, 0.6) !important;
     backdrop-filter: blur(10px);
@@ -237,13 +237,25 @@ body {
     position: fixed;
     inset: 0;
     z-index: 1000;
-    background: rgba(10, 8, 7, 0.9);
+    background: rgba(10, 8, 7, 0.95);
     backdrop-filter: blur(15px);
     display: flex;
-    align-items: flex-start; /* Permite que el scroll fluya desde arriba */
+    align-items: flex-start; 
     justify-content: center;
     overflow-y: auto; /* ÚNICO SCROLL AQUÍ */
     padding: 2rem 1rem;
+}
+
+/* Personalización del scroll bar (estilo anterior) */
+#modal-negocio::-webkit-scrollbar {
+    width: 6px;
+}
+#modal-negocio::-webkit-scrollbar-track {
+    background: transparent;
+}
+#modal-negocio::-webkit-scrollbar-thumb {
+    background: var(--p506-accent);
+    border-radius: 10px;
 }
 
 #modal-content {
@@ -252,42 +264,23 @@ body {
     background-color: #1c1614;
     border: 1px solid rgba(212, 163, 115, 0.15);
     box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 1);
-    border-radius: 24px; /* Bordes más curvos y finos */
+    border-radius: 24px;
     position: relative;
-    overflow: hidden; /* Corta la imagen con el borde redondo */
-    margin: auto; /* Centra verticalmente si el contenido es poco */
+    overflow: hidden; /* Esto corta el cuadro café de las esquinas */
+    margin: auto;
 }
 
-/* Estilo de la imagen superior */
-.modal-image-container {
-    height: 350px;
-    width: 100%;
-    position: relative;
-}
-
-.modal-image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.modal-image-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, transparent 30%, #1c1614 100%);
-}
-
-/* Botón cerrar flotante y elegante */
 .modal-close-btn {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 50;
-    background: rgba(0,0,0,0.4);
-    border: 1px solid rgba(255,255,255,0.1);
+    top: 25px;
+    right: 25px;
+    z-index: 100;
+    background: rgba(19, 15, 14, 0.8);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(212, 163, 115, 0.2);
     color: white;
-    width: 44px;
-    height: 44px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -296,18 +289,35 @@ body {
     transition: all 0.3s ease;
 }
 
-.modal-close-btn:hover {
-    background: var(--p506-accent);
-    color: #130f0e;
+.modal-close-btn:hover { background: var(--p506-accent); color: #130f0e; }
+
+.modal-image-container {
+    height: 350px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
 }
 
-.modal-close-btn svg { width: 20px; height: 20px; }
+.modal-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
 
-/* Cuerpo del contenido */
+.modal-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 30%, #1c1614 100%);
+}
+
 .modal-body-content {
     padding: 0 3rem 4rem;
-    margin-top: -60px; /* Sube el texto sobre el degradado de la foto */
+    margin-top: -60px;
     position: relative;
+    background-color: #1c1614;
 }
 
 .category-badge {
@@ -332,7 +342,6 @@ body {
     margin: 1.5rem auto;
 }
 
-/* Grid de detalles */
 .modal-grid {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
@@ -363,7 +372,6 @@ body {
 
 .info-item .icon { width: 18px; color: var(--p506-accent); flex-shrink: 0; }
 
-/* Botones de acción */
 .action-buttons {
     display: flex;
     gap: 15px;
@@ -385,7 +393,6 @@ body {
 .btn-whatsapp { background: var(--p506-accent); color: #130f0e; }
 .btn-instagram { border: 1px solid rgba(212, 163, 115, 0.3); color: var(--p506-accent); }
 
-/* Feedback refinado */
 .modal-feedback {
     background: rgba(0,0,0,0.2);
     padding: 2.5rem;
@@ -476,18 +483,17 @@ footer.header-texture {
     footer { padding-top: 3rem !important; padding-bottom: 3rem !important; }
 
     /* Ajuste Modal Móvil */
-    #modal-negocio { padding: 0; }
+    #modal-negocio { padding: 1rem 0.5rem; }
     #modal-content { 
-        border-radius: 0; 
-        min-height: 100vh; 
-        margin: 0; 
-        border: none;
+        border-radius: 20px; 
+        margin-top: 2rem;
     }
     .modal-image-container { height: 250px; }
     .modal-body-content { padding: 0 1.5rem 3rem; }
     .modal-title { font-size: 1.8rem; }
     .modal-grid { grid-template-columns: 1fr; gap: 2rem; }
     .action-buttons { flex-direction: column; }
+    .modal-close-btn { top: 15px; right: 15px; }
 }
 
 .hidden { display: none !important; }
