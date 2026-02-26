@@ -50,7 +50,7 @@
     </div>
 
     <nav class="bg-[#130f0e]/95 backdrop-blur-2xl border-b border-[#5d1c15]/40 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between py-4 md:py-6 px-6 gap-4 md:gap-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between py-6 px-6 gap-6">
             
             <div class="flex items-center gap-6 cursor-pointer" onclick="volverInicio()">
                 <div class="flex flex-col items-center gap-2">
@@ -112,22 +112,17 @@
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto py-4 md:py-20 px-6">
-        <div id="landing-categories" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-10 md:mb-20">
+    <main class="max-w-7xl mx-auto py-12 md:py-20 px-6">
+        <div id="landing-categories" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-20">
         </div>
 
         <div id="section-results" class="hidden">
-            <div class="flex items-center gap-4 mb-4 md:mb-8">
+            <div class="flex items-center gap-4 mb-8">
                 <div class="h-[1px] w-10 bg-[#5d1c15]"></div>
                 <h2 id="categoria-titulo" class="serif-title text-[10px] text-[#d4a373] uppercase tracking-[0.6em]">Recomendaciones</h2>
             </div>
 
-            <div id="sub-categorias" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 md:mb-16 min-h-[40px] relative">
-                <div id="sub-categorias-scroll" class="w-full"></div>
-                <div class="sub-scroll-hint md:hidden">
-                    <svg class="w-3 h-3 text-[#d4a373]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </div>
-            </div>
+            <div id="sub-categorias" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-16 min-h-[40px]"></div>
 
             <div class="relative">
                 <div id="wrapper-grid" class="grid-limitado">
@@ -291,6 +286,7 @@
             window.scrollTo({ top: document.getElementById('section-results').offsetTop - 100, behavior: 'smooth' });
         }
 
+        // Lógica para mostrar/ocultar el botón "Volver arriba"
         window.onscroll = function() {
             const btn = document.getElementById("back-to-top");
             if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
