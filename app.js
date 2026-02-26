@@ -222,9 +222,9 @@ function renderCards(listaFiltrada) {
 }
 
 function renderSubCategorias() {
-    const contenedor = document.getElementById('sub-categorias');
-    if (!contenedor) return;
-    contenedor.innerHTML = '';
+    const contenedorBase = document.getElementById('sub-categorias');
+    if (!contenedorBase) return;
+    contenedorBase.innerHTML = '';
     if (categoriaActual === 'todos') return;
 
     const etiquetas = [...new Set(
@@ -233,17 +233,38 @@ function renderSubCategorias() {
             .flatMap(n => n.etiquetas)
     )];
 
+    // Crear estructura de scroll para móvil
+    contenedorBase.className = "relative w-full overflow-hidden";
+    
+    const scrollContainer = document.createElement('div');
+    scrollContainer.id = "subcat-scroll";
+    scrollContainer.className = "flex overflow-x-auto hide-scroll gap-2 py-2 px-4 md:flex-wrap md:justify-center md:px-0";
+    
+    const hint = document.createElement('div');
+    hint.id = "subcat-hint";
+    hint.className = "absolute right-0 top-0 bottom-0 flex items-center pr-2 pointer-events-none transition-opacity duration-300 md:hidden";
+    hint.innerHTML = `<svg class="w-4 h-4 text-[#d4a373] animate-bounce-x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
     etiquetas.forEach(tag => {
         const btn = document.createElement('button');
         btn.innerText = tag.toUpperCase();
         const activo = etiquetaActual === tag;
-        btn.className = `text-[8px] tracking-[0.4em] px-5 py-2.5 border transition-all duration-700 ${activo ? 'border-[#d4a373] text-[#d4a373] font-bold bg-[#d4a373]/5' : 'border-transparent text-stone-500 hover:text-stone-200'}`;
+        btn.className = `whitespace-nowrap text-[8px] tracking-[0.4em] px-5 py-2.5 border transition-all duration-700 ${activo ? 'border-[#d4a373] text-[#d4a373] font-bold bg-[#d4a373]/5' : 'border-transparent text-stone-500 hover:text-stone-200'}`;
         btn.onclick = () => {
             etiquetaActual = (etiquetaActual === tag) ? null : tag;
             renderSubCategorias();
             aplicarFiltrosCombinados();
         };
-        contenedor.appendChild(btn);
+        scrollContainer.appendChild(btn);
+    });
+
+    contenedorBase.appendChild(scrollContainer);
+    contenedorBase.appendChild(hint);
+
+    // Lógica de flecha para el scroll de subcategorías
+    scrollContainer.addEventListener('scroll', () => {
+        const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+        hint.style.opacity = (scrollContainer.scrollLeft >= maxScroll - 10) ? '0' : '1';
     });
 }
 
