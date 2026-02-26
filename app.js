@@ -74,7 +74,7 @@ function renderLanding() {
         { id: 'gastronomía', nombre: 'Gastronomía', img: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1000' },
         { id: 'estética', nombre: 'Estética & Imagen', img: 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=1000' },
         { id: 'servicios', nombre: 'Servicios Varios', img: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=1000' },
-        { id: 'turismo', nombre: 'Destinos & Turismo', img: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&q=80&w=1000' }
+        { id: 'turismo', nombre: 'Destinos & Turismo', img: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=1000' }
     ];
 
     landing.innerHTML = categoriasConfig.map((cat, i) => `
@@ -144,10 +144,7 @@ async function loadData() {
 
         if (catParam && catParam !== 'todos') {
             categoriaActual = catParam;
-            const btnActivo = document.querySelector(`.filter-btn[data-cat="${catParam}"]`);
-            if(btnActivo) activarBoton(btnActivo);
             gestionarVisibilidadHeader(catParam);
-            renderSubCategorias();
             aplicarFiltrosCombinados();
         } else {
             renderLanding();
@@ -169,28 +166,20 @@ async function loadData() {
     }
 }
 
-// --- LÓGICA DE NAVEGACIÓN (FLECHAS Y SCROLL) ---
 function actualizarFlechasNav() {
-    const navScrolls = [
-        { container: 'nav-categories', hint: '.scroll-hint-arrow' },
-        { container: 'sub-categorias-scroll', hint: '.sub-scroll-hint' }
-    ];
+    const hint = document.querySelector('.scroll-hint-arrow');
+    const navScroll = document.getElementById('nav-categories');
     
-    navScrolls.forEach(({ container, hint }) => {
-        const el = document.getElementById(container);
-        const arrow = document.querySelector(hint);
-        
-        if(el && arrow) {
-            const checkScroll = () => {
-                const maxScroll = el.scrollWidth - el.clientWidth;
-                arrow.style.opacity = (el.scrollLeft >= maxScroll - 10) ? '0' : '1';
-                arrow.style.pointerEvents = (el.scrollLeft >= maxScroll - 10) ? 'none' : 'auto';
-            };
-            el.addEventListener('scroll', checkScroll);
-            // Ejecutar una vez al inicio
-            setTimeout(checkScroll, 100);
-        }
-    });
+    if(navScroll && hint) {
+        navScroll.addEventListener('scroll', () => {
+            const maxScroll = navScroll.scrollWidth - navScroll.clientWidth;
+            if (navScroll.scrollLeft >= maxScroll - 10) {
+                hint.style.opacity = '0';
+            } else {
+                hint.style.opacity = '1';
+            }
+        });
+    }
 }
 
 function renderCards(listaFiltrada) {
@@ -232,15 +221,11 @@ function renderCards(listaFiltrada) {
     }, 300);
 }
 
-// --- RENDERIZAR ETIQUETAS (SUB-CATEGORÍAS) ---
 function renderSubCategorias() {
     const contenedor = document.getElementById('sub-categorias');
     if (!contenedor) return;
-    
-    if (categoriaActual === 'todos') {
-        contenedor.innerHTML = '';
-        return;
-    }
+    contenedor.innerHTML = '';
+    if (categoriaActual === 'todos') return;
 
     const etiquetas = [...new Set(
         negociosRaw
@@ -248,39 +233,18 @@ function renderSubCategorias() {
             .flatMap(n => n.etiquetas)
     )];
 
-    if (etiquetas.length === 0) {
-        contenedor.innerHTML = '';
-        return;
-    }
-
-    // Estructura mejorada para scroll horizontal con indicador
-    contenedor.innerHTML = `
-        <div class="relative w-full max-w-5xl mx-auto px-4">
-            <div id="sub-categorias-scroll" class="flex flex-nowrap overflow-x-auto gap-3 no-scrollbar py-4 scroll-smooth">
-                ${etiquetas.map(tag => {
-                    const activo = etiquetaActual === tag;
-                    return `
-                        <button onclick="filtrarPorEtiqueta('${tag}')" 
-                                class="whitespace-nowrap text-[8px] tracking-[0.3em] px-6 py-2 border transition-all duration-500 
-                                ${activo ? 'border-[#d4a373] text-[#d4a373] bg-[#d4a373]/10 font-bold' : 'border-white/10 text-stone-500 hover:text-white hover:border-white/30'}">
-                            ${tag.toUpperCase()}
-                        </button>
-                    `;
-                }).join('')}
-            </div>
-            <div class="sub-scroll-hint absolute right-2 top-1/2 -translate-y-1/2 text-[#d4a373]/40 animate-pulse pointer-events-none md:hidden">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-        </div>
-    `;
-    
-    actualizarFlechasNav();
-}
-
-function filtrarPorEtiqueta(tag) {
-    etiquetaActual = (etiquetaActual === tag) ? null : tag;
-    renderSubCategorias();
-    aplicarFiltrosCombinados();
+    etiquetas.forEach(tag => {
+        const btn = document.createElement('button');
+        btn.innerText = tag.toUpperCase();
+        const activo = etiquetaActual === tag;
+        btn.className = `text-[8px] tracking-[0.4em] px-5 py-2.5 border transition-all duration-700 ${activo ? 'border-[#d4a373] text-[#d4a373] font-bold bg-[#d4a373]/5' : 'border-transparent text-stone-500 hover:text-stone-200'}`;
+        btn.onclick = () => {
+            etiquetaActual = (etiquetaActual === tag) ? null : tag;
+            renderSubCategorias();
+            aplicarFiltrosCombinados();
+        };
+        contenedor.appendChild(btn);
+    });
 }
 
 function aplicarFiltrosCombinados() {
@@ -331,9 +295,6 @@ function activarBoton(btn) {
         b.classList.add('text-stone-500', 'border-transparent');
     });
     btn.classList.add('text-[#d4a373]', 'border-[#d4a373]', 'font-black');
-    
-    // Auto-scroll del botón activo en el navbar móvil
-    btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
 }
 
 // --- MODAL DETALLE ---
