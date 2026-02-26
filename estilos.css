@@ -218,9 +218,8 @@ body {
     box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
-/* AJUSTE: Botón alineado al fondo */
 .glass-card button {
-    margin-top: auto !important; /* Esto los alinea todos abajo */
+    margin-top: auto !important; 
     border-radius: 12px;
     padding: 10px;
     font-size: 7px;
@@ -231,6 +230,26 @@ body {
     text-transform: uppercase;
     font-weight: 900;
     transition: all 0.4s ease;
+}
+
+/* --- AJUSTES DE MODAL COMPACTO --- */
+#modal-content {
+    max-width: 440px !important; /* Modal más estrecho */
+    width: 90% !important;
+    margin: auto;
+}
+
+#modal-content img {
+    width: 100% !important;
+    max-height: 150px !important; /* Imagen un poco más pequeña */
+    object-fit: contain !important;
+    margin-bottom: -15px !important; /* Acerca el título a la imagen */
+    padding: 10px;
+}
+
+#modal-content .serif-title {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
 
 /* --- ÁREA DE FEEDBACK --- */
@@ -285,6 +304,11 @@ footer.header-texture {
     .glass-card { border-radius: 16px; }
     .glass-card .p-8 { padding: 1rem !important; }
     .glass-card h3 { font-size: 0.9rem; }
+
+    #modal-content img {
+        max-height: 120px !important; /* Más pequeña en móvil */
+        margin-bottom: -10px !important;
+    }
 
     #purpose-card p { font-size: 0.85rem !important; }
     .search-container { max-width: 100%; }
