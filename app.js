@@ -306,7 +306,7 @@ function verDetalle(id) {
 
     const modalContenido = document.getElementById('modal-content');
     modalContenido.innerHTML = `
-        <div class="relative h-64 md:h-96 overflow-hidden">
+        <div class="relative h-48 md:h-64 overflow-hidden">
             <img src="${n.imagen}" alt="${n.nombre}" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-[#1c1614] via-transparent to-black/20"></div>
             <button onclick="cerrarModal()" class="absolute top-6 right-6 z-50 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-all">
