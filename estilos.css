@@ -232,22 +232,19 @@ body {
     transition: all 0.4s ease;
 }
 
-/* --- AJUSTE MODAL COMPACTO --- */
-/* He reducido el ancho máximo para que se vea más pequeño sin perder el estilo original */
+/* --- MODAL MÁS PEQUEÑO EN GENERAL --- */
 #modal-content {
-    max-width: 420px !important; 
-    width: 90% !important;
+    max-width: 400px !important; /* He bajado de 480px a 400px para hacerlo más compacto */
+    width: 85% !important;
     margin: auto;
-    background-color: transparent !important; /* Evita cuadros blancos */
 }
 
 #modal-content img {
     width: 100% !important;
     height: auto !important;
-    max-height: 180px !important; /* Imagen un poco más pequeña y controlada */
+    max-height: 220px !important; 
     object-fit: contain !important;
-    margin-bottom: -5px !important;
-    background: transparent !important;
+    margin-bottom: -10px !important;
 }
 
 #modal-content .serif-title {
@@ -308,8 +305,12 @@ footer.header-texture {
     .glass-card .p-8 { padding: 1rem !important; }
     .glass-card h3 { font-size: 0.9rem; }
 
+    #modal-content {
+        max-width: 320px !important; /* Más compacto en móvil */
+    }
+
     #modal-content img {
-        max-height: 140px !important; /* Más pequeño para móviles */
+        max-height: 160px !important;
     }
 
     #purpose-card p { font-size: 0.85rem !important; }
