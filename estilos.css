@@ -323,17 +323,29 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
 .animate-bounce-x { animation: bounce-x 1.5s infinite; }
 
 /* =============================================
-   --- AJUSTE ETIQUETAS Y ESPACIOS (CORREGIDO) --- 
+   --- AJUSTE ETIQUETAS Y ESPACIOS (ELIMINACIÓN DE HUECOS) --- 
    ============================================= */
 
-/* 1. ESPACIOS REDUCIDOS */
-#section-results { padding-top: 0px !important; margin-top: -10px; }
-#categoria-titulo { margin-bottom: 0px !important; padding-top: 10px; }
-#sub-categorias { margin-top: 0px !important; margin-bottom: 0.5rem !important; }
+/* 1. ELIMINAR ESPACIO ENTRE HEADER Y SALUD */
+#section-results { 
+    padding-top: 0px !important; 
+    margin-top: -45px !important; /* Sube la sección para pegar SALUD al header */
+}
 
-/* 2. ESTILO ETIQUETAS (TAMAÑO EQUILIBRADO) */
+/* 2. ELIMINAR ESPACIO ENTRE SALUD Y ETIQUETAS */
+#categoria-titulo { 
+    margin-bottom: -15px !important; /* Sube las etiquetas hacia el título */
+    padding-top: 0px !important; 
+}
+
+#sub-categorias { 
+    margin-top: 0px !important; 
+    margin-bottom: 0.5rem !important; 
+}
+
+/* 3. ESTILO ETIQUETAS */
 #subcat-scroll button {
-    font-size: 13px !important; /* Ajustado de 14px a 13px */
+    font-size: 13px !important; 
     font-weight: 600 !important;
     letter-spacing: 0.03em;
     position: relative;
@@ -370,23 +382,18 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
         padding-bottom: 2rem !important;
     }
 
-    #section-results { padding-top: 0px !important; margin-top: -5px; }
+    #section-results { 
+        margin-top: -25px !important; /* Ajuste menor para móvil */
+    }
 
     #categoria-titulo { 
-        margin-top: 0px !important;
-        margin-bottom: 2px !important; 
-        padding-bottom: 2px !important;
+        margin-bottom: -10px !important; 
     }
     
     #categoria-titulo h2 { line-height: 1 !important; font-size: 1.25rem; }
 
-    #sub-categorias {
-        margin-top: 0px !important; 
-        margin-bottom: 0.5rem !important;
-    }
-
     #subcat-scroll button {
-        font-size: 11px !important; /* Ajustado para móvil */
+        font-size: 11px !important; 
         padding: 6px 10px !important;
     }
 
@@ -396,11 +403,6 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
         gap: 0.75rem !important; 
         margin-top: 0.5rem !important;
     }
-
-    .portal-card { height: 260px; border-radius: 10px; }
-    .glass-card { border-radius: 16px; }
-    .glass-card .p-8 { padding: 1rem !important; }
-    .search-container { max-width: 100%; padding: 10px 15px !important; }
 }
 
 .hidden { display: none !important; }
