@@ -167,17 +167,25 @@ async function loadData() {
 }
 
 function actualizarFlechasNav() {
+    // Para categorías principales
     const hint = document.querySelector('.scroll-hint-arrow');
     const navScroll = document.getElementById('nav-categories');
     
     if(navScroll && hint) {
         navScroll.addEventListener('scroll', () => {
             const maxScroll = navScroll.scrollWidth - navScroll.clientWidth;
-            if (navScroll.scrollLeft >= maxScroll - 10) {
-                hint.style.opacity = '0';
-            } else {
-                hint.style.opacity = '1';
-            }
+            hint.style.opacity = (navScroll.scrollLeft >= maxScroll - 10) ? '0' : '1';
+        });
+    }
+
+    // Para sub-categorías (etiquetas)
+    const subScroll = document.getElementById('sub-categorias');
+    const subHint = document.querySelector('.sub-scroll-hint'); // Asumiendo que añadirás esta clase en el CSS
+    
+    if(subScroll && subHint) {
+        subScroll.addEventListener('scroll', () => {
+            const maxScroll = subScroll.scrollWidth - subScroll.clientWidth;
+            subHint.style.opacity = (subScroll.scrollLeft >= maxScroll - 10) ? '0' : '1';
         });
     }
 }
@@ -233,18 +241,25 @@ function renderSubCategorias() {
             .flatMap(n => n.etiquetas)
     )];
 
+    // Crear contenedor interno para scroll horizontal sin romper flex
+    const scrollWrapper = document.createElement('div');
+    scrollWrapper.className = 'flex flex-nowrap overflow-x-auto gap-4 no-scrollbar pb-4 pt-2 px-4 md:px-0 md:flex-wrap md:justify-center';
+    
     etiquetas.forEach(tag => {
         const btn = document.createElement('button');
         btn.innerText = tag.toUpperCase();
         const activo = etiquetaActual === tag;
-        btn.className = `text-[8px] tracking-[0.4em] px-5 py-2.5 border transition-all duration-700 ${activo ? 'border-[#d4a373] text-[#d4a373] font-bold bg-[#d4a373]/5' : 'border-transparent text-stone-500 hover:text-stone-200'}`;
+        btn.className = `whitespace-nowrap text-[8px] tracking-[0.4em] px-5 py-2.5 border transition-all duration-700 ${activo ? 'border-[#d4a373] text-[#d4a373] font-bold bg-[#d4a373]/5' : 'border-transparent text-stone-500 hover:text-stone-200'}`;
         btn.onclick = () => {
             etiquetaActual = (etiquetaActual === tag) ? null : tag;
             renderSubCategorias();
             aplicarFiltrosCombinados();
         };
-        contenedor.appendChild(btn);
+        scrollWrapper.appendChild(btn);
     });
+    
+    contenedor.appendChild(scrollWrapper);
+    actualizarFlechasNav(); // Re-inicializar flechas para el nuevo contenido
 }
 
 function aplicarFiltrosCombinados() {
