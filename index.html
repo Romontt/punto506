@@ -50,7 +50,7 @@
     </div>
 
     <nav class="bg-[#130f0e]/95 backdrop-blur-2xl border-b border-[#5d1c15]/40 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between py-6 px-6 gap-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between py-4 md:py-6 px-6 gap-4 md:gap-6">
             
             <div class="flex items-center gap-6 cursor-pointer" onclick="volverInicio()">
                 <div class="flex flex-col items-center gap-2">
@@ -70,7 +70,7 @@
 
             <div class="relative w-full md:w-auto flex items-center">
                 <div class="nav-scroll-container relative flex items-center w-full">
-                    <div class="flex items-center gap-8 overflow-x-auto no-scrollbar w-full md:w-auto justify-start md:justify-center px-2 py-2 scroll-smooth" id="nav-categories">
+                    <div class="flex items-center gap-8 overflow-x-auto hide-scroll w-full md:w-auto justify-start md:justify-center px-2 py-2 scroll-smooth" id="nav-categories">
                         <button data-cat="todos" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-black text-[#d4a373] border-b border-[#d4a373] pb-1 whitespace-nowrap">Inicio</button>
                         <button data-cat="salud" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Salud</button>
                         <button data-cat="gastronomía" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Gastronomía</button>
@@ -78,7 +78,7 @@
                         <button data-cat="servicios" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Servicios Varios</button>
                         <button data-cat="turismo" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Turismo</button>
                     </div>
-                    <div id="nav-hint" class="md:hidden absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none scroll-hint-arrow pr-2 transition-opacity duration-300">
+                    <div class="md:hidden absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none scroll-hint-arrow pr-2">
                         <svg class="w-4 h-4 text-[#d4a373] animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </div>
                 </div>
@@ -112,23 +112,20 @@
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto py-12 md:py-20 px-6">
-        <div id="landing-categories" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-20">
+    <main class="max-w-7xl mx-auto py-4 md:py-20 px-6">
+        <div id="landing-categories" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-10 md:mb-20">
         </div>
 
         <div id="section-results" class="hidden">
-            <div class="flex items-center gap-4 mb-8">
+            <div class="flex items-center gap-4 mb-4 md:mb-8">
                 <div class="h-[1px] w-10 bg-[#5d1c15]"></div>
                 <h2 id="categoria-titulo" class="serif-title text-[10px] text-[#d4a373] uppercase tracking-[0.6em]">Recomendaciones</h2>
             </div>
 
-            <div class="relative w-full mb-16">
-                <div id="sub-categorias" class="overflow-x-auto no-scrollbar flex items-center gap-2 md:gap-4 min-h-[40px] scroll-smooth">
-                    </div>
-                <div id="sub-hint" class="sub-scroll-hint opacity-0 transition-opacity duration-300">
-                    <svg class="w-5 h-5 text-[#d4a373] animate-bounce-horizontal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
+            <div id="sub-categorias" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 md:mb-16 min-h-[40px] relative">
+                <div id="sub-categorias-scroll" class="w-full"></div>
+                <div class="sub-scroll-hint md:hidden">
+                    <svg class="w-3 h-3 text-[#d4a373]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
             </div>
 
@@ -294,7 +291,6 @@
             window.scrollTo({ top: document.getElementById('section-results').offsetTop - 100, behavior: 'smooth' });
         }
 
-        // Lógica para mostrar/ocultar el botón "Volver arriba"
         window.onscroll = function() {
             const btn = document.getElementById("back-to-top");
             if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
