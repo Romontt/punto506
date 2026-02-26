@@ -148,11 +148,11 @@ body {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(212, 163, 115, 0.3) !important;
     border-bottom: 2px solid var(--p506-accent) !important;
-    padding: 12px 20px !important; 
+    padding: 12px 20px !important; /* Más espacioso */
     transition: var(--transition-premium);
-    max-width: 320px; 
+    max-width: 320px; /* Un poco más ancho */
     margin: 0 auto;
-    border-radius: 8px; 
+    border-radius: 8px; /* Redondeado premium */
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
@@ -205,7 +205,7 @@ body {
     z-index: 10;
 }
 
-/* --- TARJETAS DE RESULTADOS --- */
+/* --- TARJETAS DE RESULTADOS (JERARQUÍA Y HOVER) --- */
 .glass-card {
     display: flex;
     flex-direction: column;
@@ -225,6 +225,7 @@ body {
     padding: 1.5rem !important;
 }
 
+/* Placeholder Premium para imágenes faltantes */
 .img-placeholder {
     background: var(--p506-wood);
     display: flex;
@@ -242,10 +243,11 @@ body {
 .glass-card:hover {
     border-color: var(--p506-accent);
     background: rgba(60, 50, 45, 0.8);
-    transform: translateY(-12px); 
+    transform: translateY(-12px); /* Elevación más marcada */
     box-shadow: 0 30px 60px rgba(0,0,0,0.5);
 }
 
+/* Micro-interacción botón Explorar */
 .glass-card button {
     margin-top: auto !important;
     border-radius: 12px;
@@ -317,6 +319,7 @@ body {
     scrollbar-color: var(--p506-accent) transparent;
 }
 
+/* Forzar relleno compacto dentro del modal */
 #modal-content .p-6, #modal-content .p-8, #modal-content .p-10 {
     padding: 1.5rem !important;
 }
@@ -327,6 +330,7 @@ body {
     }
 }
 
+/* Personalización del scroll interno */
 #modal-content::-webkit-scrollbar { width: 4px; }
 #modal-content::-webkit-scrollbar-track { background: transparent; }
 #modal-content::-webkit-scrollbar-thumb { 
@@ -344,7 +348,7 @@ body {
     border-radius: 16px;
 }
 
-/* --- FOOTER --- */
+/* --- FOOTER (MEJORADO) --- */
 footer.header-texture {
     background-position: center top;
     background-image: 
@@ -361,15 +365,16 @@ footer p, footer nav a, footer h3, footer h2, footer span {
     text-shadow: 0 2px 4px rgba(0,0,0,1);
 }
 
+/* Corrección de contraste crítica para footer */
 footer .text-stone-400, 
 footer .text-stone-500 {
-    color: #e5e7eb !important; 
+    color: #e5e7eb !important; /* Stone-200 equivalente */
     opacity: 0.9;
 }
 
 footer .text-stone-600, 
 footer .text-stone-700 {
-    color: #9ca3af !important; 
+    color: #9ca3af !important; /* Stone-400 equivalente */
 }
 
 footer nav a:hover {
@@ -387,29 +392,8 @@ footer nav a:hover {
 
 .grid-expandido { max-height: 30000px !important; }
 
-/* --- RESPONSIVE / MÓVIL (ÚNICAS REGLAS QUE SE ACTIVAN EN CELULAR) --- */
+/* --- RESPONSIVE / MÓVIL --- */
 @media (max-width: 768px) {
-    /* Reducir espacios en Nav */
-    nav .max-w-7xl {
-        padding-top: 0.75rem !important;
-        padding-bottom: 0.75rem !important;
-    }
-
-    /* Reducir espacio entre Título Categoría y Etiquetas */
-    #section-results .flex.items-center.mb-8 {
-        margin-bottom: 0.75rem !important;
-    }
-
-    /* Reducir espacio entre Etiquetas y Grid de Negocios */
-    #sub-categorias {
-        margin-bottom: 1.25rem !important;
-    }
-
-    /* Subir el contenido principal para no tener tanto aire arriba */
-    main.max-w-7xl {
-        padding-top: 1rem !important;
-    }
-
     .header-texture { 
         padding-top: 2rem !important; 
         padding-bottom: 2rem !important;
