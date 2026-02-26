@@ -328,7 +328,6 @@ function verDetalle(id) {
                         <p class="elegant-italic text-white text-lg leading-relaxed italic border-l-2 border-[#d4a373]/30 pl-4">"${n.servicios_resumen}"</p>
                      </div>
                      <div>
-                        <h4 class="text-[9px] uppercase tracking-[0.4em] font-black text-stone-500 mb-3">Sobre nosotros</h4>
                         <p class="text-stone-400 text-sm leading-relaxed">${n.descripcion || 'Una propuesta curada bajo los estándares de exclusividad de Punto 506.'}</p>
                      </div>
                 </div>
