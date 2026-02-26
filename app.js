@@ -303,65 +303,66 @@ function verDetalle(id) {
 
     const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría solicitar más información.`);
 
-    // Ajuste de tamaño en el contenedor principal y en la imagen para evitar scroll excesivo
+    // Estructura limpia para evitar doble scroll y elementos duplicados
     document.getElementById('modal-content').innerHTML = `
-        <div class="relative h-56 md:h-80 overflow-hidden">
-            <img src="${n.imagen}" alt="${n.nombre}" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#1c1614] via-transparent"></div>
-            <button onclick="cerrarModal()" class="absolute top-4 right-4 z-50 text-white/50 hover:text-white transition-colors">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="modal-inner-wrapper">
+            <button onclick="cerrarModal()" class="modal-close-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
             </button>
-        </div>
-        <div class="p-6 md:p-10 -mt-12 relative z-10 bg-[#1c1614] max-w-4xl mx-auto">
-            <div class="flex flex-col items-center text-center mb-6">
-                <span class="text-[#d4a373] text-[9px] font-bold tracking-[0.5em] uppercase mb-2">${n.categoria}</span>
-                <h2 class="serif-title text-2xl md:text-3xl text-white uppercase tracking-[0.1em] font-light">${n.nombre}</h2>
-                <div class="h-px w-10 bg-[#d4a373] mt-3"></div>
-            </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 items-start">
-                <div class="space-y-4">
-                     <h4 class="text-[8px] uppercase tracking-[0.4em] font-bold text-stone-500 border-b border-stone-800 pb-2">Propuesta de Valor</h4>
-                     <p class="elegant-italic text-white text-base leading-relaxed italic">"${n.servicios_resumen}"</p>
-                     <p class="text-stone-400 text-[11px] leading-relaxed">${n.descripcion || 'Una experiencia curada minuciosamente por el equipo de Punto 506.'}</p>
-                </div>
-                <div class="bg-black/20 p-5 space-y-4 border border-white/5 flex flex-col justify-center rounded-sm">
-                    <div class="flex items-center gap-3">
-                        <div class="text-[#d4a373]"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <p class="text-stone-300 text-[10px] uppercase tracking-[0.15em]">${n.horario || 'Horario bajo reserva'}</p>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <div class="text-[#d4a373]"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <p class="text-stone-300 text-[10px] uppercase tracking-[0.15em] leading-relaxed">${n.direccion || 'Ubicación Premium Pococí'}</p>
-                    </div>
-                </div>
+            <div class="modal-image-container">
+                <img src="${n.imagen}" alt="${n.nombre}">
+                <div class="modal-image-overlay"></div>
             </div>
 
-            <div class="flex flex-col sm:flex-row gap-3 mb-10">
-                <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" class="flex-1 text-center py-4 bg-[#d4a373] text-[#130f0e] text-[9px] font-black uppercase tracking-[0.3em] hover:bg-white transition-all duration-500">WhatsApp</a>
-                <a href="${n.instagram || '#'}" target="_blank" class="flex-1 text-center py-4 border border-[#d4a373]/30 text-[#d4a373] text-[9px] font-bold uppercase tracking-[0.3em] hover:bg-white/5 transition-all duration-500">Instagram</a>
-            </div>
-
-            <div id="feedback-section" class="border-t border-white/5 pt-8">
-                <div id="form-wrapper">
-                    <h3 class="text-[9px] text-stone-500 uppercase tracking-[0.3em] mb-4 text-center">¿Sugerencias para mejorar?</h3>
-                    <form id="feedback-form" action="https://formspree.io/f/mlgwzggv" method="POST" class="space-y-3">
-                        <input type="hidden" name="Negocio" value="${n.nombre}">
-                        <textarea name="comentario" required placeholder="Tu opinión es anónima..." 
-                            class="w-full bg-black/40 border border-[#d4a373]/10 p-3 text-white text-xs focus:outline-none focus:border-[#d4a373] transition-colors h-24"></textarea>
-                        <button type="submit" class="w-full py-3 border border-[#d4a373] text-[#d4a373] text-[8px] font-black uppercase tracking-[0.4em] hover:bg-[#d4a373] hover:text-black transition-all">
-                            Enviar
-                        </button>
-                    </form>
+            <div class="modal-body-content">
+                <div class="text-center mb-8">
+                    <span class="category-badge">${n.categoria}</span>
+                    <h2 class="modal-title serif-title">${n.nombre}</h2>
+                    <div class="accent-line"></div>
                 </div>
-                <div id="success-message" class="hidden text-center py-6">
-                    <p class="text-[#d4a373] text-[10px] uppercase tracking-[0.3em] font-bold">¡Gracias por tu opinión!</p>
+                
+                <div class="modal-grid">
+                    <div class="info-main">
+                         <h4 class="info-label">Propuesta de Valor</h4>
+                         <p class="elegant-italic text-white text-lg mb-4 italic">"${n.servicios_resumen}"</p>
+                         <p class="text-stone-400 text-xs leading-relaxed">${n.descripcion || 'Una experiencia curada minuciosamente por el equipo de Punto 506.'}</p>
+                    </div>
+                    <div class="info-side">
+                        <div class="info-item">
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span>${n.horario || 'Bajo reserva'}</span>
+                        </div>
+                        <div class="info-item">
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span>${n.direccion || 'Pococí, Costa Rica'}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" class="btn-whatsapp">WhatsApp</a>
+                    <a href="${n.instagram || '#'}" target="_blank" class="btn-instagram">Instagram</a>
+                </div>
+
+                <div id="feedback-section" class="modal-feedback">
+                    <div id="form-wrapper">
+                        <h3 class="feedback-title">¿Sugerencias para mejorar?</h3>
+                        <form id="feedback-form" action="https://formspree.io/f/mlgwzggv" method="POST" class="space-y-4">
+                            <input type="hidden" name="Negocio" value="${n.nombre}">
+                            <textarea name="comentario" required placeholder="Tu opinión es anónima..." class="feedback-input"></textarea>
+                            <button type="submit" class="btn-submit">Enviar Sugerencia</button>
+                        </form>
+                    </div>
+                    <div id="success-message" class="hidden feedback-success">
+                        <p>¡Gracias por tu opinión!</p>
+                    </div>
                 </div>
             </div>
         </div>
     `;
 
-    // Lógica de envío sin recarga
+    // Lógica de envío de feedback
     const form = document.getElementById('feedback-form');
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
