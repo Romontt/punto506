@@ -111,47 +111,12 @@ body {
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* Contenedor de navegación principal */
-#nav-categories {
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Indicador de scroll para el Navbar */
-.scroll-hint-arrow {
-    transition: opacity 0.4s ease;
-    text-shadow: 0 0 10px rgba(212, 163, 115, 0.5);
-}
-
-/* Sistema de sub-categorías (Etiquetas) */
+/* Navegación PC (Etiquetas centradas) */
 #sub-categorias-scroll {
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
     display: flex;
-    scrollbar-width: none;
-}
-
-.sub-scroll-hint {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: linear-gradient(to left, var(--p506-bg) 40%, transparent);
-    padding-left: 30px;
-    pointer-events: none;
-    z-index: 10;
-    transition: opacity 0.5s ease;
-}
-
-.sub-scroll-hint svg {
-    color: var(--p506-accent);
-    animation: bounceRight 2s infinite;
-}
-
-@keyframes bounceRight {
-    0%, 20%, 50%, 80%, 100% { transform: translateX(0); }
-    40% { transform: translateX(5px); }
-    60% { transform: translateX(3px); }
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
 }
 
 .filter-btn {
@@ -339,15 +304,61 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
     }
     .portal-card { height: 260px; }
     
-    /* Mejoras en el scroll móvil del Navbar */
+    /* Navbar móvil */
     #nav-categories {
-        padding-bottom: 10px;
+        padding-bottom: 5px;
         mask-image: linear-gradient(to right, black 85%, transparent 100%);
+        overflow-x: auto;
+        display: flex;
+        scroll-behavior: smooth;
+    }
+
+    /* Contenedor de etiquetas elegante y ultra-compacto */
+    #sub-categorias {
+        margin-top: 0.2rem;
+        padding: 0 5px;
+        position: relative;
     }
 
     #sub-categorias-scroll {
-        padding-left: 1rem;
-        padding-right: 3rem;
+        display: flex;
+        flex-wrap: nowrap; /* Fuerza fila única */
+        justify-content: flex-start;
+        overflow-x: auto;
+        gap: 6px;
+        padding: 10px 0;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #sub-categorias button {
+        padding: 5px 12px !important;
+        font-size: 7.5px !important; /* Texto refinado */
+        letter-spacing: 0.1em !important;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.03);
+        flex: 0 0 auto; /* Evita que se encojan */
+    }
+
+    /* Flecha/degradado sutil para indicar más contenido */
+    .sub-scroll-hint {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 40px;
+        background: linear-gradient(to left, var(--p506-bg), transparent);
+        pointer-events: none;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        z-index: 5;
+    }
+
+    .sub-scroll-hint svg {
+        width: 12px;
+        opacity: 0.3;
+        color: var(--p506-accent);
+        margin-right: 5px;
     }
 }
 
