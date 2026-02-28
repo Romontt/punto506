@@ -233,6 +233,7 @@ function renderSubCategorias() {
             .flatMap(n => n.etiquetas)
     )];
 
+    // Crear estructura de scroll para móvil
     contenedorBase.className = "relative w-full overflow-hidden";
     
     const scrollContainer = document.createElement('div');
@@ -260,6 +261,7 @@ function renderSubCategorias() {
     contenedorBase.appendChild(scrollContainer);
     contenedorBase.appendChild(hint);
 
+    // Lógica de flecha para el scroll de subcategorías
     scrollContainer.addEventListener('scroll', () => {
         const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
         hint.style.opacity = (scrollContainer.scrollLeft >= maxScroll - 10) ? '0' : '1';
@@ -369,17 +371,11 @@ function verDetalle(id) {
                 </div>
             </div>
 
-            <div class="flex flex-row md:flex-col gap-4 mb-12">
+            <div class="flex flex-col sm:flex-row gap-4 mb-12">
                 <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" 
-                   class="flex-1 md:w-full flex items-center justify-center py-5 bg-[#d4a373] text-[#130f0e] hover:bg-white transition-all">
-                   <svg class="w-6 h-6 md:hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412-.003 6.557-5.338 11.892-11.893 11.892-1.996-.001-3.951-.5-5.688-1.448l-6.309 1.656zm6.29-4.139c1.52.907 3.21 1.385 4.931 1.385h.005c5.319 0 9.648-4.328 9.65-9.649.001-2.578-1.003-5.001-2.827-6.824-1.825-1.824-4.248-2.83-6.827-2.831-5.32 0-9.65 4.329-9.652 9.65-.001 1.836.52 3.588 1.503 5.068l-.991 3.616 3.698-.97zm10.163-7.013c-.278-.139-1.643-.811-1.898-.904-.255-.093-.441-.139-.626.139-.184.278-.713.904-.874 1.088-.162.185-.324.208-.602.069-.278-.139-1.173-.432-2.235-1.38-.826-.736-1.383-1.645-1.545-1.922-.162-.277-.017-.427.121-.565.125-.124.278-.324.417-.486.139-.162.185-.278.278-.463.093-.185.046-.347-.023-.486-.069-.139-.626-1.505-.858-2.066-.226-.546-.453-.472-.626-.481-.161-.008-.347-.01-.533-.01s-.487.07-.742.347c-.255.278-.973.951-.973 2.318 0 1.366.997 2.686 1.135 2.871.139.185 1.962 2.996 4.753 4.199.663.287 1.181.458 1.584.586.667.212 1.274.182 1.754.11.535-.08 1.643-.671 1.875-1.32.231-.648.231-1.204.162-1.32-.069-.116-.255-.185-.533-.324z"/></svg>
-                   <span class="hidden md:block text-[10px] font-black uppercase tracking-[0.4em]">WhatsApp</span>
-                </a>
+                   class="flex-1 text-center py-5 bg-[#d4a373] text-[#130f0e] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white transition-all">WhatsApp</a>
                 <a href="${n.instagram || '#'}" target="_blank" 
-                   class="flex-1 md:w-full flex items-center justify-center py-5 border border-[#d4a373]/30 text-[#d4a373] hover:bg-[#d4a373]/5 transition-all">
-                   <svg class="w-6 h-6 md:hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.805.249 2.227.412.558.217.957.477 1.377.896.42.42.68.818.896 1.377.163.422.358 1.057.412 2.227.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.249 1.805-.412 2.227-.217.558-.477.957-.896 1.377-.42.42-.818.68-1.377.896-.422.163-1.057.358-2.227.412-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.805-.249-2.227-.412-.558-.217-.957-.477-1.377-.896-.42-.42-.68-.818-.896-1.377-.163-.422-.358-1.057-.412-2.227-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.054-1.17.249-1.805.412-2.227.217-.558.477-.957.896-1.377.42-.42.818-.68 1.377-.896.422-.163 1.057-.358 2.227-.412 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-1.277.057-2.148.258-2.911.554-.79.306-1.461.717-2.128 1.384s-1.078 1.338-1.384 2.128c-.296.763-.497 1.634-.554 2.911-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.057 1.277.258 2.148.554 2.911.306.79.717 1.461 1.384 2.128s1.338 1.078 2.128 1.384c.763.296 1.634.497 2.911.554 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.277-.057 2.148-.258 2.911-.554.79-.306 1.461-.717 2.128-1.384s1.078-1.338 1.384-2.128c.296-.763.497-1.634.554-2.911.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.057-1.277-.258-2.148-.554-2.911-.306-.79-.717-1.461-1.384-2.128s-1.338-1.078-2.128-1.384c-.763-.296-1.634-.497-2.911-.554-1.28-.058-1.688-.072-4.947-.072zM12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-                   <span class="hidden md:block text-[10px] font-black uppercase tracking-[0.4em]">Instagram Oficial</span>
-                </a>
+                   class="flex-1 text-center py-5 border border-[#d4a373]/30 text-[#d4a373] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-[#d4a373]/5 transition-all">Instagram Oficial</a>
             </div>
 
             <div class="border-t border-white/5 pt-10">
