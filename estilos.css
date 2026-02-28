@@ -55,7 +55,7 @@
     overflow: hidden;
 }
 
-/* --- ESTILOS BASE --- */
+/* --- ESTILOS BASE ACLARADOS --- */
 body { 
     font-family: 'Inter', sans-serif; 
     background-color: var(--p506-bg);
@@ -82,7 +82,7 @@ body {
     animation: revealCard 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
 }
 
-/* --- HEADER --- */
+/* --- HEADER ACLARADO --- */
 .header-texture {
     position: relative;
     background-color: #130f0e;
@@ -107,7 +107,7 @@ body {
     animation: revealCard 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* --- NAVIGATION --- */
+/* --- NAVIGATION MÓVIL & MEJORA SCROLL INDICATOR --- */
 .hide-scroll {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -141,7 +141,7 @@ body {
     color: var(--p506-accent);
 }
 
-/* --- BUSCADOR --- */
+/* --- BUSCADOR PROMINENTE --- */
 .search-container {
     background: rgba(255, 255, 255, 0.05) !important;
     backdrop-filter: blur(10px);
@@ -315,7 +315,7 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
 .grid-limitado { max-height: 1400px; overflow: hidden; transition: max-height 1.5s ease; }
 .grid-expandido { max-height: 30000px !important; }
 
-/* --- ANIMACIÓN --- */
+/* --- ANIMACIÓN FLECHA REVELADORA --- */
 @keyframes bounce-x {
     0%, 100% { transform: translateX(0); }
     50% { transform: translateX(5px); }
@@ -323,16 +323,18 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
 .animate-bounce-x { animation: bounce-x 1.5s infinite; }
 
 /* =============================================
-   --- AJUSTE ETIQUETAS Y ESPACIOS --- 
+   --- AJUSTE ETIQUETAS Y ESPACIOS (ELIMINACIÓN DE HUECOS) --- 
    ============================================= */
 
+/* 1. ELIMINAR ESPACIO ENTRE HEADER Y SALUD */
 #section-results { 
     padding-top: 0px !important; 
-    margin-top: -45px !important; 
+    margin-top: -45px !important; /* Sube la sección para pegar SALUD al header */
 }
 
+/* 2. ELIMINAR ESPACIO ENTRE SALUD Y ETIQUETAS */
 #categoria-titulo { 
-    margin-bottom: -15px !important; 
+    margin-bottom: -15px !important; /* Sube las etiquetas hacia el título */
     padding-top: 0px !important; 
 }
 
@@ -341,6 +343,7 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
     margin-bottom: 0.5rem !important; 
 }
 
+/* 3. ESTILO ETIQUETAS */
 #subcat-scroll button {
     font-size: 13px !important; 
     font-weight: 600 !important;
@@ -353,6 +356,7 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
 
 #subcat-scroll button:hover { opacity: 1; color: var(--p506-accent); }
 
+/* Efecto subrayado dorado en etiqueta activa */
 #subcat-scroll button.bg-white, 
 #subcat-scroll button.text-black {
     background-color: transparent !important;
@@ -371,85 +375,33 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
     box-shadow: 0 0 8px var(--p506-accent);
 }
 
-/* --- RESPONSIVE / MÓVIL (ULTRA-COMPACTO) --- */
+/* --- RESPONSIVE / MÓVIL --- */
 @media (max-width: 768px) {
     .header-texture { 
-        padding-top: 1.5rem !important; 
-        padding-bottom: 1.5rem !important;
-    }
-
-    #section-results { 
-        margin-top: -60px !important; /* Pega la sección al buscador */
+        padding-top: 2rem !important; 
         padding-bottom: 2rem !important;
     }
 
-    #categoria-titulo { 
-        margin-bottom: -5px !important; 
-    }
-    
-    #categoria-titulo h2 { 
-        line-height: 1 !important; 
-        font-size: 1.1rem; 
-        letter-spacing: 0.15em;
+    #section-results { 
+        margin-top: -25px !important; /* Ajuste menor para móvil */
     }
 
+    #categoria-titulo { 
+        margin-bottom: -10px !important; 
+    }
+    
+    #categoria-titulo h2 { line-height: 1 !important; font-size: 1.25rem; }
+
     #subcat-scroll button {
-        font-size: 9px !important; 
-        padding: 5px 12px !important;
-        letter-spacing: 0.1em;
-        font-weight: 500 !important;
+        font-size: 11px !important; 
+        padding: 6px 10px !important;
     }
 
     #grid-negocios { 
         display: grid !important;
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 0.6rem !important; 
+        gap: 0.75rem !important; 
         margin-top: 0.5rem !important;
-        padding: 0 0.5rem;
-    }
-
-    .glass-card {
-        border-radius: 12px;
-    }
-
-    .glass-card .relative.h-64 {
-        height: 140px !important; /* Compacta la imagen */
-    }
-
-    .glass-card .p-8 {
-        padding: 0.8rem !important; /* Reduce huecos internos */
-    }
-
-    .glass-card .business-title {
-        font-size: 0.85rem !important;
-        margin-bottom: 0.4rem !important;
-        line-height: 1.2;
-    }
-
-    .glass-card .elegant-italic {
-        font-size: 11px !important;
-        margin-bottom: 0.8rem !important;
-        line-height: 1.3;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
-    .glass-card button {
-        padding: 8px !important;
-        font-size: 7px !important;
-        letter-spacing: 0.15em;
-        border-radius: 6px;
-    }
-
-    #modal-content {
-        max-height: 90vh;
-        width: 95%;
-    }
-
-    #modal-content .p-8 {
-        padding: 1.5rem !important;
     }
 }
 
