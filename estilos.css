@@ -55,7 +55,7 @@
     overflow: hidden;
 }
 
-/* --- ESTILOS BASE ACLARADOS --- */
+/* --- ESTILOS BASE --- */
 body { 
     font-family: 'Inter', sans-serif; 
     background-color: var(--p506-bg);
@@ -82,7 +82,7 @@ body {
     animation: revealCard 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
 }
 
-/* --- HEADER ACLARADO --- */
+/* --- HEADER --- */
 .header-texture {
     position: relative;
     background-color: #130f0e;
@@ -107,7 +107,7 @@ body {
     animation: revealCard 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* --- NAVIGATION MÓVIL & MEJORA SCROLL INDICATOR --- */
+/* --- NAVIGATION & FILTROS --- */
 .hide-scroll {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -141,7 +141,7 @@ body {
     color: var(--p506-accent);
 }
 
-/* --- BUSCADOR PROMINENTE --- */
+/* --- BUSCADOR --- */
 .search-container {
     background: rgba(255, 255, 255, 0.05) !important;
     backdrop-filter: blur(10px);
@@ -204,7 +204,7 @@ body {
     z-index: 10;
 }
 
-/* --- TARJETAS DE RESULTADOS --- */
+/* --- TARJETAS DE RESULTADOS (GRID) --- */
 .glass-card {
     display: flex;
     flex-direction: column;
@@ -217,24 +217,25 @@ body {
     overflow: hidden;
 }
 
-.glass-card .p-8 {
+.glass-card .p-6, .glass-card .p-8 {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    padding: 1.5rem !important;
+    padding: 1.25rem !important; /* Padding reducido para evitar estiramiento */
 }
 
 .glass-card:hover {
     border-color: var(--p506-accent);
     background: rgba(60, 50, 45, 0.8);
-    transform: translateY(-12px);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
-.glass-card button {
+/* Botón de Detalles Exclusivos */
+.glass-card button[onclick*="verDetalle"] {
     margin-top: auto !important;
-    border-radius: 12px;
-    padding: 12px;
+    border-radius: 8px;
+    padding: 14px;
     font-size: 8px;
     letter-spacing: 0.25em;
     border: 1px solid rgba(212, 163, 115, 0.4);
@@ -242,51 +243,23 @@ body {
     color: var(--p506-accent);
     text-transform: uppercase;
     font-weight: 900;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.4s ease;
 }
 
-.glass-card:hover button {
+.glass-card:hover button[onclick*="verDetalle"] {
     background: var(--p506-accent);
     color: var(--p506-bg);
-    transform: scale(1.05);
-    letter-spacing: 0.3em;
 }
 
-/* NUEVO: Botón de favoritos en tarjeta */
+/* Botón de favoritos redondo */
 .glass-card button[onclick*="toggleFavorito"] {
     background: rgba(19, 15, 14, 0.6);
     backdrop-filter: blur(4px);
-    transition: all 0.3s ease;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.glass-card button[onclick*="toggleFavorito"]:hover {
-    transform: scale(1.2) !important;
-    background: rgba(19, 15, 14, 0.9);
-}
-
-/* --- BOTÓN VOLVER ARRIBA --- */
-#back-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 45px;
-    height: 45px;
-    background: var(--p506-accent);
-    color: var(--p506-bg);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 99;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.4s ease;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-}
-#back-to-top.show { opacity: 1; visibility: visible; }
-
-/* --- AJUSTES DE MODAL --- */
+/* --- MODAL DETALLE --- */
 #modal-negocio {
     z-index: 1000;
     backdrop-filter: blur(15px);
@@ -294,19 +267,28 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.5rem;
+    padding: 1rem;
 }
 
 #modal-content {
     width: 100%;
     max-width: 550px; 
-    max-height: 80vh;  
+    max-height: 90vh;  
     overflow-y: auto;
     background-color: #1c1614;
     border: 1px solid rgba(212, 163, 115, 0.2);
-    box-shadow: 0 25px 50px rgba(0,0,0,0.7);
-    position: relative;
-    border-radius: 8px;
+    border-radius: 12px;
+}
+
+/* Botón Cómo Llegar en el Modal */
+a[href*="maps.google.com"] {
+    box-shadow: 0 4px 15px rgba(212, 163, 115, 0.1);
+    border-radius: 4px;
+}
+a[href*="maps.google.com"]:hover {
+    background: var(--p506-accent) !important;
+    color: var(--p506-bg) !important;
+    transform: translateY(-2px);
 }
 
 /* --- FOOTER --- */
@@ -315,105 +297,71 @@ footer.header-texture {
     background-image: 
         linear-gradient(to top, rgba(19, 15, 14, 0.98) 0%, rgba(19, 15, 14, 0.8) 50%, var(--p506-bg) 100%),
         url("img/fondoheader.jpg");
-    background-size: cover;
-    box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
     border-top: 1px solid rgba(212, 163, 115, 0.1);
-    padding-top: 5rem !important;
+    padding-top: 4rem !important;
 }
-
-footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
 
 /* --- SISTEMA VER MÁS --- */
 .grid-limitado { max-height: 1400px; overflow: hidden; transition: max-height 1.5s ease; }
 .grid-expandido { max-height: 30000px !important; }
 
-/* --- ANIMACIÓN FLECHA REVELADORA --- */
-@keyframes bounce-x {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(5px); }
-}
-.animate-bounce-x { animation: bounce-x 1.5s infinite; }
-
-/* =============================================
-   --- AJUSTE ETIQUETAS Y ESPACIOS (ELIMINACIÓN DE HUECOS) --- 
-   ============================================= */
-
-/* 1. ELIMINAR ESPACIO ENTRE HEADER Y SALUD */
+/* --- AJUSTE ETIQUETAS Y ESPACIOS --- */
 #section-results { 
     padding-top: 0px !important; 
     margin-top: -45px !important; 
 }
 
-/* 2. ELIMINAR ESPACIO ENTRE SALUD Y ETIQUETAS */
 #categoria-titulo { 
     margin-bottom: -15px !important; 
     padding-top: 0px !important; 
 }
 
-#sub-categorias { 
-    margin-top: 0px !important; 
-    margin-bottom: 0.5rem !important; 
-}
-
-/* 3. ESTILO ETIQUETAS */
 #subcat-scroll button {
     font-size: 13px !important; 
     font-weight: 600 !important;
-    letter-spacing: 0.03em;
-    position: relative;
-    transition: all 0.3s ease;
     opacity: 0.6;
     padding: 8px 16px !important;
 }
 
-#subcat-scroll button:hover { opacity: 1; color: var(--p506-accent); }
-
 #subcat-scroll button.bg-white, 
-#subcat-scroll button.text-black {
+#subcat-scroll button.text-black,
+#subcat-scroll button[style*="border-color: rgb(212, 163, 115)"] {
     background-color: transparent !important;
     color: var(--p506-accent) !important;
     opacity: 1 !important;
 }
 
-#subcat-scroll button.bg-white::after {
-    content: '';
-    position: absolute;
-    bottom: 2px;
-    left: 20%;
-    width: 60%;
-    height: 2px;
-    background: var(--p506-accent);
-    box-shadow: 0 0 8px var(--p506-accent);
-}
-
 /* --- RESPONSIVE / MÓVIL --- */
 @media (max-width: 768px) {
-    .header-texture { 
-        padding-top: 2rem !important; 
-        padding-bottom: 2rem !important;
-    }
-
-    #section-results { 
-        margin-top: -25px !important; 
-    }
-
-    #categoria-titulo { 
-        margin-bottom: -10px !important; 
-    }
-    
-    #categoria-titulo h2 { line-height: 1 !important; font-size: 1.25rem; }
-
-    #subcat-scroll button {
-        font-size: 11px !important; 
-        padding: 6px 10px !important;
-    }
-
     #grid-negocios { 
         display: grid !important;
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
         gap: 0.75rem !important; 
-        margin-top: 0.5rem !important;
+        padding: 0 0.5rem;
     }
+
+    /* Reducir títulos para que la tarjeta sea compacta */
+    .business-title {
+        font-size: 0.85rem !important;
+        line-height: 1.2;
+        min-height: 2.4rem !important;
+    }
+
+    /* Ocultar descripción en móvil para ahorrar espacio en la tarjeta */
+    .elegant-italic {
+        display: none !important;
+    }
+
+    .glass-card .p-6 {
+        padding: 0.75rem !important;
+    }
+
+    .glass-card button[onclick*="verDetalle"] {
+        padding: 10px;
+        font-size: 7px;
+    }
+
+    #section-results { margin-top: -25px !important; }
 }
 
 .hidden { display: none !important; }
