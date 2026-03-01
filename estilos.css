@@ -323,18 +323,18 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
 .animate-bounce-x { animation: bounce-x 1.5s infinite; }
 
 /* =============================================
-   --- AJUSTE ETIQUETAS Y ESPACIOS (ELIMINACIÓN DE HUECOS) --- 
+   --- AJUSTE ETIQUETAS Y ESPACIOS --- 
    ============================================= */
 
 /* 1. ELIMINAR ESPACIO ENTRE HEADER Y SALUD */
 #section-results { 
     padding-top: 0px !important; 
-    margin-top: -45px !important; /* Sube la sección para pegar SALUD al header */
+    margin-top: -45px !important; 
 }
 
 /* 2. ELIMINAR ESPACIO ENTRE SALUD Y ETIQUETAS */
 #categoria-titulo { 
-    margin-bottom: -15px !important; /* Sube las etiquetas hacia el título */
+    margin-bottom: -15px !important; 
     padding-top: 0px !important; 
 }
 
@@ -375,6 +375,48 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
     box-shadow: 0 0 8px var(--p506-accent);
 }
 
+/* =============================================
+   --- NUEVOS ESTILOS ICONOS DE CONTACTO (MODAL) --- 
+   ============================================= */
+.flex.justify-center.gap-6 a {
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(212, 163, 115, 0.2);
+    color: var(--p506-accent);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px; /* Estilo ligeramente cuadrado para ir con la estética Cinzel */
+}
+
+.flex.justify-center.gap-6 a:hover {
+    background-color: var(--p506-accent);
+    color: var(--p506-bg);
+    transform: translateY(-5px);
+    border-color: var(--p506-accent);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Tooltip opcional */
+.flex.justify-center.gap-6 a::after {
+    content: attr(title);
+    position: absolute;
+    bottom: -25px;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    color: var(--p506-accent);
+}
+
+.flex.justify-center.gap-6 a:hover::after {
+    opacity: 1;
+}
+
 /* --- RESPONSIVE / MÓVIL --- */
 @media (max-width: 768px) {
     .header-texture { 
@@ -383,7 +425,7 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
     }
 
     #section-results { 
-        margin-top: -25px !important; /* Ajuste menor para móvil */
+        margin-top: -25px !important; 
     }
 
     #categoria-titulo { 
@@ -402,6 +444,11 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
         gap: 0.75rem !important; 
         margin-top: 0.5rem !important;
+    }
+
+    .flex.justify-center.gap-6 a {
+        width: 3rem;
+        height: 3rem;
     }
 }
 
