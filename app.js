@@ -444,5 +444,22 @@ function cerrarModal() {
 document.getElementById('modal-negocio').addEventListener('click', function(e) {
     if (e.target === this) cerrarModal();
 });
+const categoriasContenedor = document.getElementById('nav-categories');
+const indicadorFlechas = document.getElementById('scroll-hint');
+
+if (categoriasContenedor && indicadorFlechas) {
+    categoriasContenedor.addEventListener('scroll', () => {
+        const scrollMaximo = categoriasContenedor.scrollWidth - categoriasContenedor.clientWidth;
+        const scrollActual = categoriasContenedor.scrollLeft;
+
+        // Si falta menos de 15px para llegar al final, ocultamos
+        if (scrollActual >= scrollMaximo - 15) {
+            indicadorFlechas.style.opacity = '0';
+        } else {
+            // Si vuelve a haber contenido a la derecha, aparecen
+            indicadorFlechas.style.opacity = '1';
+        }
+    });
+},
 
 loadData();
