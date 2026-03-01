@@ -60,7 +60,7 @@ body {
     font-family: 'Inter', sans-serif; 
     background-color: var(--p506-bg);
     background-image: 
-        radial-gradient(circle at 50% 0%, rgba(212, 163, 115, 0.12) 0%, transparent 75%),
+        radial-gradient(circle at 50% 0%, rgba(212, 163, 115, 0.12) 0%, transparent 75%), 
         url("https://www.transparenttextures.com/patterns/dark-linen.png");
     background-attachment: fixed;
     scroll-behavior: smooth;
@@ -116,10 +116,10 @@ body {
     display: none;
 }
 
+/* CORREGIDO: Se eliminó el difuminado (mask-image) */
 .nav-scroll-container {
     position: relative;
-    mask-image: linear-gradient(to right, black 85%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    overflow: visible;
 }
 
 .scroll-hint-arrow {
@@ -376,6 +376,34 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
 }
 
 /* =============================================
+   --- AJUSTE LOGO Y NAVBAR (NUEVO) --- 
+   ============================================= */
+/* Clase para el contenedor que envuelve logo y nombre */
+.brand-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; /* Espacio entre el isotipo y el texto */
+    flex-shrink: 0;
+}
+
+/* Ajuste específico para el isotipo en el navbar */
+.nav-logo-iso {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+}
+
+/* Ajuste del nombre Punto 506 */
+.nav-brand-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: white;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* =============================================
    --- NUEVOS ESTILOS ICONOS DE CONTACTO (MODAL) --- 
    ============================================= */
 .flex.justify-center.gap-6 a {
@@ -388,7 +416,7 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
     color: var(--p506-accent);
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     background: rgba(0, 0, 0, 0.3);
-    border-radius: 4px; /* Estilo ligeramente cuadrado para ir con la estética Cinzel */
+    border-radius: 4px; 
 }
 
 .flex.justify-center.gap-6 a:hover {
@@ -399,7 +427,6 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Tooltip opcional */
 .flex.justify-center.gap-6 a::after {
     content: attr(title);
     position: absolute;
@@ -449,6 +476,10 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
     .flex.justify-center.gap-6 a {
         width: 3rem;
         height: 3rem;
+    }
+
+    .nav-brand-name {
+        font-size: 0.85rem;
     }
 }
 
