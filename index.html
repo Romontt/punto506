@@ -27,6 +27,10 @@
 
     <style>
         #form-status.success { color: #d4a373; font-style: italic; font-size: 12px; }
+        /* Ajuste fino para el scroll del modal */
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #130f0e; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #d4a373; }
     </style>
 </head>
 <body class="antialiased text-stone-200">
@@ -75,7 +79,6 @@
                         <button data-cat="salud" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Salud</button>
                         <button data-cat="gastronomía" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Gastronomía</button>
                         <button data-cat="estética" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Estética</button>
-                        <button data-cat="vida nocturna" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Vida Nocturna</button>
                         <button data-cat="servicios" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Servicios Varios</button>
                         <button data-cat="turismo" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Turismo</button>
                     </div>
@@ -140,7 +143,7 @@
     </main>
 
     <div id="modal-negocio" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl">
-        <div id="modal-content" class="custom-scroll">
+        <div id="modal-content" class="custom-scroll relative w-full max-w-2xl bg-[#1c1614] border border-[#d4a373]/20 shadow-2xl rounded-lg overflow-y-auto max-h-[90vh]">
             </div>
     </div>
     
@@ -183,7 +186,6 @@
                         <a href="javascript:void(0)" onclick="filtrarCategoria('salud')" class="text-[9px] uppercase tracking-[0.3em] text-stone-400 hover:text-white transition-colors">Salud</a>
                         <a href="javascript:void(0)" onclick="filtrarCategoria('gastronomía')" class="text-[9px] uppercase tracking-[0.3em] text-stone-400 hover:text-white transition-colors">Gastronomía</a>
                         <a href="javascript:void(0)" onclick="filtrarCategoria('estética')" class="text-[9px] uppercase tracking-[0.3em] text-stone-400 hover:text-white transition-colors">Estética</a>
-                        <a href="javascript:void(0)" onclick="filtrarCategoria('vida nocturna')" class="text-[9px] uppercase tracking-[0.3em] text-stone-400 hover:text-white transition-colors">Vida Nocturna</a>
                         <a href="javascript:void(0)" onclick="filtrarCategoria('servicios')" class="text-[9px] uppercase tracking-[0.3em] text-stone-400 hover:text-white transition-colors">Servicios Varios</a>
                         <a href="javascript:void(0)" onclick="filtrarCategoria('turismo')" class="text-[9px] uppercase tracking-[0.3em] text-stone-400 hover:text-white transition-colors">Turismo</a>
                     </nav>
@@ -288,6 +290,7 @@
             window.scrollTo({ top: document.getElementById('section-results').offsetTop - 100, behavior: 'smooth' });
         }
 
+        // Lógica para mostrar/ocultar el botón "Volver arriba"
         window.onscroll = function() {
             const btn = document.getElementById("back-to-top");
             if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
