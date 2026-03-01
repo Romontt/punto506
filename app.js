@@ -78,14 +78,17 @@ function renderLanding() {
         { id: 'turismo', nombre: 'Destinos & Turismo', img: 'https://images.unsplash.com/photo-1590523278191-995cbcda646b?q=80&w=1000&auto=format&fit=crop' }
     ];
 
+    // Cambio principal: grid-cols-2 en móvil, gap más pequeño
+    landing.className = "grid grid-cols-2 md:grid-cols-3 gap-4 px-4 md:px-0";
+
     landing.innerHTML = categoriasConfig.map((cat, i) => `
         <div onclick="seleccionarCategoria('${cat.id}')" 
-             class="portal-card animate-reveal" 
+             class="portal-card animate-reveal h-40 md:h-64" 
              style="animation-delay: ${i * 0.1}s">
-            <img src="${cat.img}" alt="${cat.nombre}" loading="lazy">
-            <div class="portal-card-content">
-                <div class="mb-2 h-px w-8 bg-[#d4a373]/50"></div>
-                <h3 class="serif-title text-white text-lg tracking-[0.3em] uppercase">${cat.nombre}</h3>
+            <img src="${cat.img}" alt="${cat.nombre}" class="w-full h-full object-cover">
+            <div class="portal-card-content p-4">
+                <div class="mb-1 h-[1px] w-6 bg-[#d4a373]/50"></div>
+                <h3 class="serif-title text-white text-[10px] md:text-lg tracking-[0.2em] uppercase leading-tight">${cat.nombre}</h3>
             </div>
         </div>
     `).join('');
@@ -196,29 +199,32 @@ function renderCards(listaFiltrada) {
     grid.style.opacity = '0';
 
     setTimeout(() => {
-        grid.innerHTML = listaFiltrada.map((n, i) => `
-            <article class="group glass-card animate-reveal"
-                  style="animation-delay: ${i * 0.08}s; animation-fill-mode: forwards;">
-                <div class="relative h-64 overflow-hidden">
-                    <img src="${n.imagen}" 
-                         class="w-full h-full object-cover sepia-[10%] group-hover:sepia-0 group-hover:scale-110 transition duration-[2s] ease-out" 
-                         alt="${n.nombre}"
-                         loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#130f0e] via-transparent opacity-80"></div>
-                    <div class="absolute top-6 left-6 text-[#d4a373] text-[7px] font-black tracking-[0.4em] uppercase bg-[#130f0e]/80 backdrop-blur-md px-3 py-1.5 border border-[#d4a373]/20">${n.categoria}</div>
-                </div>
-                <div class="p-8 text-center flex flex-col flex-grow">
-                    <h3 class="business-title text-xl text-white uppercase tracking-wider font-bold mb-4 group-hover:text-[#d4a373] transition-colors duration-500">${n.nombre}</h3>
-                    <p class="elegant-italic text-stone-400 text-[14px] leading-relaxed line-clamp-2 mb-8 italic">
-                        "${n.servicios_resumen}"
-                    </p>
-                    <button onclick="verDetalle(${n.id})" 
-                            class="mt-auto w-full py-4 text-[#d4a373] text-[9px] font-bold uppercase tracking-[0.5em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-700">
-                        Detalles Exclusivos
-                    </button>
-                </div>
-            </article>
-        `).join('');
+       grid.innerHTML = listaFiltrada.map((n, i) => `
+    <article class="group glass-card animate-reveal overflow-hidden"
+          style="animation-delay: ${i * 0.08}s; animation-fill-mode: forwards;">
+        
+        <div class="relative h-48 md:h-64 overflow-hidden">
+            <img src="${n.imagen}" 
+                 class="w-full h-full object-cover sepia-[10%] group-hover:sepia-0 group-hover:scale-110 transition duration-[2s] ease-out" 
+                 alt="${n.nombre}"
+                 loading="lazy">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#130f0e] via-transparent opacity-80"></div>
+            <div class="absolute top-4 left-4 text-[#d4a373] text-[6px] font-black tracking-[0.4em] uppercase bg-[#130f0e]/80 backdrop-blur-md px-2 py-1 border border-[#d4a373]/20">${n.categoria}</div>
+        </div>
+
+        <div class="p-5 md:p-8 text-center flex flex-col flex-grow">
+            <h3 class="business-title text-base md:text-xl text-white uppercase tracking-wider font-bold mb-2 group-hover:text-[#d4a373] transition-colors duration-500">${n.nombre}</h3>
+            <p class="elegant-italic text-stone-400 text-[11px] md:text-[14px] leading-relaxed line-clamp-2 mb-4 italic">
+                "${n.servicios_resumen}"
+            </p>
+            <button onclick="verDetalle(${n.id})" 
+                    class="mt-auto w-full py-3 md:py-4 text-[#d4a373] text-[8px] md:text-[9px] font-bold uppercase tracking-[0.5em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-700">
+                Detalles
+            </button>
+        </div>
+    </article>
+`).join('');
+        
         grid.style.opacity = '1';
         gestionarLimiteVisual(listaFiltrada.length);
     }, 300);
