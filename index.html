@@ -37,7 +37,6 @@
         .elegant-italic { font-family: 'Baskervville', serif; font-style: italic; }
         #form-status.success { color: #4ade80; font-style: italic; font-size: 12px; }
         
-        /* Glassmorphism para el Header al hacer scroll */
         .nav-glass { background: rgba(15, 17, 21, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(230, 57, 70, 0.2); }
     </style>
 </head>
@@ -61,85 +60,85 @@
     </div>
 
     <nav class="nav-glass sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between py-4 px-6 gap-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between py-3 px-6 gap-3">
             
-            <div class="flex items-center gap-4 cursor-pointer" onclick="volverInicio()">
-                <div class="w-12 h-12 flex items-center justify-center border-2 border-[#e63946] rounded-lg">
-                    <span class="serif-title text-lg text-white">506</span>
+            <div class="flex items-center gap-3 cursor-pointer" onclick="volverInicio()">
+                <div class="w-10 h-10 flex items-center justify-center border-2 border-[#e63946] rounded-lg">
+                    <span class="serif-title text-base text-white">506</span>
                 </div>
                 <div class="flex flex-col">
-                    <h1 class="serif-title text-xl tracking-tighter text-white uppercase leading-none">Punto 506</h1>
-                    <span class="text-[#e63946] text-[8px] tracking-[0.2em] font-bold uppercase">DESCUBRE. CONECTA. DESTACA.</span>
+                    <h1 class="serif-title text-lg tracking-tighter text-white uppercase leading-none">Punto 506</h1>
+                    <span class="text-[#e63946] text-[7px] tracking-[0.2em] font-bold uppercase">DESCUBRE. CONECTA. DESTACA.</span>
                 </div>
             </div>
 
             <div class="relative w-full md:w-auto overflow-hidden">
-                <div class="flex items-center gap-6 overflow-x-auto hide-scroll pb-1" id="nav-categories">
-                    <button data-cat="todos" class="filter-btn transition text-[10px] uppercase tracking-widest font-bold text-[#e63946] border-b-2 border-[#e63946] pb-1 whitespace-nowrap">Inicio</button>
-                    <button data-cat="salud" class="filter-btn transition text-[10px] uppercase tracking-widest font-bold text-stone-500 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Salud</button>
-                    <button data-cat="gastronomía" class="filter-btn transition text-[10px] uppercase tracking-widest font-bold text-stone-500 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Gastronomía</button>
-                    <button data-cat="estética" class="filter-btn transition text-[10px] uppercase tracking-widest font-bold text-stone-500 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Estética</button>
-                    <button data-cat="servicios" class="filter-btn transition text-[10px] uppercase tracking-widest font-bold text-stone-500 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Servicios</button>
-                    <button data-cat="turismo" class="filter-btn transition text-[10px] uppercase tracking-widest font-bold text-stone-500 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Turismo</button>
+                <div class="flex items-center gap-5 overflow-x-auto hide-scroll pb-1" id="nav-categories">
+                    <button data-cat="todos" class="filter-btn transition text-[9px] uppercase tracking-widest font-bold text-[#e63946] border-b-2 border-[#e63946] pb-1 whitespace-nowrap">Inicio</button>
+                    <button data-cat="salud" class="filter-btn transition text-[9px] uppercase tracking-widest font-bold text-stone-500 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Salud</button>
+                    <button data-cat="gastronomía" class="filter-btn transition text-[9px] uppercase tracking-widest font-bold text-stone-500 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Gastronomía</button>
+                    <button data-cat="estética" class="filter-btn transition text-[9px] uppercase tracking-widest font-bold text-stone-500 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Estética</button>
+                    <button data-cat="servicios" class="filter-btn transition text-[9px] uppercase tracking-widest font-bold text-stone-500 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Servicios</button>
+                    <button data-cat="turismo" class="filter-btn transition text-[9px] uppercase tracking-widest font-bold text-stone-500 pb-1 border-b-2 border-transparent hover:text-white whitespace-nowrap">Turismo</button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <header id="main-header" class="relative py-16 md:py-28 bg-[#0f1115] overflow-hidden border-b border-white/5">
+    <header id="main-header" class="relative py-8 md:py-12 bg-[#0f1115] overflow-hidden border-b border-white/5">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-10 pointer-events-none">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--rojo-506)_0%,_transparent_70%)]"></div>
         </div>
 
         <div class="relative z-10 max-w-5xl mx-auto text-center px-6">
-            <div id="purpose-card" class="mb-12 transition-all duration-700">
-                <span class="inline-block px-4 py-1 rounded-full border border-[#e63946]/30 text-[#e63946] text-[10px] font-bold uppercase tracking-widest mb-6">Directorío Comercial</span>
-                <h2 class="serif-title text-3xl md:text-5xl text-white mb-6 leading-tight">¿Qué buscas hoy en <span class="text-[#e63946]">Pococí?</span></h2>
-                <p class="elegant-italic text-stone-400 text-lg md:text-xl max-w-2xl mx-auto">
-                    "Punto 506 es un espacio creado para fortalecer el comercio local en Pococí. Nuestra misión es conectar a la comunidad con servicios profesionales de calidad, sirviendo como una plataforma de crecimiento mutuo donde cada negocio tiene el potencial de destacar y cada usuario encuentra lo mejor de nuestra zona."
+            <div id="purpose-card" class="mb-6 transition-all duration-700">
+                <span class="inline-block px-3 py-0.5 rounded-full border border-[#e63946]/30 text-[#e63946] text-[9px] font-bold uppercase tracking-widest mb-4">Directorio Comercial</span>
+                <h2 class="serif-title text-2xl md:text-4xl text-white mb-4 leading-tight">¿Qué buscas hoy en <span class="text-[#e63946]">Pococí?</span></h2>
+                <p class="elegant-italic text-stone-400 text-base md:text-lg max-w-2xl mx-auto">
+                    "Punto 506 es un espacio creado para fortalecer el comercio local en Pococí. Conectamos a la comunidad con servicios profesionales de calidad, destacando lo mejor de nuestra zona."
                 </p>
             </div>
 
-            <div id="discover-tagline" class="hidden mb-12">
-                <h2 class="serif-title text-white text-3xl md:text-4xl uppercase tracking-tighter italic">
+            <div id="discover-tagline" class="hidden mb-6">
+                <h2 class="serif-title text-white text-2xl md:text-3xl uppercase tracking-tighter italic">
                     Descubre. <span class="text-[#e63946]">Conecta.</span> Destaca.
                 </h2>
             </div>
             
-            <div class="relative max-w-2xl mx-auto group">
+            <div class="relative max-w-xl mx-auto group">
                 <div class="absolute inset-0 bg-[#e63946]/20 blur-xl group-focus-within:bg-[#e63946]/40 transition-all"></div>
-                <div class="relative flex items-center bg-[#1a1d23] border border-white/10 rounded-2xl p-2 focus-within:border-[#e63946]/50 transition-all shadow-2xl">
-                    <div class="pl-4 text-[#e63946]">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="relative flex items-center bg-[#1a1d23] border border-white/10 rounded-xl p-1.5 focus-within:border-[#e63946]/50 transition-all shadow-2xl">
+                    <div class="pl-3 text-[#e63946]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </div>
-                    <input type="text" id="busqueda" placeholder="Busca por nombre, servicio o categoría..." class="bg-transparent border-none outline-none text-white px-4 py-3 w-full text-lg placeholder:text-stone-600 focus:ring-0">
+                    <input type="text" id="busqueda" placeholder="Busca por nombre o servicio..." class="bg-transparent border-none outline-none text-white px-3 py-2 w-full text-base placeholder:text-stone-600 focus:ring-0">
                 </div>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto py-12 md:py-20 px-6">
+    <main class="max-w-7xl mx-auto py-8 md:py-12 px-6">
         <div id="landing-categories" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             </div>
 
         <div id="section-results" class="hidden">
-            <div class="flex items-center justify-center gap-4 mb-12">
+            <div class="flex items-center justify-center gap-4 mb-8">
                 <div class="h-[2px] w-12 bg-[#e63946]"></div>
                 <h2 id="categoria-titulo" class="serif-title text-sm md:text-lg text-white uppercase tracking-[0.3em]">Resultados</h2>
                 <div class="h-[2px] w-12 bg-[#e63946]"></div>
             </div>
 
-            <div id="sub-categorias" class="flex flex-wrap justify-center gap-3 mb-12 min-h-[40px]"></div>
+            <div id="sub-categorias" class="flex flex-wrap justify-center gap-3 mb-8 min-h-[40px]"></div>
 
             <div class="relative">
                 <div id="wrapper-grid" class="grid-limitado">
                     <div id="grid-negocios" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
                 </div>
 
-                <div id="btn-ver-mas-container" class="flex justify-center mt-16 hidden">
-                    <button onclick="expandirGrid()" id="btn-ver-mas" class="group relative px-12 py-4 bg-[#e63946] text-white rounded-full overflow-hidden transition-all shadow-lg hover:shadow-[#e63946]/40">
+                <div id="btn-ver-mas-container" class="flex justify-center mt-12 hidden">
+                    <button onclick="expandirGrid()" id="btn-ver-mas" class="group relative px-10 py-3.5 bg-[#e63946] text-white rounded-full overflow-hidden transition-all shadow-lg hover:shadow-[#e63946]/40">
                         <span class="relative z-10 serif-title text-xs uppercase tracking-widest">Explorar todo el directorio</span>
                     </button>
                 </div>
@@ -152,36 +151,36 @@
             </div>
     </div>
     
-    <section id="grow-network-section" class="max-w-6xl mx-auto py-20 px-6">
-        <div class="bg-gradient-to-br from-[#1a1d23] to-[#0f1115] p-8 md:p-16 rounded-[2rem] border border-white/5 text-center shadow-inner">
-            <h3 class="serif-title text-white text-2xl md:text-3xl mb-6 italic">¿Tu comercio aún no es parte del <span class="text-[#e63946]">estándar preeminente?</span></h3>
-            <p class="text-stone-400 text-base md:text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
+    <section id="grow-network-section" class="max-w-6xl mx-auto py-12 px-6">
+        <div class="bg-gradient-to-br from-[#1a1d23] to-[#0f1115] p-8 md:p-12 rounded-[2rem] border border-white/5 text-center shadow-inner">
+            <h3 class="serif-title text-white text-xl md:text-2xl mb-4 italic">¿Tu comercio aún no es parte del <span class="text-[#e63946]">estándar preeminente?</span></h3>
+            <p class="text-stone-400 text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed">
                 ¿Tienes un negocio o conoces algún lugar en Pococí que merezca estar aquí? Ayúdanos a destacar lo mejor de nuestra zona.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-6">
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
                 <a href="https://wa.me/+50661961136?text=Hola!%20Me%20gustaría%20registrar%20mi%20negocio%20en%20Punto%20506" 
                     target="_blank" 
-                    class="bg-[#e63946] text-white px-8 py-4 rounded-xl serif-title text-[10px] uppercase tracking-widest hover:scale-105 transition-transform">
+                    class="bg-[#e63946] text-white px-7 py-3.5 rounded-xl serif-title text-[9px] uppercase tracking-widest hover:scale-105 transition-transform">
                     Registrar mi negocio
                 </a>
                 <a href="https://wa.me/+50661961136?text=Hola!%20Quiero%20recomendar%20un%20negocio%20para%20Punto%20506" 
                     target="_blank" 
-                    class="bg-white/5 text-white border border-white/10 px-8 py-4 rounded-xl serif-title text-[10px] uppercase tracking-widest hover:bg-white/10 transition-colors">
+                    class="bg-white/5 text-white border border-white/10 px-7 py-3.5 rounded-xl serif-title text-[9px] uppercase tracking-widest hover:bg-white/10 transition-colors">
                     Recomendar un lugar
                 </a>
             </div>
         </div>
     </section>
 
-    <footer class="bg-[#0a0c10] border-t border-white/5 pt-20 pb-10">
+    <footer class="bg-[#0a0c10] border-t border-white/5 pt-16 pb-10">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                 <div class="flex flex-col items-center md:items-start">
-                    <div class="w-14 h-14 bg-[#e63946] rounded-xl flex items-center justify-center shadow-lg mb-6">
-                        <span class="serif-title text-xl text-white">506</span>
+                    <div class="w-12 h-12 bg-[#e63946] rounded-xl flex items-center justify-center shadow-lg mb-4">
+                        <span class="serif-title text-lg text-white">506</span>
                     </div>
-                    <h2 class="serif-title text-2xl text-white mb-2 uppercase">Punto 506</h2>
-                    <p class="text-stone-500 text-[10px] leading-relaxed tracking-widest uppercase">Guápiles, Pococí, Costa Rica</p>
+                    <h2 class="serif-title text-xl text-white mb-2 uppercase">Punto 506</h2>
+                    <p class="text-stone-500 text-[9px] leading-relaxed tracking-widest uppercase">Guápiles, Pococí, Costa Rica</p>
                 </div>
 
                 <div class="text-center md:text-left">
