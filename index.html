@@ -27,6 +27,10 @@
 
     <style>
         #form-status.success { color: #d4a373; font-style: italic; font-size: 12px; }
+        /* Ajuste fino para el scroll del modal */
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #130f0e; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #d4a373; }
     </style>
 </head>
 <body class="antialiased text-stone-200">
@@ -139,7 +143,7 @@
     </main>
 
     <div id="modal-negocio" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl">
-        <div id="modal-content" class="custom-scroll">
+        <div id="modal-content" class="custom-scroll relative w-full max-w-2xl bg-[#1c1614] border border-[#d4a373]/20 shadow-2xl rounded-lg overflow-y-auto max-h-[90vh]">
             </div>
     </div>
     
