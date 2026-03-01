@@ -1,7 +1,6 @@
 let negociosRaw = [];
 let categoriaActual = 'todos';
 let etiquetaActual = null;
-let userCoords = null; // Nueva variable para geolocalización
 
 const normalizar = (t) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
@@ -16,35 +15,11 @@ function toggleFavorito(id, event) {
     }
     localStorage.setItem('favoritos_p506', JSON.stringify(favoritos));
     
-    // Actualizar visualmente el botón sin recargar
     const btn = event.currentTarget;
     const icon = btn.querySelector('i');
     icon.classList.toggle('fa-solid');
     icon.classList.toggle('fa-regular');
     btn.classList.toggle('text-red-500');
-}
-
-// --- LÓGICA DE GEOLOCALIZACIÓN ---
-function obtenerUbicacion() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(pos => {
-            userCoords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-            // Si ya hay tarjetas renderizadas, las actualizamos para mostrar la distancia
-            if (negociosRaw.length > 0 && categoriaActual !== 'todos') aplicarFiltrosCombinados();
-        });
-    }
-}
-
-function calcularDistancia(lat1, lon1, lat2, lon2) {
-    if (!lat1 || !lon1 || !lat2 || !lon2) return null;
-    const R = 6371; // Radio de la Tierra en km
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLon = (lon2 - lon1) * Math.PI / 180;
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-              Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return (R * c).toFixed(1);
 }
 
 // --- LÓGICA DE HEADER Y SECCIONES DINÁMICAS ---
@@ -180,8 +155,6 @@ async function loadData() {
         const response = await fetch('negocios.json');
         negociosRaw = await response.json();
         
-        obtenerUbicacion(); // Iniciar geolocalización
-
         const params = new URLSearchParams(window.location.search);
         const catParam = params.get('categoria');
 
@@ -235,37 +208,35 @@ function renderCards(listaFiltrada) {
     setTimeout(() => {
         grid.innerHTML = listaFiltrada.map((n, i) => {
             const esFav = favoritos.includes(n.id);
-            let distanciaHTML = '';
-            
-            if (userCoords && n.lat && n.lng) {
-                const dist = calcularDistancia(userCoords.lat, userCoords.lng, n.lat, n.lng);
-                distanciaHTML = `<span class="ml-2 text-[8px] opacity-70">| A ${dist} km</span>`;
-            }
+            const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría solicitar más información.`);
 
             return `
             <article class="group glass-card animate-reveal"
                   style="animation-delay: ${i * 0.08}s; animation-fill-mode: forwards;">
-                <div class="relative h-64 overflow-hidden">
+                <div class="relative h-56 md:h-64 overflow-hidden">
                     <img src="${n.imagen}" 
-                         class="w-full h-full object-cover sepia-[10%] group-hover:sepia-0 group-hover:scale-110 transition duration-[2s] ease-out" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition duration-[2s] ease-out" 
                          alt="${n.nombre}"
                          loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#130f0e] via-transparent opacity-80"></div>
                     
-                    <div class="absolute top-6 left-6 text-[#d4a373] text-[7px] font-black tracking-[0.4em] uppercase bg-[#130f0e]/80 backdrop-blur-md px-3 py-1.5 border border-[#d4a373]/20">
-                        ${n.categoria} ${distanciaHTML}
+                    <div class="absolute top-4 left-4 text-[#d4a373] text-[7px] font-black tracking-[0.4em] uppercase bg-[#130f0e]/80 backdrop-blur-md px-3 py-1.5 border border-[#d4a373]/20">
+                        ${n.categoria}
                     </div>
 
                     <button onclick="toggleFavorito(${n.id}, event)" 
-                            class="absolute top-6 right-6 z-20 w-8 h-8 flex items-center justify-center bg-[#130f0e]/60 backdrop-blur-md rounded-full border border-white/10 transition-all ${esFav ? 'text-red-500' : 'text-white/50 hover:text-white'}">
+                            class="absolute top-4 right-4 z-20 w-8 h-8 flex items-center justify-center bg-[#130f0e]/60 backdrop-blur-md rounded-full border border-white/10 transition-all ${esFav ? 'text-red-500' : 'text-white/50 hover:text-white'}">
                         <i class="${esFav ? 'fa-solid' : 'fa-regular'} fa-heart text-xs"></i>
                     </button>
                 </div>
-                <div class="p-8 text-center flex flex-col flex-grow">
-                    <h3 class="business-title text-xl text-white uppercase tracking-wider font-bold mb-4 group-hover:text-[#d4a373] transition-colors duration-500">${n.nombre}</h3>
-                    <p class="elegant-italic text-stone-400 text-[14px] leading-relaxed line-clamp-2 mb-8 italic">
-                        "${n.servicios_resumen}"
-                    </p>
+                <div class="p-6 md:p-8 text-center flex flex-col flex-grow">
+                    <h3 class="business-title text-lg md:text-xl text-white uppercase tracking-wider font-bold mb-3 group-hover:text-[#d4a373] transition-colors duration-500 line-clamp-2 min-h-[3rem] flex items-center justify-center">${n.nombre}</h3>
+                    
+                    <div class="flex justify-center gap-4 mb-6">
+                        <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" class="text-stone-400 hover:text-[#d4a373] transition-colors"><i class="fa-brands fa-whatsapp text-xl"></i></a>
+                        <a href="${n.instagram || '#'}" target="_blank" class="text-stone-400 hover:text-[#d4a373] transition-colors"><i class="fa-brands fa-instagram text-xl"></i></a>
+                    </div>
+
                     <button onclick="verDetalle(${n.id})" 
                             class="mt-auto w-full py-4 text-[#d4a373] text-[9px] font-bold uppercase tracking-[0.5em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-700">
                         Detalles Exclusivos
@@ -336,7 +307,7 @@ function aplicarFiltrosCombinados() {
         const coincideBusqueda = normalizar(n.nombre).includes(busqueda) || 
                                  normalizar(n.servicios_resumen).includes(busqueda) ||
                                  normalizar(n.categoria).includes(busqueda) ||
-                                 (n.direccion && normalizar(n.direccion).includes(busqueda)); // Búsqueda por dirección
+                                 (n.direccion && normalizar(n.direccion).includes(busqueda));
         const coincideCategoria = categoriaActual === 'todos' || normalizar(n.categoria) === normalizar(categoriaActual);
         const coincideEtiqueta = !etiquetaActual || (n.etiquetas && n.etiquetas.includes(etiquetaActual));
         return coincideBusqueda && coincideCategoria && coincideEtiqueta;
@@ -380,7 +351,7 @@ function verDetalle(id) {
     if (!n) return;
 
     const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría solicitar más información.`);
-    const mapsUrl = n.lat ? `https://www.google.com/maps?q=${n.lat},${n.lng}` : '#';
+    const mapsUrl = n.lat ? `https://www.google.com/maps/search/?api=1&query=${n.lat},${n.lng}` : '#';
 
     const modalContenido = document.getElementById('modal-content');
     modalContenido.innerHTML = `
@@ -410,7 +381,7 @@ function verDetalle(id) {
                      </div>
                 </div>
                 
-                <div class="bg-black/30 p-6 border border-[#d4a373]/10 space-y-6 w-fit h-fit">
+                <div class="bg-black/30 p-6 border border-[#d4a373]/10 space-y-6 w-full h-fit">
                     <div class="flex items-start gap-4">
                         <div class="text-[#d4a373] mt-1"><i class="fa-regular fa-clock text-sm"></i></div>
                         <div>
@@ -422,20 +393,24 @@ function verDetalle(id) {
                         <div class="text-[#d4a373] mt-1"><i class="fa-solid fa-location-dot text-sm"></i></div>
                         <div>
                             <span class="block text-[8px] text-stone-500 uppercase tracking-widest mb-1">Ubicación</span>
-                            <p class="text-stone-200 text-xs font-medium uppercase tracking-wider leading-relaxed">${n.direccion || 'Distrito Premium, Pococí'}</p>
-                            ${n.lat ? `<a href="${mapsUrl}" target="_blank" class="text-[#d4a373] text-[8px] font-bold mt-2 inline-block hover:underline uppercase tracking-widest">Ver en Google Maps</a>` : ''}
+                            <p class="text-stone-200 text-xs font-medium uppercase tracking-wider leading-relaxed mb-4">${n.direccion || 'Distrito Premium, Pococí'}</p>
+                            ${n.lat ? `
+                                <a href="${mapsUrl}" target="_blank" 
+                                   class="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-[#d4a373]/40 text-[#d4a373] text-[9px] font-black uppercase tracking-[0.2em] hover:bg-[#d4a373] hover:text-black transition-all">
+                                   <i class="fa-solid fa-route"></i> CÓMO LLEGAR
+                                </a>` : ''}
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="flex flex-col sm:flex-row gap-4 mb-12">
+            <div class="flex flex-row gap-4 mb-12">
                 <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" 
                    class="flex-1 flex items-center justify-center gap-3 py-5 bg-[#d4a373] text-[#130f0e] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white transition-all">
-                   <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp</a>
+                   <i class="fa-brands fa-whatsapp text-lg"></i></a>
                 <a href="${n.instagram || '#'}" target="_blank" 
                    class="flex-1 flex items-center justify-center gap-3 py-5 border border-[#d4a373]/30 text-[#d4a373] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-[#d4a373]/5 transition-all">
-                   <i class="fa-brands fa-instagram text-lg"></i> Instagram</a>
+                   <i class="fa-brands fa-instagram text-lg"></i></a>
             </div>
 
             <div class="border-t border-white/5 pt-10">
