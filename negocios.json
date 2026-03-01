@@ -7,11 +7,14 @@
     "servicios_resumen": "Hamburguesas artesanales, costillas BBQ y papas especiales. Servicio exclusivo para llevar.",
     "instagram": "https://www.instagram.com/uykericocr/",
     "imagen": "img/uykerico.png",
-    "whatsapp": "+50689537426",
-    "descripcion": "Una de las propuestas más sólidas de Fast Food Grill en Pococí. Destaca por el uso de pan artesanal en sus hamburguesas y costillas con un glaseado BBQ impecable. Es la opción ideal para quienes buscan una cena con sabor a parrilla real pero con la comodidad del servicio para llevar.",
+    "whatsapp": "50689537426",
+    "descripcion": "Una de las propuestas más sólidas de Fast Food Grill en Pococí. Destaca por el uso de pan artesanal en sus hamburguesas y costillas con un glaseado BBQ impecable.",
     "horario": "Jueves, Viernes y Sábados | 6:00 PM a 10:00 PM",
-    "direccion": "La Emilia, 100m Norte de la Panadería La Esquinita"
-  },
+    "direccion": "La Emilia, 100m Norte de la Panadería La Esquinita",
+    "lat": 10.215089, 
+    "lng": -83.778693,
+    "maps_link": "https://maps.app.goo.gl/88hsnuMyQa3h7FEv9"
+},
   {
     "id": 2,
     "nombre": "María del Mar Venegas Estética & Spa",
@@ -24,6 +27,9 @@
     "descripcion": "Un centro estético que se diferencia por traer a la zona técnicas de vanguardia como el drenaje brasileño y el peeling coreano. El enfoque aquí es el bienestar integral, ofreciendo un espacio de calma donde la tecnología estética y el cuidado personal se encuentran en un ambiente profesional.",
     "horario": "Lunes a Sábado | Previa cita",
     "direccion": "Costado Noreste de las Oficinas del PANI, Guápiles"
+    "lat": 10.218297, 
+    "lng": -83.787854,
+    "maps_link": "https://maps.app.goo.gl/cKZRwTGcz8h9QkDL7"
   },
   {
     "id": 3,
@@ -37,6 +43,9 @@
     "descripcion": "Especialista en el arte de la mirada desde 2015. Brows by María del Mar combina técnica avanzada y precisión artística para resaltar la belleza natural de cada cliente. Ubicado en el corazón de Guápiles, este estudio es el referente en diseño de cejas, ofreciendo desde servicios tradicionales de depilación hasta las últimas tendencias internacionales como el laminado y el efecto polvo.",
     "horario": "Lunes a Sábado | Previa cita",
     "direccion": "Costado Noreste de las Oficinas del PANI, Guápiles"
+    "lat": 10.218297, 
+    "lng": -83.787854,
+    "maps_link": "https://maps.app.goo.gl/7vMxdqNDrwk5vQdW8"
   },
   {
     "id": 4,
@@ -50,6 +59,9 @@
     "descripcion": "Capturando momentos y construyendo marcas con una visión única. Montiel Diseño y Fotografía ofrece soluciones visuales integrales, desde la cobertura artística de eventos especiales y sesiones personalizadas hasta el desarrollo de logotipos que definen la esencia de su negocio. Profesionalismo y creatividad al servicio de su imagen.",
     "horario": "Lunes a Sábado: Bajo reserva",
     "direccion": "Guápiles, Pococí."
+    "lat": 10.2117, 
+    "lng": -83.7853,
+    "maps_link": "null"
   },
   {
   "id": 5,
@@ -63,6 +75,9 @@
   "descripcion": "Todos tus trámites de licencia en un mismo lugar. Especialistas en facilitar el proceso de obtención y renovación de licencia. Ofrecen alquiler de vehículos (moto, carro, cuadraciclo) para pruebas de manejo en las 13 sedes de Cosevi, además de dictámenes médicos digitales autorizados. ¡Aprovechá sus promociones mensuales!",
   "horario": "Lunes a Sábado | 8:00 AM a 5:00 PM",
   "direccion": "Sede Guápiles: 300 mts sur de Pequeño Mundo"
+  "lat": 10.1970902946147, 
+  "lng": -83.78486457460879,
+  "maps_link": "https://maps.app.goo.gl/nq5zw6GH2MBipga47"
 },
   {
   "id": 6,
@@ -76,6 +91,9 @@
   "descripcion": "Un centro integral que combina salud y belleza con tecnología de punta en Guápiles. Destacan por su sistema de depilación efectiva Fyralaser y una amplia gama de servicios profesionales que incluyen medicina, nutrición, odontología y perforación humanizada de orejas. Calidad médica y resultados estéticos en un solo lugar.",
   "horario": "Lunes a Sábado | Previa cita",
   "direccion": "Frente a la delegación del Tránsito (Policía de Tránsito), Guápiles"
+  "lat": 10.197221,
+  "lng": -83.784806,
+  "maps_link": "https://maps.app.goo.gl/FTisDrorsGPtaDpb9"
 },
   {
     "id": 7,
@@ -89,6 +107,9 @@
     "descripcion": "La propuesta de entrenamiento más completa en Guápiles. Se distingue por ser el único centro de acondicionamiento físico en la zona con piscina semi-olímpica, integrando la natación con disciplinas modernas como cardio dance, yoga y entrenamiento funcional. Ideal para quienes buscan variedad y profesionalismo en un solo lugar.",
     "horario": "Consultar horarios de clases y piscina directamente",
     "direccion": "300 mts sur de Pequeño mundo, Guápiles, Pococí."
+    "lat": 10.196724500377636,
+    "lng": -83.78396446350246,
+    "maps_link": "https://maps.app.goo.gl/ghyug93dwWaM49958"
   },
   {
   "id": 8,
@@ -102,6 +123,9 @@
   "descripcion": "⛱️ El balneario favorito de Guápiles para disfrutar en familia. Cuenta con amplias piscinas para adultos y niños equipadas con divertidos toboganes 💦. Además de la zona de piscinas, ofrece una experiencia completa con Restaurante😋, Heladería🍨 y Coctelería🍹🍻 para pasar un día inolvidable.",
   "horario": "Miércoles a Domingo | 9:00 AM a 5:00 PM",
   "direccion": "300 mts sur de Pequeño mundo, Guápiles, Pococí."
+  "lat": 10.196865935328027,
+  "lng": -83.78427664694284,
+  "maps_link": "https://maps.app.goo.gl/fCaVNBLQendZPwkN8"
 },
   {
  "id": 9,
@@ -115,5 +139,8 @@
   "descripcion": "Un centro integral que combina salud y belleza con tecnología de punta en Guápiles. Destacan por su sistema de depilación efectiva Fyralaser y una amplia gama de servicios profesionales que incluyen medicina, nutrición, odontología y perforación humanizada de orejas. Calidad médica y resultados estéticos en un solo lugar.",
   "horario": "Lunes a Sábado | Previa cita",
   "direccion": "Frente a la delegación del Tránsito (Policía de Tránsito), Guápiles"
+  "lat": 10.197221,
+  "lng": -83.784806,
+  "maps_link": "https://maps.app.goo.gl/FTisDrorsGPtaDpb9"
 }
 ]
