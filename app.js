@@ -325,7 +325,6 @@ function verDetalle(id) {
 
     const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría solicitar más información.`);
     
-    // Generar link de Google Maps si no existe uno válido
     const mapsUrl = (n.maps_link && n.maps_link !== "null") 
         ? n.maps_link 
         : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(n.nombre + ' ' + n.direccion)}`;
