@@ -252,6 +252,18 @@ body {
     letter-spacing: 0.3em;
 }
 
+/* NUEVO: Botón de favoritos en tarjeta */
+.glass-card button[onclick*="toggleFavorito"] {
+    background: rgba(19, 15, 14, 0.6);
+    backdrop-filter: blur(4px);
+    transition: all 0.3s ease;
+}
+
+.glass-card button[onclick*="toggleFavorito"]:hover {
+    transform: scale(1.2) !important;
+    background: rgba(19, 15, 14, 0.9);
+}
+
 /* --- BOTÓN VOLVER ARRIBA --- */
 #back-to-top {
     position: fixed;
@@ -329,12 +341,12 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
 /* 1. ELIMINAR ESPACIO ENTRE HEADER Y SALUD */
 #section-results { 
     padding-top: 0px !important; 
-    margin-top: -45px !important; /* Sube la sección para pegar SALUD al header */
+    margin-top: -45px !important; 
 }
 
 /* 2. ELIMINAR ESPACIO ENTRE SALUD Y ETIQUETAS */
 #categoria-titulo { 
-    margin-bottom: -15px !important; /* Sube las etiquetas hacia el título */
+    margin-bottom: -15px !important; 
     padding-top: 0px !important; 
 }
 
@@ -356,7 +368,6 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
 
 #subcat-scroll button:hover { opacity: 1; color: var(--p506-accent); }
 
-/* Efecto subrayado dorado en etiqueta activa */
 #subcat-scroll button.bg-white, 
 #subcat-scroll button.text-black {
     background-color: transparent !important;
@@ -383,7 +394,7 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
     }
 
     #section-results { 
-        margin-top: -25px !important; /* Ajuste menor para móvil */
+        margin-top: -25px !important; 
     }
 
     #categoria-titulo { 
