@@ -83,8 +83,8 @@ function renderLanding() {
              style="animation-delay: ${i * 0.1}s">
             <img src="${cat.img}" alt="${cat.nombre}" loading="lazy">
             <div class="portal-card-content">
-                <div class="mb-2 h-px w-8 bg-[#d4a373]/50"></div>
-                <h3 class="serif-title text-white text-lg tracking-[0.3em] uppercase">${cat.nombre}</h3>
+                <div class="mb-2 h-px w-8 bg-[#e63946]/50"></div>
+                <h3 class="serif-title text-white text-lg tracking-[0.2em] uppercase">${cat.nombre}</h3>
             </div>
         </div>
     `).join('');
@@ -198,19 +198,19 @@ function renderCards(listaFiltrada) {
                   style="animation-delay: ${i * 0.08}s; animation-fill-mode: forwards;">
                 <div class="relative h-64 overflow-hidden">
                     <img src="${n.imagen}" 
-                         class="w-full h-full object-cover sepia-[10%] group-hover:sepia-0 group-hover:scale-110 transition duration-[2s] ease-out" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition duration-[2s] ease-out" 
                          alt="${n.nombre}"
                          loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#130f0e] via-transparent opacity-80"></div>
-                    <div class="absolute top-6 left-6 text-[#d4a373] text-[7px] font-black tracking-[0.4em] uppercase bg-[#130f0e]/80 backdrop-blur-md px-3 py-1.5 border border-[#d4a373]/20">${n.categoria}</div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0f1115] via-transparent opacity-80"></div>
+                    <div class="absolute top-6 left-6 text-white text-[7px] font-black tracking-[0.4em] uppercase bg-[#e63946] px-3 py-1.5 shadow-lg">${n.categoria}</div>
                 </div>
                 <div class="p-8 text-center flex flex-col flex-grow">
-                    <h3 class="business-title text-xl text-white uppercase tracking-wider font-bold mb-4 group-hover:text-[#d4a373] transition-colors duration-500">${n.nombre}</h3>
+                    <h3 class="business-title text-xl text-white uppercase tracking-wider font-bold mb-4 group-hover:text-[#e63946] transition-colors duration-500">${n.nombre}</h3>
                     <p class="elegant-italic text-stone-400 text-[14px] leading-relaxed line-clamp-2 mb-8 italic">
                         "${n.servicios_resumen}"
                     </p>
                     <button onclick="verDetalle(${n.id})" 
-                            class="mt-auto w-full py-4 text-[#d4a373] text-[9px] font-bold uppercase tracking-[0.5em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-700">
+                            class="mt-auto w-full py-4 text-white text-[9px] font-bold uppercase tracking-[0.5em] border border-white/10 hover:bg-[#e63946] hover:border-[#e63946] transition-all duration-700">
                         Detalles Exclusivos
                     </button>
                 </div>
@@ -233,7 +233,6 @@ function renderSubCategorias() {
             .flatMap(n => n.etiquetas)
     )];
 
-    // Crear estructura de scroll para móvil
     contenedorBase.className = "relative w-full overflow-hidden";
     
     const scrollContainer = document.createElement('div');
@@ -243,13 +242,13 @@ function renderSubCategorias() {
     const hint = document.createElement('div');
     hint.id = "subcat-hint";
     hint.className = "absolute right-0 top-0 bottom-0 flex items-center pr-2 pointer-events-none transition-opacity duration-300 md:hidden";
-    hint.innerHTML = `<svg class="w-4 h-4 text-[#d4a373] animate-bounce-x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    hint.innerHTML = `<svg class="w-4 h-4 text-[#e63946] animate-bounce-x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
     etiquetas.forEach(tag => {
         const btn = document.createElement('button');
         btn.innerText = tag.toUpperCase();
         const activo = etiquetaActual === tag;
-        btn.className = `whitespace-nowrap text-[8px] tracking-[0.4em] px-5 py-2.5 border transition-all duration-700 ${activo ? 'border-[#d4a373] text-[#d4a373] font-bold bg-[#d4a373]/5' : 'border-transparent text-stone-500 hover:text-stone-200'}`;
+        btn.className = `whitespace-nowrap text-[8px] tracking-[0.4em] px-5 py-2.5 border transition-all duration-700 ${activo ? 'bg-[#e63946] border-[#e63946] text-white font-bold' : 'border-white/10 text-stone-500 hover:text-stone-200'}`;
         btn.onclick = () => {
             etiquetaActual = (etiquetaActual === tag) ? null : tag;
             renderSubCategorias();
@@ -261,7 +260,6 @@ function renderSubCategorias() {
     contenedorBase.appendChild(scrollContainer);
     contenedorBase.appendChild(hint);
 
-    // Lógica de flecha para el scroll de subcategorías
     scrollContainer.addEventListener('scroll', () => {
         const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
         hint.style.opacity = (scrollContainer.scrollLeft >= maxScroll - 10) ? '0' : '1';
@@ -312,10 +310,10 @@ function initFilters() {
 
 function activarBoton(btn) {
     document.querySelectorAll('.filter-btn').forEach(b => {
-        b.classList.remove('text-[#d4a373]', 'border-[#d4a373]', 'font-black');
+        b.classList.remove('text-[#e63946]', 'border-[#e63946]', 'font-black');
         b.classList.add('text-stone-500', 'border-transparent');
     });
-    btn.classList.add('text-[#d4a373]', 'border-[#d4a373]', 'font-black');
+    btn.classList.add('text-[#e63946]', 'border-[#e63946]', 'font-black');
 }
 
 // --- MODAL DETALLE ---
@@ -329,40 +327,40 @@ function verDetalle(id) {
     modalContenido.innerHTML = `
         <div class="relative h-48 md:h-64 overflow-hidden">
             <img src="${n.imagen}" alt="${n.nombre}" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#1c1614] via-transparent to-black/20"></div>
-            <button onclick="cerrarModal()" class="absolute top-6 right-6 z-50 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-all">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1a1d23] via-transparent to-black/20"></div>
+            <button onclick="cerrarModal()" class="absolute top-6 right-6 z-50 bg-black/40 hover:bg-[#e63946] text-white p-2 rounded-full transition-all">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
         </div>
         
-        <div class="p-8 md:p-12 -mt-10 relative z-10 bg-[#1c1614]">
+        <div class="p-8 md:p-12 -mt-10 relative z-10 bg-[#1a1d23]">
             <div class="text-center mb-10">
-                <span class="text-[#d4a373] text-[10px] font-black tracking-[0.5em] uppercase block mb-3">${n.categoria}</span>
+                <span class="text-[#e63946] text-[10px] font-black tracking-[0.5em] uppercase block mb-3">${n.categoria}</span>
                 <h2 class="serif-title text-3xl md:text-4xl text-white uppercase tracking-[0.1em]">${n.nombre}</h2>
-                <div class="h-px w-16 bg-[#d4a373] mx-auto mt-6"></div>
+                <div class="h-px w-16 bg-[#e63946] mx-auto mt-6"></div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
                 <div class="space-y-6">
                      <div>
                         <h4 class="text-[9px] uppercase tracking-[0.4em] font-black text-stone-500 mb-3">La Experiencia</h4>
-                        <p class="elegant-italic text-white text-lg leading-relaxed italic border-l-2 border-[#d4a373]/30 pl-4">"${n.servicios_resumen}"</p>
+                        <p class="elegant-italic text-white text-lg leading-relaxed italic border-l-2 border-[#e63946]/30 pl-4">"${n.servicios_resumen}"</p>
                      </div>
                      <div>
                         <p class="text-stone-400 text-sm leading-relaxed">${n.descripcion || 'Una propuesta curada bajo los estándares de exclusividad de Punto 506.'}</p>
                      </div>
                 </div>
                 
-                <div class="bg-black/30 p-6 border border-[#d4a373]/10 space-y-6 w-fit h-fit">
+                <div class="bg-black/20 p-6 border border-white/5 space-y-6 w-fit h-fit rounded-xl">
                     <div class="flex items-start gap-4">
-                        <div class="text-[#d4a373] mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div class="text-[#e63946] mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div>
                             <span class="block text-[8px] text-stone-500 uppercase tracking-widest mb-1">Horarios de Atención</span>
                             <p class="text-stone-200 text-xs font-medium uppercase tracking-wider">${n.horario || 'Consultar disponibilidad'}</p>
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
-                        <div class="text-[#d4a373] mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div class="text-[#e63946] mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div>
                             <span class="block text-[8px] text-stone-500 uppercase tracking-widest mb-1">Ubicación</span>
                             <p class="text-stone-200 text-xs font-medium uppercase tracking-wider leading-relaxed">${n.direccion || 'Distrito Premium, Pococí'}</p>
@@ -373,9 +371,9 @@ function verDetalle(id) {
 
             <div class="flex flex-col sm:flex-row gap-4 mb-12">
                 <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" 
-                   class="flex-1 text-center py-5 bg-[#d4a373] text-[#130f0e] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white transition-all">WhatsApp</a>
+                   class="flex-1 text-center py-5 bg-[#e63946] text-white text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white hover:text-black transition-all rounded-lg">WhatsApp</a>
                 <a href="${n.instagram || '#'}" target="_blank" 
-                   class="flex-1 text-center py-5 border border-[#d4a373]/30 text-[#d4a373] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-[#d4a373]/5 transition-all">Instagram Oficial</a>
+                   class="flex-1 text-center py-5 border border-white/10 text-white text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white/5 transition-all rounded-lg">Instagram Oficial</a>
             </div>
 
             <div class="border-t border-white/5 pt-10">
@@ -384,21 +382,20 @@ function verDetalle(id) {
                     <form id="feedback-form" action="https://formspree.io/f/mlgwzggv" method="POST" class="max-w-xl mx-auto space-y-4">
                         <input type="hidden" name="Negocio" value="${n.nombre}">
                         <textarea name="comentario" required placeholder="Escribe aquí tu sugerencia de forma anónima..." 
-                            class="w-full bg-black/50 border border-white/10 p-4 text-white text-xs focus:outline-none focus:border-[#d4a373] transition-colors h-28 resize-none"></textarea>
-                        <button type="submit" class="w-full py-4 border border-[#d4a373] text-[#d4a373] text-[9px] font-black uppercase tracking-[0.5em] hover:bg-[#d4a373] hover:text-black transition-all">
+                            class="w-full bg-black/50 border border-white/10 p-4 text-white text-xs focus:outline-none focus:border-[#e63946] transition-colors h-28 resize-none rounded-xl"></textarea>
+                        <button type="submit" class="w-full py-4 bg-transparent border border-[#e63946] text-[#e63946] text-[9px] font-black uppercase tracking-[0.5em] hover:bg-[#e63946] hover:text-white transition-all rounded-xl">
                             Enviar Comentarios
                         </button>
                     </form>
                 </div>
                 <div id="success-message" class="hidden text-center py-8">
-                    <div class="mb-4 text-[#d4a373] flex justify-center"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                    <p class="text-[#d4a373] text-[10px] uppercase tracking-[0.4em] font-black">Mensaje recibido con éxito</p>
+                    <div class="mb-4 text-[#2d6a4f] flex justify-center"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    <p class="text-[#2d6a4f] text-[10px] uppercase tracking-[0.4em] font-black">Mensaje recibido con éxito</p>
                 </div>
             </div>
         </div>
     `;
 
-    // Lógica Feedback
     const form = document.getElementById('feedback-form');
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
