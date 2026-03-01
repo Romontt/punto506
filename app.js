@@ -10,6 +10,7 @@ function gestionarVisibilidadHeader(categoria) {
     const discoverTagline = document.getElementById('discover-tagline');
     const growSection = document.getElementById('grow-network-section');
 
+    // Mantenemos la lógica de 'todos' para la landing y ocultamos en categorías específicas
     if (categoria === 'todos') {
         if (purposeCard) purposeCard.classList.remove('hidden');
         if (discoverTagline) discoverTagline.classList.add('hidden');
@@ -69,6 +70,7 @@ function renderLanding() {
     
     gestionarVisibilidadHeader('todos');
 
+    // Lista de categorías actualizada según tus instrucciones
     const categoriasConfig = [
         { id: 'salud', nombre: 'Salud & Bienestar', img: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1000' },
         { id: 'gastronomía', nombre: 'Gastronomía', img: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1000' },
@@ -142,6 +144,7 @@ async function loadData() {
         const params = new URLSearchParams(window.location.search);
         const catParam = params.get('categoria');
 
+        // Validación para evitar errores si la URL tiene una categoría inexistente
         if (catParam && catParam !== 'todos') {
             categoriaActual = catParam;
             gestionarVisibilidadHeader(catParam);
@@ -233,7 +236,6 @@ function renderSubCategorias() {
             .flatMap(n => n.etiquetas)
     )];
 
-    // Crear estructura de scroll para móvil
     contenedorBase.className = "relative w-full overflow-hidden";
     
     const scrollContainer = document.createElement('div');
@@ -261,7 +263,6 @@ function renderSubCategorias() {
     contenedorBase.appendChild(scrollContainer);
     contenedorBase.appendChild(hint);
 
-    // Lógica de flecha para el scroll de subcategorías
     scrollContainer.addEventListener('scroll', () => {
         const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
         hint.style.opacity = (scrollContainer.scrollLeft >= maxScroll - 10) ? '0' : '1';
