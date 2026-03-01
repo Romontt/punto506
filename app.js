@@ -77,7 +77,6 @@ function renderLanding() {
         { id: 'turismo', nombre: 'Destinos & Turismo', img: 'https://images.unsplash.com/photo-1590523278191-995cbcda646b?q=80&w=1000&auto=format&fit=crop' }
     ];
 
-    // Ajuste: Se redujo el espaciado (mb-1, padding, etc) para que las tarjetas sean más compactas
     landing.innerHTML = categoriasConfig.map((cat, i) => `
         <div onclick="seleccionarCategoria('${cat.id}')" 
              class="portal-card animate-reveal" 
@@ -317,7 +316,7 @@ function activarBoton(btn) {
     btn.classList.add('text-[#e63946]', 'border-[#e63946]', 'font-black');
 }
 
-// --- MODAL DETALLE ---
+// --- MODAL DETALLE (AJUSTADO PARA MEJORAR IMAGEN Y SCROLL) ---
 function verDetalle(id) {
     const n = negociosRaw.find(item => item.id === id);
     if (!n) return;
@@ -326,15 +325,15 @@ function verDetalle(id) {
 
     const modalContenido = document.getElementById('modal-content');
     modalContenido.innerHTML = `
-        <div class="relative h-48 md:h-64 overflow-hidden">
-            <img src="${n.imagen}" alt="${n.nombre}" class="w-full h-full object-cover">
+        <div class="relative bg-white/5 flex items-center justify-center p-6 h-56 md:h-72 overflow-hidden">
+            <img src="${n.imagen}" alt="${n.nombre}" class="max-w-full max-h-full object-contain relative z-10">
             <div class="absolute inset-0 bg-gradient-to-t from-[#1a1d23] via-transparent to-black/20"></div>
-            <button onclick="cerrarModal()" class="absolute top-6 right-6 z-50 bg-black/40 hover:bg-[#e63946] text-white p-2 rounded-full transition-all">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <button onclick="cerrarModal()" class="absolute top-6 right-6 z-50 bg-black/60 hover:bg-[#e63946] text-white p-2.5 rounded-full transition-all border border-white/10">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
         </div>
         
-        <div class="p-8 md:p-12 -mt-10 relative z-10 bg-[#1a1d23]">
+        <div class="p-8 md:p-12 -mt-6 relative z-10 bg-[#1a1d23] rounded-t-[2.5rem]">
             <div class="text-center mb-10">
                 <span class="text-[#e63946] text-[10px] font-black tracking-[0.5em] uppercase block mb-3">${n.categoria}</span>
                 <h2 class="serif-title text-3xl md:text-4xl text-white uppercase tracking-[0.1em]">${n.nombre}</h2>
@@ -352,7 +351,7 @@ function verDetalle(id) {
                      </div>
                 </div>
                 
-                <div class="bg-black/20 p-6 border border-white/5 space-y-6 w-fit h-fit rounded-xl">
+                <div class="bg-black/20 p-6 border border-white/5 space-y-6 w-full h-fit rounded-xl">
                     <div class="flex items-start gap-4">
                         <div class="text-[#e63946] mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div>
