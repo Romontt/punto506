@@ -4,24 +4,6 @@ let etiquetaActual = null;
 
 const normalizar = (t) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
-// --- LÓGICA DE FAVORITOS (LocalStorage) ---
-function toggleFavorito(id, event) {
-    event.stopPropagation();
-    let favoritos = JSON.parse(localStorage.getItem('favoritos_p506')) || [];
-    if (favoritos.includes(id)) {
-        favoritos = favoritos.filter(f => f !== id);
-    } else {
-        favoritos.push(id);
-    }
-    localStorage.setItem('favoritos_p506', JSON.stringify(favoritos));
-    
-    const btn = event.currentTarget;
-    const icon = btn.querySelector('i');
-    icon.classList.toggle('fa-solid');
-    icon.classList.toggle('fa-regular');
-    btn.classList.toggle('text-red-500');
-}
-
 // --- LÓGICA DE HEADER Y SECCIONES DINÁMICAS ---
 function gestionarVisibilidadHeader(categoria) {
     const purposeCard = document.getElementById('purpose-card');
@@ -57,6 +39,7 @@ function ejecutarTransicion(callback) {
     }
 }
 
+// --- VOLVER AL INICIO ---
 function volverInicio() {
     ejecutarTransicion(() => {
         categoriaActual = 'todos';
@@ -75,6 +58,7 @@ function volverInicio() {
     });
 }
 
+// --- RENDERIZAR CUADROS DE CATEGORÍA ---
 function renderLanding() {
     const landing = document.getElementById('landing-categories');
     const resultados = document.getElementById('section-results');
@@ -189,7 +173,11 @@ function actualizarFlechasNav() {
     if(navScroll && hint) {
         navScroll.addEventListener('scroll', () => {
             const maxScroll = navScroll.scrollWidth - navScroll.clientWidth;
-            hint.style.opacity = (navScroll.scrollLeft >= maxScroll - 10) ? '0' : '1';
+            if (navScroll.scrollLeft >= maxScroll - 10) {
+                hint.style.opacity = '0';
+            } else {
+                hint.style.opacity = '1';
+            }
         });
     }
 }
@@ -198,7 +186,6 @@ function renderCards(listaFiltrada) {
     const landing = document.getElementById('landing-categories');
     const resultados = document.getElementById('section-results');
     const grid = document.getElementById('grid-negocios');
-    const favoritos = JSON.parse(localStorage.getItem('favoritos_p506')) || [];
     
     if(landing) landing.classList.add('hidden');
     if(resultados) resultados.classList.remove('hidden');
@@ -206,44 +193,29 @@ function renderCards(listaFiltrada) {
     grid.style.opacity = '0';
 
     setTimeout(() => {
-        grid.innerHTML = listaFiltrada.map((n, i) => {
-            const esFav = favoritos.includes(n.id);
-            const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría solicitar más información.`);
-
-            return `
+        grid.innerHTML = listaFiltrada.map((n, i) => `
             <article class="group glass-card animate-reveal"
                   style="animation-delay: ${i * 0.08}s; animation-fill-mode: forwards;">
-                <div class="relative h-56 md:h-64 overflow-hidden">
+                <div class="relative h-64 overflow-hidden">
                     <img src="${n.imagen}" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition duration-[2s] ease-out" 
+                         class="w-full h-full object-cover sepia-[10%] group-hover:sepia-0 group-hover:scale-110 transition duration-[2s] ease-out" 
                          alt="${n.nombre}"
                          loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#130f0e] via-transparent opacity-80"></div>
-                    
-                    <div class="absolute top-4 left-4 text-[#d4a373] text-[7px] font-black tracking-[0.4em] uppercase bg-[#130f0e]/80 backdrop-blur-md px-3 py-1.5 border border-[#d4a373]/20">
-                        ${n.categoria}
-                    </div>
-
-                    <button onclick="toggleFavorito(${n.id}, event)" 
-                            class="absolute top-4 right-4 z-20 w-8 h-8 flex items-center justify-center bg-[#130f0e]/60 backdrop-blur-md rounded-full border border-white/10 transition-all ${esFav ? 'text-red-500' : 'text-white/50 hover:text-white'}">
-                        <i class="${esFav ? 'fa-solid' : 'fa-regular'} fa-heart text-xs"></i>
-                    </button>
+                    <div class="absolute top-6 left-6 text-[#d4a373] text-[7px] font-black tracking-[0.4em] uppercase bg-[#130f0e]/80 backdrop-blur-md px-3 py-1.5 border border-[#d4a373]/20">${n.categoria}</div>
                 </div>
-                <div class="p-6 md:p-8 text-center flex flex-col flex-grow">
-                    <h3 class="business-title text-lg md:text-xl text-white uppercase tracking-wider font-bold mb-3 group-hover:text-[#d4a373] transition-colors duration-500 line-clamp-2 min-h-[3rem] flex items-center justify-center">${n.nombre}</h3>
-                    
-                    <div class="flex justify-center gap-4 mb-6">
-                        <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" class="text-stone-400 hover:text-[#d4a373] transition-colors"><i class="fa-brands fa-whatsapp text-xl"></i></a>
-                        <a href="${n.instagram || '#'}" target="_blank" class="text-stone-400 hover:text-[#d4a373] transition-colors"><i class="fa-brands fa-instagram text-xl"></i></a>
-                    </div>
-
+                <div class="p-8 text-center flex flex-col flex-grow">
+                    <h3 class="business-title text-xl text-white uppercase tracking-wider font-bold mb-4 group-hover:text-[#d4a373] transition-colors duration-500">${n.nombre}</h3>
+                    <p class="elegant-italic text-stone-400 text-[14px] leading-relaxed line-clamp-2 mb-8 italic">
+                        "${n.servicios_resumen}"
+                    </p>
                     <button onclick="verDetalle(${n.id})" 
                             class="mt-auto w-full py-4 text-[#d4a373] text-[9px] font-bold uppercase tracking-[0.5em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-700">
                         Detalles Exclusivos
                     </button>
                 </div>
             </article>
-        `}).join('');
+        `).join('');
         grid.style.opacity = '1';
         gestionarLimiteVisual(listaFiltrada.length);
     }, 300);
@@ -261,6 +233,7 @@ function renderSubCategorias() {
             .flatMap(n => n.etiquetas)
     )];
 
+    // Crear estructura de scroll para móvil
     contenedorBase.className = "relative w-full overflow-hidden";
     
     const scrollContainer = document.createElement('div');
@@ -288,6 +261,7 @@ function renderSubCategorias() {
     contenedorBase.appendChild(scrollContainer);
     contenedorBase.appendChild(hint);
 
+    // Lógica de flecha para el scroll de subcategorías
     scrollContainer.addEventListener('scroll', () => {
         const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
         hint.style.opacity = (scrollContainer.scrollLeft >= maxScroll - 10) ? '0' : '1';
@@ -306,8 +280,7 @@ function aplicarFiltrosCombinados() {
     const filtrados = negociosRaw.filter(n => {
         const coincideBusqueda = normalizar(n.nombre).includes(busqueda) || 
                                  normalizar(n.servicios_resumen).includes(busqueda) ||
-                                 normalizar(n.categoria).includes(busqueda) ||
-                                 (n.direccion && normalizar(n.direccion).includes(busqueda));
+                                 normalizar(n.categoria).includes(busqueda);
         const coincideCategoria = categoriaActual === 'todos' || normalizar(n.categoria) === normalizar(categoriaActual);
         const coincideEtiqueta = !etiquetaActual || (n.etiquetas && n.etiquetas.includes(etiquetaActual));
         return coincideBusqueda && coincideCategoria && coincideEtiqueta;
@@ -351,7 +324,6 @@ function verDetalle(id) {
     if (!n) return;
 
     const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría solicitar más información.`);
-    const mapsUrl = n.lat ? `https://www.google.com/maps/search/?api=1&query=${n.lat},${n.lng}` : '#';
 
     const modalContenido = document.getElementById('modal-content');
     modalContenido.innerHTML = `
@@ -381,36 +353,29 @@ function verDetalle(id) {
                      </div>
                 </div>
                 
-                <div class="bg-black/30 p-6 border border-[#d4a373]/10 space-y-6 w-full h-fit">
+                <div class="bg-black/30 p-6 border border-[#d4a373]/10 space-y-6 w-fit h-fit">
                     <div class="flex items-start gap-4">
-                        <div class="text-[#d4a373] mt-1"><i class="fa-regular fa-clock text-sm"></i></div>
+                        <div class="text-[#d4a373] mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div>
                             <span class="block text-[8px] text-stone-500 uppercase tracking-widest mb-1">Horarios de Atención</span>
                             <p class="text-stone-200 text-xs font-medium uppercase tracking-wider">${n.horario || 'Consultar disponibilidad'}</p>
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
-                        <div class="text-[#d4a373] mt-1"><i class="fa-solid fa-location-dot text-sm"></i></div>
+                        <div class="text-[#d4a373] mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div>
                             <span class="block text-[8px] text-stone-500 uppercase tracking-widest mb-1">Ubicación</span>
-                            <p class="text-stone-200 text-xs font-medium uppercase tracking-wider leading-relaxed mb-4">${n.direccion || 'Distrito Premium, Pococí'}</p>
-                            ${n.lat ? `
-                                <a href="${mapsUrl}" target="_blank" 
-                                   class="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-[#d4a373]/40 text-[#d4a373] text-[9px] font-black uppercase tracking-[0.2em] hover:bg-[#d4a373] hover:text-black transition-all">
-                                   <i class="fa-solid fa-route"></i> CÓMO LLEGAR
-                                </a>` : ''}
+                            <p class="text-stone-200 text-xs font-medium uppercase tracking-wider leading-relaxed">${n.direccion || 'Distrito Premium, Pococí'}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="flex flex-row gap-4 mb-12">
+            <div class="flex flex-col sm:flex-row gap-4 mb-12">
                 <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" 
-                   class="flex-1 flex items-center justify-center gap-3 py-5 bg-[#d4a373] text-[#130f0e] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white transition-all">
-                   <i class="fa-brands fa-whatsapp text-lg"></i></a>
+                   class="flex-1 text-center py-5 bg-[#d4a373] text-[#130f0e] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white transition-all">WhatsApp</a>
                 <a href="${n.instagram || '#'}" target="_blank" 
-                   class="flex-1 flex items-center justify-center gap-3 py-5 border border-[#d4a373]/30 text-[#d4a373] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-[#d4a373]/5 transition-all">
-                   <i class="fa-brands fa-instagram text-lg"></i></a>
+                   class="flex-1 text-center py-5 border border-[#d4a373]/30 text-[#d4a373] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-[#d4a373]/5 transition-all">Instagram Oficial</a>
             </div>
 
             <div class="border-t border-white/5 pt-10">
@@ -433,6 +398,7 @@ function verDetalle(id) {
         </div>
     `;
 
+    // Lógica Feedback
     const form = document.getElementById('feedback-form');
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
