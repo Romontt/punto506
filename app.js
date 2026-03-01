@@ -152,7 +152,7 @@ async function loadData() {
         }
 
         initFilters();
-        actualizarFlechasNav();
+        actualizarFlechasNav(); // Esta función ahora maneja el scroll-hint
 
         setTimeout(() => {
             const loader = document.getElementById('preloader');
@@ -167,14 +167,16 @@ async function loadData() {
     }
 }
 
+// --- GESTIÓN DE FLECHAS NAV (OCULTAR AL FINAL) ---
 function actualizarFlechasNav() {
-    const hint = document.querySelector('.scroll-hint-arrow');
     const navScroll = document.getElementById('nav-categories');
+    const hint = document.getElementById('scroll-hint'); // ID actualizado del HTML anterior
     
     if(navScroll && hint) {
         navScroll.addEventListener('scroll', () => {
             const maxScroll = navScroll.scrollWidth - navScroll.clientWidth;
-            if (navScroll.scrollLeft >= maxScroll - 10) {
+            // Ocultamos si llega al final (con 15px de margen)
+            if (navScroll.scrollLeft >= maxScroll - 15) {
                 hint.style.opacity = '0';
             } else {
                 hint.style.opacity = '1';
@@ -323,10 +325,7 @@ function verDetalle(id) {
     if (!n) return;
 
     const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría solicitar más información.`);
-    
-    const mapsUrl = (n.maps_link && n.maps_link !== "null") 
-        ? n.maps_link 
-        : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(n.nombre + ' ' + n.direccion)}`;
+    const mapsUrl = (n.maps_link && n.maps_link !== "null") ? n.maps_link : `https://www.google.com/maps/search/${encodeURIComponent(n.nombre + ' ' + n.direccion)}`;
 
     const modalContenido = document.getElementById('modal-content');
     modalContenido.innerHTML = `
@@ -444,22 +443,6 @@ function cerrarModal() {
 document.getElementById('modal-negocio').addEventListener('click', function(e) {
     if (e.target === this) cerrarModal();
 });
-const categoriasContenedor = document.getElementById('nav-categories');
-const indicadorFlechas = document.getElementById('scroll-hint');
 
-if (categoriasContenedor && indicadorFlechas) {
-    categoriasContenedor.addEventListener('scroll', () => {
-        const scrollMaximo = categoriasContenedor.scrollWidth - categoriasContenedor.clientWidth;
-        const scrollActual = categoriasContenedor.scrollLeft;
-
-        // Si falta menos de 15px para llegar al final, ocultamos
-        if (scrollActual >= scrollMaximo - 15) {
-            indicadorFlechas.style.opacity = '0';
-        } else {
-            // Si vuelve a haber contenido a la derecha, aparecen
-            indicadorFlechas.style.opacity = '1';
-        }
-    });
-},
-
+// --- INICIO DE LA APP ---
 loadData();
