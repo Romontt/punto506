@@ -221,7 +221,7 @@ body {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    padding: 1.25rem !important; /* Padding reducido para evitar estiramiento */
+    padding: 1.25rem !important; 
 }
 
 .glass-card:hover {
@@ -331,6 +331,39 @@ footer.header-texture {
     opacity: 1 !important;
 }
 
+/* --- BACK TO TOP --- */
+#back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+    background: var(--p506-bg);
+    border: 1px solid var(--p506-accent);
+    color: var(--p506-accent);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+#back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#back-to-top:hover {
+    background: var(--p506-accent);
+    color: var(--p506-bg);
+    transform: translateY(-3px);
+}
+
 /* --- RESPONSIVE / MÓVIL --- */
 @media (max-width: 768px) {
     #grid-negocios { 
@@ -340,14 +373,12 @@ footer.header-texture {
         padding: 0 0.5rem;
     }
 
-    /* Reducir títulos para que la tarjeta sea compacta */
     .business-title {
         font-size: 0.85rem !important;
         line-height: 1.2;
         min-height: 2.4rem !important;
     }
 
-    /* Ocultar descripción en móvil para ahorrar espacio en la tarjeta */
     .elegant-italic {
         display: none !important;
     }
@@ -362,6 +393,13 @@ footer.header-texture {
     }
 
     #section-results { margin-top: -25px !important; }
+    
+    #back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+    }
 }
 
 .hidden { display: none !important; }
