@@ -77,14 +77,15 @@ function renderLanding() {
         { id: 'turismo', nombre: 'Destinos & Turismo', img: 'https://images.unsplash.com/photo-1590523278191-995cbcda646b?q=80&w=1000&auto=format&fit=crop' }
     ];
 
+    // Ajuste: Se redujo el espaciado (mb-1, padding, etc) para que las tarjetas sean más compactas
     landing.innerHTML = categoriasConfig.map((cat, i) => `
         <div onclick="seleccionarCategoria('${cat.id}')" 
              class="portal-card animate-reveal" 
              style="animation-delay: ${i * 0.1}s">
             <img src="${cat.img}" alt="${cat.nombre}" loading="lazy">
             <div class="portal-card-content">
-                <div class="mb-2 h-px w-8 bg-[#e63946]/50"></div>
-                <h3 class="serif-title text-white text-lg tracking-[0.2em] uppercase">${cat.nombre}</h3>
+                <div class="mb-1 h-px w-6 bg-[#e63946]/50"></div>
+                <h3 class="serif-title text-white text-[15px] tracking-[0.15em] uppercase">${cat.nombre}</h3>
             </div>
         </div>
     `).join('');
