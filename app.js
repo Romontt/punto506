@@ -4,6 +4,18 @@ let etiquetaActual = null;
 
 const normalizar = (t) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
+// --- LÓGICA DE FAVICON ---
+function configurarFavicon() {
+    const faviconUrl = 'https://i.ibb.co/p667mGz/506-Favi.png';
+    let link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.head.appendChild(link);
+    }
+    link.href = faviconUrl;
+}
+
 // --- LÓGICA DE HEADER Y SECCIONES DINÁMICAS ---
 function gestionarVisibilidadHeader(categoria) {
     const purposeCard = document.getElementById('purpose-card');
@@ -137,6 +149,7 @@ function gestionarLimiteVisual(totalMostrados) {
 
 async function loadData() {
     try {
+        configurarFavicon();
         const response = await fetch('negocios.json');
         negociosRaw = await response.json();
         
