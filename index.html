@@ -7,12 +7,6 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-TFXFGHPZ');</script>
     
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="apple-touch-icon" href="icon-mobile.svg">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#130f0e">
-    <link rel="manifest" href="site.webmanifest">
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -21,20 +15,10 @@
     <meta name="keywords" content="Pococí, Guápiles, Cariari, comercio local, directorio Pococí, servicios Guápiles, Montzu CR">
     <link rel="canonical" href="https://punto506.montzucr.com/" />
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://punto506.montzucr.com/">
     <meta property="og:title" content="Punto 506 | Directorio Comercial de Pococí">
     <meta property="og:description" content="Descubre el estándar preeminente del comercio en Guápiles y alrededores.">
-    <meta property="og:image" content="https://punto506.montzucr.com/img/og-preview.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://punto506.montzucr.com/">
-    <meta name="twitter:title" content="Punto 506 | Directorio Comercial de Pococí">
-    <meta name="twitter:description" content="Descubre el estándar preeminente del comercio en Guápiles y alrededores.">
-    <meta name="twitter:image" content="https://punto506.montzucr.com/img/og-preview.png">
+    <meta property="og:image" content="https://punto506.montzucr.com/img/og-preview.jpg"> <meta property="og:url" content="https://punto506.montzucr.com/">
+    <meta property="og:type" content="website">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Montserrat:wght@700&family=Baskervville:italic&display=swap" rel="stylesheet">
@@ -43,10 +27,6 @@
 
     <style>
         #form-status.success { color: #d4a373; font-style: italic; font-size: 12px; }
-        /* Ajuste fino para el scroll del modal */
-        .custom-scroll::-webkit-scrollbar { width: 4px; }
-        .custom-scroll::-webkit-scrollbar-track { background: #130f0e; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: #d4a373; }
     </style>
 </head>
 <body class="antialiased text-stone-200">
@@ -97,7 +77,6 @@
                         <button data-cat="estética" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Estética</button>
                         <button data-cat="servicios" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Servicios Varios</button>
                         <button data-cat="turismo" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Turismo</button>
-                        <button data-cat="nocturna" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Vida Nocturna</button>
                     </div>
                     <div class="md:hidden absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none scroll-hint-arrow pr-2">
                         <svg class="w-4 h-4 text-[#d4a373] animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -160,7 +139,7 @@
     </main>
 
     <div id="modal-negocio" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl">
-        <div id="modal-content" class="custom-scroll relative w-full max-w-2xl bg-[#1c1614] border border-[#d4a373]/20 shadow-2xl rounded-lg overflow-y-auto max-h-[90vh]">
+        <div id="modal-content" class="custom-scroll">
             </div>
     </div>
     
@@ -205,7 +184,6 @@
                         <a href="javascript:void(0)" onclick="filtrarCategoria('estética')" class="text-[9px] uppercase tracking-[0.3em] text-stone-400 hover:text-white transition-colors">Estética</a>
                         <a href="javascript:void(0)" onclick="filtrarCategoria('servicios')" class="text-[9px] uppercase tracking-[0.3em] text-stone-400 hover:text-white transition-colors">Servicios Varios</a>
                         <a href="javascript:void(0)" onclick="filtrarCategoria('turismo')" class="text-[9px] uppercase tracking-[0.3em] text-stone-400 hover:text-white transition-colors">Turismo</a>
-                        <a href="javascript:void(0)" onclick="filtrarCategoria('nocturna')" class="text-[9px] uppercase tracking-[0.3em] text-stone-400 hover:text-white transition-colors">Vida Nocturna</a>
                     </nav>
                 </div>
 
@@ -308,6 +286,7 @@
             window.scrollTo({ top: document.getElementById('section-results').offsetTop - 100, behavior: 'smooth' });
         }
 
+        // Lógica para mostrar/ocultar el botón "Volver arriba"
         window.onscroll = function() {
             const btn = document.getElementById("back-to-top");
             if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
