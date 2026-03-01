@@ -316,7 +316,7 @@ function activarBoton(btn) {
     btn.classList.add('text-[#e63946]', 'border-[#e63946]', 'font-black');
 }
 
-// --- MODAL DETALLE CON IMAGEN ABARCANDO TODO ---
+// --- MODAL DETALLE COMPACTO PARA MÓVIL ---
 function verDetalle(id) {
     const n = negociosRaw.find(item => item.id === id);
     if (!n) return;
@@ -325,83 +325,65 @@ function verDetalle(id) {
 
     const modalContenido = document.getElementById('modal-content');
     modalContenido.innerHTML = `
-        <div class="relative w-full h-[40vh] md:h-[55vh] overflow-hidden">
+        <div class="relative w-full h-[35vh] md:h-[50vh] overflow-hidden">
             <img src="${n.imagen}" alt="${n.nombre}" class="w-full h-full object-cover">
-            
-            <div class="absolute inset-0 bg-gradient-to-t from-[#1a1d23] via-[#1a1d23]/20 to-transparent"></div>
-            
-            <button onclick="cerrarModal()" class="absolute top-6 right-6 z-50 bg-black/40 backdrop-blur-md hover:bg-[#e63946] text-white p-3 rounded-full transition-all border border-white/10">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1a1d23] via-transparent to-black/10"></div>
+            <button onclick="cerrarModal()" class="absolute top-4 right-4 z-50 bg-black/50 backdrop-blur-md text-white p-2.5 rounded-full border border-white/10">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
         </div>
         
-        <div class="px-6 md:px-12 pb-16 -mt-16 relative z-10">
-            <div class="bg-[#1a1d23]/90 backdrop-blur-2xl p-8 md:p-12 rounded-[2rem] border border-white/5 shadow-2xl">
+        <div class="px-5 md:px-12 pb-10 -mt-12 relative z-10">
+            <div class="bg-[#1a1d23] p-6 md:p-12 rounded-[2rem] border border-white/5 shadow-2xl">
                 
-                <div class="text-center mb-10">
-                    <span class="text-[#e63946] text-[10px] font-black tracking-[0.5em] uppercase block mb-3">${n.categoria}</span>
-                    <h2 class="serif-title text-3xl md:text-5xl text-white uppercase tracking-tight leading-tight">${n.nombre}</h2>
-                    <div class="h-1 w-16 bg-[#e63946] mx-auto mt-6 rounded-full"></div>
+                <div class="text-center mb-6">
+                    <span class="text-[#e63946] text-[8px] font-black tracking-[0.4em] uppercase block mb-2">${n.categoria}</span>
+                    <h2 class="serif-title text-2xl md:text-4xl text-white uppercase tracking-tight">${n.nombre}</h2>
                 </div>
                 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
-                    <div class="space-y-8">
-                         <div>
-                            <h4 class="text-[9px] uppercase tracking-[0.4em] font-black text-stone-500 mb-4 border-b border-white/5 pb-2 italic">La Experiencia</h4>
-                            <p class="elegant-italic text-white text-xl md:text-2xl leading-relaxed italic">"${n.servicios_resumen}"</p>
-                         </div>
-                         <div>
-                            <p class="text-stone-400 text-sm md:text-base leading-relaxed font-light">${n.descripcion || 'Una propuesta curada bajo los estándares de exclusividad de Punto 506.'}</p>
-                         </div>
+                <div class="space-y-6 mb-8">
+                    <div>
+                        <p class="elegant-italic text-white text-lg md:text-xl leading-snug italic text-center">"${n.servicios_resumen}"</p>
                     </div>
                     
-                    <div class="grid grid-cols-1 gap-4 h-fit">
-                        <div class="bg-white/5 p-6 border border-white/10 rounded-2xl flex items-center gap-5">
-                            <div class="text-[#e63946] bg-[#e63946]/10 p-3 rounded-xl"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.5"/></svg></div>
-                            <div>
-                                <span class="block text-[8px] text-stone-500 uppercase tracking-widest mb-1 font-bold">Horarios</span>
-                                <p class="text-stone-200 text-xs font-medium uppercase tracking-wider">${n.horario || 'Lunes a Sábado'}</p>
-                            </div>
+                    <div class="grid grid-cols-2 gap-3 h-fit">
+                        <div class="bg-white/5 p-4 border border-white/5 rounded-xl">
+                            <span class="block text-[7px] text-stone-500 uppercase tracking-widest mb-1 font-bold italic">Horario</span>
+                            <p class="text-stone-200 text-[10px] uppercase font-medium">${n.horario || 'Lunes a Sábado'}</p>
                         </div>
-                        <div class="bg-white/5 p-6 border border-white/10 rounded-2xl flex items-center gap-5">
-                            <div class="text-[#e63946] bg-[#e63946]/10 p-3 rounded-xl"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="1.5"/></svg></div>
-                            <div>
-                                <span class="block text-[8px] text-stone-500 uppercase tracking-widest mb-1 font-bold">Ubicación</span>
-                                <p class="text-stone-200 text-xs font-medium uppercase tracking-wider leading-relaxed">${n.direccion || 'Distrito Premium, Costa Rica'}</p>
-                            </div>
+                        <div class="bg-white/5 p-4 border border-white/5 rounded-xl">
+                            <span class="block text-[7px] text-stone-500 uppercase tracking-widest mb-1 font-bold italic">Lugar</span>
+                            <p class="text-stone-200 text-[10px] uppercase font-medium truncate">${n.direccion || 'Costa Rica'}</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="flex flex-col sm:flex-row gap-4 mb-16">
+                <div class="flex gap-3 mb-10">
                     <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" 
-                       class="flex-1 text-center py-5 bg-[#e63946] text-white text-[10px] font-black uppercase tracking-[0.4em] hover:scale-[1.02] transition-all rounded-xl shadow-lg shadow-[#e63946]/20">WhatsApp</a>
+                       class="flex-1 text-center py-4 bg-[#e63946] text-white text-[9px] font-black uppercase tracking-[0.3em] rounded-xl shadow-lg shadow-[#e63946]/10">WhatsApp</a>
                     <a href="${n.instagram || '#'}" target="_blank" 
-                       class="flex-1 text-center py-5 border border-white/20 text-white text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white/5 transition-all rounded-xl">Instagram Oficial</a>
+                       class="flex-1 text-center py-4 border border-white/10 text-white text-[9px] font-black uppercase tracking-[0.3em] rounded-xl">Instagram</a>
                 </div>
 
-                <div class="border-t border-white/5 pt-12">
+                <div class="border-t border-white/5 pt-8">
                     <div id="form-wrapper">
-                        <h3 class="text-[9px] text-stone-500 uppercase tracking-[0.4em] mb-8 text-center italic">¿Cómo fue tu experiencia? Tu feedback es valioso</h3>
-                        <form id="feedback-form" action="https://formspree.io/f/mlgwzggv" method="POST" class="max-w-xl mx-auto space-y-4">
+                        <form id="feedback-form" action="https://formspree.io/f/mlgwzggv" method="POST" class="max-w-xl mx-auto space-y-3">
                             <input type="hidden" name="Negocio" value="${n.nombre}">
-                            <textarea name="comentario" required placeholder="Tu opinión anónima nos ayuda a mejorar..." 
-                                class="w-full bg-black/40 border border-white/10 p-5 text-white text-xs focus:outline-none focus:border-[#e63946] transition-all h-32 resize-none rounded-xl"></textarea>
-                            <button type="submit" class="w-full py-5 bg-transparent border border-[#e63946]/40 text-[#e63946] text-[9px] font-black uppercase tracking-[0.5em] hover:bg-[#e63946] hover:text-white transition-all rounded-xl">
+                            <textarea name="comentario" required placeholder="Tu opinión nos importa (anónimo)..." 
+                                class="w-full bg-black/40 border border-white/5 p-4 text-white text-xs focus:outline-none focus:border-[#e63946] transition-all h-24 resize-none rounded-xl"></textarea>
+                            <button type="submit" class="w-full py-4 bg-transparent border border-[#e63946]/40 text-[#e63946] text-[8px] font-black uppercase tracking-[0.4em] rounded-xl hover:bg-[#e63946] hover:text-white transition-all">
                                 Enviar Sugerencia
                             </button>
                         </form>
                     </div>
-                    <div id="success-message" class="hidden text-center py-10 bg-[#2d6a4f]/10 rounded-2xl border border-[#2d6a4f]/20">
-                        <div class="mb-4 text-[#2d6a4f] flex justify-center"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                        <p class="text-[#2d6a4f] text-[10px] uppercase tracking-[0.4em] font-black">Feedback recibido con éxito</p>
+                    <div id="success-message" class="hidden text-center py-6 bg-[#2d6a4f]/10 rounded-xl border border-[#2d6a4f]/20">
+                        <p class="text-[#2d6a4f] text-[9px] uppercase tracking-[0.3em] font-black">¡Gracias por tu mensaje!</p>
                     </div>
                 </div>
             </div>
         </div>
     `;
 
-    // Lógica del Formulario
     const form = document.getElementById('feedback-form');
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
