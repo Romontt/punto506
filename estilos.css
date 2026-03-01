@@ -107,7 +107,7 @@ body {
     animation: revealCard 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* --- NAVIGATION MÓVIL & MEJORA SCROLL INDICATOR --- */
+/* --- NAVIGATION & ELIMINACIÓN DE DIFUMINADO EN PC --- */
 .hide-scroll {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -118,8 +118,19 @@ body {
 
 .nav-scroll-container {
     position: relative;
+    /* Difuminado solo activo en móvil por defecto */
     mask-image: linear-gradient(to right, black 85%, transparent 100%);
     -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+}
+
+@media (min-width: 768px) {
+    .nav-scroll-container {
+        mask-image: none !important;
+        -webkit-mask-image: none !important;
+    }
+    .scroll-hint-arrow {
+        display: none !important;
+    }
 }
 
 .scroll-hint-arrow {
@@ -266,7 +277,7 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    z-index: 99;
+    z-index: 1100; /* Aumentado para estar sobre todo */
     opacity: 0;
     visibility: hidden;
     transition: all 0.4s ease;
@@ -276,7 +287,7 @@ body {
 
 /* --- AJUSTES DE MODAL --- */
 #modal-negocio {
-    z-index: 1000;
+    z-index: 1200;
     backdrop-filter: blur(15px);
     background-color: rgba(0, 0, 0, 0.85);
     display: flex;
@@ -323,18 +334,16 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
 .animate-bounce-x { animation: bounce-x 1.5s infinite; }
 
 /* =============================================
-   --- AJUSTE ETIQUETAS Y ESPACIOS (ELIMINACIÓN DE HUECOS) --- 
+   --- AJUSTE ETIQUETAS Y ESPACIOS --- 
    ============================================= */
 
-/* 1. ELIMINAR ESPACIO ENTRE HEADER Y SALUD */
 #section-results { 
     padding-top: 0px !important; 
-    margin-top: -45px !important; /* Sube la sección para pegar SALUD al header */
+    margin-top: -45px !important; 
 }
 
-/* 2. ELIMINAR ESPACIO ENTRE SALUD Y ETIQUETAS */
 #categoria-titulo { 
-    margin-bottom: -15px !important; /* Sube las etiquetas hacia el título */
+    margin-bottom: -15px !important; 
     padding-top: 0px !important; 
 }
 
@@ -343,7 +352,6 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
     margin-bottom: 0.5rem !important; 
 }
 
-/* 3. ESTILO ETIQUETAS */
 #subcat-scroll button {
     font-size: 13px !important; 
     font-weight: 600 !important;
@@ -356,7 +364,6 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
 
 #subcat-scroll button:hover { opacity: 1; color: var(--p506-accent); }
 
-/* Efecto subrayado dorado en etiqueta activa */
 #subcat-scroll button.bg-white, 
 #subcat-scroll button.text-black {
     background-color: transparent !important;
@@ -383,7 +390,7 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
     }
 
     #section-results { 
-        margin-top: -25px !important; /* Ajuste menor para móvil */
+        margin-top: -25px !important; 
     }
 
     #categoria-titulo { 
