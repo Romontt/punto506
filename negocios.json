@@ -142,5 +142,21 @@
   "lat": 10.197221,
   "lng": -83.784806,
   "maps_link": "https://maps.app.goo.gl/FTisDrorsGPtaDpb9"
-}
+},
+  {
+    "id": 10,
+    "nombre": "Delicias Lucam",
+    "categoria": "Gastronomía",
+    "etiquetas": ["Pasteles", "Repostería", "Postres", "Galletas"],
+    "servicios_resumen": "Pastelería artesanal personalizada: queques temáticos, cupcakes, galletas y repostería fina.",
+    "instagram": "https://www.instagram.com/delicias_lucam/",
+    "imagen": "img/delicias_lucam.png",
+    "whatsapp": "+50686250301",
+    "descripcion": "Especialistas en transformar ideas en arte comestible. Esta pastelería artesanal destaca en Pococí por su nivel de detalle en queques personalizados y una línea de repostería que equilibra sabor y presentación impecable.",
+    "horario": "Consultar por pedidos especiales",
+    "direccion": "Guápiles, Pococí",
+    "lat": 10.229433930782404,
+    "lng": -83.7992972045998,
+    "maps_link": "https://maps.app.goo.gl/3Jw8vqgDHtFuzsUeA"
+},
 ]
