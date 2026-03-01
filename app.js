@@ -233,7 +233,6 @@ function renderSubCategorias() {
             .flatMap(n => n.etiquetas)
     )];
 
-    // Crear estructura de scroll para móvil
     contenedorBase.className = "relative w-full overflow-hidden";
     
     const scrollContainer = document.createElement('div');
@@ -261,7 +260,6 @@ function renderSubCategorias() {
     contenedorBase.appendChild(scrollContainer);
     contenedorBase.appendChild(hint);
 
-    // Lógica de flecha para el scroll de subcategorías
     scrollContainer.addEventListener('scroll', () => {
         const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
         hint.style.opacity = (scrollContainer.scrollLeft >= maxScroll - 10) ? '0' : '1';
@@ -410,7 +408,6 @@ function verDetalle(id) {
         </div>
     `;
 
-    // Lógica Feedback
     const form = document.getElementById('feedback-form');
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
