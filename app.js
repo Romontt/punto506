@@ -384,7 +384,10 @@ function verDetalle(id) {
                 </a>
                 <a href="${mapsUrl}" target="_blank" 
                    class="w-14 h-14 flex items-center justify-center border border-[#d4a373]/30 text-[#d4a373] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-500" title="Cómo Llegar">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7l5-2.5 5.553 2.776a1 1 0 01.447.894v10.764a1 1 0 01-1.447.894L14 17l-5 3z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
                 </a>
             </div>
 
