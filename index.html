@@ -28,7 +28,6 @@
 
     <style>
         #form-status.success { color: #d4a373; font-style: italic; font-size: 12px; }
-        /* Estilo rápido para el badge de favoritos en el nav */
         #fav-count { font-size: 8px; vertical-align: super; }
     </style>
 </head>
@@ -116,11 +115,6 @@
                 </svg>
                 <input type="text" id="busqueda" placeholder="¿QUÉ ESTÁS BUSCANDO?" class="search-input bg-transparent border-none outline-none text-white placeholder:text-stone-500 uppercase w-full focus:ring-0">
             </div>
-
-            <button onclick="activarCercania()" class="group flex items-center gap-3 mx-auto py-2 px-4 rounded-full border border-[#d4a373]/20 hover:border-[#d4a373] transition-all duration-500">
-                <i class="fa-solid fa-location-crosshairs text-[#d4a373] group-hover:animate-pulse"></i>
-                <span class="text-[9px] tracking-[0.3em] uppercase text-stone-400 group-hover:text-[#d4a373]">Negocios cerca de mí</span>
-            </button>
         </div>
     </header>
 
