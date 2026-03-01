@@ -79,12 +79,12 @@ function renderLanding() {
 
     landing.innerHTML = categoriasConfig.map((cat, i) => `
         <div onclick="seleccionarCategoria('${cat.id}')" 
-             class="portal-card animate-reveal" 
-             style="animation-delay: ${i * 0.1}s">
-            <img src="${cat.img}" alt="${cat.nombre}" loading="lazy">
-            <div class="portal-card-content">
-                <div class="mb-2 h-px w-8 bg-[#d4a373]/50"></div>
-                <h3 class="serif-title text-white text-lg tracking-[0.3em] uppercase">${cat.nombre}</h3>
+             class="portal-card animate-reveal group border-2 border-[#2c1e1a]/10" 
+             style="animation-delay: ${i * 0.1}s; border-radius: 4px;">
+            <img src="${cat.img}" alt="${cat.nombre}" loading="lazy" class="sepia-[20%] group-hover:sepia-0 transition-all duration-700">
+            <div class="portal-card-content bg-gradient-to-t from-[#2c1e1a]/80 to-transparent">
+                <div class="mb-3 h-[2px] w-10 bg-[#d4a373]"></div>
+                <h3 class="serif-title text-[#f4e9d7] text-xl tracking-[0.2em] uppercase font-bold">${cat.nombre}</h3>
             </div>
         </div>
     `).join('');
@@ -160,7 +160,7 @@ async function loadData() {
 
     } catch (e) { 
         const grid = document.getElementById('grid-negocios');
-        if(grid) grid.innerHTML = '<p class="text-stone-600 text-center py-20 col-span-full uppercase text-[9px] tracking-[0.5em] font-bold italic">Preparando la experiencia...</p>';
+        if(grid) grid.innerHTML = '<p class="text-[#2c1e1a] text-center py-20 col-span-full uppercase text-[10px] tracking-[0.5em] font-bold italic opacity-60">Preparando la experiencia local...</p>';
         const loader = document.getElementById('preloader');
         if (loader) loader.classList.add('fade-out');
     }
@@ -194,24 +194,29 @@ function renderCards(listaFiltrada) {
 
     setTimeout(() => {
         grid.innerHTML = listaFiltrada.map((n, i) => `
-            <article class="group glass-card animate-reveal"
-                  style="animation-delay: ${i * 0.08}s; animation-fill-mode: forwards;">
-                <div class="relative h-64 overflow-hidden">
+            <article class="group relative bg-[#f4e9d7] border border-[#2c1e1a]/10 p-1 transition-all duration-500 animate-reveal"
+                  style="animation-delay: ${i * 0.08}s; animation-fill-mode: forwards; border-radius: 2px;">
+                <div class="relative h-64 overflow-hidden border border-[#2c1e1a]/5">
                     <img src="${n.imagen}" 
-                         class="w-full h-full object-cover sepia-[10%] group-hover:sepia-0 group-hover:scale-110 transition duration-[2s] ease-out" 
+                         class="w-full h-full object-cover sepia-[15%] group-hover:sepia-0 group-hover:scale-105 transition duration-[2s] ease-out" 
                          alt="${n.nombre}"
                          loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#130f0e] via-transparent opacity-80"></div>
-                    <div class="absolute top-6 left-6 text-[#d4a373] text-[7px] font-black tracking-[0.4em] uppercase bg-[#130f0e]/80 backdrop-blur-md px-3 py-1.5 border border-[#d4a373]/20">${n.categoria}</div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#2c1e1a]/60 via-transparent opacity-80"></div>
+                    <div class="absolute top-4 left-4 bg-[#5d1c15] text-[#f4e9d7] text-[8px] font-bold tracking-[0.3em] uppercase px-3 py-1.5 shadow-lg rotate-[-1deg]">
+                        ${n.categoria}
+                    </div>
                 </div>
-                <div class="p-8 text-center flex flex-col flex-grow">
-                    <h3 class="business-title text-xl text-white uppercase tracking-wider font-bold mb-4 group-hover:text-[#d4a373] transition-colors duration-500">${n.nombre}</h3>
-                    <p class="elegant-italic text-stone-400 text-[14px] leading-relaxed line-clamp-2 mb-8 italic">
+                <div class="p-6 text-center flex flex-col flex-grow bg-[url('https://www.transparenttextures.com/patterns/dark-linen.png')]">
+                    <h3 class="serif-title text-xl text-[#2c1e1a] uppercase tracking-wider font-bold mb-3 group-hover:text-[#5d1c15] transition-colors duration-500">
+                        ${n.nombre}
+                    </h3>
+                    <div class="w-12 h-[1px] bg-[#2c1e1a]/20 mx-auto mb-4"></div>
+                    <p class="elegant-italic text-[#5a4a42] text-[15px] leading-relaxed line-clamp-2 mb-8 italic">
                         "${n.servicios_resumen}"
                     </p>
                     <button onclick="verDetalle(${n.id})" 
-                            class="mt-auto w-full py-4 text-[#d4a373] text-[9px] font-bold uppercase tracking-[0.5em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-700">
-                        Detalles Exclusivos
+                            class="mt-auto w-full py-4 bg-transparent border-2 border-[#2c1e1a] text-[#2c1e1a] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-[#2c1e1a] hover:text-[#f4e9d7] transition-all duration-500">
+                        Ver Detalles
                     </button>
                 </div>
             </article>
@@ -233,23 +238,26 @@ function renderSubCategorias() {
             .flatMap(n => n.etiquetas)
     )];
 
-    // Crear estructura de scroll para móvil
-    contenedorBase.className = "relative w-full overflow-hidden";
+    contenedorBase.className = "relative w-full overflow-hidden mb-6";
     
     const scrollContainer = document.createElement('div');
     scrollContainer.id = "subcat-scroll";
-    scrollContainer.className = "flex overflow-x-auto hide-scroll gap-2 py-2 px-4 md:flex-wrap md:justify-center md:px-0";
+    scrollContainer.className = "flex overflow-x-auto hide-scroll gap-3 py-4 px-4 md:flex-wrap md:justify-center md:px-0";
     
     const hint = document.createElement('div');
     hint.id = "subcat-hint";
     hint.className = "absolute right-0 top-0 bottom-0 flex items-center pr-2 pointer-events-none transition-opacity duration-300 md:hidden";
-    hint.innerHTML = `<svg class="w-4 h-4 text-[#d4a373] animate-bounce-x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    hint.innerHTML = `<svg class="w-4 h-4 text-[#5d1c15] animate-bounce-x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
     etiquetas.forEach(tag => {
         const btn = document.createElement('button');
         btn.innerText = tag.toUpperCase();
         const activo = etiquetaActual === tag;
-        btn.className = `whitespace-nowrap text-[8px] tracking-[0.4em] px-5 py-2.5 border transition-all duration-700 ${activo ? 'border-[#d4a373] text-[#d4a373] font-bold bg-[#d4a373]/5' : 'border-transparent text-stone-500 hover:text-stone-200'}`;
+        // Estilo tipo sello/etiqueta rústica
+        btn.className = `whitespace-nowrap text-[9px] tracking-[0.3em] px-6 py-2 border-2 transition-all duration-500 font-bold ${activo 
+            ? 'border-[#5d1c15] bg-[#5d1c15] text-[#f4e9d7] shadow-md transform scale-105' 
+            : 'border-[#2c1e1a]/10 text-[#2c1e1a]/60 hover:border-[#2c1e1a]/40 hover:text-[#2c1e1a]'}`;
+        
         btn.onclick = () => {
             etiquetaActual = (etiquetaActual === tag) ? null : tag;
             renderSubCategorias();
@@ -261,7 +269,6 @@ function renderSubCategorias() {
     contenedorBase.appendChild(scrollContainer);
     contenedorBase.appendChild(hint);
 
-    // Lógica de flecha para el scroll de subcategorías
     scrollContainer.addEventListener('scroll', () => {
         const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
         hint.style.opacity = (scrollContainer.scrollLeft >= maxScroll - 10) ? '0' : '1';
@@ -275,6 +282,7 @@ function aplicarFiltrosCombinados() {
     
     if(tituloSeccion) {
         tituloSeccion.innerText = categoriaActual === 'todos' ? 'Nuestra Colección' : categoriaActual;
+        tituloSeccion.className = "serif-title text-[#2c1e1a] text-2xl md:text-3xl tracking-[0.2em] uppercase text-center mb-2";
     }
 
     const filtrados = negociosRaw.filter(n => {
@@ -312,10 +320,10 @@ function initFilters() {
 
 function activarBoton(btn) {
     document.querySelectorAll('.filter-btn').forEach(b => {
-        b.classList.remove('text-[#d4a373]', 'border-[#d4a373]', 'font-black');
-        b.classList.add('text-stone-500', 'border-transparent');
+        b.classList.remove('text-[#5d1c15]', 'border-[#5d1c15]', 'font-black');
+        b.classList.add('text-[#2c1e1a]/50', 'border-transparent');
     });
-    btn.classList.add('text-[#d4a373]', 'border-[#d4a373]', 'font-black');
+    btn.classList.add('text-[#5d1c15]', 'border-[#5d1c15]', 'font-black');
 }
 
 // --- MODAL DETALLE ---
@@ -326,46 +334,49 @@ function verDetalle(id) {
     const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría solicitar más información.`);
 
     const modalContenido = document.getElementById('modal-content');
+    // Fondo de papel/kraft para el modal
+    modalContenido.className = "bg-[#f4e9d7] border-4 border-[#2c1e1a]/20 shadow-2xl overflow-y-auto max-w-2xl w-full mx-auto relative";
+    
     modalContenido.innerHTML = `
-        <div class="relative h-48 md:h-64 overflow-hidden">
-            <img src="${n.imagen}" alt="${n.nombre}" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#1c1614] via-transparent to-black/20"></div>
-            <button onclick="cerrarModal()" class="absolute top-6 right-6 z-50 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-all">
+        <div class="relative h-56 md:h-72 overflow-hidden border-b border-[#2c1e1a]/10">
+            <img src="${n.imagen}" alt="${n.nombre}" class="w-full h-full object-cover sepia-[10%]">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#f4e9d7] via-transparent"></div>
+            <button onclick="cerrarModal()" class="absolute top-6 right-6 z-50 bg-[#2c1e1a]/80 hover:bg-[#5d1c15] text-[#f4e9d7] p-2 transition-all">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
         </div>
         
-        <div class="p-8 md:p-12 -mt-10 relative z-10 bg-[#1c1614]">
+        <div class="p-8 md:p-12 -mt-12 relative z-10">
             <div class="text-center mb-10">
-                <span class="text-[#d4a373] text-[10px] font-black tracking-[0.5em] uppercase block mb-3">${n.categoria}</span>
-                <h2 class="serif-title text-3xl md:text-4xl text-white uppercase tracking-[0.1em]">${n.nombre}</h2>
-                <div class="h-px w-16 bg-[#d4a373] mx-auto mt-6"></div>
+                <span class="text-[#5d1c15] text-[10px] font-black tracking-[0.5em] uppercase block mb-3">${n.categoria}</span>
+                <h2 class="serif-title text-3xl md:text-5xl text-[#2c1e1a] uppercase tracking-[0.05em] leading-tight">${n.nombre}</h2>
+                <div class="h-[2px] w-20 bg-[#5d1c15]/40 mx-auto mt-6"></div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
                 <div class="space-y-6">
                      <div>
-                        <h4 class="text-[9px] uppercase tracking-[0.4em] font-black text-stone-500 mb-3">La Experiencia</h4>
-                        <p class="elegant-italic text-white text-lg leading-relaxed italic border-l-2 border-[#d4a373]/30 pl-4">"${n.servicios_resumen}"</p>
+                        <h4 class="text-[9px] uppercase tracking-[0.4em] font-black text-[#2c1e1a]/40 mb-3 font-sans">La Experiencia</h4>
+                        <p class="elegant-italic text-[#2c1e1a] text-xl leading-relaxed italic border-l-4 border-[#d4a373] pl-5">"${n.servicios_resumen}"</p>
                      </div>
                      <div>
-                        <p class="text-stone-400 text-sm leading-relaxed">${n.descripcion || 'Una propuesta curada bajo los estándares de exclusividad de Punto 506.'}</p>
+                        <p class="text-[#5a4a42] text-[15px] leading-relaxed font-sans">${n.descripcion || 'Una propuesta curada bajo los estándares de Punto 506.'}</p>
                      </div>
                 </div>
                 
-                <div class="bg-black/30 p-6 border border-[#d4a373]/10 space-y-6 w-fit h-fit">
+                <div class="bg-[#2c1e1a]/5 p-8 border border-[#2c1e1a]/10 space-y-6 h-fit rounded-sm">
                     <div class="flex items-start gap-4">
-                        <div class="text-[#d4a373] mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div class="text-[#5d1c15] mt-1"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div>
-                            <span class="block text-[8px] text-stone-500 uppercase tracking-widest mb-1">Horarios de Atención</span>
-                            <p class="text-stone-200 text-xs font-medium uppercase tracking-wider">${n.horario || 'Consultar disponibilidad'}</p>
+                            <span class="block text-[9px] text-[#2c1e1a]/50 uppercase tracking-widest mb-1 font-bold">Horarios</span>
+                            <p class="text-[#2c1e1a] text-[13px] font-bold uppercase tracking-wider">${n.horario || 'Consultar disponibilidad'}</p>
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
-                        <div class="text-[#d4a373] mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div class="text-[#5d1c15] mt-1"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                         <div>
-                            <span class="block text-[8px] text-stone-500 uppercase tracking-widest mb-1">Ubicación</span>
-                            <p class="text-stone-200 text-xs font-medium uppercase tracking-wider leading-relaxed">${n.direccion || 'Distrito Premium, Pococí'}</p>
+                            <span class="block text-[9px] text-[#2c1e1a]/50 uppercase tracking-widest mb-1 font-bold">Ubicación</span>
+                            <p class="text-[#2c1e1a] text-[13px] font-bold uppercase tracking-wider leading-relaxed">${n.direccion || 'Distrito Local, Pococí'}</p>
                         </div>
                     </div>
                 </div>
@@ -373,26 +384,26 @@ function verDetalle(id) {
 
             <div class="flex flex-col sm:flex-row gap-4 mb-12">
                 <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" 
-                   class="flex-1 text-center py-5 bg-[#d4a373] text-[#130f0e] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white transition-all">WhatsApp</a>
+                   class="flex-1 text-center py-5 bg-[#2c1e1a] text-[#f4e9d7] text-[11px] font-black uppercase tracking-[0.4em] hover:bg-[#5d1c15] transition-all shadow-md">Conectar por WhatsApp</a>
                 <a href="${n.instagram || '#'}" target="_blank" 
-                   class="flex-1 text-center py-5 border border-[#d4a373]/30 text-[#d4a373] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-[#d4a373]/5 transition-all">Instagram Oficial</a>
+                   class="flex-1 text-center py-5 border-2 border-[#2c1e1a] text-[#2c1e1a] text-[11px] font-black uppercase tracking-[0.4em] hover:bg-[#2c1e1a]/5 transition-all">Instagram Oficial</a>
             </div>
 
-            <div class="border-t border-white/5 pt-10">
+            <div class="border-t-2 border-[#2c1e1a]/5 pt-10">
                 <div id="form-wrapper">
-                    <h3 class="text-[9px] text-stone-500 uppercase tracking-[0.4em] mb-6 text-center italic">¿Cómo fue tu experiencia? Tu feedback es valioso</h3>
+                    <h3 class="text-[10px] text-[#2c1e1a]/50 uppercase tracking-[0.4em] mb-6 text-center italic font-sans">Tu opinión construye comunidad</h3>
                     <form id="feedback-form" action="https://formspree.io/f/mlgwzggv" method="POST" class="max-w-xl mx-auto space-y-4">
                         <input type="hidden" name="Negocio" value="${n.nombre}">
-                        <textarea name="comentario" required placeholder="Escribe aquí tu sugerencia de forma anónima..." 
-                            class="w-full bg-black/50 border border-white/10 p-4 text-white text-xs focus:outline-none focus:border-[#d4a373] transition-colors h-28 resize-none"></textarea>
-                        <button type="submit" class="w-full py-4 border border-[#d4a373] text-[#d4a373] text-[9px] font-black uppercase tracking-[0.5em] hover:bg-[#d4a373] hover:text-black transition-all">
+                        <textarea name="comentario" required placeholder="Contanos tu experiencia de forma anónima..." 
+                            class="w-full bg-white/50 border-2 border-[#2c1e1a]/10 p-5 text-[#2c1e1a] text-sm focus:outline-none focus:border-[#5d1c15] transition-colors h-32 resize-none rounded-sm"></textarea>
+                        <button type="submit" class="w-full py-4 border-2 border-[#5d1c15] text-[#5d1c15] text-[10px] font-black uppercase tracking-[0.5em] hover:bg-[#5d1c15] hover:text-[#f4e9d7] transition-all shadow-sm">
                             Enviar Comentarios
                         </button>
                     </form>
                 </div>
                 <div id="success-message" class="hidden text-center py-8">
-                    <div class="mb-4 text-[#d4a373] flex justify-center"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                    <p class="text-[#d4a373] text-[10px] uppercase tracking-[0.4em] font-black">Mensaje recibido con éxito</p>
+                    <div class="mb-4 text-[#5d1c15] flex justify-center"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                    <p class="text-[#5d1c15] text-[12px] uppercase tracking-[0.4em] font-black">¡Recibido, compa! Gracias.</p>
                 </div>
             </div>
         </div>
@@ -403,6 +414,7 @@ function verDetalle(id) {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const submitBtn = form.querySelector('button');
+        const originalText = submitBtn.innerText;
         submitBtn.innerText = "ENVIANDO...";
         submitBtn.disabled = true;
 
@@ -417,8 +429,9 @@ function verDetalle(id) {
                 document.getElementById('success-message').classList.remove('hidden');
             }
         } catch (error) {
-            submitBtn.innerText = "ERROR";
+            submitBtn.innerText = "ERROR AL ENVIAR";
             submitBtn.disabled = false;
+            setTimeout(() => { submitBtn.innerText = originalText; }, 2000);
         }
     });
 
