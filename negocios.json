@@ -158,5 +158,21 @@
     "lat": 10.229433930782404,
     "lng": -83.7992972045998,
     "maps_link": "https://maps.app.goo.gl/3Jw8vqgDHtFuzsUeA"
+},
+  {
+    "id": 3,
+    "nombre": "Mal de Amores",
+    "categoria": "Vida Nocturna",
+    "etiquetas": ["Bar", "Coctelería", "Música en Vivo", "Despecho"],
+    "servicios_resumen": "Primer Bar de Despecho en Guápiles. Coctelería temática, ambiente de fiesta y noches de karaoke/DJ.",
+    "instagram": "https://www.instagram.com/mal_de.amores/",
+    "imagen": "img/mal_de_amores.png",
+    "whatsapp": "+50671183698",
+    "descripcion": "El lugar definitivo en Guápiles para quienes buscan una noche diferente. Bajo el lema 'Ama, llora y bebe', ofrece un concepto único de Bar de Despecho con promociones semanales, shows de comedia y el mejor ambiente para celebrar o pasar un buen rato entre amigos.",
+    "horario": "Miércoles a Domingo | 5:00 PM a 12:00 MN",
+    "direccion": "A un costado de Cosevi, Guápiles)",
+    "lat": 10.196840,
+    "lng": -83.784308,
+    "maps_link": "https://maps.app.goo.gl/agxXpaXArgspxbHXA"
 }
 ]
