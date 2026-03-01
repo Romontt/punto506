@@ -99,7 +99,7 @@ body {
     color: var(--p506-accent);
 }
 
-/* --- HEADER / HERO SECTION --- */
+/* --- HEADER / HERO SECTION (AJUSTADO A SMALL) --- */
 #main-header {
     background-color: var(--p506-bg);
     position: relative;
@@ -109,9 +109,11 @@ body {
 .header-texture {
     background-image: 
         linear-gradient(to bottom, rgba(15, 17, 21, 0.2) 0%, var(--p506-bg) 100%),
-        url("img/fondoheader.jpg"); /* Mantengo tu ruta de imagen */
+        url("img/fondoheader.jpg"); 
     background-size: cover;
     background-position: center;
+    padding-top: 2rem !important;    /* Reducido de 3rem */
+    padding-bottom: 2rem !important; /* Reducido de 3rem */
 }
 
 #purpose-card {
@@ -123,23 +125,23 @@ body {
 .search-container {
     background: var(--p506-card) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    padding: 14px 24px !important;
+    padding: 10px 20px !important;   /* Reducido para ser más esbelto */
     transition: var(--transition-premium);
-    max-width: 600px;
-    margin: 0 auto;
-    border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    max-width: 550px;                /* Ligeramente más estrecho */
+    margin: 0.5rem auto 0;           /* Margen superior reducido */
+    border-radius: 12px;             /* Radio más sutil */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
 }
 
 .search-container:focus-within {
     border-color: var(--p506-accent) !important;
     box-shadow: 0 20px 40px rgba(230, 57, 70, 0.15);
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
 
 .search-input {
     letter-spacing: 0.02em !important;
-    font-size: 16px !important;
+    font-size: 15px !important;      /* Reducido de 16px */
     font-weight: 400;
     color: white !important;
 }
@@ -147,10 +149,10 @@ body {
 /* --- GRID DE CATEGORÍAS (LANDING) --- */
 .portal-card {
     position: relative;
-    height: 380px;
+    height: 340px;                   /* Reducido de 380px */
     overflow: hidden;
     cursor: pointer;
-    border-radius: 24px;
+    border-radius: 20px;             /* Ajustado */
     background: var(--p506-card);
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -174,7 +176,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 2rem;
+    padding: 1.5rem;                 /* Reducido de 2rem */
     background: linear-gradient(to top, rgba(15, 17, 21, 0.9) 0%, transparent 70%);
 }
 
@@ -251,20 +253,20 @@ body {
 /* --- ETIQUETAS Y ESPACIOS --- */
 #section-results { 
     padding-top: 0px !important; 
-    margin-top: -30px !important; 
+    margin-top: -20px !important;    /* Ajustado para subir la sección un poco más */
 }
 
 #sub-categorias { 
-    margin-top: 1rem !important;
-    margin-bottom: 2rem !important; 
+    margin-top: 0.75rem !important;  /* Reducido */
+    margin-bottom: 1.5rem !important; /* Reducido */
 }
 
 /* Estilo de Subcategorías (Pills) */
 #subcat-scroll button {
-    font-size: 12px !important; 
+    font-size: 11px !important;      /* Reducido */
     font-weight: 500;
     border-radius: 100px;
-    padding: 8px 20px !important;
+    padding: 6px 16px !important;    /* Reducido */
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--p506-text-muted);
@@ -287,20 +289,27 @@ body {
 /* --- FOOTER --- */
 footer {
     background: #0a0c10 !important;
+    padding-top: 3rem !important;    /* Reducido de 5rem */
 }
 
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {
     #grid-negocios { 
         grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
-        gap: 1.5rem !important; 
+        gap: 1.25rem !important; 
     }
     
-    .portal-card { height: 320px; }
+    .header-texture { 
+        padding-top: 1.5rem !important; 
+        padding-bottom: 1.5rem !important; 
+    }
+
+    .portal-card { height: 280px; } /* Más compacto en móvil */
     
     .search-container {
-        padding: 10px 16px !important;
-        border-radius: 12px;
+        padding: 8px 16px !important;
+        border-radius: 10px;
+        margin-top: 0.25rem;
     }
 }
 
