@@ -316,7 +316,7 @@ function activarBoton(btn) {
     btn.classList.add('text-[#e63946]', 'border-[#e63946]', 'font-black');
 }
 
-// --- MODAL DETALLE COMPACTO PARA MÓVIL ---
+// --- MODAL DETALLE COMPACTO (MISMA INFO, MENOS ESPACIO) ---
 function verDetalle(id) {
     const n = negociosRaw.find(item => item.id === id);
     if (!n) return;
@@ -327,8 +327,8 @@ function verDetalle(id) {
     modalContenido.innerHTML = `
         <div class="relative w-full h-[35vh] md:h-[50vh] overflow-hidden">
             <img src="${n.imagen}" alt="${n.nombre}" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#1a1d23] via-transparent to-black/10"></div>
-            <button onclick="cerrarModal()" class="absolute top-4 right-4 z-50 bg-black/50 backdrop-blur-md text-white p-2.5 rounded-full border border-white/10">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1a1d23] via-transparent to-black/20"></div>
+            <button onclick="cerrarModal()" class="absolute top-4 right-4 z-50 bg-black/40 backdrop-blur-md text-white p-2.5 rounded-full border border-white/10">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
         </div>
@@ -341,35 +341,46 @@ function verDetalle(id) {
                     <h2 class="serif-title text-2xl md:text-4xl text-white uppercase tracking-tight">${n.nombre}</h2>
                 </div>
                 
-                <div class="space-y-6 mb-8">
-                    <div>
-                        <p class="elegant-italic text-white text-lg md:text-xl leading-snug italic text-center">"${n.servicios_resumen}"</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="text-[8px] uppercase tracking-[0.3em] font-black text-stone-500 mb-2 border-b border-white/5 pb-1 italic">La Experiencia</h4>
+                            <p class="elegant-italic text-white text-lg md:text-xl leading-snug italic">"${n.servicios_resumen}"</p>
+                        </div>
+                        <p class="text-stone-400 text-xs md:text-sm leading-relaxed font-light">${n.descripcion || 'Una propuesta curada bajo los estándares de exclusividad de Punto 506.'}</p>
                     </div>
                     
-                    <div class="grid grid-cols-2 gap-3 h-fit">
-                        <div class="bg-white/5 p-4 border border-white/5 rounded-xl">
-                            <span class="block text-[7px] text-stone-500 uppercase tracking-widest mb-1 font-bold italic">Horario</span>
-                            <p class="text-stone-200 text-[10px] uppercase font-medium">${n.horario || 'Lunes a Sábado'}</p>
+                    <div class="grid grid-cols-2 md:grid-cols-1 gap-3 h-fit">
+                        <div class="bg-white/5 p-4 border border-white/5 rounded-xl flex items-center gap-3">
+                            <div class="text-[#e63946] scale-75"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.5"/></svg></div>
+                            <div>
+                                <span class="block text-[7px] text-stone-500 uppercase tracking-widest font-bold">Horarios</span>
+                                <p class="text-stone-200 text-[10px] uppercase font-medium">${n.horario || 'Lunes a Sábado'}</p>
+                            </div>
                         </div>
-                        <div class="bg-white/5 p-4 border border-white/5 rounded-xl">
-                            <span class="block text-[7px] text-stone-500 uppercase tracking-widest mb-1 font-bold italic">Lugar</span>
-                            <p class="text-stone-200 text-[10px] uppercase font-medium truncate">${n.direccion || 'Costa Rica'}</p>
+                        <div class="bg-white/5 p-4 border border-white/5 rounded-xl flex items-center gap-3">
+                            <div class="text-[#e63946] scale-75"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="1.5"/></svg></div>
+                            <div>
+                                <span class="block text-[7px] text-stone-500 uppercase tracking-widest font-bold">Ubicación</span>
+                                <p class="text-stone-200 text-[10px] uppercase font-medium leading-tight">${n.direccion || 'Costa Rica'}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="flex gap-3 mb-10">
+                <div class="flex flex-col sm:flex-row gap-3 mb-10">
                     <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" target="_blank" 
-                       class="flex-1 text-center py-4 bg-[#e63946] text-white text-[9px] font-black uppercase tracking-[0.3em] rounded-xl shadow-lg shadow-[#e63946]/10">WhatsApp</a>
+                       class="flex-1 text-center py-4 bg-[#e63946] text-white text-[9px] font-black uppercase tracking-[0.3em] rounded-xl shadow-lg">WhatsApp</a>
                     <a href="${n.instagram || '#'}" target="_blank" 
                        class="flex-1 text-center py-4 border border-white/10 text-white text-[9px] font-black uppercase tracking-[0.3em] rounded-xl">Instagram</a>
                 </div>
 
                 <div class="border-t border-white/5 pt-8">
                     <div id="form-wrapper">
+                        <h3 class="text-[8px] text-stone-500 uppercase tracking-[0.3em] mb-4 text-center italic">Feedback de tu experiencia</h3>
                         <form id="feedback-form" action="https://formspree.io/f/mlgwzggv" method="POST" class="max-w-xl mx-auto space-y-3">
                             <input type="hidden" name="Negocio" value="${n.nombre}">
-                            <textarea name="comentario" required placeholder="Tu opinión nos importa (anónimo)..." 
+                            <textarea name="comentario" required placeholder="Tu opinión anónima..." 
                                 class="w-full bg-black/40 border border-white/5 p-4 text-white text-xs focus:outline-none focus:border-[#e63946] transition-all h-24 resize-none rounded-xl"></textarea>
                             <button type="submit" class="w-full py-4 bg-transparent border border-[#e63946]/40 text-[#e63946] text-[8px] font-black uppercase tracking-[0.4em] rounded-xl hover:bg-[#e63946] hover:text-white transition-all">
                                 Enviar Sugerencia
@@ -377,7 +388,7 @@ function verDetalle(id) {
                         </form>
                     </div>
                     <div id="success-message" class="hidden text-center py-6 bg-[#2d6a4f]/10 rounded-xl border border-[#2d6a4f]/20">
-                        <p class="text-[#2d6a4f] text-[9px] uppercase tracking-[0.3em] font-black">¡Gracias por tu mensaje!</p>
+                        <p class="text-[#2d6a4f] text-[9px] uppercase tracking-[0.3em] font-black">Feedback recibido</p>
                     </div>
                 </div>
             </div>
