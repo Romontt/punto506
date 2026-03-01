@@ -26,30 +26,34 @@
     <link rel="stylesheet" href="estilos.css">
 
     <style>
-        #form-status.success { color: #d4a373; font-style: italic; font-size: 12px; }
+        #form-status.success { color: #5d1c15; font-style: italic; font-size: 12px; }
+        /* Sobreescritura estética rústica */
+        body { background-color: #f4e9d7; color: #2c1e1a; background-image: url('https://www.transparenttextures.com/patterns/dark-linen.png'); }
+        .header-texture { background-color: #2c1e1a; background-image: url('https://www.transparenttextures.com/patterns/black-linen-2.png'); }
+        .nav-scroll-container button { transition: all 0.5s ease; }
     </style>
 </head>
-<body class="antialiased text-stone-200">
+<body class="antialiased">
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TFXFGHPZ"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     
-    <div id="preloader" class="transition-opacity duration-500">
+    <div id="preloader" class="transition-opacity duration-500 bg-[#f4e9d7]">
         <div class="flex flex-col items-center gap-4 loader-logo">
-            <div class="w-20 h-20 iso-emblem rounded-full flex items-center justify-center border-2 border-[#d4a373]">
-                <span class="serif-title text-xl text-[#d4a373] font-bold">506</span>
+            <div class="w-20 h-20 iso-emblem rounded-full flex items-center justify-center border-2 border-[#5d1c15]">
+                <span class="serif-title text-xl text-[#5d1c15] font-bold">506</span>
             </div>
             <div class="text-center">
-                <span class="block text-[8px] tracking-[0.5em] font-black text-[#d4a373] uppercase mt-2">Punto 506</span>
-                <span class="block text-[7px] tracking-[0.3em] font-bold text-[#d4a373]/60 uppercase mt-1">BY MONTZU CR</span>
+                <span class="block text-[8px] tracking-[0.5em] font-black text-[#2c1e1a] uppercase mt-2">Punto 506</span>
+                <span class="block text-[7px] tracking-[0.3em] font-bold text-[#5d1c15]/60 uppercase mt-1">BY MONTZU CR</span>
             </div>
         </div>
     </div>
 
-    <div id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <div id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-[#5d1c15] text-[#f4e9d7] border border-[#f4e9d7]/20 shadow-xl">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
 
-    <nav class="bg-[#130f0e]/95 backdrop-blur-2xl border-b border-[#5d1c15]/40 sticky top-0 z-50">
+    <nav class="bg-[#2c1e1a]/95 backdrop-blur-2xl border-b border-[#5d1c15]/40 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between py-6 px-6 gap-6">
             
             <div class="flex items-center gap-6 cursor-pointer" onclick="volverInicio()">
@@ -63,7 +67,7 @@
                 <div class="h-12 w-[1px] bg-[#d4a373]/20"></div>
 
                 <div class="flex flex-col justify-center">
-                    <h1 class="serif-title text-2xl md:text-3xl tracking-[0.3em] text-white uppercase font-normal leading-none">Punto 506</h1>
+                    <h1 class="serif-title text-2xl md:text-3xl tracking-[0.3em] text-[#f4e9d7] uppercase font-normal leading-none">Punto 506</h1>
                     <p class="text-[#d4a373]/60 uppercase tracking-[0.4em] text-[8px] font-bold mt-2">DESCUBRE. CONECTA. DESTACA.</p>
                 </div>
             </div>
@@ -72,11 +76,11 @@
                 <div class="nav-scroll-container relative flex items-center w-full">
                     <div class="flex items-center gap-8 overflow-x-auto hide-scroll w-full md:w-auto justify-start md:justify-center px-2 py-2 scroll-smooth" id="nav-categories">
                         <button data-cat="todos" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-black text-[#d4a373] border-b border-[#d4a373] pb-1 whitespace-nowrap">Inicio</button>
-                        <button data-cat="salud" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Salud</button>
-                        <button data-cat="gastronomía" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Gastronomía</button>
-                        <button data-cat="estética" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Estética</button>
-                        <button data-cat="servicios" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Servicios Varios</button>
-                        <button data-cat="turismo" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-500 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Turismo</button>
+                        <button data-cat="salud" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-400 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Salud</button>
+                        <button data-cat="gastronomía" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-400 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Gastronomía</button>
+                        <button data-cat="estética" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-400 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Estética</button>
+                        <button data-cat="servicios" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-400 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Servicios Varios</button>
+                        <button data-cat="turismo" class="filter-btn transition text-[9px] uppercase tracking-[0.4em] font-bold text-stone-400 pb-1 border-b border-transparent hover:text-white whitespace-nowrap">Turismo</button>
                     </div>
                     <div class="md:hidden absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none scroll-hint-arrow pr-2">
                         <svg class="w-4 h-4 text-[#d4a373] animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -86,51 +90,52 @@
         </div>
     </nav>
 
-    <header id="main-header" class="relative py-12 md:py-20 header-texture border-b border-[#d4a373]/10 overflow-hidden transition-all duration-1000">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#130f0e]"></div>
+    <header id="main-header" class="relative py-12 md:py-20 header-texture border-b border-[#5d1c15]/20 overflow-hidden transition-all duration-1000">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#2c1e1a]/40"></div>
         <div class="relative z-10 max-w-4xl mx-auto text-center px-6">
             
-            <div id="purpose-card" class="bg-[#130f0e]/60 backdrop-blur-sm p-4 md:p-8 rounded-sm border border-[#d4a373]/5 mb-10 transition-all duration-700">
+            <div id="purpose-card" class="bg-[#f4e9d7]/5 backdrop-blur-sm p-6 md:p-10 rounded-sm border border-[#f4e9d7]/10 mb-10 transition-all duration-700 shadow-2xl">
                 <h2 class="serif-title text-[#d4a373] text-[11px] tracking-[0.8em] mb-4 uppercase font-bold">Nuestro Propósito</h2>
-                <p class="elegant-italic text-white text-base md:text-lg leading-relaxed drop-shadow-md">
+                <p class="elegant-italic text-[#f4e9d7] text-base md:text-xl leading-relaxed drop-shadow-md italic">
                     "Punto 506 es un espacio creado para fortalecer el comercio local en Pococí. Nuestra misión es conectar a la comunidad con servicios profesionales de calidad, sirviendo como una plataforma de crecimiento mutuo donde cada negocio tiene el potencial de destacar y cada usuario encuentra lo mejor de nuestra zona."
                 </p>
             </div>
 
             <div id="discover-tagline" class="hidden transition-all duration-700 mb-10">
-                <h2 class="serif-title text-white text-xl md:text-3xl tracking-[0.4em] uppercase font-light">
+                <h2 class="serif-title text-[#f4e9d7] text-xl md:text-3xl tracking-[0.4em] uppercase font-light">
                     Descubre. <span class="text-[#d4a373]">Conecta.</span> Destaca.
                 </h2>
             </div>
             
-            <div class="search-container flex items-center gap-4">
-                <svg class="w-4 h-4 text-[#d4a373]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="search-container flex items-center gap-4 bg-[#f4e9d7] border-2 border-[#5d1c15]/20 p-4 shadow-inner">
+                <svg class="w-5 h-5 text-[#5d1c15]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                <input type="text" id="busqueda" placeholder="¿QUÉ ESTÁS BUSCANDO?" class="search-input bg-transparent border-none outline-none text-white placeholder:text-stone-500 uppercase w-full focus:ring-0">
+                <input type="text" id="busqueda" placeholder="¿QUÉ ESTÁS BUSCANDO?" class="search-input bg-transparent border-none outline-none text-[#2c1e1a] placeholder:text-[#2c1e1a]/40 font-bold tracking-widest uppercase w-full focus:ring-0">
             </div>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto py-12 md:py-20 px-6">
-        <div id="landing-categories" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-20">
+        <div id="landing-categories" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-20">
         </div>
 
         <div id="section-results" class="hidden">
-            <div class="flex items-center gap-4 mb-8">
-                <div class="h-[1px] w-10 bg-[#5d1c15]"></div>
-                <h2 id="categoria-titulo" class="serif-title text-[10px] text-[#d4a373] uppercase tracking-[0.6em]">Recomendaciones</h2>
+            <div class="flex items-center gap-4 mb-10 justify-center">
+                <div class="h-[2px] w-12 bg-[#5d1c15]/30"></div>
+                <h2 id="categoria-titulo" class="serif-title text-xl text-[#2c1e1a] uppercase tracking-[0.4em] font-bold text-center">Recomendaciones</h2>
+                <div class="h-[2px] w-12 bg-[#5d1c15]/30"></div>
             </div>
 
             <div id="sub-categorias" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-16 min-h-[40px]"></div>
 
             <div class="relative">
                 <div id="wrapper-grid" class="grid-limitado">
-                    <div id="grid-negocios" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-10"></div>
+                    <div id="grid-negocios" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-10"></div>
                 </div>
 
                 <div id="btn-ver-mas-container" class="flex justify-center mt-12 hidden">
-                    <button onclick="expandirGrid()" id="btn-ver-mas" class="py-4 px-10 border border-[#d4a373] text-[#d4a373] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-500">
+                    <button onclick="expandirGrid()" id="btn-ver-mas" class="py-5 px-12 bg-[#2c1e1a] text-[#f4e9d7] text-[10px] font-black uppercase tracking-[0.5em] hover:bg-[#5d1c15] transition-all duration-500 shadow-xl rounded-sm">
                         Ver todas las experiencias
                     </button>
                 </div>
@@ -138,40 +143,41 @@
         </div>
     </main>
 
-    <div id="modal-negocio" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl">
-        <div id="modal-content" class="custom-scroll">
+    <div id="modal-negocio" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-4 bg-[#2c1e1a]/90 backdrop-blur-xl">
+        <div id="modal-content" class="custom-scroll shadow-2xl">
             </div>
     </div>
     
-    <section id="grow-network-section" class="max-w-4xl mx-auto py-10 md:py-16 px-6 text-center transition-all duration-500">
-        <div class="bg-gradient-to-b from-[#2c1e1a]/20 to-transparent p-6 md:p-10 border border-[#d4a373]/10 rounded-xl">
-            <h3 class="serif-title text-[#d4a373] text-lg md:text-xl tracking-[0.3em] mb-4 uppercase">¿Tu comercio aún no es parte del estándar preeminente?</h3>
-            <p class="elegant-italic text-stone-400 text-sm md:text-base mb-8 max-w-xl mx-auto leading-relaxed">
+    <section id="grow-network-section" class="max-w-4xl mx-auto py-10 md:py-20 px-6 text-center transition-all duration-500">
+        <div class="bg-white/40 backdrop-blur-md p-8 md:p-14 border-2 border-[#2c1e1a]/10 rounded-sm shadow-lg relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-2 h-full bg-[#5d1c15]"></div>
+            <h3 class="serif-title text-[#2c1e1a] text-xl md:text-2xl tracking-[0.2em] mb-6 uppercase font-bold">¿Tu comercio aún no es parte del estándar preeminente?</h3>
+            <p class="elegant-italic text-[#5a4a42] text-sm md:text-lg mb-10 max-w-xl mx-auto leading-relaxed italic">
                 ¿Tienes un negocio o conoces algún lugar en Pococí que merezca estar aquí? Ayúdanos a destacar lo mejor de nuestra zona.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
                 <a href="https://wa.me/+50661961136?text=Hola!%20Me%20gustaría%20registrar%20mi%20negocio%20en%20Punto%20506" 
                     target="_blank" 
-                    class="inline-block py-3 px-6 border border-[#d4a373] text-[#d4a373] text-[9px] font-black uppercase tracking-[0.3em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-500">
+                    class="inline-block py-4 px-8 bg-[#5d1c15] text-[#f4e9d7] text-[10px] font-black uppercase tracking-[0.3em] hover:bg-[#2c1e1a] transition-all duration-500 shadow-md">
                     Registrar mi negocio
                 </a>
                 <a href="https://wa.me/+50661961136?text=Hola!%20Quiero%20recomendar%20un%20negocio%20para%20Punto%20506" 
                     target="_blank" 
-                    class="inline-block py-3 px-6 border border-[#d4a373]/20 text-stone-400 text-[9px] font-black uppercase tracking-[0.3em] hover:border-[#d4a373] hover:text-[#d4a373] transition-all duration-500">
+                    class="inline-block py-4 px-8 border-2 border-[#2c1e1a] text-[#2c1e1a] text-[10px] font-black uppercase tracking-[0.3em] hover:bg-[#2c1e1a] hover:text-[#f4e9d7] transition-all duration-500">
                     Recomendar un lugar
                 </a>
             </div>
         </div>
     </section>
 
-    <footer class="header-texture border-t border-[#d4a373]/10 pt-20 pb-10 mt-10">
+    <footer class="header-texture border-t-4 border-[#5d1c15] pt-20 pb-10 mt-10">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
                 <div class="flex flex-col items-center md:items-start text-center md:text-left">
-                    <div class="iso-emblem w-14 h-14 rounded-full mb-6 shadow-lg flex items-center justify-center border-2 border-[#d4a373]/30">
+                    <div class="iso-emblem w-14 h-14 rounded-full mb-6 shadow-lg flex items-center justify-center border-2 border-[#d4a373]/30 bg-[#2c1e1a]">
                         <span class="serif-title text-[12px] text-[#d4a373] font-bold mt-0.5">506</span>
                     </div>
-                    <h2 class="serif-title text-2xl tracking-[0.3em] text-white uppercase mb-2">Punto 506</h2>
+                    <h2 class="serif-title text-2xl tracking-[0.3em] text-[#f4e9d7] uppercase mb-2">Punto 506</h2>
                     <p class="text-[#d4a373]/60 uppercase tracking-[0.4em] text-[8px] font-black mb-6">DESCUBRE. CONECTA. DESTACA.</p>
                     <p class="text-stone-500 text-[10px] leading-relaxed tracking-wider uppercase">Guápiles, Pococí, Costa Rica</p>
                 </div>
@@ -226,12 +232,12 @@
         </div>
     </footer>
 
-    <div id="modal-legal" class="fixed inset-0 z-[1100] hidden flex items-center justify-center p-4 bg-black/98 backdrop-blur-2xl">
-        <div class="bg-[#1c1614] w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-none border border-[#d4a373]/20 shadow-2xl relative p-8 md:p-12 custom-scroll">
-            <button onclick="cerrarModalLegal()" class="absolute top-6 right-6 text-[#d4a373]/60 hover:text-[#d4a373] transition">
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" /></svg>
+    <div id="modal-legal" class="fixed inset-0 z-[1100] hidden flex items-center justify-center p-4 bg-[#2c1e1a]/98 backdrop-blur-2xl">
+        <div class="bg-[#f4e9d7] w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-none border-4 border-[#2c1e1a]/20 shadow-2xl relative p-8 md:p-12 custom-scroll">
+            <button onclick="cerrarModalLegal()" class="absolute top-6 right-6 text-[#2c1e1a]/60 hover:text-[#5d1c15] transition">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
-            <div id="legal-content-target" class="prose prose-invert max-w-none">
+            <div id="legal-content-target" class="prose prose-stone max-w-none">
                 </div>
         </div>
     </div>
@@ -240,28 +246,28 @@
     <script>
         const legalTexts = {
             terminos: `
-                <h2 class="serif-title text-[#d4a373] text-xl mb-6 uppercase tracking-widest">Términos Exclusivos</h2>
-                <div class="space-y-6 text-stone-400 text-sm leading-relaxed elegant-prose">
-                    <p class="font-bold text-white">1. NATURALEZA DEL SERVICIO</p>
+                <h2 class="serif-title text-[#5d1c15] text-2xl mb-6 uppercase tracking-widest font-bold">Términos Exclusivos</h2>
+                <div class="space-y-6 text-[#5a4a42] text-sm leading-relaxed elegant-prose">
+                    <p class="font-bold text-[#2c1e1a] uppercase tracking-wider">1. NATURALEZA DEL SERVICIO</p>
                     <p>Punto 506 es una plataforma de enlace comercial. No somos responsables por la calidad, garantías o transacciones realizadas entre el usuario y los comercios listados.</p>
                     
-                    <p class="font-bold text-white">2. PROMOCIÓN DE LANZAMIENTO</p>
-                    <p>Como parte de nuestro compromiso con el crecimiento local, el registro para los primeros negocios seleccionados será <span class="text-[#d4a373]">sin costo alguno durante el periodo de lanzamiento por tiempo limitado</span>. Punto 506 se reserva el derecho de modificar estas condiciones previo aviso.</p>
+                    <p class="font-bold text-[#2c1e1a] uppercase tracking-wider">2. PROMOCIÓN DE LANZAMIENTO</p>
+                    <p>Como parte de nuestro compromiso con el crecimiento local, el registro para los primeros negocios seleccionados será <span class="text-[#5d1c15] font-bold">sin costo alguno durante el periodo de lanzamiento por tiempo limitado</span>. Punto 506 se reserva el derecho de modificar estas condiciones previo aviso.</p>
                     
-                    <p class="font-bold text-white">3. VERACIDAD DE LA INFORMACIÓN</p>
+                    <p class="font-bold text-[#2c1e1a] uppercase tracking-wider">3. VERACIDAD DE LA INFORMACIÓN</p>
                     <p>Cada comercio es responsable de la veracidad de los datos, precios y ofertas publicadas. Punto 506 actúa únicamente como un escaparate digital preeminente.</p>
                 </div>
             `,
             privacidad: `
-                <h2 class="serif-title text-[#d4a373] text-xl mb-6 uppercase tracking-widest">Aviso de Privacidad</h2>
-                <div class="space-y-6 text-stone-400 text-sm leading-relaxed">
-                    <p class="font-bold text-white">1. PROTECCIÓN DE DATOS</p>
+                <h2 class="serif-title text-[#5d1c15] text-2xl mb-6 uppercase tracking-widest font-bold">Aviso de Privacidad</h2>
+                <div class="space-y-6 text-[#5a4a42] text-sm leading-relaxed">
+                    <p class="font-bold text-[#2c1e1a] uppercase tracking-wider">1. PROTECCIÓN DE DATOS</p>
                     <p>En cumplimiento con la normativa de Costa Rica, informamos que los datos suministrados por los comercios son utilizados exclusivamente para la visibilidad en el directorio y contacto directo de clientes potenciales.</p>
                     
-                    <p class="font-bold text-white">2. USO DE IMAGEN</p>
+                    <p class="font-bold text-[#2c1e1a] uppercase tracking-wider">2. USO DE IMAGEN</p>
                     <p>Al registrar su negocio, el propietario autoriza a Punto 506 el uso de material visual del comercio para fines promocionales dentro de la plataforma y sus redes sociales asociadas.</p>
                     
-                    <p class="font-bold text-white">3. SEGURIDAD</p>
+                    <p class="font-bold text-[#2c1e1a] uppercase tracking-wider">3. SEGURIDAD</p>
                     <p>No compartimos bases de datos con terceros. Su información es tratada bajo los estándares de seguridad de MONTZU CR.</p>
                 </div>
             `
@@ -286,7 +292,6 @@
             window.scrollTo({ top: document.getElementById('section-results').offsetTop - 100, behavior: 'smooth' });
         }
 
-        // Lógica para mostrar/ocultar el botón "Volver arriba"
         window.onscroll = function() {
             const btn = document.getElementById("back-to-top");
             if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
