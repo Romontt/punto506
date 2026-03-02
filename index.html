@@ -268,23 +268,27 @@
 
     <script src="app.js"></script>
     <script>
-        // --- FUNCIÓN DE ANALYTICS PARA CLICS EN NEGOCIOS ---
-        function registrarClickNegocio(nombreNegocio, plataforma) {
-            if (typeof gtag === 'function') {
-                gtag('event', 'click_negocio', {
-                    'business_name': nombreNegocio,
-                    'platform': plataforma
-                });
-            } else if (typeof dataLayer !== 'undefined') {
-                dataLayer.push({
-                    'event': 'click_negocio',
-                    'business_name': nombreNegocio,
-                    'platform': plataforma
-                });
-            }
-            // Log opcional para verificar en consola durante pruebas
-            console.log(`Métrica enviada: ${nombreNegocio} - ${plataforma}`);
-        }
+      // --- FUNCIÓN DE ANALYTICS MEJORADA ---
+function registrarClickNegocio(nombreNegocio, plataforma) {
+    // 1. Esto imprimirá en la consola de tu navegador (F12) para que confirmes que el clic funciona
+    console.log("Intentando enviar evento:", nombreNegocio, plataforma);
+    // 2. Intentar enviar vía gtag (forma directa)
+    if (typeof gtag === 'function') {
+        gtag('event', 'click_negocio', {
+            'business_name': nombreNegocio,
+            'platform': plataforma,
+            'send_to': 'G-SCCTHXBBP7' // Forzamos el envío a tu ID específico
+        });
+    } 
+    // 3. También lo enviamos al dataLayer por si usas GTM
+    if (typeof dataLayer !== 'undefined') {
+        dataLayer.push({
+            'event': 'click_negocio',
+            'business_name': nombreNegocio,
+            'platform': plataforma
+        });
+    }
+}
 
         const legalTexts = {
             terminos: `
