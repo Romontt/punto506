@@ -261,6 +261,24 @@
 
     <script src="app.js"></script>
     <script>
+        // --- FUNCIÓN DE ANALYTICS PARA CLICS EN NEGOCIOS ---
+        function registrarClickNegocio(nombreNegocio, plataforma) {
+            if (typeof gtag === 'function') {
+                gtag('event', 'click_negocio', {
+                    'business_name': nombreNegocio,
+                    'platform': plataforma
+                });
+            } else if (typeof dataLayer !== 'undefined') {
+                dataLayer.push({
+                    'event': 'click_negocio',
+                    'business_name': nombreNegocio,
+                    'platform': plataforma
+                });
+            }
+            // Log opcional para verificar en consola durante pruebas
+            console.log(`Métrica enviada: ${nombreNegocio} - ${plataforma}`);
+        }
+
         const legalTexts = {
             terminos: `
                 <h2 class="serif-title text-[#d4a373] text-xl mb-6 uppercase tracking-widest">Términos Exclusivos</h2>
