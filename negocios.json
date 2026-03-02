@@ -174,5 +174,21 @@
     "lat": 10.196840,
     "lng": -83.784308,
     "maps_link": "https://maps.app.goo.gl/agxXpaXArgspxbHXA"
+},
+  {
+    "id": 12,
+    "nombre": "Taquería Torres",
+    "categoria": "Gastronomía",
+    "etiquetas": ["Tacos", "Hamburguesas", "Comida Rápida", "Cenas"],
+    "servicios_resumen": "Especialistas en Tacos Artesanales, Hamburguesas y Tostones Supremos con el sabor auténtico de la zona.",
+    "instagram": "https://www.instagram.com/taqueria.torres.guapiles/",
+    "imagen": "img/taqueria-torres.png",
+    "whatsapp": "+50688543437",
+    "descripcion": "Una parada obligatoria en Guápiles para los amantes de la comida urbana de calidad. Sus Tacos Artesanales y el Tostón Supremo son los favoritos de la comunidad, servidos en un ambiente familiar y acogedor.",
+    "horario": "Lun a Jue: 4:00 PM - 10:00 PM | Vie a Dom: 4:00 PM - 11:00 PM",
+    "direccion": "Barrio Zurquí, de Lavacar Los Mangos 150m Norte, Guápiles.",
+    "lat": 10.221872145675153,
+    "lng": -83.79109947138134,
+    "maps_link": "https://maps.app.goo.gl/f39CiNtFi6wuEwL66"
 }
 ]
