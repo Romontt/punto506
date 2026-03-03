@@ -289,11 +289,16 @@ function aplicarFiltrosCombinados() {
     }
 
     const filtrados = negociosRaw.filter(n => {
-        const coincideBusqueda = normalizar(n.nombre).includes(busqueda) || 
-                                 normalizar(n.servicios_resumen).includes(busqueda) ||
-                                 normalizar(n.categoria).includes(busqueda);
+        // 1. Buscamos en Nombre, Resumen, Categoría Y AHORA TAMBIÉN EN ETIQUETAS
+        const coincideBusqueda = 
+            normalizar(n.nombre).includes(busqueda) || 
+            normalizar(n.servicios_resumen).includes(busqueda) ||
+            normalizar(n.categoria).includes(busqueda) ||
+            (n.etiquetas && n.etiquetas.some(etq => normalizar(etq).includes(busqueda))); // <--- ESTA LÍNEA ES LA MAGIA
+
         const coincideCategoria = categoriaActual === 'todos' || normalizar(n.categoria) === normalizar(categoriaActual);
         const coincideEtiqueta = !etiquetaActual || (n.etiquetas && n.etiquetas.includes(etiquetaActual));
+        
         return coincideBusqueda && coincideCategoria && coincideEtiqueta;
     });
 
