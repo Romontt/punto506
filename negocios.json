@@ -190,5 +190,21 @@
     "lat": 10.221872145675153,
     "lng": -83.79109947138134,
     "maps_link": "https://maps.app.goo.gl/f39CiNtFi6wuEwL66"
+},
+  {
+    "id": 13,
+    "nombre": "JR BarberShop",
+    "categoria": "Estética",
+    "etiquetas": ["Barbería", "Cortes", "Barbas", "Servicio a Domicilio"],
+    "servicios_resumen": "Barbería profesional especializada en cortes clásicos, desvanecidos y cuidado integral de la barba.",
+    "instagram": "https://www.instagram.com/jrbarbershop_25/",
+    "imagen": "img/jr-barbershop.png",
+    "whatsapp": "+50684087743",
+    "descripcion": "Liderada por Josías Rojas, JR BarberShop ofrece una experiencia de cuidado masculino de alta calidad. Expertos en diseño de barba, mascarilla negra y exfoliación, brindan un servicio detallista tanto en su local como en modalidad a domicilio.",
+    "horario": "Lun a Dom | 8:00 AM - 7:00 PM",
+    "direccion": "Barrio La Emilia, 50 metros norte Escuela los Diamantes, a mano derecha, Guápiles",
+    "lat": 10.214265,
+    "lng": -83.777698,
+    "maps_link": "https://maps.app.goo.gl/FyVt7BLS24DA7pk67"
 }
 ]
