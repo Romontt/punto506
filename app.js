@@ -289,12 +289,14 @@ function aplicarFiltrosCombinados() {
     }
 
     const filtrados = negociosRaw.filter(n => {
-        // 1. Buscamos en Nombre, Resumen, Categoría Y AHORA TAMBIÉN EN ETIQUETAS
+        // --- AQUÍ ESTÁ EL CAMBIO ---
+        // Ahora busca en: Nombre, Resumen, Categoría, Descripción y Etiquetas
         const coincideBusqueda = 
             normalizar(n.nombre).includes(busqueda) || 
             normalizar(n.servicios_resumen).includes(busqueda) ||
             normalizar(n.categoria).includes(busqueda) ||
-            (n.etiquetas && n.etiquetas.some(etq => normalizar(etq).includes(busqueda))); // <--- ESTA LÍNEA ES LA MAGIA
+            (n.descripcion && normalizar(n.descripcion).includes(busqueda)) || // <--- BUSCA EN DESCRIPCIÓN
+            (n.etiquetas && n.etiquetas.some(etq => normalizar(etq).includes(busqueda))); // <--- BUSCA EN ETIQUETAS
 
         const coincideCategoria = categoriaActual === 'todos' || normalizar(n.categoria) === normalizar(categoriaActual);
         const coincideEtiqueta = !etiquetaActual || (n.etiquetas && n.etiquetas.includes(etiquetaActual));
@@ -305,7 +307,7 @@ function aplicarFiltrosCombinados() {
     if (busqueda !== '' || categoriaActual !== 'todos') {
         renderCards(filtrados);
         gestionarVisibilidadHeader(categoriaActual);
-        renderSubCategorias(); // Refresca visibilidad de etiquetas
+        renderSubCategorias(); 
     } else {
         renderLanding();
     }
