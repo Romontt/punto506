@@ -206,5 +206,21 @@
     "lat": 10.214265,
     "lng": -83.777698,
     "maps_link": "https://maps.app.goo.gl/FyVt7BLS24DA7pk67"
+},
+  {
+    "id": 14,
+    "nombre": "Go Cell Support",
+    "categoria": "servicios",
+    "etiquetas": ["Tecnología", "Reparación", "Accesorios", "Librería", "Bazar"],
+    "servicios_resumen": "Soporte técnico profesional para dispositivos y una amplia línea de bazar y librería.",
+    "instagram": "https://www.instagram.com/go.cell.support/",
+    "imagen": "img/go-cell-support.png",
+    "whatsapp": "+50670739765",
+    "descripcion": "Especialistas en la reparación de celulares, consolas (PS4, PS5, Xbox) y computadoras. Además, contamos con una completa sección de accesorios para móvil, artículos de librería y bazar en un solo lugar.",
+    "horario": "Lun a Sab | 8:00 AM - 6:00 PM",
+    "direccion": "75 Metros Sur de Iglesia Católica, Toro Amarillo, Guápiles",
+    "lat": 10.21253109508652,
+    "lng": -83.80910082913286,
+    "maps_link": "https://maps.app.goo.gl/Gp9yVhghfzHAy1FZ7"
 }
 ]
