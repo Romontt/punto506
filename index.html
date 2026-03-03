@@ -328,26 +328,26 @@ window.addEventListener('load', function() {
 // --- 2. MANEJO DEL BOTÓN ATRÁS (Lógica de Cascada) ---
 window.onpopstate = function(event) {
     const modalNegocio = document.getElementById('modal-negocio');
-    const modalLegal = document.getElementById('modal-legal');
     const sectionResults = document.getElementById('section-results');
 
-    // SI HAY MODALES ABIERTOS: Solo cerramos el modal y NO dejamos que el navegador haga nada más
-    if ((modalNegocio && !modalNegocio.classList.contains('hidden')) || 
-        (modalLegal && !modalLegal.classList.contains('hidden'))) {
-        
-        if (modalNegocio) modalNegocio.classList.add('hidden');
-        if (modalLegal) cerrarModalLegal();
-        
+    // CASO 1: Si el modal está abierto, lo cerramos y DETENEMOS el proceso
+    if (modalNegocio && !modalNegocio.classList.contains('hidden')) {
+        modalNegocio.classList.add('hidden');
         document.body.style.overflow = 'auto';
-        return; // Detenemos aquí para que no se salga de la categoría
+        return; // <--- IMPORTANTE: Esto evita que se ejecute lo de abajo
     }
 
-    // SI NO HAY MODALES PERO ESTAMOS EN UNA CATEGORÍA: Volvemos al inicio
-    if (sectionResults && !sectionResults.classList.contains('hidden')) {
+    // CASO 2: Si NO hay modal, pero el evento viene de un estado de "inicio"
+    // o simplemente el usuario dio atrás estando en una categoría
+    if (event.state && event.state.step === 'inicio') {
         if (typeof volverInicio === 'function') {
             volverInicio();
-            // Al volver al inicio, limpiamos el historial para que el siguiente 'atrás' sí salga de la web
-            history.replaceState({ step: 'inicio' }, "", window.location.pathname);
+        }
+    } 
+    // CASO 3: Si no hay estado pero sectionResults es visible (el usuario dio atrás en el navegador)
+    else if (sectionResults && !sectionResults.classList.contains('hidden')) {
+        if (typeof volverInicio === 'function') {
+            volverInicio();
         }
     }
 };
