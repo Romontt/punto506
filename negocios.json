@@ -216,11 +216,27 @@
     "instagram": "https://www.instagram.com/go.cell.support/",
     "imagen": "img/go-cell-support.png",
     "whatsapp": "+50670739765",
-    "descripcion": "Especialistas en la reparación de celulares, consolas (PS4, PS5, Xbox) y computadoras. Además, contamos con una completa sección de accesorios para móvil, artículos de librería y bazar en un solo lugar.",
+    "descripcion": "Especialistas en la reparación de celulares, consolas (PS4, PS5, Xbox) y computadoras. Además, cuentan con una completa sección de accesorios para móvil, artículos de librería y bazar en un solo lugar.",
     "horario": "Lun a Sab | 8:00 AM - 6:00 PM",
     "direccion": "75 Metros Sur de Iglesia Católica, Toro Amarillo, Guápiles",
     "lat": 10.21253109508652,
     "lng": -83.80910082913286,
     "maps_link": "https://maps.app.goo.gl/Gp9yVhghfzHAy1FZ7"
+},
+  {
+    "id": 15,
+    "nombre": "Ale Catering Service",
+    "categoria": "eventos",
+    "etiquetas": ["Catering", "Salón de Eventos", "Bodas", "Bajo Reserva", "Alimentación"],
+    "servicios_resumen": "Servicio de catering profesional y salas de eventos exclusivas para momentos inolvidables.",
+    "instagram": "https://www.instagram.com/alecateringservice/",
+    "imagen": "img/ale-catering.png",
+    "whatsapp": "+50688978662",
+    "descripcion": "Especialistas en la planificación y ejecución de eventos sociales y corporativos en Guápiles. Ofrecen un servicio integral de alimentación y elegantes salas de eventos diseñadas para bodas, celebraciones y reuniones especiales. Atención profesional bajo reserva previa.",
+    "horario": "Previa Reservación",
+    "direccion": "Guápiles, Pococí",
+    "lat": 10.22686309071414, 
+    "lng": -83.78563281339672,
+    "maps_link": "https://maps.app.goo.gl/R1zVNTD9ftvUqbPP7"
 }
 ]
