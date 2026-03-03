@@ -328,30 +328,27 @@ window.addEventListener('load', function() {
 // --- 2. MANEJO DEL BOTÓN ATRÁS (Lógica de Cascada) ---
 window.onpopstate = function(event) {
     const modalNegocio = document.getElementById('modal-negocio');
-    const sectionResults = document.getElementById('section-results');
+    
+    // 1. Si estamos cerrando el modal con la X, NO hacemos nada más
+    if (cerrandoManual) {
+        return; 
+    }
 
-    // CASO 1: Si el modal está abierto, lo cerramos y DETENEMOS el proceso
+    // 2. Si el usuario dio "atrás" físicamente en el celular mientras el modal estaba abierto
     if (modalNegocio && !modalNegocio.classList.contains('hidden')) {
         modalNegocio.classList.add('hidden');
         document.body.style.overflow = 'auto';
-        return; // <--- IMPORTANTE: Esto evita que se ejecute lo de abajo
+        return; 
     }
 
-    // CASO 2: Si NO hay modal, pero el evento viene de un estado de "inicio"
-    // o simplemente el usuario dio atrás estando en una categoría
-    if (event.state && event.state.step === 'inicio') {
-        if (typeof volverInicio === 'function') {
-            volverInicio();
-        }
-    } 
-    // CASO 3: Si no hay estado pero sectionResults es visible (el usuario dio atrás en el navegador)
-    else if (sectionResults && !sectionResults.classList.contains('hidden')) {
+    // 3. SOLO si no hay modal y no estamos cerrando manualmente, volvemos al inicio
+    const sectionResults = document.getElementById('section-results');
+    if (sectionResults && !sectionResults.classList.contains('hidden')) {
         if (typeof volverInicio === 'function') {
             volverInicio();
         }
     }
 };
-
 // --- 3. CATEGORÍAS (Crea el primer escalón) ---
 function filtrarCategoria(cat) {
     const btn = document.querySelector(`[data-cat="${cat}"]`);
