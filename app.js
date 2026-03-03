@@ -454,15 +454,16 @@ history.pushState({ step: 'modal' }, "", "#detalle");
 }
 
 function cerrarModal() {
-    document.getElementById('modal-negocio').classList.add('hidden');
+    const modal = document.getElementById('modal-negocio');
+    modal.classList.add('hidden');
     document.body.style.overflow = 'auto';
-    
-    // Si el usuario cerró manualmente y hay un hash de detalle, volvemos atrás en el historial
+
+    // Si cerramos con la X y estamos en el detalle, 
+    // volvemos atrás pero marcamos que NO queremos resetear la categoría
     if (window.location.hash === "#detalle") {
         history.back();
     }
 }
-
 document.getElementById('modal-negocio').addEventListener('click', function(e) {
     if (e.target === this) cerrarModal();
 });
