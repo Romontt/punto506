@@ -113,7 +113,8 @@ function seleccionarCategoria(id) {
 
 function actualizarURL(categoria) {
     const nuevaUrl = categoria === 'todos' ? window.location.pathname : `?categoria=${encodeURIComponent(categoria.toLowerCase())}`;
-    window.history.pushState({ path: nuevaUrl }, '', nuevaUrl);
+    // Cambio: Añadimos { step: 'categoria' } para que el onpopstate lo reconozca
+    window.history.pushState({ step: 'categoria', path: nuevaUrl }, '', nuevaUrl);
 }
 
 function expandirGrid() {
@@ -447,7 +448,7 @@ function verDetalle(id) {
             submitBtn.disabled = false;
         }
     });
-
+history.pushState({ step: 'modal' }, "", "#detalle");
     document.getElementById('modal-negocio').classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 }
@@ -455,6 +456,11 @@ function verDetalle(id) {
 function cerrarModal() {
     document.getElementById('modal-negocio').classList.add('hidden');
     document.body.style.overflow = 'auto';
+    
+    // Si el usuario cerró manualmente y hay un hash de detalle, volvemos atrás en el historial
+    if (window.location.hash === "#detalle") {
+        history.back();
+    }
 }
 
 document.getElementById('modal-negocio').addEventListener('click', function(e) {
