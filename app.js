@@ -453,17 +453,24 @@ history.pushState({ step: 'modal' }, "", "#detalle");
     document.body.style.overflow = 'hidden';
 }
 
+let cerrandoManual = false; // Variable de control
+
 function cerrarModal() {
     const modal = document.getElementById('modal-negocio');
+    if (!modal || modal.classList.contains('hidden')) return;
+
+    cerrandoManual = true; // Activamos el freno
     modal.classList.add('hidden');
     document.body.style.overflow = 'auto';
 
-    // Si cerramos con la X y estamos en el detalle, 
-    // volvemos atrás pero marcamos que NO queremos resetear la categoría
     if (window.location.hash === "#detalle") {
         history.back();
     }
+    
+    // Quitamos el freno después de un breve instante
+    setTimeout(() => { cerrandoManual = false; }, 100);
 }
+
 document.getElementById('modal-negocio').addEventListener('click', function(e) {
     if (e.target === this) cerrarModal();
 });
