@@ -190,6 +190,7 @@ function actualizarFlechasNav() {
     }
 }
 
+
 function renderCards(listaFiltrada) {
     const landing = document.getElementById('landing-categories');
     const resultados = document.getElementById('section-results');
