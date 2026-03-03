@@ -319,33 +319,85 @@ function registrarClickNegocio(nombreNegocio, plataforma) {
             `
         };
 
-        function abrirModalLegal(tipo) {
-            const target = document.getElementById('legal-content-target');
-            const modal = document.getElementById('modal-legal');
-            target.innerHTML = legalTexts[tipo];
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
+        // --- 1. INICIALIZACIÓN (Asegura que 'Inicio' sea siempre el punto cero) ---
+window.addEventListener('load', function() {
+    // Reemplazamos el estado actual para que sea 'inicio'
+    history.replaceState({ step: 'inicio' }, "");
+});
 
-        function cerrarModalLegal() {
-            document.getElementById('modal-legal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
+// --- 2. MANEJO DEL BOTÓN ATRÁS (Lógica de Cascada) ---
+window.onpopstate = function(event) {
+    const modalNegocio = document.getElementById('modal-negocio');
+    const modalLegal = document.getElementById('modal-legal');
+    const sectionResults = document.getElementById('section-results');
 
-        function filtrarCategoria(cat) {
-            const btn = document.querySelector(`[data-cat="${cat}"]`);
-            if(btn) btn.click();
-            window.scrollTo({ top: document.getElementById('section-results').offsetTop - 100, behavior: 'smooth' });
-        }
+    // SI HAY MODALES ABIERTOS: Solo cerramos el modal y NO dejamos que el navegador haga nada más
+    if ((modalNegocio && !modalNegocio.classList.contains('hidden')) || 
+        (modalLegal && !modalLegal.classList.contains('hidden'))) {
+        
+        if (modalNegocio) modalNegocio.classList.add('hidden');
+        if (modalLegal) cerrarModalLegal();
+        
+        document.body.style.overflow = 'auto';
+        return; // Detenemos aquí para que no se salga de la categoría
+    }
 
-        window.onscroll = function() {
-            const btn = document.getElementById("back-to-top");
-            if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-                btn.classList.add("show");
-            } else {
-                btn.classList.remove("show");
-            }
-        };
+    // SI NO HAY MODALES PERO ESTAMOS EN UNA CATEGORÍA: Volvemos al inicio
+    if (sectionResults && !sectionResults.classList.contains('hidden')) {
+        if (typeof volverInicio === 'function') {
+            volverInicio();
+            // Al volver al inicio, limpiamos el historial para que el siguiente 'atrás' sí salga de la web
+            history.replaceState({ step: 'inicio' }, "", window.location.pathname);
+        }
+    }
+};
+
+// --- 3. CATEGORÍAS (Crea el primer escalón) ---
+function filtrarCategoria(cat) {
+    const btn = document.querySelector(`[data-cat="${cat}"]`);
+    if(btn) {
+        // Registramos que nos movimos a una categoría
+        history.pushState({ step: 'categoria', id: cat }, "", "#" + cat);
+        btn.click();
+        
+        setTimeout(() => {
+            const offset = document.getElementById('section-results').offsetTop - 90;
+            window.scrollTo({ top: offset, behavior: 'smooth' });
+        }, 150);
+    }
+}
+
+// --- 4. MODALES (Crea el segundo escalón) ---
+// Nota: Esta lógica debe aplicarse también cuando abres un negocio en app.js
+function abrirModalLegal(tipo) {
+    const target = document.getElementById('legal-content-target');
+    const modal = document.getElementById('modal-legal');
+    target.innerHTML = legalTexts[tipo];
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    
+    // Registramos un NUEVO paso. Ahora el historial es: Inicio > Categoría > Modal
+    history.pushState({ step: 'modal' }, "", "#view");
+}
+
+function cerrarModalLegal() {
+    document.getElementById('modal-legal').classList.add('hidden');
+    document.body.style.overflow = 'auto';
+    // Si cierran con la X, volvemos atrás en el historial manualmente para mantener sincronía
+    if (window.location.hash === "#view") {
+        history.back();
+    }
+}
+
+// --- 5. SCROLL ---
+window.onscroll = function() {
+    const btn = document.getElementById("back-to-top");
+    if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+        btn.classList.add("show");
+    } else {
+        btn.classList.remove("show");
+    }
+};
     </script>
 </body>
 </html>
