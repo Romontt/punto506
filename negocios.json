@@ -302,5 +302,53 @@
     "lat": 10.212531, 
     "lng": -83.785632,
     "maps_link": "https://montzucr.com/visas.html"
+},
+  {
+    "id": 20,
+    "nombre": "JC Tour & Travel",
+    "categoria": "turismo",
+    "etiquetas": ["Agencia de Viajes", "Reservas Hoteleras", "Tiquetes Aéreos", "Eventos", "Turismo"],
+    "servicios_resumen": "Tu experto en experiencias de viaje: reservas de hoteles todo incluido, tiquetes aéreos y viajes personalizados.",
+    "instagram": "https://www.instagram.com/jc_tour_travel/",
+    "imagen": "img/jc-tour-travel.png",
+    "whatsapp": "+50685581384",
+    "descripcion": "Agencia de viajes dedicada a la planificación de experiencias a tu medida. Especialistas en reservas hoteleras en los mejores destinos, gestión de tiquetes aéreos y organización de eventos sociales o corporativos en hoteles nacionales.",
+    "horario": "Salidas Programadas",
+    "direccion": "Buenos Aires, Jiménez, 150m sur de la antena del ICE",
+    "lat": 10.182624259815679,
+    "lng": -83.78325640910872,
+    "maps_link": "https://maps.app.goo.gl/yn8KcKtpdHJ2bh6v6"
+},
+  {
+    "id": 21,
+    "nombre": "Azalea Accesorios",
+    "categoria": "servicios",
+    "etiquetas": ["Joyería", "Accesorios", "Venta al por mayor", "Emprendimiento", "Moda"],
+    "servicios_resumen": "Brilla con joyería de alta calidad al por mayor y detalle con envíos a todo el país.",
+    "instagram": "https://www.instagram.com/azalea.accesorioscr/",
+    "imagen": "img/azalea-accesorios.png",
+    "whatsapp": "+50660621842", 
+    "descripcion": "Especialistas en joyería y accesorios que resaltan tu belleza. Ofrecen opciones de compra al detalle y precios especiales al por mayor para quienes desean emprender su propio negocio. Calidad y brillo en cada pieza con envíos seguros a todo Costa Rica.",
+    "horario": "Tienda Virtual | Envíos diarios",
+    "direccion": "Tienda Virtual, Guápiles.",
+    "lat": 10.212531, 
+    "lng": -83.785632,
+    "maps_link": "https://wa.me/50660621842"
+},
+  {
+    "id": 22,
+    "nombre": "Adry Impulsa",
+    "categoria": "Salud",
+    "etiquetas": ["Nutrición", "Hábitos Saludables", "Colágeno", "Bienestar", "Suplementos"],
+    "servicios_resumen": "Transforma tu estilo de vida: asesoría en hábitos, nutrición avanzada y productos de bienestar.",
+    "instagram": "https://www.instagram.com/adry_impulsa/",
+    "imagen": "img/adry-impulsa.png",
+    "whatsapp": "+50671120443", 
+    "descripcion": "Enfocada en acción y resultados reales, Adry Impulsa te guía en la transformación de tus hábitos diarios. Especialista en suplementación premium como colágeno hidrolizado y nutrición celular, brindando el apoyo necesario para mejorar tu salud física y motivarte a alcanzar tu mejor versión.",
+    "horario": "Asesoría Personalizada | Virtual",
+    "direccion": "Servicio en línea, Guápiles",
+    "lat": 10.212531,
+    "lng": -83.785632,
+    "maps_link": "https://wa.me/50671120443"
 }
 ]
