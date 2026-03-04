@@ -291,12 +291,13 @@ function aplicarFiltrosCombinados() {
     const filtrados = negociosRaw.filter(n => {
         // --- AQUÍ ESTÁ EL CAMBIO ---
         // Ahora busca en: Nombre, Resumen, Categoría, Descripción y Etiquetas
-        const coincideBusqueda = 
-            normalizar(n.nombre).includes(busqueda) || 
-            normalizar(n.servicios_resumen).includes(busqueda) ||
-            normalizar(n.categoria).includes(busqueda) ||
-            (n.descripcion && normalizar(n.descripcion).includes(busqueda)) || // <--- BUSCA EN DESCRIPCIÓN
-            (n.etiquetas && n.etiquetas.some(etq => normalizar(etq).includes(busqueda))); // <--- BUSCA EN ETIQUETAS
+       const coincideBusqueda = 
+    normalizar(n.nombre).includes(busqueda) || 
+    normalizar(n.servicios_resumen).includes(busqueda) ||
+    normalizar(n.categoria).includes(busqueda) ||
+    normalizar(n.keywords_busqueda || "").includes(busqueda) || // <--- NUEVA LÍNEA: Busca en los sinónimos ocultos
+    (n.descripcion && normalizar(n.descripcion).includes(busqueda)) || 
+    (n.etiquetas && n.etiquetas.some(etq => normalizar(etq).includes(busqueda)));
 
         const coincideCategoria = categoriaActual === 'todos' || normalizar(n.categoria) === normalizar(categoriaActual);
         const coincideEtiqueta = !etiquetaActual || (n.etiquetas && n.etiquetas.includes(etiquetaActual));
