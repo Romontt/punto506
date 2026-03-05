@@ -494,39 +494,54 @@ function cerrarModalRegistro() {
 document.getElementById('modal-registro')?.addEventListener('click', function(e) {
     if (e.target === this) cerrarModalRegistro();
 });
+// --- MANEJO DEL FORMULARIO DE REGISTRO ---
 document.addEventListener('submit', async function(e) {
-    // Solo actuamos si es el formulario de registro
+    // 1. Identificar que es el formulario de registro
     const form = e.target.closest('#registro-form'); 
     if (!form) return;
 
+    // 2. Bloquear la redirección de Formspree inmediatamente
     e.preventDefault();
+
     const btn = form.querySelector('button[type="submit"]');
     const textoOriginal = btn.innerText;
     
+    // 3. Feedback visual en el botón
     btn.innerText = "PROCESANDO...";
     btn.disabled = true;
 
     try {
+        const formData = new FormData(form);
         const response = await fetch(form.action, {
             method: 'POST',
-            body: new FormData(form),
+            body: formData,
             headers: { 'Accept': 'application/json' }
         });
 
         if (response.ok) {
-            btn.innerText = "¡RECIBIDO!";
+            // 4. ÉXITO: Cambiamos el contenido del botón o mostramos mensaje
+            btn.innerText = "¡REGISTRO EXITOSO!";
+            btn.style.backgroundColor = "#d4a373"; // Color dorado de tu branding
+            btn.style.color = "#130f0e";
+
+            // 5. Cerramos el modal tras una breve pausa para que vean el éxito
             setTimeout(() => {
                 cerrarModalRegistro();
-                form.reset();
+                form.reset(); // Limpiar campos
                 btn.innerText = textoOriginal;
                 btn.disabled = false;
+                btn.style.backgroundColor = ""; // Reset estilos
+                btn.style.color = "";
             }, 2500);
+
         } else {
-            throw new Error();
+            throw new Error("Error en el servidor");
         }
     } catch (error) {
-        btn.innerText = "REINTENTAR";
+        // 6. MANEJO DE ERROR
+        btn.innerText = "ERROR - REINTENTAR";
         btn.disabled = false;
+        console.error("Error al registrar:", error);
     }
 });
 
