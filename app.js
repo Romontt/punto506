@@ -494,20 +494,23 @@ function cerrarModalRegistro() {
 document.getElementById('modal-registro')?.addEventListener('click', function(e) {
     if (e.target === this) cerrarModalRegistro();
 });
-// --- MANEJO DEL FORMULARIO DE REGISTRO (ESTILO FEEDBACK) ---
+// --- MANEJO DEL MODAL DE REGISTRO (REEMPLAZA LO ANTERIOR CON ESTO) ---
+
 function abrirModalRegistro() {
     const modal = document.getElementById('modal-registro');
     if (modal) {
         modal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
 
-        // Vincular el evento justo cuando se abre el modal, asegurando que el DOM existe
-        const form = document.getElementById('registro-form');
+        // Buscamos el formulario dentro del modal
+        // Asegúrate de que en tu HTML el ID sea 'form-registro' o 'registro-form'
+        const form = document.getElementById('form-registro') || document.getElementById('registro-form');
+        
         if (form && !form.dataset.listenerActive) {
-            form.dataset.listenerActive = "true"; // Evita duplicar el evento
+            form.dataset.listenerActive = "true"; // Evita que se asigne el evento muchas veces
             
             form.addEventListener('submit', async (e) => {
-                e.preventDefault();
+                e.preventDefault(); // <--- ESTO ES LO QUE EVITA QUE SALTE A FORMSPREE
                 
                 const btn = form.querySelector('button[type="submit"]');
                 const textoOriginal = btn.innerText;
@@ -530,6 +533,7 @@ function abrirModalRegistro() {
                         setTimeout(() => {
                             cerrarModalRegistro();
                             form.reset();
+                            // Restauramos el botón para la próxima vez
                             btn.innerText = textoOriginal;
                             btn.disabled = false;
                             btn.style.backgroundColor = "";
@@ -541,11 +545,25 @@ function abrirModalRegistro() {
                 } catch (error) {
                     btn.innerText = "ERROR - REINTENTAR";
                     btn.disabled = false;
+                    btn.style.backgroundColor = "#ff4444";
                 }
             });
         }
     }
 }
+
+function cerrarModalRegistro() {
+    const modal = document.getElementById('modal-registro');
+    if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Escuchar clic fuera del modal para cerrar
+document.getElementById('modal-registro')?.addEventListener('click', function(e) {
+    if (e.target === this) cerrarModalRegistro();
+});
 
 // --- INICIO DE LA APP ---
 loadData();
