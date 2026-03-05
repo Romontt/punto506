@@ -516,36 +516,25 @@ function cerrarModalRegistro() {
 
 // Configuración del envío (Se ejecuta una sola vez al cargar la página)
 document.addEventListener('DOMContentLoaded', () => {
-    // Intentamos buscar el formulario por cualquiera de los dos IDs que podrías tener
     const registroForm = document.getElementById('form-registro') || document.getElementById('registro-form');
-    const modalRegistro = document.getElementById('modal-registro');
-
-    // Cerrar al hacer clic fuera del modal
-    if (modalRegistro) {
-        modalRegistro.addEventListener('click', (e) => {
-            if (e.target === modalRegistro) cerrarModalRegistro();
-        });
-    }
-
-    // Manejo del envío del formulario
+    
     if (registroForm) {
         registroForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+            e.preventDefault(); // Evita la redirección y el error 405
             
             const btn = registroForm.querySelector('button[type="submit"]');
-            if (!btn) return;
-
             const textoOriginal = btn.innerText;
             btn.innerText = "PROCESANDO...";
             btn.disabled = true;
 
+            // CREAMOS LOS DATOS
+            const formData = new FormData(registroForm);
+
             try {
-                // Usamos la URL que tiene el formulario en su atributo 'action'
-                const actionUrl = registroForm.action || "https://formspree.io/f/xqedvowy";
-                
-                const response = await fetch(actionUrl, {
+                // FORZAMOS LA URL AQUÍ (Usa el ID que me pasaste antes: xqedvowy)
+                const response = await fetch("https://formspree.io/f/xqedvowy", {
                     method: 'POST',
-                    body: new FormData(registroForm),
+                    body: formData,
                     headers: { 'Accept': 'application/json' }
                 });
 
@@ -563,7 +552,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         btn.style.color = "";
                     }, 2500);
                 } else {
-                    throw new Error("Error en respuesta de servidor");
+                    throw new Error("Respuesta no OK");
                 }
             } catch (error) {
                 console.error("Error al enviar:", error);
