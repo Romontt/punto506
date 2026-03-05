@@ -494,56 +494,58 @@ function cerrarModalRegistro() {
 document.getElementById('modal-registro')?.addEventListener('click', function(e) {
     if (e.target === this) cerrarModalRegistro();
 });
-// --- MANEJO DEL FORMULARIO DE REGISTRO ---
-document.addEventListener('submit', async function(e) {
-    // 1. Identificar que es el formulario de registro
-    const form = e.target.closest('#registro-form'); 
-    if (!form) return;
+// --- MANEJO DEL FORMULARIO DE REGISTRO (ESTILO FEEDBACK) ---
+function abrirModalRegistro() {
+    const modal = document.getElementById('modal-registro');
+    if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
 
-    // 2. Bloquear la redirección de Formspree inmediatamente
-    e.preventDefault();
+        // Vincular el evento justo cuando se abre el modal, asegurando que el DOM existe
+        const form = document.getElementById('registro-form');
+        if (form && !form.dataset.listenerActive) {
+            form.dataset.listenerActive = "true"; // Evita duplicar el evento
+            
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const btn = form.querySelector('button[type="submit"]');
+                const textoOriginal = btn.innerText;
 
-    const btn = form.querySelector('button[type="submit"]');
-    const textoOriginal = btn.innerText;
-    
-    // 3. Feedback visual en el botón
-    btn.innerText = "PROCESANDO...";
-    btn.disabled = true;
+                btn.innerText = "PROCESANDO...";
+                btn.disabled = true;
 
-    try {
-        const formData = new FormData(form);
-        const response = await fetch(form.action, {
-            method: 'POST',
-            body: formData,
-            headers: { 'Accept': 'application/json' }
-        });
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: new FormData(form),
+                        headers: { 'Accept': 'application/json' }
+                    });
 
-        if (response.ok) {
-            // 4. ÉXITO: Cambiamos el contenido del botón o mostramos mensaje
-            btn.innerText = "¡REGISTRO EXITOSO!";
-            btn.style.backgroundColor = "#d4a373"; // Color dorado de tu branding
-            btn.style.color = "#130f0e";
+                    if (response.ok) {
+                        btn.innerText = "¡REGISTRO EXITOSO!";
+                        btn.style.backgroundColor = "#d4a373";
+                        btn.style.color = "#130f0e";
 
-            // 5. Cerramos el modal tras una breve pausa para que vean el éxito
-            setTimeout(() => {
-                cerrarModalRegistro();
-                form.reset(); // Limpiar campos
-                btn.innerText = textoOriginal;
-                btn.disabled = false;
-                btn.style.backgroundColor = ""; // Reset estilos
-                btn.style.color = "";
-            }, 2500);
-
-        } else {
-            throw new Error("Error en el servidor");
+                        setTimeout(() => {
+                            cerrarModalRegistro();
+                            form.reset();
+                            btn.innerText = textoOriginal;
+                            btn.disabled = false;
+                            btn.style.backgroundColor = "";
+                            btn.style.color = "";
+                        }, 2500);
+                    } else {
+                        throw new Error();
+                    }
+                } catch (error) {
+                    btn.innerText = "ERROR - REINTENTAR";
+                    btn.disabled = false;
+                }
+            });
         }
-    } catch (error) {
-        // 6. MANEJO DE ERROR
-        btn.innerText = "ERROR - REINTENTAR";
-        btn.disabled = false;
-        console.error("Error al registrar:", error);
     }
-});
+}
 
 // --- INICIO DE LA APP ---
 loadData();
