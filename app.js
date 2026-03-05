@@ -458,126 +458,22 @@ let cerrandoManual = false;
 
 function cerrarModal() {
     const modal = document.getElementById('modal-negocio');
-    // Si el modal no existe o ya está oculto, no hacemos nada
     if (!modal || modal.classList.contains('hidden')) return;
 
+    cerrandoManual = true;
     modal.classList.add('hidden');
     document.body.style.overflow = 'auto';
 
-    // Si el cierre NO fue por el botón "atrás" del cel (popstate),
-    // entonces forzamos el retroceso en el historial para limpiar la URL (#detalle)
-    if (!cerrandoManual && window.location.hash === "#detalle") {
+    if (window.location.hash === "#detalle") {
         history.back();
     }
     
-    // Resetear la bandera después de un momento
-    setTimeout(() => { 
-        cerrandoManual = false; 
-    }, 100);
+    setTimeout(() => { cerrandoManual = false; }, 100);
 }
 
-document.getElementById('modal-negocio')?.addEventListener('click', function(e) {
+document.getElementById('modal-negocio').addEventListener('click', function(e) {
     if (e.target === this) cerrarModal();
 });
-// --- FUNCIONES DEL MODAL DE REGISTRO ---
-function abrirModalRegistro() {
-    const modal = document.getElementById('modal-registro');
-    if (modal) {
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-        // Registramos un paso en el historial para que el botón "atrás" del cel lo cierre
-        history.pushState({ step: 'modal-registro' }, "", "#registro");
-    }
-}
 
-function cerrarModalRegistro() {
-    const modal = document.getElementById('modal-registro');
-    if (modal) {
-        modal.classList.add('hidden');
-        document.body.style.overflow = 'auto';
-        
-        // Si el hash es #registro, volvemos atrás para limpiar la URL
-        if (window.location.hash === "#registro") {
-            history.back();
-        }
-    }
-}
-
-// Cerrar al hacer clic fuera del contenido (en el fondo oscuro)
-document.getElementById('modal-registro')?.addEventListener('click', function(e) {
-    if (e.target === this) cerrarModalRegistro();
-});
-// --- MANEJO DEL BOTÓN ATRÁS DEL NAVEGADOR/MÓVIL ---
-// Este bloque detecta cuando el usuario presiona 'atrás'
-window.addEventListener('popstate', function(e) {
-    // 1. Si el modal de detalles está abierto
-    const modalDetalle = document.getElementById('modal-negocio');
-    if (modalDetalle && !modalDetalle.classList.contains('hidden')) {
-        cerrandoManual = true; // <--- AÑADE ESTO AQUÍ
-        cerrarModal();
-    }
-
-    // 2. Si el modal de registro está abierto
-    const modalRegistro = document.getElementById('modal-registro');
-    if (modalRegistro && !modalRegistro.classList.contains('hidden')) {
-        modalRegistro.classList.add('hidden');
-        document.body.style.overflow = 'auto';
-    }
-});
-// --- MANEJADOR DE FORMULARIOS GLOBAL (CORREGIDO) ---
-document.addEventListener('submit', async function(e) {
-    // 1. Identificar qué formulario se está enviando
-    const registroForm = e.target.closest('#modal-registro form');
-    const feedbackForm = e.target.closest('#feedback-form');
-    
-    // Si no es ninguno de nuestros formularios, no hacemos nada
-    if (!registroForm && !feedbackForm) return;
-
-    e.preventDefault(); // Detenemos el envío normal en ambos casos
-    
-    const form = registroForm || feedbackForm;
-    const btnEnviar = form.querySelector('button[type="submit"]');
-    const textoOriginal = btnEnviar.innerText;
-
-    // Estado visual de carga
-    btnEnviar.innerText = "ENVIANDO...";
-    btnEnviar.disabled = true;
-
-    try {
-        const response = await fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
-            headers: { 'Accept': 'application/json' }
-        });
-
-        if (response.ok) {
-            btnEnviar.innerText = "¡EXITOSO!";
-            btnEnviar.style.backgroundColor = "#d4a373";
-            btnEnviar.style.color = "#130f0e";
-            
-            if (registroForm) {
-                // Lógica específica para REGISTRO
-                setTimeout(() => {
-                    cerrarModalRegistro();
-                    form.reset();
-                    btnEnviar.innerText = textoOriginal;
-                    btnEnviar.disabled = false;
-                    btnEnviar.style = ""; // Limpia estilos extra
-                }, 2000);
-            } else {
-                // Lógica específica para FEEDBACK (Detalle)
-                document.getElementById('form-wrapper').classList.add('hidden');
-                document.getElementById('success-message').classList.remove('hidden');
-            }
-        } else {
-            throw new Error();
-        }
-    } catch (error) {
-        btnEnviar.innerText = "ERROR";
-        btnEnviar.disabled = false;
-        setTimeout(() => { btnEnviar.innerText = textoOriginal; }, 3000);
-    }
-});
-}
 // --- INICIO DE LA APP ---
 loadData();
