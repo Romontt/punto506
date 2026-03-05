@@ -524,59 +524,59 @@ window.addEventListener('popstate', function(e) {
         document.body.style.overflow = 'auto';
     }
 });
-// --- MANEJADOR DEL FORMULARIO DE REGISTRO (CORREGIDO) ---
-// Usamos el documento para escuchar el envío y asegurar que no se escape
+// --- MANEJADOR DE FORMULARIOS GLOBAL (CORREGIDO) ---
 document.addEventListener('submit', async function(e) {
-    // Verificamos si el formulario que se envía es el que está dentro del modal de registro
-    const form = e.target.closest('#modal-registro form');
+    // 1. Identificar qué formulario se está enviando
+    const registroForm = e.target.closest('#modal-registro form');
+    const feedbackForm = e.target.closest('#feedback-form');
     
-    if (form) {
-        e.preventDefault(); // <--- ESTO detiene el salto a la página de Formspree
+    // Si no es ninguno de nuestros formularios, no hacemos nada
+    if (!registroForm && !feedbackForm) return;
 
-        const btnEnviar = form.querySelector('button[type="submit"]');
-        const textoOriginal = btnEnviar.innerText;
+    e.preventDefault(); // Detenemos el envío normal en ambos casos
+    
+    const form = registroForm || feedbackForm;
+    const btnEnviar = form.querySelector('button[type="submit"]');
+    const textoOriginal = btnEnviar.innerText;
 
-        // 1. Estado visual de "Enviando"
-        btnEnviar.innerText = "ENVIANDO...";
-        btnEnviar.disabled = true;
+    // Estado visual de carga
+    btnEnviar.innerText = "ENVIANDO...";
+    btnEnviar.disabled = true;
 
-        try {
-            const response = await fetch(form.action, {
-                method: 'POST',
-                body: new FormData(form),
-                headers: { 'Accept': 'application/json' }
-            });
+    try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+        });
 
-            if (response.ok) {
-                // 2. ÉXITO: Cambia el texto del botón a Gracias
-                btnEnviar.innerText = "¡GRACIAS, REGISTRO EXITOSO!";
-                btnEnviar.style.backgroundColor = "#d4a373"; 
-                btnEnviar.style.color = "#130f0e";
-                
-                form.reset(); // Limpiar los datos del formulario
-
-                // 3. Esperar 2 segundos para que el usuario lea el mensaje y cerrar solo
+        if (response.ok) {
+            btnEnviar.innerText = "¡EXITOSO!";
+            btnEnviar.style.backgroundColor = "#d4a373";
+            btnEnviar.style.color = "#130f0e";
+            
+            if (registroForm) {
+                // Lógica específica para REGISTRO
                 setTimeout(() => {
-                    cerrarModalRegistro(); // Cerramos el modal
-                    
-                    // Resetear el botón para la próxima vez que se abra
+                    cerrarModalRegistro();
+                    form.reset();
                     btnEnviar.innerText = textoOriginal;
                     btnEnviar.disabled = false;
-                    btnEnviar.style.backgroundColor = "";
-                    btnEnviar.style.color = "";
+                    btnEnviar.style = ""; // Limpia estilos extra
                 }, 2000);
-
             } else {
-                throw new Error();
+                // Lógica específica para FEEDBACK (Detalle)
+                document.getElementById('form-wrapper').classList.add('hidden');
+                document.getElementById('success-message').classList.remove('hidden');
             }
-        } catch (error) {
-            // Caso de error
-            btnEnviar.innerText = "ERROR AL ENVIAR";
-            btnEnviar.disabled = false;
-            setTimeout(() => { btnEnviar.innerText = textoOriginal; }, 3000);
+        } else {
+            throw new Error();
         }
+    } catch (error) {
+        btnEnviar.innerText = "ERROR";
+        btnEnviar.disabled = false;
+        setTimeout(() => { btnEnviar.innerText = textoOriginal; }, 3000);
     }
 });
-
 // --- INICIO DE LA APP ---
 loadData();
