@@ -474,6 +474,61 @@ function cerrarModal() {
 document.getElementById('modal-negocio').addEventListener('click', function(e) {
     if (e.target === this) cerrarModal();
 });
+function abrirModalRegistro() {
+    const modal = document.getElementById('modal-registro');
+    if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function cerrarModalRegistro() {
+    const modal = document.getElementById('modal-registro');
+    if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Cerrar al hacer clic fuera del contenido
+document.getElementById('modal-registro')?.addEventListener('click', function(e) {
+    if (e.target === this) cerrarModalRegistro();
+});
+document.addEventListener('submit', async function(e) {
+    // Solo actuamos si es el formulario de registro
+    const form = e.target.closest('#registro-form'); 
+    if (!form) return;
+
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    const textoOriginal = btn.innerText;
+    
+    btn.innerText = "PROCESANDO...";
+    btn.disabled = true;
+
+    try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+            btn.innerText = "¡RECIBIDO!";
+            setTimeout(() => {
+                cerrarModalRegistro();
+                form.reset();
+                btn.innerText = textoOriginal;
+                btn.disabled = false;
+            }, 2500);
+        } else {
+            throw new Error();
+        }
+    } catch (error) {
+        btn.innerText = "REINTENTAR";
+        btn.disabled = false;
+    }
+});
 
 // --- INICIO DE LA APP ---
 loadData();
