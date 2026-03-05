@@ -494,61 +494,15 @@ function cerrarModalRegistro() {
 document.getElementById('modal-registro')?.addEventListener('click', function(e) {
     if (e.target === this) cerrarModalRegistro();
 });
-// --- MANEJO DEL MODAL DE REGISTRO (REEMPLAZA LO ANTERIOR CON ESTO) ---
+// --- SISTEMA DE REGISTRO BLINDADO ---
 
 function abrirModalRegistro() {
     const modal = document.getElementById('modal-registro');
     if (modal) {
         modal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
-
-        // Buscamos el formulario dentro del modal
-        // Asegúrate de que en tu HTML el ID sea 'form-registro' o 'registro-form'
-        const form = document.getElementById('form-registro') || document.getElementById('registro-form');
-        
-        if (form && !form.dataset.listenerActive) {
-            form.dataset.listenerActive = "true"; // Evita que se asigne el evento muchas veces
-            
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault(); // <--- ESTO ES LO QUE EVITA QUE SALTE A FORMSPREE
-                
-                const btn = form.querySelector('button[type="submit"]');
-                const textoOriginal = btn.innerText;
-
-                btn.innerText = "PROCESANDO...";
-                btn.disabled = true;
-
-                try {
-                    const response = await fetch(form.action, {
-                        method: 'POST',
-                        body: new FormData(form),
-                        headers: { 'Accept': 'application/json' }
-                    });
-
-                    if (response.ok) {
-                        btn.innerText = "¡REGISTRO EXITOSO!";
-                        btn.style.backgroundColor = "#d4a373";
-                        btn.style.color = "#130f0e";
-
-                        setTimeout(() => {
-                            cerrarModalRegistro();
-                            form.reset();
-                            // Restauramos el botón para la próxima vez
-                            btn.innerText = textoOriginal;
-                            btn.disabled = false;
-                            btn.style.backgroundColor = "";
-                            btn.style.color = "";
-                        }, 2500);
-                    } else {
-                        throw new Error();
-                    }
-                } catch (error) {
-                    btn.innerText = "ERROR - REINTENTAR";
-                    btn.disabled = false;
-                    btn.style.backgroundColor = "#ff4444";
-                }
-            });
-        }
+    } else {
+        console.error("No se encontró el modal con ID: modal-registro");
     }
 }
 
@@ -560,10 +514,65 @@ function cerrarModalRegistro() {
     }
 }
 
-// Escuchar clic fuera del modal para cerrar
-document.getElementById('modal-registro')?.addEventListener('click', function(e) {
-    if (e.target === this) cerrarModalRegistro();
-});
+// Configuración del envío (Se ejecuta una sola vez al cargar la página)
+document.addEventListener('DOMContentLoaded', () => {
+    // Intentamos buscar el formulario por cualquiera de los dos IDs que podrías tener
+    const registroForm = document.getElementById('form-registro') || document.getElementById('registro-form');
+    const modalRegistro = document.getElementById('modal-registro');
 
+    // Cerrar al hacer clic fuera del modal
+    if (modalRegistro) {
+        modalRegistro.addEventListener('click', (e) => {
+            if (e.target === modalRegistro) cerrarModalRegistro();
+        });
+    }
+
+    // Manejo del envío del formulario
+    if (registroForm) {
+        registroForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const btn = registroForm.querySelector('button[type="submit"]');
+            if (!btn) return;
+
+            const textoOriginal = btn.innerText;
+            btn.innerText = "PROCESANDO...";
+            btn.disabled = true;
+
+            try {
+                // Usamos la URL que tiene el formulario en su atributo 'action'
+                const actionUrl = registroForm.action || "https://formspree.io/f/xqedvowy";
+                
+                const response = await fetch(actionUrl, {
+                    method: 'POST',
+                    body: new FormData(registroForm),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    btn.innerText = "¡REGISTRO EXITOSO!";
+                    btn.style.backgroundColor = "#d4a373";
+                    btn.style.color = "#130f0e";
+
+                    setTimeout(() => {
+                        cerrarModalRegistro();
+                        registroForm.reset();
+                        btn.innerText = textoOriginal;
+                        btn.disabled = false;
+                        btn.style.backgroundColor = "";
+                        btn.style.color = "";
+                    }, 2500);
+                } else {
+                    throw new Error("Error en respuesta de servidor");
+                }
+            } catch (error) {
+                console.error("Error al enviar:", error);
+                btn.innerText = "ERROR - REINTENTAR";
+                btn.disabled = false;
+                btn.style.backgroundColor = "#ff4444";
+            }
+        });
+    }
+});
 // --- INICIO DE LA APP ---
 loadData();
