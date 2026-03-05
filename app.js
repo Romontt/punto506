@@ -476,7 +476,7 @@ function cerrarModal() {
     }, 100);
 }
 
-document.getElementById('modal-negocio').addEventListener('click', function(e) {
+document.getElementById('modal-negocio').('click', function(e) {
     if (e.target === this) cerrarModal();
 });
 // --- FUNCIONES DEL MODAL DE REGISTRO ---
@@ -524,63 +524,59 @@ window.addEventListener('popstate', function(e) {
         document.body.style.overflow = 'auto';
     }
 });
-// --- MANEJADOR DEL FORMULARIO DE REGISTRO (Formspree sin recargar) ---
-const formularioRegistro = document.querySelector('#modal-registro form');
+// --- MANEJADOR DEL FORMULARIO DE REGISTRO (CORREGIDO) ---
+// Usamos el documento para escuchar el envío y asegurar que no se escape
+document.addEventListener('submit', async function(e) {
+    // Verificamos si el formulario que se envía es el que está dentro del modal de registro
+    const form = e.target.closest('#modal-registro form');
+    
+    if (form) {
+        e.preventDefault(); // <--- ESTO detiene el salto a la página de Formspree
 
-if (formularioRegistro) {
-    formularioRegistro.addEventListener('submit', async function(e) {
-        e.preventDefault(); // Evita que abra la página de Formspree
-        
-        const btnEnviar = this.querySelector('button[type="submit"]');
+        const btnEnviar = form.querySelector('button[type="submit"]');
         const textoOriginal = btnEnviar.innerText;
-        
-        // Efecto visual de "Enviando..."
+
+        // 1. Estado visual de "Enviando"
         btnEnviar.innerText = "ENVIANDO...";
         btnEnviar.disabled = true;
-        btnEnviar.style.opacity = "0.5";
-
-        const formData = new FormData(this);
 
         try {
-            const response = await fetch(this.action, {
+            const response = await fetch(form.action, {
                 method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
             });
 
             if (response.ok) {
-                // ÉXITO
-                btnEnviar.innerText = "¡RECIBIDO!";
-                btnEnviar.style.backgroundColor = "#4ade80"; // Verde éxito
+                // 2. ÉXITO: Cambia el texto del botón a Gracias
+                btnEnviar.innerText = "¡GRACIAS, REGISTRO EXITOSO!";
+                btnEnviar.style.backgroundColor = "#d4a373"; 
                 btnEnviar.style.color = "#130f0e";
                 
+                form.reset(); // Limpiar los datos del formulario
+
+                // 3. Esperar 2 segundos para que el usuario lea el mensaje y cerrar solo
                 setTimeout(() => {
-                    cerrarModalRegistro(); // Cerramos el modal usando tu función existente
-                    this.reset(); // Limpiamos los campos
+                    cerrarModalRegistro(); // Cerramos el modal
                     
-                    alert("¡Gracias! Hemos recibido tu solicitud. Nos pondremos en contacto pronto.");
-                    
-                    // Restauramos el botón para la próxima vez
+                    // Resetear el botón para la próxima vez que se abra
                     btnEnviar.innerText = textoOriginal;
                     btnEnviar.disabled = false;
-                    btnEnviar.style.opacity = "1";
-                    btnEnviar.style.backgroundColor = ""; 
+                    btnEnviar.style.backgroundColor = "";
                     btnEnviar.style.color = "";
-                }, 1500);
+                }, 2000);
+
             } else {
                 throw new Error();
             }
         } catch (error) {
-            // ERROR
-            alert("Hubo un problema. Por favor, intenta de nuevo o contáctanos por WhatsApp.");
-            btnEnviar.innerText = "REINTENTAR";
+            // Caso de error
+            btnEnviar.innerText = "ERROR AL ENVIAR";
             btnEnviar.disabled = false;
-            btnEnviar.style.opacity = "1";
+            setTimeout(() => { btnEnviar.innerText = textoOriginal; }, 3000);
         }
-    });
-}
+    }
+});
 
 // --- INICIO DE LA APP ---
 loadData();
