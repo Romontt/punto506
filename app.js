@@ -476,7 +476,7 @@ function cerrarModal() {
     }, 100);
 }
 
-document.getElementById('modal-negocio').('click', function(e) {
+document.getElementById('modal-negocio')?.addEventListener('click', function(e) {
     if (e.target === this) cerrarModal();
 });
 // --- FUNCIONES DEL MODAL DE REGISTRO ---
