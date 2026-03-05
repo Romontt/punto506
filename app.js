@@ -524,6 +524,63 @@ window.addEventListener('popstate', function(e) {
         document.body.style.overflow = 'auto';
     }
 });
+// --- MANEJADOR DEL FORMULARIO DE REGISTRO (Formspree sin recargar) ---
+const formularioRegistro = document.querySelector('#modal-registro form');
+
+if (formularioRegistro) {
+    formularioRegistro.addEventListener('submit', async function(e) {
+        e.preventDefault(); // Evita que abra la página de Formspree
+        
+        const btnEnviar = this.querySelector('button[type="submit"]');
+        const textoOriginal = btnEnviar.innerText;
+        
+        // Efecto visual de "Enviando..."
+        btnEnviar.innerText = "ENVIANDO...";
+        btnEnviar.disabled = true;
+        btnEnviar.style.opacity = "0.5";
+
+        const formData = new FormData(this);
+
+        try {
+            const response = await fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                // ÉXITO
+                btnEnviar.innerText = "¡RECIBIDO!";
+                btnEnviar.style.backgroundColor = "#4ade80"; // Verde éxito
+                btnEnviar.style.color = "#130f0e";
+                
+                setTimeout(() => {
+                    cerrarModalRegistro(); // Cerramos el modal usando tu función existente
+                    this.reset(); // Limpiamos los campos
+                    
+                    alert("¡Gracias! Hemos recibido tu solicitud. Nos pondremos en contacto pronto.");
+                    
+                    // Restauramos el botón para la próxima vez
+                    btnEnviar.innerText = textoOriginal;
+                    btnEnviar.disabled = false;
+                    btnEnviar.style.opacity = "1";
+                    btnEnviar.style.backgroundColor = ""; 
+                    btnEnviar.style.color = "";
+                }, 1500);
+            } else {
+                throw new Error();
+            }
+        } catch (error) {
+            // ERROR
+            alert("Hubo un problema. Por favor, intenta de nuevo o contáctanos por WhatsApp.");
+            btnEnviar.innerText = "REINTENTAR";
+            btnEnviar.disabled = false;
+            btnEnviar.style.opacity = "1";
+        }
+    });
+}
 
 // --- INICIO DE LA APP ---
 loadData();
