@@ -578,5 +578,6 @@ document.addEventListener('submit', async function(e) {
         setTimeout(() => { btnEnviar.innerText = textoOriginal; }, 3000);
     }
 });
+}
 // --- INICIO DE LA APP ---
 loadData();
