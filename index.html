@@ -173,11 +173,9 @@
                 ¿Tienes un negocio o conoces algún lugar en Pococí que merezca estar aquí? Ayúdanos a destacar lo mejor de nuestra zona.
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="https://wa.me/+50662117858?text=Hola!%20Me%20gustaría%20registrar%20mi%20negocio%20en%20Punto%20506" 
-                    target="_blank" 
-                    class="inline-block py-3 px-6 border border-[#d4a373] text-[#d4a373] text-[9px] font-black uppercase tracking-[0.3em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-500">
-                    Registrar mi negocio
-                </a>
+                <button onclick="abrirModalRegistro()" class="inline-block py-3 px-6 border border-[#d4a373] text-[#d4a373] text-[9px] font-black uppercase tracking-[0.3em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-500">
+    Registrar mi negocio
+</button>
                 <a href="https://wa.me/+50662117858?text=Hola!%20Quiero%20recomendar%20un%20negocio%20para%20Punto%20506" 
                     target="_blank" 
                     class="inline-block py-3 px-6 border border-[#d4a373]/20 text-stone-400 text-[9px] font-black uppercase tracking-[0.3em] hover:border-[#d4a373] hover:text-[#d4a373] transition-all duration-500">
@@ -218,7 +216,7 @@
                     <h3 class="serif-title text-[#d4a373] text-[9px] md:text-[10px] tracking-[0.4em] uppercase mb-6 md:mb-8 font-bold">Institucional</h3>
                     <nav class="flex flex-col gap-3 md:gap-4 text-left">
                         <a href="#main-header" class="text-[8px] md:text-[9px] uppercase tracking-[0.3em] text-stone-400 hover:text-white transition-colors">Propósito</a>
-                        <a href="https://wa.me/+50662117858" target="_blank" class="text-[8px] md:text-[9px] uppercase tracking-[0.3em] text-stone-400 hover:text-white transition-colors">Registrar</a>
+                        <a href="javascript:void(0)" onclick="abrirModalRegistro()" class="text-[8px] md:text-[9px] uppercase tracking-[0.3em] text-stone-400 hover:text-white transition-colors">Registrar</a>
                         <a href="javascript:void(0)" onclick="abrirModalLegal('terminos')" class="text-[8px] md:text-[9px] uppercase tracking-[0.3em] text-stone-400 hover:text-white transition-colors">Términos</a>
                         <a href="javascript:void(0)" onclick="abrirModalLegal('privacidad')" class="text-[8px] md:text-[9px] uppercase tracking-[0.3em] text-stone-400 hover:text-white transition-colors">Privacidad</a>
                     </nav>
@@ -399,5 +397,41 @@ window.onscroll = function() {
     }
 };
     </script>
+    <div id="modal-registro" class="fixed inset-0 z-[1200] hidden flex items-center justify-center p-4 bg-black/95 backdrop-blur-2xl">
+    <div class="bg-[#1c1614] w-full max-w-md border border-[#d4a373]/20 shadow-2xl relative p-8 md:p-10 rounded-sm">
+        
+        <button onclick="cerrarModalRegistro()" class="absolute top-6 right-6 text-[#d4a373]/60 hover:text-[#d4a373] transition">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        
+        <div class="text-center mb-8">
+            <h2 class="serif-title text-[#d4a373] text-xl mb-2 uppercase tracking-widest font-bold">Unirse a Punto 506</h2>
+            <p class="text-stone-400 text-[9px] uppercase tracking-[0.3em]">Déjanos tus datos y nos pondremos en contacto</p>
+        </div>
+
+        <form action="https://formspree.io/f/xqedvowy" method="POST" class="space-y-5">
+            <div>
+                <label class="block text-[8px] uppercase tracking-widest text-[#d4a373] mb-2 font-bold ml-1">Nombre del Negocio</label>
+                <input type="text" name="nombre_negocio" required class="input-registro" placeholder="Ej: Café de la Montaña">
+            </div>
+
+            <div>
+                <label class="block text-[8px] uppercase tracking-widest text-[#d4a373] mb-2 font-bold ml-1">Instagram del Negocio</label>
+                <input type="text" name="instagram" required class="input-registro" placeholder="@tu_usuario">
+            </div>
+
+            <div>
+                <label class="block text-[8px] uppercase tracking-widest text-[#d4a373] mb-2 font-bold ml-1">Número de Contacto</label>
+                <input type="tel" name="telefono" required class="input-registro" placeholder="WhatsApp o celular">
+            </div>
+
+            <div class="pt-4">
+                <button type="submit" class="w-full py-4 bg-[#d4a373] text-[#130f0e] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white transition-all duration-500 shadow-lg">
+                    Enviar Información
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
