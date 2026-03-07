@@ -392,5 +392,23 @@
     "lat": 10.212531,
     "lng": -83.785632,
     "maps_link": "https://wa.me/50671120443"
-  }
+  },
+  {
+  "id": 23,
+  "nombre": "Dulzuras Luna",
+  "categoria": "Gastronomía",
+  "etiquetas": ["Repostería", "Pastelería Artesanal", "Mesas de Dulces", "Eventos", "Bocadillos"],
+  "keywords_busqueda": "reposteria artesanal pasteles personalizados queques bodas quinceaños mesas de dulces postres bocadillos salados dulces eventos catering pan artesanal guapiles",
+  "servicios_resumen": "Repostería 100% artesanal, pasteles personalizados y mesas de dulces para eventos especiales.",
+  "instagram": "null",
+  "imagen": "img/dulzuras-luna.png",
+  "facebook": "https://www.facebook.com/profile.php?id=100063601992500",
+  "whatsapp": "+50684215432",
+  "descripcion": "En Dulzuras Luna creamos repostería y pastelería 100% artesanal con ingredientes de la mejor calidad. Nos especializamos en complacer el gusto de cada cliente con pasteles totalmente personalizados y una gran variedad de bocadillos dulces y salados. Somos expertos en el montaje de mesas de dulces para bodas, quince años y todo tipo de fiestas.",
+  "horario": "Bajo Pedido | Pedidos Personalizados",
+  "direccion": "125 metros al Sur de la Carnicería Guerrero, Guápiles.",
+  "lat": 10.21104818593506,
+  "lng": -83.78149021970603,
+  "maps_link": "https://maps.app.goo.gl/wsVPJiRMjJnMMbrx9"
+}
 ]
