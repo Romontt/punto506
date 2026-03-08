@@ -1,96 +1,107 @@
 /* publicidad.js 
    Módulo independiente para el botón flotante de Amazon.
-   Inyecta su propio HTML, CSS y Lógica sin afectar el sitio principal.
 */
 
 (function() {
-    // 1. Inyección de Estilos (Corregidos y unificados)
+    // 1. Inyección de Estilos (Actualizados para los dos botones)
     const style = document.createElement('style');
     style.innerHTML = `
         #amazon-floating-container {
-    position: fixed;
-    bottom: 95px; /* <--- Súbelo aquí */
-    right: 25px;
-    z-index: 99999;
+            position: fixed;
+            bottom: 95px; 
+            right: 25px;
+            z-index: 99999;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         .amazon-tooltip {
             background: #ff9900;
             color: #000;
             padding: 8px 15px;
-            border-radius: 15px 15px 0 15px; /* Estilo gota de chat */
-            font-size: 12px;
-            font-weight: bold;
+            border-radius: 15px 15px 0 15px;
+            font-size: 11px;
+            font-weight: 800;
             margin-bottom: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            max-width: 200px;
+            max-width: 180px;
             line-height: 1.3;
             text-align: right;
-            animation: bounceIn 1s ease-out, pulse 2s infinite;
+            text-transform: uppercase;
+            animation: bounceIn 1s ease-out;
         }
 
         .amazon-btn-main {
             background: #232f3e;
             border: 2px solid #ff9900;
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
         }
 
-        .amazon-btn-main:hover { transform: scale(1.1) rotate(5deg); }
+        .amazon-btn-main:hover { transform: scale(1.1); }
         
         #amazon-modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             display: none;
             align-items: center;
             justify-content: center;
             z-index: 100000;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
         }
 
         .amazon-modal-card {
             background: #111;
-            border: 1px solid #333;
+            border: 1px solid #d4a373/20;
             width: 90%;
-            max-width: 380px;
-            border-radius: 24px;
-            padding: 30px;
+            max-width: 360px;
+            border-radius: 20px;
+            padding: 35px 25px;
             text-align: center;
-            color: #eee;
         }
 
-        .amazon-wa-link {
+        /* ESTILO DE BOTONES DENTRO DEL MODAL */
+        .btn-modal-adv {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            margin-bottom: 12px;
+            transition: all 0.4s;
+        }
+
+        .btn-amazon-direct {
             background: #ff9900;
             color: #000;
-            display: block;
-            padding: 15px;
-            border-radius: 12px;
-            font-weight: bold;
-            text-decoration: none;
-            margin: 20px 0;
-            transition: background 0.3s;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
+        .btn-wa-quote {
+            border: 1px solid #ff9900;
+            color: #ff9900;
+        }
+
+        .btn-modal-adv:hover {
+            filter: brightness(1.2);
+            transform: translateY(-2px);
         }
 
         @keyframes bounceIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
     `;
@@ -99,27 +110,28 @@
     // 2. Crear Estructura HTML
     const amazonHTML = `
         <div id="amazon-floating-container">
-            <div class="amazon-tooltip">¿Necesitas traer algo de Amazon para tu negocio? 📦</div>
-            <button class="amazon-btn-main" onclick="openAmazonModal()">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff9900" stroke-width="2"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+            <div class="amazon-tooltip">¿Buscas algo en Amazon para tu negocio? 📦</div>
+            <button class="amazon-btn-main" onclick="openAmazonModal()" aria-label="Publicidad y Cotizaciones">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff9900" stroke-width="2"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M12 3v18"/><path d="M12 12l8.7-4.8"/><path d="M12 12L3.3 7.2"/></svg>
             </button>
         </div>
 
         <div id="amazon-modal-overlay" onclick="closeAmazonModal(event)">
             <div class="amazon-modal-card">
-                <h2 style="color:#ff9900; font-size: 22px; margin-bottom: 10px;">Cotización Gratis</h2>
-                <p style="font-size: 14px; line-height: 1.5; color: #aaa;">
-                    Dinos qué ocupas traer de Amazon y te damos la información y cotización totalmente gratis. ¡Ideal para tu negocio en Guápiles!
+                <h2 style="color:#ff9900; font-family: 'Cinzel', serif; font-size: 18px; letter-spacing: 3px; margin-bottom: 15px; text-transform: uppercase;">Servicio de Importación</h2>
+                <p style="font-size: 13px; color: #888; margin-bottom: 25px; font-style: italic;">
+                    "Traemos tus herramientas y suministros desde Amazon hasta la puerta de tu local en Pococí."
                 </p>
                 
-                <div style="background:#222; height:100px; margin: 20px 0; border-radius: 15px; display: flex; align-items: center; justify-content: center; border: 1px dashed #444; color: #555; font-style: italic; font-size: 12px;">
-                    [ Espacio para Google AdSense ]
-                </div>
-
-                <a href="https://wa.me/50662117858?text=Hola!%20Vengo%20del%20Directorio.%20Quiero%20cotizar%20un%20producto%20de%20Amazon" target="_blank" class="amazon-wa-link">
-                    Consultar por WhatsApp
+                <a href="TU_LINK_DE_AFILIADO_GENERAL" target="_blank" class="btn-modal-adv btn-amazon-direct" rel="nofollow noopener">
+                    Ver Ofertas en Amazon
                 </a>
-                <button onclick="document.getElementById('amazon-modal-overlay').style.display='none'" style="background:none; border:none; color:#777; cursor:pointer; font-size:13px;">Cerrar</button>
+
+                <a href="https://wa.me/50662117858?text=Hola!%20Quiero%20una%20cotización%20para%20un%20producto%20de%20Amazon" target="_blank" class="btn-modal-adv btn-wa-quote">
+                    Cotización Gratis (WA)
+                </a>
+
+                <button onclick="document.getElementById('amazon-modal-overlay').style.display='none'" style="background:none; border:none; color:#444; cursor:pointer; font-size:11px; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px;">Cerrar</button>
             </div>
         </div>
     `;
