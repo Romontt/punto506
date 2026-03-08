@@ -2,7 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://punto506.montzucr.com/</loc>
-    <lastmod>2026-03-07</lastmod> <changefreq>daily</changefreq>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=1</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=2</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=3</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=4</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=5</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=6</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=7</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=8</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=9</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=10</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=11</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=12</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=13</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=14</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=15</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=16</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=17</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=18</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=19</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=20</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=21</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=22</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=23</loc><priority>0.8</priority></url>
+  <url><loc>https://punto506.montzucr.com/negocio.html?id=24</loc><priority>0.8</priority></url>
 </urlset>
