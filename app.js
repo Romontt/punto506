@@ -124,17 +124,18 @@ function renderLanding() {
 
 function seleccionarCategoria(id) {
     ejecutarTransicion(() => {
+        // 1. Cambiamos el estado
         categoriaActual = id;
         etiquetaActual = null;
         
-        // --- FUERZA LA VISIBILIDAD AQUÍ ---
+        // 2. APAGAMOS la landing de inmediato y PRENDEMOS los resultados
         const landing = document.getElementById('landing-categories');
         const resultados = document.getElementById('section-results');
         
-        if(landing) landing.classList.add('hidden'); // Ocultamos la landing sí o sí
-        if(resultados) resultados.classList.remove('hidden'); // Mostramos resultados
+        if (landing) landing.classList.add('hidden');
+        if (resultados) resultados.classList.remove('hidden');
 
-        // Actualizar botones del footer para que el nuevo brille
+        // 3. Actualizamos la interfaz (botones y URL)
         const botones = document.querySelectorAll('.filter-btn');
         botones.forEach(btn => {
             if(btn.getAttribute('data-cat') === id) activarBoton(btn);
@@ -142,11 +143,12 @@ function seleccionarCategoria(id) {
 
         actualizarURL(id);
         gestionarVisibilidadHeader(id);
+        
+        // 4. Ejecutamos el renderizado de los datos
         renderSubCategorias();
         aplicarFiltrosCombinados();
     });
 }
-
 function actualizarURL(categoria) {
     const nuevaUrl = categoria === 'todos' ? window.location.pathname : `?categoria=${encodeURIComponent(categoria.toLowerCase())}`;
     window.history.pushState({ step: 'categoria', path: nuevaUrl }, '', nuevaUrl);
@@ -324,6 +326,7 @@ function aplicarFiltrosCombinados() {
     }
 
     const filtrados = negociosRaw.filter(n => {
+        // --- FILTRADO DE NEGOCIOS ---
         const coincideBusqueda = 
             normalizar(n.nombre).includes(busqueda) || 
             normalizar(n.servicios_resumen).includes(busqueda) ||
@@ -338,9 +341,12 @@ function aplicarFiltrosCombinados() {
         return coincideBusqueda && coincideCategoria && coincideEtiqueta;
     });
 
-    // --- LÓGICA DE VISIBILIDAD UNIFICADA ---
-    if (busqueda !== '' || (categoriaActual !== 'todos' && categoriaActual !== null)) {
-        // Mostramos resultados, ocultamos landing
+    // --- CONTROL DE VISIBILIDAD (EL ÚLTIMO CAMBIO) ---
+    const tieneBusqueda = busqueda !== '';
+    const esCategoriaReal = categoriaActual !== 'todos' && categoriaActual !== null;
+
+    if (tieneBusqueda || esCategoriaReal) {
+        // Forzamos visibilidad de resultados y ocultamos landing SIEMPRE que no sea "todos"
         document.getElementById('section-results').classList.remove('hidden');
         document.getElementById('landing-categories').classList.add('hidden');
         
@@ -348,7 +354,7 @@ function aplicarFiltrosCombinados() {
         gestionarVisibilidadHeader(categoriaActual);
         renderSubCategorias(); 
     } else {
-        // Volvemos a la landing (solo cuando no hay búsqueda y es 'todos')
+        // Solo volvemos a la landing si realmente estamos en 'todos' y sin buscar nada
         renderLanding();
     }
 }
