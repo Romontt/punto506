@@ -38,17 +38,22 @@
     <meta property="og:url" content="https://punto506.montzucr.com/">
     <meta property="og:type" content="website">
 
+    <link rel="preload" as="image" href="https://punto506.montzucr.com/img/og-preview.webp" fetchpriority="high">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Montserrat:wght@700&family=Baskervville:ital@0;1&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Montserrat:wght@700&family=Baskervville:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="estilos.css">
 
     <style>
-        html { background-color: #130f0e; } /* Ayuda a Lighthouse a no ver fondo blanco inicial */
+        html { background-color: #130f0e; }
         #form-status.success { color: #d4a373; font-style: italic; font-size: 12px; }
         .custom-scroll::-webkit-scrollbar { width: 4px; }
         .custom-scroll::-webkit-scrollbar-track { background: #130f0e; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #d4a373; }
+        /* Evita saltos visuales en el móvil */
+        body { background: #130f0e; color: white; min-height: 100vh; }
     </style>
 </head>
 <body class="antialiased text-stone-200">
