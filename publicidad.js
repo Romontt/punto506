@@ -123,7 +123,7 @@
                     "Traemos tus herramientas y suministros desde Amazon hasta la puerta de tu local en Pococí."
                 </p>
                 
-                <a href="TU_LINK_DE_AFILIADO_GENERAL" target="_blank" class="btn-modal-adv btn-amazon-direct" rel="nofollow noopener">
+                <a href="https://amzn.to/4bt27Y5" target="_blank" class="btn-modal-adv btn-amazon-direct" rel="nofollow noopener">
                     Ver Ofertas en Amazon
                 </a>
 
