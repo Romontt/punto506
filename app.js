@@ -124,29 +124,25 @@ function renderLanding() {
 
 function seleccionarCategoria(id) {
     ejecutarTransicion(() => {
-        // 1. Cambiamos el estado
         categoriaActual = id;
         etiquetaActual = null;
         
-        // 2. APAGAMOS la landing de inmediato y PRENDEMOS los resultados
+        // APAGAR LANDING Y PRENDER RESULTADOS
         const landing = document.getElementById('landing-categories');
         const resultados = document.getElementById('section-results');
-        
-        if (landing) landing.classList.add('hidden');
-        if (resultados) resultados.classList.remove('hidden');
-
-        // 3. Actualizamos la interfaz (botones y URL)
-        const botones = document.querySelectorAll('.filter-btn');
-        botones.forEach(btn => {
-            if(btn.getAttribute('data-cat') === id) activarBoton(btn);
-        });
+        if(landing) landing.classList.add('hidden');
+        if(resultados) resultados.classList.remove('hidden');
 
         actualizarURL(id);
         gestionarVisibilidadHeader(id);
-        
-        // 4. Ejecutamos el renderizado de los datos
         renderSubCategorias();
         aplicarFiltrosCombinados();
+
+        // SCROLL AUTOMÁTICO A LOS RESULTADOS
+        setTimeout(() => {
+            const offset = resultados.offsetTop - 90;
+            window.scrollTo({ top: offset, behavior: 'smooth' });
+        }, 100);
     });
 }
 function actualizarURL(categoria) {
