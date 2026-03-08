@@ -127,6 +127,13 @@ function seleccionarCategoria(id) {
         categoriaActual = id;
         etiquetaActual = null;
         
+        // --- NUEVAS LÍNEAS DE SEGURIDAD ---
+        const landing = document.getElementById('landing-categories');
+        const resultados = document.getElementById('section-results');
+        if(landing) landing.classList.add('hidden');
+        if(resultados) resultados.classList.remove('hidden');
+        // ----------------------------------
+
         const botones = document.querySelectorAll('.filter-btn');
         botones.forEach(btn => {
             if(btn.getAttribute('data-cat') === id) activarBoton(btn);
