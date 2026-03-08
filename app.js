@@ -232,9 +232,8 @@ function renderCards(listaFiltrada) {
         <div class="relative h-48 md:h-64 overflow-hidden">
             <img src="${n.imagen}" 
                  class="w-full h-full object-cover sepia-[10%] group-hover:sepia-0 group-hover:scale-110 transition duration-[2s] ease-out" 
-                 alt="${n.nombre}"
-                 loading="lazy">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#130f0e] via-transparent opacity-80"></div>
+                 alt="${n.nombre} - ${n.categoria} en Pococí" 
+                 loading="lazy"> <div class="absolute inset-0 bg-gradient-to-t from-[#130f0e] via-transparent opacity-80"></div>
             <div class="absolute top-4 left-4 text-[#d4a373] text-[6px] font-black tracking-[0.4em] uppercase bg-[#130f0e]/80 backdrop-blur-md px-2 py-1 border border-[#d4a373]/20">${n.categoria}</div>
         </div>
 
