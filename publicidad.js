@@ -8,10 +8,10 @@
     const style = document.createElement('style');
     style.innerHTML = `
         #amazon-floating-container {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            z-index: 99999;
+    position: fixed;
+    bottom: 95px; /* <--- Súbelo aquí */
+    right: 25px;
+    z-index: 99999;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
