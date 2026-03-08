@@ -410,5 +410,23 @@
   "lat": 10.21104818593506,
   "lng": -83.78149021970603,
   "maps_link": "https://maps.app.goo.gl/wsVPJiRMjJnMMbrx9"
+},
+  {
+  "id": 24,
+  "nombre": "Zootecnia HZ del Caribe",
+  "categoria": "servicios",
+  "etiquetas": ["Veterinaria", "Zootecnia", "Ganadería", "Mascotas", "Servicio a Domicilio"],
+  "keywords_busqueda": "veterinaria zootecnista bienestar animal salud vacunas desparasitacion ganado vacas perros gatos asistencia tecnica fincas nutricion animal domicilio santa rosa limon caribe",
+  "servicios_resumen": "Asistencia técnica especializada, vacunación y chequeo general para especies productivas y de compañía.",
+  "instagram": "https://www.instagram.com/zootecniahzcaribe/",
+  "imagen": "img/zootecnia-hz.png",
+  "facebook": "null",
+  "whatsapp": "+50672461352",
+  "descripcion": "Un equipo apasionado por la vida animal que combina precisión técnica y eficiencia productiva con un enfoque ético. Ofrecen soluciones integrales tanto para ganadería (optimización de rendimiento) como para mascotas del hogar, garantizando salud y bienestar en cada etapa del camino. Trabajo profesional realizado directamente a domicilio.",
+  "horario": "Lunes a Sábado | Bajo Cita (Trabajo a Domicilio)",
+  "direccion": "Servicio a Domicilio",
+  "lat": 10.21379121016654,
+  "lng": -83.78871668439581,
+  "maps_link": "https://maps.app.goo.gl/AvEKJFFUt3o4LSAn7"
 }
 ]
