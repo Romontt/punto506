@@ -333,6 +333,8 @@ function aplicarFiltrosCombinados() {
     });
 
     if (busqueda !== '' || categoriaActual !== 'todos') {
+        document.getElementById('section-results').classList.remove('hidden');
+        document.getElementById('landing-categories').classList.add('hidden');
         renderCards(filtrados);
         gestionarVisibilidadHeader(categoriaActual);
         renderSubCategorias(); 
