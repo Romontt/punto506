@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://punto506.montzucr.com/sitemap.xml
