@@ -127,13 +127,14 @@ function seleccionarCategoria(id) {
         categoriaActual = id;
         etiquetaActual = null;
         
-        // --- NUEVAS LÍNEAS DE SEGURIDAD ---
+        // --- FUERZA LA VISIBILIDAD AQUÍ ---
         const landing = document.getElementById('landing-categories');
         const resultados = document.getElementById('section-results');
-        if(landing) landing.classList.add('hidden');
-        if(resultados) resultados.classList.remove('hidden');
-        // ----------------------------------
+        
+        if(landing) landing.classList.add('hidden'); // Ocultamos la landing sí o sí
+        if(resultados) resultados.classList.remove('hidden'); // Mostramos resultados
 
+        // Actualizar botones del footer para que el nuevo brille
         const botones = document.querySelectorAll('.filter-btn');
         botones.forEach(btn => {
             if(btn.getAttribute('data-cat') === id) activarBoton(btn);
@@ -358,13 +359,14 @@ function initFilters() {
 
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
-            e.preventDefault(); // Evita saltos extraños
+            // Evitamos que el navegador haga cosas raras con el scroll por defecto
             const catValue = btn.getAttribute('data-cat');
             
             if(catValue === 'todos') {
                 volverInicio();
             } else {
-                // Esto es lo que debe ejecutarse cuando clickeas Salud, Gastronomía, etc.
+                // IMPORTANTE: Llamamos a seleccionarCategoria directamente
+                // Esto saltará la lógica de la landing.
                 seleccionarCategoria(catValue);
             }
         });
