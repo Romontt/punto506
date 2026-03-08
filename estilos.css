@@ -302,7 +302,7 @@ footer.header-texture {
     background-position: center top;
     background-image: 
         linear-gradient(to top, rgba(19, 15, 14, 0.98) 0%, rgba(19, 15, 14, 0.8) 50%, var(--p506-bg) 100%),
-        url("img/fondoheader.jpg");
+        url("img/fondoheader.webp");
     background-size: cover;
     box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
     border-top: 1px solid rgba(212, 163, 115, 0.1);
