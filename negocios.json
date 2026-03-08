@@ -428,5 +428,23 @@
   "lat": 10.21379121016654,
   "lng": -83.78871668439581,
   "maps_link": "https://maps.app.goo.gl/AvEKJFFUt3o4LSAn7"
-}
+},
+  {
+    "id": 25,
+    "nombre": "Podoclínica Dra. Pies",
+    "categoria": "Salud",
+    "etiquetas": ["Podología", "Medicina General", "Pie Diabético", "Uñas Encarnadas", "Salud Integral"],
+    "keywords_busqueda": "pies podologo medicina general salud pies uñas hongos pie diabetico plantillas ortopedicas adultos mayores guapiles clinica medica cuidado pies",
+    "servicios_resumen": "Especialistas en podología y medicina general. Cuidado profesional de la salud de sus pies con criterio médico.",
+    "instagram": "https://www.instagram.com/drapiescr/",
+    "imagen": "img/logos/dra-pies.webp",
+    "facebook": "https://www.facebook.com/drapiescr",
+    "whatsapp": "+50685515775",
+    "descripcion": "Bajo la dirección de la Dra. Katherine Gómez, Podoclínica Dra. Pies ofrece un enfoque médico integral para la salud de sus pies. Especializados en tratamientos para adultos mayores, manejo de pie diabético y patologías ungueales, combinando precisión técnica con calidez humana en el corazón de Guápiles.",
+    "horario": "Lunes a Sábado | Previa Cita",
+    "direccion": "CliniTotal Plaza Médica, a un costado del INS, Guápiles.",
+    "lat": 10.215552342483994,
+    "lng": -83.78340343136733,
+    "maps_link": "https://maps.app.goo.gl/GsPt9BcPntMMcYUW7"
+  }
 ]
