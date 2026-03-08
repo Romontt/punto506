@@ -323,15 +323,13 @@ function aplicarFiltrosCombinados() {
     }
 
     const filtrados = negociosRaw.filter(n => {
-        // --- AQUÍ ESTÁ EL CAMBIO ---
-        // Ahora busca en: Nombre, Resumen, Categoría, Descripción y Etiquetas
-       const coincideBusqueda = 
-    normalizar(n.nombre).includes(busqueda) || 
-    normalizar(n.servicios_resumen).includes(busqueda) ||
-    normalizar(n.categoria).includes(busqueda) ||
-    normalizar(n.keywords_busqueda || "").includes(busqueda) || // <--- NUEVA LÍNEA: Busca en los sinónimos ocultos
-    (n.descripcion && normalizar(n.descripcion).includes(busqueda)) || 
-    (n.etiquetas && n.etiquetas.some(etq => normalizar(etq).includes(busqueda)));
+        const coincideBusqueda = 
+            normalizar(n.nombre).includes(busqueda) || 
+            normalizar(n.servicios_resumen).includes(busqueda) ||
+            normalizar(n.categoria).includes(busqueda) ||
+            normalizar(n.keywords_busqueda || "").includes(busqueda) || 
+            (n.descripcion && normalizar(n.descripcion).includes(busqueda)) || 
+            (n.etiquetas && n.etiquetas.some(etq => normalizar(etq).includes(busqueda)));
 
         const coincideCategoria = categoriaActual === 'todos' || normalizar(n.categoria) === normalizar(categoriaActual);
         const coincideEtiqueta = !etiquetaActual || (n.etiquetas && n.etiquetas.includes(etiquetaActual));
@@ -339,13 +337,17 @@ function aplicarFiltrosCombinados() {
         return coincideBusqueda && coincideCategoria && coincideEtiqueta;
     });
 
-    if (busqueda !== '' || categoriaActual !== 'todos') {
+    // --- LÓGICA DE VISIBILIDAD UNIFICADA ---
+    if (busqueda !== '' || (categoriaActual !== 'todos' && categoriaActual !== null)) {
+        // Mostramos resultados, ocultamos landing
         document.getElementById('section-results').classList.remove('hidden');
         document.getElementById('landing-categories').classList.add('hidden');
+        
         renderCards(filtrados);
         gestionarVisibilidadHeader(categoriaActual);
         renderSubCategorias(); 
     } else {
+        // Volvemos a la landing (solo cuando no hay búsqueda y es 'todos')
         renderLanding();
     }
 }
@@ -355,11 +357,14 @@ function initFilters() {
     if(input) input.addEventListener('input', () => aplicarFiltrosCombinados());
 
     document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault(); // Evita saltos extraños
             const catValue = btn.getAttribute('data-cat');
+            
             if(catValue === 'todos') {
                 volverInicio();
             } else {
+                // Esto es lo que debe ejecutarse cuando clickeas Salud, Gastronomía, etc.
                 seleccionarCategoria(catValue);
             }
         });
