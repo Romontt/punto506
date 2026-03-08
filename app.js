@@ -400,7 +400,7 @@ function verDetalle(id) {
     const modalContenido = document.getElementById('modal-content');
     modalContenido.innerHTML = `
         <div class="relative h-48 md:h-64 overflow-hidden">
-            <img src="${n.imagen}" alt="${n.nombre}" class="w-full h-full object-cover">
+            <img src="${n.imagen}" alt="${n.nombre} - ${n.servicios_resumen}" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-[#1c1614] via-transparent to-black/20"></div>
             <button onclick="cerrarModal()" class="absolute top-6 right-6 z-50 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-all">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
