@@ -605,5 +605,86 @@
     "lat": 10.215552342483994,
     "lng": -83.78340343136733,
     "maps_link": "https://maps.app.goo.gl/GsPt9BcPntMMcYUW7"
+  },
+  {
+    "id": 26,
+    "nombre": "Hi Tea Guápiles",
+    "categoria": "Gastronomía",
+    "etiquetas": ["Bubble Tea", "Repostería", "Comida Asiática", "Gyosas", "Postres"],
+    "keywords_busqueda": "te de burbujas boba tea comida china asiática gyosas dumplings rollos de camaron cake pastel postres merienda bebida fria barrio chino hello kitty cafe",
+    "servicios_resumen": "Bubble Tea auténtico, repostería creativa y snacks asiáticos como gyosas y rollos de camarón.",
+    "instagram": "https://www.instagram.com/hitea.guapiles/",
+    "facebook": "https://www.facebook.com/profile.php?id=61575271720818",
+    "imagen": "img/logos/hi-tea.webp",
+    "whatsapp": "+50687448301",
+    "descripcion": "¡Desde el Barrio Chino hasta el corazón de Guápiles! Hi Tea ofrece una experiencia gastronómica asiática única, especializándose en el auténtico Bubble Tea y repostería temática. Además, cuentan con una selección de snacks calientes como gyosas de cerdo y rollos de camarón, todo en un ambiente moderno y creativo.",
+    "horario": "Lunes a Domingo | 11:00 AM a 7:00 PM",
+    "estado_horario": {
+      "tipo": "horario",
+      "config": {
+        "1": ["11:00", "19:00"],
+        "2": ["11:00", "19:00"],
+        "3": ["11:00", "19:00"],
+        "4": ["11:00", "19:00"],
+        "5": ["11:00", "19:00"],
+        "6": ["11:00", "19:00"],
+        "7": ["11:00", "19:00"]
+      }
+    },
+    "direccion": "Frente a Asembis, Guápiles.",
+    "lat": 10.215998338775448,
+    "lng": -83.79318621739729,
+    "maps_link": "https://maps.app.goo.gl/7vMxdqNDrwk5vQdW80"
+  },
+  {
+    "id": 27,
+    "nombre": "Royal Lashes",
+    "categoria": "Estética",
+    "etiquetas": ["Pestañas", "Uñas", "Cejas", "Faciales", "Lifting"],
+    "keywords_busqueda": "pestañas extensiones de pestañas uñas acrilicas manicure limpieza facial henna cejas lifting de pestañas laminado de cejas belleza mujer mirada salon estética sauces guapiles",
+    "servicios_resumen": "Especialistas en extensiones de pestañas, diseño de cejas, uñas y cuidado facial.",
+    "instagram": "https://www.instagram.com/royal_lashes.nv/",
+    "facebook": "null",
+    "imagen": "img/logos/royal-lashes.webp",
+    "whatsapp": "+50662624356",
+    "descripcion": "En Royal Lashes nos enfocamos en resaltar tu mirada y belleza natural. Ofrecemos servicios profesionales de aplicación de pestañas, laminado de cejas y uñas con acabados impecables. Ubicados en Los Sauces de Guápiles, brindamos una atención personalizada en un ambiente diseñado para tu comodidad.",
+    "horario": "Lunes a Sábado | Previa Cita",
+    "estado_horario": {
+      "tipo": "cita",
+      "config": null
+    },
+    "direccion": "Los Sauces, Guápiles.",
+    "lat": 10.226890251437572,
+    "lng": -83.80168949333206,
+    "maps_link": "https://maps.app.goo.gl/RyuU68mgvUZi73oD6"
+  },
+  {
+    "id": 28,
+    "nombre": "Tropihelados Gourmet",
+    "categoria": "Gastronomía",
+    "etiquetas": ["Helados Artesanales", "Postres", "Helados de Leche", "Servicio a Domicilio"],
+    "keywords_busqueda": "helados artesanales deli gourmet postres cremosos paletas helado de leche nutella cheesecake galleta oreo baileys frio dulce merienda entrega gratis guapiles centro antojo",
+    "servicios_resumen": "Helados artesanales cremosos con sabores gourmet y entregas gratuitas en Guápiles centro.",
+    "instagram": "https://www.instagram.com/heladosdeligourmet/",
+    "facebook": "null",
+    "imagen": "img/logos/helados-deli.webp",
+    "whatsapp": "+50660110386",
+    "descripcion": "Una empresa familiar dedicada a llevar sabor y tradición a través de helados artesanales excepcionalmente cremosos. Con una amplia variedad de sabores gourmet como Nutella, Cheesecake y Baileys, se distinguen por su calidad y por ofrecer entregas gratuitas en el casco central de Guápiles.",
+    "horario": "Lunes a Sábado | 12:00 MD a 4:00 PM",
+    "estado_horario": {
+      "tipo": "horario",
+      "config": {
+        "1": ["12:00", "16:00"],
+        "2": ["12:00", "16:00"],
+        "3": ["12:00", "16:00"],
+        "4": ["12:00", "16:00"],
+        "5": ["12:00", "16:00"],
+        "6": ["12:00", "16:00"]
+      }
+    },
+    "direccion": "Servicio a Domicilio, Guápiles y alrededores.",
+    "lat": 10.212531,
+    "lng": -83.785632,
+    "maps_link": "https://maps.app.goo.gl/7vMxdqNDrwk5vQdW84"
   }
 ]
