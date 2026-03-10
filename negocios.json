@@ -686,5 +686,61 @@
     "lat": 10.212531,
     "lng": -83.785632,
     "maps_link": "https://maps.app.goo.gl/7vMxdqNDrwk5vQdW84"
+  },
+  {
+    "id": 29,
+    "nombre": "El Lab",
+    "categoria": "Vida Nocturna",
+    "etiquetas": ["Discoteca", "Mixología", "Cócteles XL", "Eventos", "Bar"],
+    "keywords_busqueda": "discoteca fiesta baile bar cocteles xl mixologia el lab drinks hulk la toxica avenger tequila margarita jager shots musica djs eventos guapiles noche diversion",
+    "servicios_resumen": "Especialistas en mixología creativa, cócteles XL y eventos de vida nocturna con DJs en vivo.",
+    "instagram": "https://www.instagram.com/el_lab_/",
+    "facebook": "https://www.facebook.com/ellabbarcr",
+    "imagen": "img/logos/el-lab.webp",
+    "whatsapp": "+50684966116",
+    "descripcion": "Un referente de la vida nocturna en Guápiles que combina la pasión por la mixología con un ambiente de fiesta inigualable. El Lab destaca por su propuesta de 'Cócteles XL' y una carta de bebidas creativas con nombres temáticos, ofreciendo eventos constantes con DJs locales, promociones especiales para cumpleañeros y un espacio moderno diseñado para el entretenimiento nocturno.",
+    "horario": "Miércoles, Jueves y Domingo: 4:00 PM - 12:00 MN | Viernes y Sábado: 8:30 PM - 2:30 AM",
+    "estado_horario": {
+      "tipo": "horario",
+      "config": {
+        "3": ["16:00", "00:00"],
+        "4": ["16:00", "00:00"],
+        "5": ["20:30", "02:30"],
+        "6": ["20:30", "02:30"],
+        "7": ["16:00", "00:00"]
+      }
+    },
+    "direccion": "Centro Comercial Nuevo Guápiles, Guápiles.",
+    "lat": 10.201588093030356,
+    "lng": -83.78263955787607,
+    "maps_link": "https://maps.app.goo.gl/Fn8k8RGQbKtDvF5D8"
+  },
+  {
+    "id": 30,
+    "nombre": "Drunk Street Food",
+    "categoria": "Gastronomía",
+    "etiquetas": ["Street Food", "Hamburguesas", "Alitas", "Servicio Express", "Snacks"],
+    "keywords_busqueda": "comida rapida street food hamburguesas smash burger alitas de pollo wings papas fritas nachos palitos de queso mozarrella sticks cena domicilio express guapiles el lab drunk",
+    "servicios_resumen": "Especialistas en Smash Burgers, alitas y snacks con servicio express y consumo en local.",
+    "instagram": "https://www.instagram.com/el_lab_/",
+    "facebook": "null",
+    "imagen": "img/logos/drunk-street-food.webp",
+    "whatsapp": "+50664211214",
+    "descripcion": "La propuesta gastronómica de El Lab que conquista por su sabor urbano. Drunk Street Food ofrece una variedad de Smash Burgers, alitas con salsas originales y sus famosas Papas LAB cargadas. Con un horario ideal para cenas y antojos nocturnos, brindan la opción de disfrutar en el local o mediante su eficiente servicio express en la zona de Guápiles.",
+    "horario": "Miércoles a Domingo | 5:00 PM a 11:00 PM",
+    "estado_horario": {
+      "tipo": "horario",
+      "config": {
+        "3": ["17:00", "23:00"],
+        "4": ["17:00", "23:00"],
+        "5": ["17:00", "23:00"],
+        "6": ["17:00", "23:00"],
+        "7": ["17:00", "23:00"]
+      }
+    },
+    "direccion": "Centro Comercial Nuevo, Guápiles (Dentro de El Lab).",
+    "lat": 10.201588,
+    "lng": -83.782639,
+    "maps_link": "https://maps.app.goo.gl/Fn8k8RGQbKtDvF5D8"
   }
 ]
