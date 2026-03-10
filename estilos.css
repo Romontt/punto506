@@ -322,6 +322,26 @@ footer .text-stone-400 { color: #e5e7eb !important; opacity: 0.9; }
 }
 .animate-bounce-x { animation: bounce-x 1.5s infinite; }
 
+/* --- ANIMACIÓN DE DESTELLO DORADO (NUEVO) --- */
+@keyframes gold-flash {
+  0% { 
+    border-color: rgba(212, 163, 115, 0.2); 
+    box-shadow: 0 0 0 rgba(212, 163, 115, 0);
+  }
+  50% { 
+    border-color: var(--p506-accent); 
+    box-shadow: 0 0 20px rgba(212, 163, 115, 0.4); 
+  }
+  100% { 
+    border-color: rgba(212, 163, 115, 0.2); 
+    box-shadow: 0 0 0 rgba(212, 163, 115, 0);
+  }
+}
+
+.animate-gold-flash {
+  animation: gold-flash 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* =============================================
    --- AJUSTE ETIQUETAS Y ESPACIOS --- 
    ============================================= */
