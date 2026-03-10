@@ -192,44 +192,6 @@ function actualizarFlechasNav() {
         });
     }
 }
-function obtenerBadgeEstado(n) {
-    if (!n.estado_horario) return '';
-    const ahora = new Date();
-    const diaActual = ahora.getDay(); // 0 es Domingo, 1 Lunes... 6 Sábado
-    const horaActual = ahora.getHours() + (ahora.getMinutes() / 60);
-    // Caso 1: Por Cita / Reserva
-    if (n.estado_horario.tipo === 'cita') {
-        return `<div class="absolute top-4 right-4 z-20 flex items-center gap-1.5 bg-blue-500/10 backdrop-blur-md border border-blue-500/50 px-3 py-1.5 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
-                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
-                    <span class="text-blue-400 text-[8px] font-black uppercase tracking-[0.2em]">Previa Cita</span>
-                </div>`;
-    }
-    // Caso 2: Por Horario
-    if (n.estado_horario.tipo === 'horario') {
-        const config = n.estado_horario.config;
-        const rangoHoy = config[diaActual];
-        if (rangoHoy) {
-            const [hInicio, mInicio] = rangoHoy[0].split(':').map(Number);
-            const [hFin, mFin] = rangoHoy[1].split(':').map(Number);
-            
-            const inicio = hInicio + (mInicio / 60);
-            const fin = hFin + (mFin / 60);
-            if (horaActual >= inicio && horaActual < fin) {
-                // ABIERTO
-                return `<div class="absolute top-4 right-4 z-20 flex items-center gap-1.5 bg-emerald-500/10 backdrop-blur-md border border-emerald-500/50 px-3 py-1.5 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                            <span class="text-emerald-400 text-[8px] font-black uppercase tracking-[0.2em]">Abierto Ahora</span>
-                        </div>`;
-            }
-        }
-        // CERRADO
-        return `<div class="absolute top-4 right-4 z-20 flex items-center gap-1.5 bg-zinc-900/80 backdrop-blur-md border border-white/10 px-3 py-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-zinc-500"></span>
-                    <span class="text-zinc-400 text-[8px] font-black uppercase tracking-[0.2em]">Cerrado</span>
-                </div>`;
-    }
-    return '';
-}
 function renderCards(listaFiltrada) {
     const landing = document.getElementById('landing-categories');
     const resultados = document.getElementById('section-results');
