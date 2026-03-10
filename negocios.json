@@ -717,7 +717,7 @@
   },
   {
     "id": 30,
-    "nombre": "Drunk Street Food",
+    "nombre": "Drunk Street Food / El Lab",
     "categoria": "Gastronomía",
     "etiquetas": ["Street Food", "Hamburguesas", "Alitas", "Servicio Express", "Snacks"],
     "keywords_busqueda": "comida rapida street food hamburguesas smash burger alitas de pollo wings papas fritas nachos palitos de queso mozarrella sticks cena domicilio express guapiles el lab drunk",
@@ -738,7 +738,7 @@
         "7": ["17:00", "23:00"]
       }
     },
-    "direccion": "Centro Comercial Nuevo, Guápiles (Dentro de El Lab).",
+    "direccion": "El Lab, Centro Comercial Nuevo, Guápiles (Dentro de El Lab).",
     "lat": 10.201588,
     "lng": -83.782639,
     "maps_link": "https://maps.app.goo.gl/Fn8k8RGQbKtDvF5D8"
