@@ -742,5 +742,60 @@
     "lat": 10.201588,
     "lng": -83.782639,
     "maps_link": "https://maps.app.goo.gl/Fn8k8RGQbKtDvF5D8"
+  },
+  {
+    "id": 31,
+    "nombre": "LUX Sport Bar",
+    "categoria": "Vida Nocturna",
+    "etiquetas": ["Bar", "Restaurante", "Karaoke", "Bocas", "Olla de Carne"],
+    "keywords_busqueda": "sport bar bar restaurante lux guapiles centro karaoke cantar fiesta bocas olla de carne cortesía comida criolla chifrijo tragos cervezas noche diversion",
+    "servicios_resumen": "Bar y restaurante con el mejor ambiente de karaoke, bocas tradicionales y cortesías de la casa.",
+    "instagram": "https://www.instagram.com/luxsportbar_/",
+    "facebook": "https://www.facebook.com/luxdiscotecaysportbar",
+    "imagen": "img/logos/lux-bar.webp",
+    "whatsapp": "+50663602466",
+    "descripcion": "LUX Sport Bar es el destino favorito en Guápiles para quienes buscan buena comida y entretenimiento. Reconocido por su ambiente de karaoke diario y sus deliciosas bocas tradicionales de cortesía, el lugar destaca por detalles como su clásica olla de carne toda la semana. Es el sitio perfecto para disfrutar de una cena con sabor criollo y una noche llena de música y diversión.",
+    "horario": "Lunes, Miércoles y Jueves: 12:00 MD - 12:00 MN | Viernes y Sábado: 12:00 MD - 2:30 AM | Domingo: 12:00 MD - 1:00 AM",
+    "estado_horario": {
+      "tipo": "horario",
+      "config": {
+        "1": ["12:00", "00:00"],
+        "3": ["12:00", "00:00"],
+        "4": ["12:00", "00:00"],
+        "5": ["12:00", "02:30"],
+        "6": ["12:00", "02:30"],
+        "7": ["12:00", "01:00"]
+      }
+    },
+    "direccion": "Centro Comercial Dos Rios Lux, Guápiles.",
+    "lat": 10.21324916664367,
+    "lng": -83.78680990645091,
+    "maps_link": "https://maps.app.goo.gl/DthUzN9rcn1uXDNU7"
+  },
+  {
+    "id": 32,
+    "nombre": "LUX Discoteca",
+    "categoria": "Vida Nocturna",
+    "etiquetas": ["Discoteca", "DJs", "Fiesta", "VIP", "Eventos"],
+    "keywords_busqueda": "discoteca fiesta baile lux night room guapiles centro djs musica en vivo barra libre perreo intenso noche diversion cocteleria premium eventos",
+    "servicios_resumen": "Experiencia nocturna exclusiva con los mejores DJs, coctelería premium y noches temáticas.",
+    "instagram": "https://www.instagram.com/luxsportbar_/",
+    "facebook": "https://www.facebook.com/luxdiscotecaysportbar",
+    "imagen": "img/logos/lux-discoteca.webp",
+    "whatsapp": "+50671651360",
+    "descripcion": "El 'Night Room' de LUX redefine la fiesta en Guápiles con una propuesta de entretenimiento de alto nivel. Bajo el concepto de 'One Room, Different Vibes', ofrece una experiencia inmersiva con DJs invitados, una producción visual de vanguardia y un ambiente diseñado para quienes buscan lo mejor de la vida nocturna local.",
+    "horario": "Viernes, Sábado y Domingo | 8:00 PM a 2:30 AM",
+    "estado_horario": {
+      "tipo": "horario",
+      "config": {
+        "5": ["20:00", "02:30"],
+        "6": ["20:00", "02:30"],
+        "7": ["20:00", "02:30"]
+      }
+    },
+    "direccion": "Centro Comercial Dos Rios Lux, Guápiles.",
+    "lat": 10.21324916664367,
+    "lng": -83.78680990645091,
+    "maps_link": "https://maps.app.goo.gl/DthUzN9rcn1uXDNU7"
   }
 ]
