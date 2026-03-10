@@ -58,7 +58,7 @@ function obtenerBadgeEstado(n) {
             }
         }
 
-        const infoAbre = proximoDia ? `<span class="text-[#d4a373] text-[8px] font-bold uppercase tracking-tight">Abre ${diaEncontrado} a las ${proximoDia[0]}</span>` : '';
+        const infoAbre = proximoDia ? `<span class="text-[#d4a373] text-[9px] font-bold uppercase tracking-tight">Abre ${diaEncontrado} a las ${proximoDia[0]}</span>` : '';
 
         return `<div class="absolute top-4 right-4 z-20 flex flex-col items-end gap-1 bg-black/80 backdrop-blur-xl border border-white/10 px-3 py-1.5 shadow-xl">
                     <div class="flex items-center gap-1.5">
