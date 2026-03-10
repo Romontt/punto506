@@ -205,8 +205,8 @@ function renderCards(listaFiltrada) {
             // Generamos el badge dinámico aquí
             const badgeEstado = obtenerBadgeEstado(n);
             return `
-            <article class="group glass-card animate-reveal overflow-hidden"
-                  style="animation-delay: ${i * 0.08}s; animation-fill-mode: forwards;">
+            <article class="group glass-card animate-reveal animate-gold-flash overflow-hidden"
+         style="animation-delay: ${i * 0.08}s; animation-fill-mode: forwards;">
                 <div class="relative h-48 md:h-64 overflow-hidden">
                     ${badgeEstado}
                     <img src="${n.imagen}" 
