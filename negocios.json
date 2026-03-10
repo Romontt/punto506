@@ -12,6 +12,14 @@
     "whatsapp": "50689537426",
     "descripcion": "Una de las propuestas más sólidas de Fast Food Grill en Pococí. Destaca por el uso de pan artesanal en sus hamburguesas y costillas con un glaseado BBQ impecable.",
     "horario": "Jueves, Viernes y Sábados | 6:00 PM a 10:00 PM",
+    "estado_horario": {
+      "tipo": "horario",
+      "config": {
+        "4": ["18:00", "22:00"],
+        "5": ["18:00", "22:00"],
+        "6": ["18:00", "22:00"]
+      }
+    },
     "direccion": "La Emilia, 100m Norte de la Panadería La Esquinita",
     "lat": 10.215089,
     "lng": -83.778693,
@@ -30,6 +38,10 @@
     "whatsapp": "+50661928809",
     "descripcion": "Un centro estético que se diferencia por traer a la zona técnicas de vanguardia como el drenaje brasileño y el peeling coreano. El enfoque aquí es el bienestar integral, ofreciendo un espacio de calma donde la tecnología estética y el cuidado personal se encuentran en un ambiente profesional.",
     "horario": "Lunes a Sábado | Previa cita",
+    "estado_horario": {
+      "tipo": "cita",
+      "config": null
+    },
     "direccion": "Costado Noreste de las Oficinas del PANI, Guápiles",
     "lat": 10.218297,
     "lng": -83.787854,
@@ -48,6 +60,10 @@
     "whatsapp": "+50661928809",
     "descripcion": "Especialista en el arte de la mirada desde 2015. Brows by María del Mar combina técnica avanzada y precisión artística para resaltar la belleza natural de cada cliente. Ubicado en el corazón de Guápiles, este estudio es el referente en diseño de cejas, ofreciendo desde servicios tradicionales de depilación hasta las últimas tendencias internacionales como el laminado y el efecto polvo.",
     "horario": "Lunes a Sábado | Previa cita",
+    "estado_horario": {
+      "tipo": "cita",
+      "config": null
+    },
     "direccion": "Costado Noreste de las Oficinas del PANI, Guápiles",
     "lat": 10.218297,
     "lng": -83.787854,
@@ -66,6 +82,10 @@
     "whatsapp": "+50683484866",
     "descripcion": "Capturando momentos y construyendo marcas con una visión única. Montiel Diseño y Fotografía ofrece soluciones visuales integrales, desde la cobertura artística de eventos especiales y sesiones personalizadas hasta el desarrollo de logotipos que definen la esencia de su negocio. Profesionalismo y creatividad al servicio de su imagen.",
     "horario": "Lunes a Sábado: Bajo reserva",
+    "estado_horario": {
+      "tipo": "reserva",
+      "config": null
+    },
     "direccion": "Guápiles, Pococí.",
     "lat": 10.2117,
     "lng": -83.7853,
@@ -84,6 +104,17 @@
     "whatsapp": "+50686776688",
     "descripcion": "Todos tus trámites de licencia en un mismo lugar. Especialistas en facilitar el proceso de obtención y renovación de licencia. Ofrecen alquiler de vehículos (moto, carro, cuadraciclo) para pruebas de manejo en las 13 sedes de Cosevi, además de dictámenes médicos digitales autorizados. ¡Aprovechá sus promociones mensuales!",
     "horario": "Lunes a Sábado | 8:00 AM a 5:00 PM",
+    "estado_horario": {
+      "tipo": "horario",
+      "config": {
+        "1": ["08:00", "17:00"],
+        "2": ["08:00", "17:00"],
+        "3": ["08:00", "17:00"],
+        "4": ["08:00", "17:00"],
+        "5": ["08:00", "17:00"],
+        "6": ["08:00", "17:00"]
+      }
+    },
     "direccion": "Sede Guápiles: 300 mts sur de Pequeño Mundo",
     "lat": 10.1970902946147,
     "lng": -83.78486457460879,
@@ -102,6 +133,10 @@
     "whatsapp": "+50672999737",
     "descripcion": "Un centro integral que combina salud y belleza con tecnología de punta en Guápiles. Destacan por su sistema de depilación efectiva Fyralaser y una amplia gama de servicios profesionales que incluyen medicina, nutrición, odontología y perforación humanizada de orejas. Calidad médica y resultados estéticos en un solo lugar.",
     "horario": "Lunes a Sábado | Previa cita",
+    "estado_horario": {
+      "tipo": "cita",
+      "config": null
+    },
     "direccion": "Frente a la delegación del Tránsito (Policía de Tránsito), Guápiles",
     "lat": 10.197221,
     "lng": -83.784806,
@@ -120,6 +155,10 @@
     "whatsapp": "+50672048120",
     "descripcion": "La propuesta de entrenamiento más completa en Guápiles. Se distingue por ser el único centro de acondicionamiento físico en la zona con piscina semi-olímpica, integrando la natación con disciplinas modernas como cardio dance, yoga y entrenamiento funcional. Ideal para quienes buscan variedad y profesionalismo en un solo lugar.",
     "horario": "Consultar horarios de clases y piscina directamente",
+    "estado_horario": {
+      "tipo": "cita",
+      "config": null
+    },
     "direccion": "300 mts sur de Pequeño mundo, Guápiles, Pococí.",
     "lat": 10.196724500377636,
     "lng": -83.78396446350246,
@@ -138,6 +177,16 @@
     "whatsapp": "+50672048120",
     "descripcion": "⛱️ El balneario favorito de Guápiles para disfrutar en familia. Cuenta con amplias piscinas para adultos y niños equipadas con divertidos toboganes 💦. Además de la zona de piscinas, ofrece una experiencia completa con Restaurante😋, Heladería🍨 y Coctelería🍹🍻 para pasar un día inolvidable.",
     "horario": "Miércoles a Domingo | 9:00 AM a 5:00 PM",
+    "estado_horario": {
+      "tipo": "horario",
+      "config": {
+        "3": ["09:00", "17:00"],
+        "4": ["09:00", "17:00"],
+        "5": ["09:00", "17:00"],
+        "6": ["09:00", "17:00"],
+        "7": ["09:00", "17:00"]
+      }
+    },
     "direccion": "300 mts sur de Pequeño mundo, Guápiles, Pococí.",
     "lat": 10.196865935328027,
     "lng": -83.78427664694284,
@@ -156,6 +205,10 @@
     "whatsapp": "+50672999737",
     "descripcion": "Un centro integral que combina salud y belleza con tecnología de punta en Guápiles. Destacan por su sistema de depilación efectiva Fyralaser y una amplia gama de servicios profesionales que incluyen medicina, nutrición, odontología y perforación humanizada de orejas. Calidad médica y resultados estéticos en un solo lugar.",
     "horario": "Lunes a Sábado | Previa cita",
+    "estado_horario": {
+      "tipo": "cita",
+      "config": null
+    },
     "direccion": "Frente a la delegación del Tránsito (Policía de Tránsito), Guápiles",
     "lat": 10.197221,
     "lng": -83.784806,
@@ -174,6 +227,10 @@
     "whatsapp": "+50686250301",
     "descripcion": "Especialistas en transformar ideas en arte comestible. Esta pastelería artesanal destaca en Pococí por su nivel de detalle en queques personalizados y una línea de repostería que equilibra sabor y presentación impecable.",
     "horario": "Martes a Domingo | 8:00 AM a 5:00 PM Contra Pedido",
+    "estado_horario": {
+      "tipo": "reserva",
+      "config": null
+    },
     "direccion": "Barrio San Miguel, Guápiles",
     "lat": 10.229433930782404,
     "lng": -83.7992972045998,
@@ -192,6 +249,16 @@
     "whatsapp": "+50671183698",
     "descripcion": "El lugar definitivo en Guápiles para quienes buscan una noche diferente. Bajo el lema 'Ama, llora y bebe', ofrece un concepto único de Bar de Despecho con promociones semanales, shows de comedia y el mejor ambiente para celebrar o pasar un buen rato entre amigos.",
     "horario": "Miércoles a Domingo | 5:00 PM a 12:00 MN",
+    "estado_horario": {
+      "tipo": "horario",
+      "config": {
+        "3": ["17:00", "23:59"],
+        "4": ["17:00", "23:59"],
+        "5": ["17:00", "23:59"],
+        "6": ["17:00", "23:59"],
+        "7": ["17:00", "23:59"]
+      }
+    },
     "direccion": "A un costado de Cosevi, Guápiles)",
     "lat": 10.196840,
     "lng": -83.784308,
@@ -210,6 +277,18 @@
     "whatsapp": "+50688543437",
     "descripcion": "Una parada obligatoria en Guápiles para los amantes de la comida urbana de calidad. Sus Tacos Artesanales y el Tostón Supremo son los favoritos de la comunidad, servidos en un ambiente familiar y acogedor.",
     "horario": "Lun a Jue: 4:00 PM - 10:00 PM | Vie a Dom: 4:00 PM - 11:00 PM",
+    "estado_horario": {
+      "tipo": "horario",
+      "config": {
+        "1": ["16:00", "22:00"],
+        "2": ["16:00", "22:00"],
+        "3": ["16:00", "22:00"],
+        "4": ["16:00", "22:00"],
+        "5": ["16:00", "23:00"],
+        "6": ["16:00", "23:00"],
+        "7": ["16:00", "23:00"]
+      }
+    },
     "direccion": "Barrio Zurquí, de Lavacar Los Mangos 150m Norte, Guápiles.",
     "lat": 10.221872145675153,
     "lng": -83.79109947138134,
@@ -227,6 +306,18 @@
     "whatsapp": "+50684087743",
     "descripcion": "Liderada por Josías Rojas, JR BarberShop ofrece una experiencia de cuidado masculino de alta calidad. Expertos en diseño de barba, mascarilla negra y exfoliación, brindan un servicio detallista tanto en su local como en modalidad a domicilio.",
     "horario": "Lun a Dom | 8:00 AM - 7:00 PM",
+    "estado_horario": {
+      "tipo": "horario",
+      "config": {
+        "1": ["08:00", "19:00"],
+        "2": ["08:00", "19:00"],
+        "3": ["08:00", "19:00"],
+        "4": ["08:00", "19:00"],
+        "5": ["08:00", "19:00"],
+        "6": ["08:00", "19:00"],
+        "7": ["08:00", "19:00"]
+      }
+    },
     "direccion": "Barrio La Emilia, 50 metros norte Escuela los Diamantes, a mano derecha, Guápiles",
     "lat": 10.214265,
     "lng": -83.777698,
@@ -245,6 +336,17 @@
     "whatsapp": "+50670739765",
     "descripcion": "Especialistas en la reparación de celulares, consolas (PS4, PS5, Xbox) y computadoras. Además, cuentan con una completa sección de accesorios para móvil, artículos de librería y bazar en un solo lugar.",
     "horario": "Lun a Sab | 8:00 AM - 6:00 PM",
+    "estado_horario": {
+      "tipo": "horario",
+      "config": {
+        "1": ["08:00", "18:00"],
+        "2": ["08:00", "18:00"],
+        "3": ["08:00", "18:00"],
+        "4": ["08:00", "18:00"],
+        "5": ["08:00", "18:00"],
+        "6": ["08:00", "18:00"]
+      }
+    },
     "direccion": "75 Metros Sur de Iglesia Católica, Toro Amarillo, Guápiles",
     "lat": 10.21253109508652,
     "lng": -83.80910082913286,
@@ -263,6 +365,10 @@
     "whatsapp": "+50688978662",
     "descripcion": "Especialistas en la planificación y ejecución de eventos sociales y corporativos en Guápiles. Ofrecen un servicio integral de alimentación y elegantes salas de eventos diseñadas para bodas, celebraciones y reuniones especiales. Atención profesional bajo reserva previa.",
     "horario": "Previa Reservación",
+    "estado_horario": {
+      "tipo": "reserva",
+      "config": null
+    },
     "direccion": "Guápiles, Pococí",
     "lat": 10.22686309071414,
     "lng": -83.78563281339672,
@@ -281,6 +387,10 @@
     "whatsapp": "+50686776534",
     "descripcion": "Especialistas en crear momentos inolvidables a través del turismo de aventura. Ofrecemos tours guiados a cataratas, caminatas benéficas, expediciones a volcanes y destinos internacionales. ¡Atrévete a vivir la próxima experiencia con guías profesionales!",
     "horario": "Salidas Programadas",
+    "estado_horario": {
+      "tipo": "reserva",
+      "config": null
+    },
     "direccion": "San Luis, Jiménez, Pococí",
     "lat": 10.258542309810144,
     "lng": -83.70628191994274,
@@ -299,6 +409,17 @@
     "whatsapp": "+50686248576",
     "descripcion": "Bajo la dirección de la profesional Yendry Alfaro, este Beauty Salon en el centro de Guápiles se destaca por resultados impecables en colorimetría y salud capilar. Un espacio dedicado a realzar la belleza personal con técnicas modernas y atención personalizada.",
     "horario": "Lun a Sab | 9:00 AM - 6:00 PM",
+    "estado_horario": {
+      "tipo": "horario",
+      "config": {
+        "1": ["09:00", "18:00"],
+        "2": ["09:00", "18:00"],
+        "3": ["09:00", "18:00"],
+        "4": ["09:00", "18:00"],
+        "5": ["09:00", "18:00"],
+        "6": ["09:00", "18:00"]
+      }
+    },
     "direccion": "Costado izquierdo de la Librería Clips, Guápiles Centro",
     "lat": 10.214593,
     "lng": -83.788957,
@@ -317,6 +438,10 @@
     "whatsapp": "+50684937223",
     "descripcion": "Expertos en educación vial en Guápiles. Ofrecemos paquetes completos que incluyen alquiler de vehículos (auto y moto), dictamen médico y acompañamiento en recorridos de prueba. Especialistas también en licencias para equipo especial como retroexcavadoras y montacargas.",
     "horario": "Lunes a Sábado | Previa cita",
+    "estado_horario": {
+      "tipo": "cita",
+      "config": null
+    },
     "direccion": "Guápiles 100 metros sur de Ruta 32 contiguo a Cabinas del Tropico, Guápiles",
     "lat": 10.201123934626223,
     "lng": -83.78662390708773,
@@ -334,6 +459,16 @@
     "whatsapp": "+50661961136",
     "descripcion": "En Visas Montzu te acompañamos paso a paso en el proceso de tu viaje. Somos expertos en asesoría para trámites de visas (USA, Canadá), compra de boletos aéreos y planificación logística para que tu única preocupación sea disfrutar del destino.",
     "horario": "Lunes a Viernes | 8:00 AM - 5:00 PM",
+    "estado_horario": {
+      "tipo": "horario",
+      "config": {
+        "1": ["08:00", "17:00"],
+        "2": ["08:00", "17:00"],
+        "3": ["08:00", "17:00"],
+        "4": ["08:00", "17:00"],
+        "5": ["08:00", "17:00"]
+      }
+    },
     "direccion": "Guápiles, Pococí",
     "lat": 10.212531,
     "lng": -83.785632,
@@ -352,6 +487,10 @@
     "whatsapp": "+50685581384",
     "descripcion": "Agencia de viajes dedicada a la planificación de experiencias a tu medida. Especialistas en reservas hoteleras en los mejores destinos, gestión de tiquetes aéreos y organización de eventos sociales o corporativos en hoteles nacionales.",
     "horario": "Salidas Programadas",
+    "estado_horario": {
+      "tipo": "reserva",
+      "config": null
+    },
     "direccion": "Buenos Aires, Jiménez, 150m sur de la antena del ICE",
     "lat": 10.182624259815679,
     "lng": -83.78325640910872,
@@ -370,6 +509,10 @@
     "whatsapp": "+50660621842",
     "descripcion": "Especialistas en joyería y accesorios que resaltan tu belleza. Ofrecen opciones de compra al detalle y precios especiales al por mayor para quienes desean emprender su propio negocio. Calidad y brillo en cada pieza con envíos seguros a todo Costa Rica.",
     "horario": "Consultar al Whatsapp",
+    "estado_horario": {
+      "tipo": "cita",
+      "config": null
+    },
     "direccion": "Calle Vargas, entrada del taller Juan Acuña calle sin salida penúltima casa, Guápiles.",
     "lat": 10.212531,
     "lng": -83.785632,
@@ -388,47 +531,59 @@
     "whatsapp": "+50671120443",
     "descripcion": "Enfocada en acción y resultados reales, Adry Impulsa te guía en la transformación de tus hábitos diarios. Especialista en suplementación premium como colágeno hidrolizado y nutrición celular, brindando el apoyo necesario para mejorar tu salud física y motivarte a alcanzar tu mejor versión.",
     "horario": "Asesoría Personalizada | Virtual",
+    "estado_horario": {
+      "tipo": "cita",
+      "config": null
+    },
     "direccion": "Servicio en línea, Guápiles",
     "lat": 10.212531,
     "lng": -83.785632,
     "maps_link": "https://wa.me/50671120443"
   },
   {
-  "id": 23,
-  "nombre": "Dulzuras Luna",
-  "categoria": "Gastronomía",
-  "etiquetas": ["Repostería", "Pastelería Artesanal", "Mesas de Dulces", "Eventos", "Bocadillos"],
-  "keywords_busqueda": "reposteria artesanal pasteles personalizados queques bodas quinceaños mesas de dulces postres bocadillos salados dulces eventos catering pan artesanal guapiles",
-  "servicios_resumen": "Repostería 100% artesanal, pasteles personalizados y mesas de dulces para eventos especiales.",
-  "instagram": "null",
-  "imagen": "img/logos/dulzuras-luna.webp",
-  "facebook": "https://www.facebook.com/profile.php?id=100063601992500",
-  "whatsapp": "+50684215432",
-  "descripcion": "En Dulzuras Luna creamos repostería y pastelería 100% artesanal con ingredientes de la mejor calidad. Nos especializamos en complacer el gusto de cada cliente con pasteles totalmente personalizados y una gran variedad de bocadillos dulces y salados. Somos expertos en el montaje de mesas de dulces para bodas, quince años y todo tipo de fiestas.",
-  "horario": "Bajo Pedido | Pedidos Personalizados",
-  "direccion": "125 metros al Sur de la Carnicería Guerrero, Guápiles.",
-  "lat": 10.21104818593506,
-  "lng": -83.78149021970603,
-  "maps_link": "https://maps.app.goo.gl/wsVPJiRMjJnMMbrx9"
-},
+    "id": 23,
+    "nombre": "Dulzuras Luna",
+    "categoria": "Gastronomía",
+    "etiquetas": ["Repostería", "Pastelería Artesanal", "Mesas de Dulces", "Eventos", "Bocadillos"],
+    "keywords_busqueda": "reposteria artesanal pasteles personalizados queques bodas quinceaños mesas de dulces postres bocadillos salados dulces eventos catering pan artesanal guapiles",
+    "servicios_resumen": "Repostería 100% artesanal, pasteles personalizados y mesas de dulces para eventos especiales.",
+    "instagram": "null",
+    "imagen": "img/logos/dulzuras-luna.webp",
+    "facebook": "https://www.facebook.com/profile.php?id=100063601992500",
+    "whatsapp": "+50684215432",
+    "descripcion": "En Dulzuras Luna creamos repostería y pastelería 100% artesanal con ingredientes de la mejor calidad. Nos especializamos en complacer el gusto de cada cliente con pasteles totalmente personalizados y una gran variedad de bocadillos dulces y salados. Somos expertos en el montaje de mesas de dulces para bodas, quince años y todo tipo de fiestas.",
+    "horario": "Bajo Pedido | Pedidos Personalizados",
+    "estado_horario": {
+      "tipo": "reserva",
+      "config": null
+    },
+    "direccion": "125 metros al Sur de la Carnicería Guerrero, Guápiles.",
+    "lat": 10.21104818593506,
+    "lng": -83.78149021970603,
+    "maps_link": "https://maps.app.goo.gl/wsVPJiRMjJnMMbrx9"
+  },
   {
-  "id": 24,
-  "nombre": "Zootecnia HZ del Caribe",
-  "categoria": "servicios",
-  "etiquetas": ["Veterinaria", "Zootecnia", "Ganadería", "Mascotas", "Servicio a Domicilio"],
-  "keywords_busqueda": "veterinaria zootecnista bienestar animal salud vacunas desparasitacion ganado vacas perros gatos asistencia tecnica fincas nutricion animal domicilio santa rosa limon caribe",
-  "servicios_resumen": "Asistencia técnica especializada, vacunación y chequeo general para especies productivas y de compañía.",
-  "instagram": "https://www.instagram.com/zootecniahzcaribe/",
-  "imagen": "img/logos/zootecnia-hz.webp",
-  "facebook": "null",
-  "whatsapp": "+50672461352",
-  "descripcion": "Un equipo apasionado por la vida animal que combina precisión técnica y eficiencia productiva con un enfoque ético. Ofrecen soluciones integrales tanto para ganadería (optimización de rendimiento) como para mascotas del hogar, garantizando salud y bienestar en cada etapa del camino. Trabajo profesional realizado directamente a domicilio.",
-  "horario": "Lunes a Sábado | Bajo Cita (Trabajo a Domicilio)",
-  "direccion": "Servicio a Domicilio",
-  "lat": 10.21379121016654,
-  "lng": -83.78871668439581,
-  "maps_link": "https://maps.app.goo.gl/AvEKJFFUt3o4LSAn7"
-},
+    "id": 24,
+    "nombre": "Zootecnia HZ del Caribe",
+    "categoria": "servicios",
+    "etiquetas": ["Veterinaria", "Zootecnia", "Ganadería", "Mascotas", "Servicio a Domicilio"],
+    "keywords_busqueda": "veterinaria zootecnista bienestar animal salud vacunas desparasitacion ganado vacas perros gatos asistencia tecnica fincas nutricion animal domicilio santa rosa limon caribe",
+    "servicios_resumen": "Asistencia técnica especializada, vacunación y chequeo general para especies productivas y de compañía.",
+    "instagram": "https://www.instagram.com/zootecniahzcaribe/",
+    "imagen": "img/logos/zootecnia-hz.webp",
+    "facebook": "null",
+    "whatsapp": "+50672461352",
+    "descripcion": "Un equipo apasionado por la vida animal que combina precisión técnica y eficiencia productiva con un enfoque ético. Ofrecen soluciones integrales tanto para ganadería (optimización de rendimiento) como para mascotas del hogar, garantizando salud y bienestar en cada etapa del camino. Trabajo profesional realizado directamente a domicilio.",
+    "horario": "Lunes a Sábado | Bajo Cita (Trabajo a Domicilio)",
+    "estado_horario": {
+      "tipo": "cita",
+      "config": null
+    },
+    "direccion": "Servicio a Domicilio",
+    "lat": 10.21379121016654,
+    "lng": -83.78871668439581,
+    "maps_link": "https://maps.app.goo.gl/AvEKJFFUt3o4LSAn7"
+  },
   {
     "id": 25,
     "nombre": "Podoclínica Dra. Pies",
@@ -442,6 +597,10 @@
     "whatsapp": "+50685515775",
     "descripcion": "Bajo la dirección de la Dra. Katherine Gómez, Podoclínica Dra. Pies ofrece un enfoque médico integral para la salud de sus pies. Especializados en tratamientos para adultos mayores, manejo de pie diabético y patologías ungueales, combinando precisión técnica con calidez humana en el corazón de Guápiles.",
     "horario": "Lunes a Sábado | Previa Cita",
+    "estado_horario": {
+      "tipo": "cita",
+      "config": null
+    },
     "direccion": "CliniTotal Plaza Médica, a un costado del INS, Guápiles.",
     "lat": 10.215552342483994,
     "lng": -83.78340343136733,
