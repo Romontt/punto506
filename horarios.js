@@ -10,7 +10,7 @@ function obtenerBadgeEstado(n) {
         const texto = n.estado_horario.tipo === 'cita' ? 'Previa Cita' : 'Bajo Reserva';
         return `<div class="absolute top-4 right-4 z-20 flex items-center gap-1.5 bg-black/70 backdrop-blur-xl border border-blue-500/50 px-3 py-1.5 shadow-lg">
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
-                    <span class="text-blue-400 text-[8px] font-black uppercase tracking-[0.2em]">${texto}</span>
+                    <span class="text-blue-400 text-[9px] font-black uppercase tracking-[0.2em]">${texto}</span>
                 </div>`;
     }
 
