@@ -32,14 +32,14 @@ function obtenerBadgeEstado(n) {
                 if (minRestantes <= 30) {
                     return `<div class="absolute top-4 right-4 z-20 flex items-center gap-1.5 bg-black/70 backdrop-blur-xl border border-orange-500/50 px-3 py-1.5 shadow-lg">
                                 <span class="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
-                                <span class="text-orange-400 text-[8px] font-black uppercase tracking-[0.2em]">Cierra Pronto</span>
+                                <span class="text-orange-400 text-[9px] font-black uppercase tracking-[0.2em]">Cierra Pronto</span>
                             </div>`;
                 }
 
                 // ABIERTO NORMAL
                 return `<div class="absolute top-4 right-4 z-20 flex items-center gap-1.5 bg-black/70 backdrop-blur-xl border border-emerald-500/50 px-3 py-1.5 shadow-lg">
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                            <span class="text-emerald-400 text-[8px] font-black uppercase tracking-[0.2em]">Abierto Ahora</span>
+                            <span class="text-emerald-400 text-[9px] font-black uppercase tracking-[0.2em]">Abierto Ahora</span>
                         </div>`;
             }
         }
@@ -58,12 +58,12 @@ function obtenerBadgeEstado(n) {
             }
         }
 
-        const infoAbre = proximoDia ? `<span class="text-[#d4a373] text-[7px] font-bold uppercase tracking-tight">Abre ${diaEncontrado} a las ${proximoDia[0]}</span>` : '';
+        const infoAbre = proximoDia ? `<span class="text-[#d4a373] text-[8px] font-bold uppercase tracking-tight">Abre ${diaEncontrado} a las ${proximoDia[0]}</span>` : '';
 
         return `<div class="absolute top-4 right-4 z-20 flex flex-col items-end gap-1 bg-black/80 backdrop-blur-xl border border-white/10 px-3 py-1.5 shadow-xl">
                     <div class="flex items-center gap-1.5">
                         <span class="w-1.5 h-1.5 rounded-full bg-zinc-600"></span>
-                        <span class="text-zinc-400 text-[8px] font-black uppercase tracking-[0.2em]">Cerrado</span>
+                        <span class="text-zinc-400 text-[9px] font-black uppercase tracking-[0.2em]">Cerrado</span>
                     </div>
                     ${infoAbre}
                 </div>`;
