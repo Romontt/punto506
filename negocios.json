@@ -797,5 +797,35 @@
     "lat": 10.21324916664367,
     "lng": -83.78680990645091,
     "maps_link": "https://maps.app.goo.gl/DthUzN9rcn1uXDNU7"
+  },
+  {
+    "id": 33,
+    "nombre": "Bar Punta Mona",
+    "categoria": "Vida Nocturna",
+    "etiquetas": ["Bar", "Playa Urbana", "Coctelería", "DJs", "Transmisiones Deportivas"],
+    "keywords_busqueda": "bar punta mona guapiles centro fiesta playa arena mar cocteles gin tonic 2x1 chiliguaro gratis promociones cervezas djs musica en vivo futbol transmisiones ambiente relax",
+    "servicios_resumen": "Ambiente de playa selvática en la ciudad con coctelería creativa, DJs y el mejor ambiente.",
+    "instagram": "https://www.instagram.com/barpuntamona/",
+    "facebook": "https://www.facebook.com/profile.php?id=100076526342555",
+    "imagen": "img/logos/punta-mona.webp",
+    "whatsapp": "+50683107808",
+    "descripcion": "Bar Punta Mona ofrece un ambiente de playa selvática cuidadosamente detallado para que vivas las emociones del mar, el sol y la arena en el corazón de Guápiles. Es el lugar perfecto para disfrutar de coctelería premium y promociones, noches de fiesta con DJs y transmisiones de los mejores eventos deportivos con audio en vivo.",
+    "horario": "Lunes: 5:00 PM - 12:00 MN | Martes a Domingo: 12:00 MD - 12:00 AM",
+    "estado_horario": {
+      "tipo": "horario",
+      "config": {
+        "1": ["17:00", "00:00"],
+        "2": ["12:00", "00:00"],
+        "3": ["12:00", "00:00"],
+        "4": ["12:00", "00:00"],
+        "5": ["12:00", "00:00"],
+        "6": ["12:00", "00:00"],
+        "7": ["12:00", "00:00"]
+      }
+    },
+    "direccion": "La Comarca Gastro Park, Frente al parqueo de la subasta de la Expo Pococí, Guápiles.",
+    "lat": 10.22457063080131,
+    "lng": -83.78107744708205,
+    "maps_link": "https://maps.app.goo.gl/GaVrYfhvyvnVjwXo7"
   }
 ]
