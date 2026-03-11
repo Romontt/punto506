@@ -69,11 +69,9 @@ function volverInicio() {
         if (inputBusqueda) inputBusqueda.value = '';
         actualizarURL('todos');
         gestionarVisibilidadHeader('todos');
-        
         document.querySelectorAll('.filter-btn').forEach(btn => {
             if(btn.getAttribute('data-cat') === 'todos') activarBoton(btn);
         });
-        
         renderLanding();
     });
 }
@@ -137,7 +135,6 @@ function expandirGrid() {
     if(wrapper) wrapper.classList.add('grid-expandido');
     if(btnContainer) btnContainer.classList.add('hidden');
 }
-
 function gestionarLimiteVisual(totalMostrados) {
     const wrapper = document.getElementById('wrapper-grid');
     const btnContainer = document.getElementById('btn-ver-mas-container');
@@ -196,7 +193,6 @@ function renderCards(listaFiltrada) {
     const landing = document.getElementById('landing-categories');
     const resultados = document.getElementById('section-results');
     const grid = document.getElementById('grid-negocios');
-    
     if(landing) landing.classList.add('hidden');
     if(resultados) resultados.classList.remove('hidden');
     grid.style.opacity = '0';
@@ -216,7 +212,6 @@ function renderCards(listaFiltrada) {
                     <div class="absolute inset-0 bg-gradient-to-t from-[#130f0e] via-transparent opacity-80"></div>
                     <div class="absolute top-4 left-4 text-[#d4a373] text-[6px] font-black tracking-[0.4em] uppercase bg-[#130f0e]/80 backdrop-blur-md px-2 py-1 border border-[#d4a373]/20">${n.categoria}</div>
                 </div>
-
                 <div class="p-5 md:p-8 text-center flex flex-col flex-grow">
                     <h3 class="business-title text-base md:text-xl text-white uppercase tracking-wider font-bold mb-2 group-hover:text-[#d4a373] transition-colors duration-500">${n.nombre}</h3>
                     <p class="elegant-italic text-stone-400 text-[11px] md:text-[14px] leading-relaxed line-clamp-2 mb-4 italic">
@@ -316,7 +311,6 @@ function initFilters() {
         btn.addEventListener('click', (e) => {
             // Evitamos que el navegador haga cosas raras con el scroll por defecto
             const catValue = btn.getAttribute('data-cat');
-            
             if(catValue === 'todos') {
                 volverInicio();
             } else {
@@ -341,7 +335,6 @@ function verDetalle(id) {
     registrarActividad('ver_detalle', n.nombre);
     const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría solicitar más información.`);
     const mapsUrl = (n.maps_link && n.maps_link !== "null") ? n.maps_link : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(n.nombre + ' ' + n.direccion)}`;
-
     // --- LÓGICA DE REDES SOCIALES DINÁMICA ---
     let botonesRedes = '';
     // Botón de Instagram (Solo si existe y no es "null")
@@ -371,14 +364,12 @@ function verDetalle(id) {
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
         </div>
-        
         <div class="p-8 md:p-12 -mt-10 relative z-10 bg-[#1c1614]">
             <div class="text-center mb-10">
                 <span class="text-[#d4a373] text-[10px] font-black tracking-[0.5em] uppercase block mb-3">${n.categoria}</span>
                 <h2 class="serif-title text-3xl md:text-4xl text-white uppercase tracking-[0.1em]">${n.nombre}</h2>
                 <div class="h-px w-16 bg-[#d4a373] mx-auto mt-6"></div>
             </div>
-            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
                 <div class="space-y-6">
                      <div>
@@ -389,7 +380,6 @@ function verDetalle(id) {
                         <p class="text-stone-400 text-sm leading-relaxed">${n.descripcion || 'Una propuesta curada bajo los estándares de exclusividad de Punto 506.'}</p>
                      </div>
                 </div>
-                
                 <div class="bg-black/30 p-6 border border-[#d4a373]/10 space-y-6 w-fit h-fit">
                     <div class="flex items-start gap-4">
                         <div class="text-[#d4a373] mt-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -468,18 +458,14 @@ let cerrandoManual = false;
 function cerrarModal() {
     const modal = document.getElementById('modal-negocio');
     if (!modal || modal.classList.contains('hidden')) return;
-
     cerrandoManual = true;
     modal.classList.add('hidden');
     document.body.style.overflow = 'auto';
-
     if (window.location.hash === "#detalle") {
         history.back();
     }
-    
     setTimeout(() => { cerrandoManual = false; }, 100);
 }
-
 document.getElementById('modal-negocio').addEventListener('click', function(e) {
     if (e.target === this) cerrarModal();
 });
@@ -490,7 +476,6 @@ function abrirModalRegistro() {
         document.body.style.overflow = 'hidden';
     }
 }
-
 function cerrarModalRegistro() {
     const modal = document.getElementById('modal-registro');
     if (modal) {
@@ -522,16 +507,13 @@ function cerrarModalRegistro() {
 // Configuración del envío (Se ejecuta una sola vez al cargar la página)
 document.addEventListener('DOMContentLoaded', () => {
     const registroForm = document.getElementById('form-registro') || document.getElementById('registro-form');
-    
     if (registroForm) {
         registroForm.addEventListener('submit', async (e) => {
             e.preventDefault(); // Evita la redirección y el error 405
-            
             const btn = registroForm.querySelector('button[type="submit"]');
             const textoOriginal = btn.innerText;
             btn.innerText = "PROCESANDO...";
             btn.disabled = true;
-
             // CREAMOS LOS DATOS
             const formData = new FormData(registroForm);
             try {
