@@ -241,6 +241,7 @@ function registrarClickNegocio(nombreNegocio, plataforma) {
         gtag('event', 'click_negocio', {
             'business_name': nombreNegocio,
             'platform': plataforma,
+            'transport_type': 'beacon',
             'send_to': 'G-SCCTHXBBP7' // Forzamos el envío a tu ID específico
         });
     } 
