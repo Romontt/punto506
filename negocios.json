@@ -3,15 +3,15 @@
     "id": 1,
     "nombre": "Uy Ke Rico",
     "categoria": "Gastronomía",
-    "etiquetas": ["Hamburguesas", "Costillas", "Servicio a Domicilio", "Comida Rápida"],
-    "keywords_busqueda": "hamburgueseria grill parrilla carne bbq barbacoa papas fritas cena comida rapida artesanal llevar domicilio delivery antojo moncha",
+    "etiquetas": ["Hamburguesas", "Servicio a Domicilio", "Comida Rápida", "Parrilla"],
+    "keywords_busqueda": "hamburgueseria grill parrilla carne bbq barbacoa papas fritas cena comida rapida artesanal llevar domicilio delivery antojo moncha costillas cerdito pan artesanal glaseado cena noche comida urbana guapiles pococi",
     "servicios_resumen": "Hamburguesas artesanales, costillas BBQ y papas especiales. Servicio exclusivo para llevar.",
     "instagram": "https://www.instagram.com/uykericocr/",
     "imagen": "img/logos/uykerico.webp",
     "facebook": "https://www.facebook.com/profile.php?id=61579744980372",
     "whatsapp": "50689537426",
     "descripcion": "Una de las propuestas más sólidas de Fast Food Grill en Pococí. Destaca por el uso de pan artesanal en sus hamburguesas y costillas con un glaseado BBQ impecable.",
-    "horario": "Jueves, Viernes y Sábados | 6:00 PM a 10:00 PM",
+    "horario": "Jueves, Viernes y Sábados | 6:00 PM a 10:00 PM"
     "estado_horario": {
       "tipo": "horario",
       "config": {
@@ -218,15 +218,15 @@
     "id": 10,
     "nombre": "Delicias Lucam",
     "categoria": "Gastronomía",
-    "etiquetas": ["Pasteles", "Repostería", "Postres", "Galletas"],
-    "keywords_busqueda": "queques tortas dulces reposteria panaderia cumpleanos celebracion postre artesanal personalizados cupcakes eventos fiestas",
+    "etiquetas": ["Repostería", "Postres", "Eventos", "Pasteles"],
+    "keywords_busqueda": "queques tortas dulces reposteria panaderia cumpleanos celebracion postre artesanal personalizados cupcakes eventos fiestas galletas mesa de dulces bocadillos decorados diseño candy bar guapiles bocaditos",
     "servicios_resumen": "Pastelería artesanal personalizada: queques temáticos, cupcakes, galletas y repostería fina.",
     "instagram": "https://www.instagram.com/delicias_lucam/",
     "facebook": "https://www.facebook.com/deliciaslucam",
     "imagen": "img/logos/delicias-lucam.webp",
     "whatsapp": "+50686250301",
     "descripcion": "Especialistas en transformar ideas en arte comestible. Esta pastelería artesanal destaca en Pococí por su nivel de detalle en queques personalizados y una línea de repostería que equilibra sabor y presentación impecable.",
-    "horario": "Martes a Domingo | 8:00 AM a 5:00 PM Contra Pedido",
+    "horario": "Martes a Domingo | 8:00 AM a 5:00 PM Contra Pedido"
     "estado_horario": {
       "tipo": "reserva",
       "config": null
@@ -269,14 +269,14 @@
     "nombre": "Taquería Torres",
     "categoria": "Gastronomía",
     "etiquetas": ["Tacos", "Hamburguesas", "Comida Rápida", "Cenas"],
-    "keywords_busqueda": "tacos tostones comida urbana cena tacos artesanales comida rapida guapiles nocturno hambre comida mexicana",
+    "keywords_busqueda": "tacos tostones comida urbana cena tacos artesanales comida rapida guapiles nocturno hambre comida mexicana carne mechada queso fundido tortilla palmada nachos antojitos barata noche salir comer",
     "servicios_resumen": "Especialistas en Tacos Artesanales, Hamburguesas y Tostones Supremos con el sabor auténtico de la zona.",
     "instagram": "https://www.instagram.com/taqueria.torres.guapiles/",
     "facebook": "https://www.facebook.com/taqueria.torres.guapiles",
     "imagen": "img/logos/taqueria-torres.webp",
     "whatsapp": "+50688543437",
     "descripcion": "Una parada obligatoria en Guápiles para los amantes de la comida urbana de calidad. Sus Tacos Artesanales y el Tostón Supremo son los favoritos de la comunidad, servidos en un ambiente familiar y acogedor.",
-    "horario": "Lun a Jue: 4:00 PM - 10:00 PM | Vie a Dom: 4:00 PM - 11:00 PM",
+    "horario": "Lun a Jue: 4:00 PM - 10:00 PM | Vie a Dom: 4:00 PM - 11:00 PM"
     "estado_horario": {
       "tipo": "horario",
       "config": {
@@ -544,15 +544,15 @@
     "id": 23,
     "nombre": "Dulzuras Luna",
     "categoria": "Gastronomía",
-    "etiquetas": ["Repostería", "Pastelería Artesanal", "Mesas de Dulces", "Eventos", "Bocadillos"],
-    "keywords_busqueda": "reposteria artesanal pasteles personalizados queques bodas quinceaños mesas de dulces postres bocadillos salados dulces eventos catering pan artesanal guapiles",
+    "etiquetas": ["Repostería", "Postres", "Eventos", "Bocadillos"],
+    "keywords_busqueda": "reposteria artesanal pasteles personalizados queques bodas quinceaños mesas de dulces postres bocadillos salados dulces eventos catering pan artesanal guapiles artesano bocaditos fiestas celebraciones",
     "servicios_resumen": "Repostería 100% artesanal, pasteles personalizados y mesas de dulces para eventos especiales.",
     "instagram": "null",
     "imagen": "img/logos/dulzuras-luna.webp",
     "facebook": "https://www.facebook.com/profile.php?id=100063601992500",
     "whatsapp": "+50684215432",
-    "descripcion": "En Dulzuras Luna creamos repostería y pastelería 100% artesanal con ingredientes de la mejor calidad. Nos especializamos en complacer el gusto de cada cliente con pasteles totalmente personalizados y una gran variedad de bocadillos dulces y salados. Somos expertos en el montaje de mesas de dulces para bodas, quince años y todo tipo de fiestas.",
-    "horario": "Bajo Pedido | Pedidos Personalizados",
+    "descripcion": "En Dulzuras Luna creamos repostería y pastelería 100% artesanal con ingredientes de la mejor calidad. Nos especializamos en complacer el gusto de cada cliente con pasteles totalmente personalizados y una gran variedad de bocadillos dulces y salados.",
+    "horario": "Bajo Pedido | Pedidos Personalizados"
     "estado_horario": {
       "tipo": "reserva",
       "config": null
@@ -610,15 +610,15 @@
     "id": 26,
     "nombre": "Hi Tea Guápiles",
     "categoria": "Gastronomía",
-    "etiquetas": ["Bubble Tea", "Repostería", "Comida Asiática", "Gyosas", "Postres"],
-    "keywords_busqueda": "te de burbujas boba tea comida china asiática gyosas dumplings rollos de camaron cake pastel postres merienda bebida fria barrio chino hello kitty cafe",
+    "etiquetas": ["Bubble Tea", "Postres", "Comida Asiática", "Snacks"],
+    "keywords_busqueda": "te de burbujas boba tea comida china asiática gyosas dumplings rollos de camaron cake pastel postres merienda bebida fria barrio chino hello kitty cafe snacks tapioca perlas fruta refresco guapiles",
     "servicios_resumen": "Bubble Tea auténtico, repostería creativa y snacks asiáticos como gyosas y rollos de camarón.",
     "instagram": "https://www.instagram.com/hitea.guapiles/",
     "facebook": "https://www.facebook.com/profile.php?id=61575271720818",
     "imagen": "img/logos/hi-tea.webp",
     "whatsapp": "+50687448301",
-    "descripcion": "¡Desde el Barrio Chino hasta el corazón de Guápiles! Hi Tea ofrece una experiencia gastronómica asiática única, especializándose en el auténtico Bubble Tea y repostería temática. Además, cuentan con una selección de snacks calientes como gyosas de cerdo y rollos de camarón, todo en un ambiente moderno y creativo.",
-    "horario": "Lunes a Domingo | 11:00 AM a 7:00 PM",
+    "descripcion": "¡Desde el Barrio Chino hasta el corazón de Guápiles! Hi Tea ofrece una experiencia gastronómica asiática única, especializándose en el auténtico Bubble Tea y repostería temática.",
+    "horario": "Lunes a Domingo | 11:00 AM a 7:00 PM"
     "estado_horario": {
       "tipo": "horario",
       "config": {
@@ -662,15 +662,15 @@
     "id": 28,
     "nombre": "Tropihelados Gourmet",
     "categoria": "Gastronomía",
-    "etiquetas": ["Helados Artesanales", "Postres", "Helados de Leche", "Servicio a Domicilio"],
-    "keywords_busqueda": "helados artesanales deli gourmet postres cremosos paletas helado de leche nutella cheesecake galleta oreo baileys frio dulce merienda entrega gratis guapiles centro antojo",
+    "etiquetas": ["Postres", "Servicio a Domicilio", "Helados"],
+    "keywords_busqueda": "helados artesanales deli gourmet postres cremosos paletas helado de leche nutella cheesecake galleta oreo baileys frio dulce merienda entrega gratis guapiles centro antojo paletas sorbetes",
     "servicios_resumen": "Helados artesanales cremosos con sabores gourmet y entregas gratuitas en Guápiles centro.",
     "instagram": "https://www.instagram.com/heladosdeligourmet/",
     "facebook": "null",
     "imagen": "img/logos/helados-deli.webp",
     "whatsapp": "+50660110386",
-    "descripcion": "Una empresa familiar dedicada a llevar sabor y tradición a través de helados artesanales excepcionalmente cremosos. Con una amplia variedad de sabores gourmet como Nutella, Cheesecake y Baileys, se distinguen por su calidad y por ofrecer entregas gratuitas en el casco central de Guápiles.",
-    "horario": "Lunes a Sábado | 12:00 MD a 4:00 PM",
+    "descripcion": "Una empresa familiar dedicada a llevar sabor y tradición a través de helados artesanales excepcionalmente cremosos. Se distinguen por ofrecer entregas gratuitas en el casco central de Guápiles.",
+    "horario": "Lunes a Sábado | 12:00 MD a 4:00 PM"
     "estado_horario": {
       "tipo": "horario",
       "config": {
@@ -719,15 +719,15 @@
     "id": 30,
     "nombre": "Drunk Street Food / El Lab",
     "categoria": "Gastronomía",
-    "etiquetas": ["Street Food", "Hamburguesas", "Alitas", "Servicio Express", "Servicio a Domicilio", "Snacks"],
-    "keywords_busqueda": "comida rapida street food hamburguesas smash burger alitas de pollo wings papas fritas nachos palitos de queso mozarrella sticks cena domicilio express guapiles el lab drunk",
+    "etiquetas": ["Hamburguesas", "Servicio a Domicilio", "Comida Rápida", "Snacks"],
+    "keywords_busqueda": "comida rapida street food hamburguesas smash burger alitas de pollo wings papas fritas nachos palitos de queso mozarrella sticks cena domicilio express guapiles el lab drunk lab cargadas salsas",
     "servicios_resumen": "Especialistas en Smash Burgers, alitas y snacks con servicio express y consumo en local.",
     "instagram": "https://www.instagram.com/el_lab_/",
     "facebook": "null",
     "imagen": "img/logos/drunk-street-food.webp",
     "whatsapp": "+50664211214",
-    "descripcion": "La propuesta gastronómica de El Lab que conquista por su sabor urbano. Drunk Street Food ofrece una variedad de Smash Burgers, alitas con salsas originales y sus famosas Papas LAB cargadas. Con un horario ideal para cenas y antojos nocturnos, brindan la opción de disfrutar en el local o mediante su eficiente servicio express en la zona de Guápiles.",
-    "horario": "Miércoles a Domingo | 5:00 PM a 11:00 PM",
+    "descripcion": "La propuesta gastronómica de El Lab que conquista por su sabor urbano. Ofrece una variedad de Smash Burgers, alitas con salsas originales y sus famosas Papas LAB cargadas.",
+    "horario": "Miércoles a Domingo | 5:00 PM a 11:00 PM"
     "estado_horario": {
       "tipo": "horario",
       "config": {
@@ -832,15 +832,15 @@
     "id": 34,
     "nombre": "Café Letras",
     "categoria": "Gastronomía",
-    "etiquetas": ["Cafetería", "Catering", "Barra de Café", "Eventos", "Servicio a Domicilio"],
-    "keywords_busqueda": "café de especialidad barista eventos privados bodas baby shower reuniones fiestas barra de café móvil nómada lectura aroma café letras ferias guápiles la rita pococí",
+    "etiquetas": ["Cafetería", "Eventos", "Servicio a Domicilio", "Postres"],
+    "keywords_busqueda": "café de especialidad barista eventos privados bodas baby shower reuniones fiestas barra de café móvil nómada lectura aroma café letras ferias guápiles la rita pococí catering servicio profesional tico",
     "servicios_resumen": "Barras de café de especialidad para eventos privados, ferias y celebraciones en todo el país.",
     "instagram": "https://www.instagram.com/_letras.cafe/",
     "facebook": "https://www.facebook.com/el.cafe.letras",
     "imagen": "img/logos/cafe-letras.webp",
     "whatsapp": "+50661564793",
-    "descripcion": "Café de Letras es una experiencia nómada que combina el aroma del café de especialidad con la armonía de la lectura. Se especializan en el montaje de barras de café profesionales para eventos privados como bodas, quince años y reuniones corporativas en cualquier parte del país. Llevan la esencia de una cafetería artesanal directamente a su celebración con paquetes personalizados.",
-    "horario": "Servicio para Eventos | Bajo Reservación",
+    "descripcion": "Café de Letras es una experiencia nómada que combina el aroma del café de especialidad con la armonía de la lectura. Llevan la esencia de una cafetería artesanal directamente a su celebración.",
+    "horario": "Servicio para Eventos | Bajo Reservación"
     "estado_horario": {
       "tipo": "reserva",
       "config": null
@@ -849,5 +849,27 @@
     "lat": 10.212531,
     "lng": -83.785632,
     "maps_link": "https://wa.me/50661564793"
+  },
+  {
+    "id": 35,
+    "nombre": "Alma Inquebrantable",
+    "categoria": "Servicios",
+    "etiquetas": ["Tienda Virtual", "Moda Femenina", "Joyería", "Accesorios", "Ropa de Dama"],
+    "keywords_busqueda": "ropa mujer chicas accesorios joyeria virtual tienda online guapiles blusas jeans vestidos bisuteria moda femenina emprendimiento gemelas vargas",
+    "servicios_resumen": "Tienda virtual especializada en ropa, joyería y accesorios exclusivos para chicas.",
+    "instagram": "https://www.instagram.com/alma.inquebrantable1411/",
+    "facebook": "null",
+    "imagen": "img/logos/alma-inquebrantable.webp",
+    "whatsapp": "+50688744168",
+    "descripcion": "Alma Inquebrantable es una tienda virtual diseñada para resaltar la esencia femenina. Ofrecen una selección curada de ropa, joyería y accesorios modernos para chicas que buscan estilo y calidad. Bajo la gestión de sus propietarias Graciela Vargas y Maricruz Vargas, brindan atención personalizada a través de sus líneas de contacto: 8874-4168 / 8874-4108.",
+    "horario": "Tienda Virtual | Bajo Pedido",
+    "estado_horario": {
+      "tipo": "cita",
+      "config": null
+    },
+    "direccion": "Servicio a Domicilio y Envíos, Guápiles",
+    "lat": 10.212531,
+    "lng": -83.785632,
+    "maps_link": "https://wa.me/50688744168"
   }
 ]
