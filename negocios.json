@@ -827,5 +827,27 @@
     "lat": 10.22457063080131,
     "lng": -83.78107744708205,
     "maps_link": "https://maps.app.goo.gl/GaVrYfhvyvnVjwXo7"
+  },
+  {
+    "id": 34,
+    "nombre": "Café Letras",
+    "categoria": "Gastronomía",
+    "etiquetas": ["Cafetería", "Catering", "Barra de Café", "Eventos", "A domicilio"],
+    "keywords_busqueda": "café de especialidad barista eventos privados bodas baby shower reuniones fiestas barra de café móvil nómada lectura aroma café letras ferias guápiles la rita pococí",
+    "servicios_resumen": "Barras de café de especialidad para eventos privados, ferias y celebraciones en todo el país.",
+    "instagram": "https://www.instagram.com/_letras.cafe/",
+    "facebook": "https://www.facebook.com/el.cafe.letras",
+    "imagen": "img/logos/cafe-letras.webp",
+    "whatsapp": "+50661564793",
+    "descripcion": "Café de Letras es una experiencia nómada que combina el aroma del café de especialidad con la armonía de la lectura. Se especializan en el montaje de barras de café profesionales para eventos privados como bodas, quince años y reuniones corporativas en cualquier parte del país. Llevan la esencia de una cafetería artesanal directamente a su celebración con paquetes personalizados.",
+    "horario": "Servicio para Eventos | Bajo Reservación",
+    "estado_horario": {
+      "tipo": "reserva",
+      "config": null
+    },
+    "direccion": "Servicio a Domicilio y Eventos Privados (Todo el país)",
+    "lat": 10.212531,
+    "lng": -83.785632,
+    "maps_link": "https://wa.me/50661564793"
   }
 ]
