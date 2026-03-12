@@ -11,7 +11,7 @@
     "facebook": "https://www.facebook.com/profile.php?id=61579744980372",
     "whatsapp": "50689537426",
     "descripcion": "Una de las propuestas más sólidas de Fast Food Grill en Pococí. Destaca por el uso de pan artesanal en sus hamburguesas y costillas con un glaseado BBQ impecable.",
-    "horario": "Jueves, Viernes y Sábados | 6:00 PM a 10:00 PM"
+    "horario": "Jueves, Viernes y Sábados | 6:00 PM a 10:00 PM",
     "estado_horario": {
       "tipo": "horario",
       "config": {
@@ -226,7 +226,7 @@
     "imagen": "img/logos/delicias-lucam.webp",
     "whatsapp": "+50686250301",
     "descripcion": "Especialistas en transformar ideas en arte comestible. Esta pastelería artesanal destaca en Pococí por su nivel de detalle en queques personalizados y una línea de repostería que equilibra sabor y presentación impecable.",
-    "horario": "Martes a Domingo | 8:00 AM a 5:00 PM Contra Pedido"
+    "horario": "Martes a Domingo | 8:00 AM a 5:00 PM Contra Pedido",
     "estado_horario": {
       "tipo": "reserva",
       "config": null
@@ -276,7 +276,7 @@
     "imagen": "img/logos/taqueria-torres.webp",
     "whatsapp": "+50688543437",
     "descripcion": "Una parada obligatoria en Guápiles para los amantes de la comida urbana de calidad. Sus Tacos Artesanales y el Tostón Supremo son los favoritos de la comunidad, servidos en un ambiente familiar y acogedor.",
-    "horario": "Lun a Jue: 4:00 PM - 10:00 PM | Vie a Dom: 4:00 PM - 11:00 PM"
+    "horario": "Lun a Jue: 4:00 PM - 10:00 PM | Vie a Dom: 4:00 PM - 11:00 PM",
     "estado_horario": {
       "tipo": "horario",
       "config": {
@@ -552,7 +552,7 @@
     "facebook": "https://www.facebook.com/profile.php?id=100063601992500",
     "whatsapp": "+50684215432",
     "descripcion": "En Dulzuras Luna creamos repostería y pastelería 100% artesanal con ingredientes de la mejor calidad. Nos especializamos en complacer el gusto de cada cliente con pasteles totalmente personalizados y una gran variedad de bocadillos dulces y salados.",
-    "horario": "Bajo Pedido | Pedidos Personalizados"
+    "horario": "Bajo Pedido | Pedidos Personalizados",
     "estado_horario": {
       "tipo": "reserva",
       "config": null
@@ -618,7 +618,7 @@
     "imagen": "img/logos/hi-tea.webp",
     "whatsapp": "+50687448301",
     "descripcion": "¡Desde el Barrio Chino hasta el corazón de Guápiles! Hi Tea ofrece una experiencia gastronómica asiática única, especializándose en el auténtico Bubble Tea y repostería temática.",
-    "horario": "Lunes a Domingo | 11:00 AM a 7:00 PM"
+    "horario": "Lunes a Domingo | 11:00 AM a 7:00 PM",
     "estado_horario": {
       "tipo": "horario",
       "config": {
@@ -670,7 +670,7 @@
     "imagen": "img/logos/helados-deli.webp",
     "whatsapp": "+50660110386",
     "descripcion": "Una empresa familiar dedicada a llevar sabor y tradición a través de helados artesanales excepcionalmente cremosos. Se distinguen por ofrecer entregas gratuitas en el casco central de Guápiles.",
-    "horario": "Lunes a Sábado | 12:00 MD a 4:00 PM"
+    "horario": "Lunes a Sábado | 12:00 MD a 4:00 PM",
     "estado_horario": {
       "tipo": "horario",
       "config": {
@@ -727,7 +727,7 @@
     "imagen": "img/logos/drunk-street-food.webp",
     "whatsapp": "+50664211214",
     "descripcion": "La propuesta gastronómica de El Lab que conquista por su sabor urbano. Ofrece una variedad de Smash Burgers, alitas con salsas originales y sus famosas Papas LAB cargadas.",
-    "horario": "Miércoles a Domingo | 5:00 PM a 11:00 PM"
+    "horario": "Miércoles a Domingo | 5:00 PM a 11:00 PM",
     "estado_horario": {
       "tipo": "horario",
       "config": {
@@ -840,7 +840,7 @@
     "imagen": "img/logos/cafe-letras.webp",
     "whatsapp": "+50661564793",
     "descripcion": "Café de Letras es una experiencia nómada que combina el aroma del café de especialidad con la armonía de la lectura. Llevan la esencia de una cafetería artesanal directamente a su celebración.",
-    "horario": "Servicio para Eventos | Bajo Reservación"
+    "horario": "Servicio para Eventos | Bajo Reservación",
     "estado_horario": {
       "tipo": "reserva",
       "config": null
