@@ -298,207 +298,91 @@ window.onpopstate = function(event) {
     if (cerrandoManual) {
         return; 
     }
-
-
-
     // 2. Si el usuario dio "atrás" físicamente en el celular mientras el modal estaba abierto
-
     if (modalNegocio && !modalNegocio.classList.contains('hidden')) {
-
         modalNegocio.classList.add('hidden');
-
         document.body.style.overflow = 'auto';
-
         return; 
-
     }
-
-
-
     // 3. SOLO si no hay modal y no estamos cerrando manualmente, volvemos al inicio
-
     const sectionResults = document.getElementById('section-results');
-
     if (sectionResults && !sectionResults.classList.contains('hidden')) {
-
         if (typeof volverInicio === 'function') {
-
             volverInicio();
-
         }
-
     }
-
 };
-
 // --- 3. CATEGORÍAS (Crea el primer escalón) ---
-
 function filtrarCategoria(cat) {
-
     const btn = document.querySelector(`[data-cat="${cat}"]`);
-
     if(btn) {
-
         // Registramos que nos movimos a una categoría
-
         history.pushState({ step: 'categoria', id: cat }, "", "#" + cat);
-
         btn.click();
-
-        
-
         setTimeout(() => {
-
             const offset = document.getElementById('section-results').offsetTop - 90;
-
             window.scrollTo({ top: offset, behavior: 'smooth' });
-
         }, 150);
-
     }
-
 }
-
-
-
 // --- 4. MODALES (Crea el segundo escalón) ---
-
 // Nota: Esta lógica debe aplicarse también cuando abres un negocio en app.js
-
 function abrirModalLegal(tipo) {
-
     const target = document.getElementById('legal-content-target');
-
     const modal = document.getElementById('modal-legal');
-
     target.innerHTML = legalTexts[tipo];
-
     modal.classList.remove('hidden');
-
     document.body.style.overflow = 'hidden';
-
-    
-
     // Registramos un NUEVO paso. Ahora el historial es: Inicio > Categoría > Modal
-
     history.pushState({ step: 'modal' }, "", "#view");
-
 }
-
-
-
 function cerrarModalLegal() {
-
     document.getElementById('modal-legal').classList.add('hidden');
-
     document.body.style.overflow = 'auto';
-
     // Si cierran con la X, volvemos atrás en el historial manualmente para mantener sincronía
-
     if (window.location.hash === "#view") {
-
         history.back();
-
     }
-
 }
-
-
-
 // --- 5. SCROLL ---
-
 window.onscroll = function() {
-
     const btn = document.getElementById("back-to-top");
-
     if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-
         btn.classList.add("show");
-
     } else {
-
         btn.classList.remove("show");
-
     }
-
 };
-
     </script>
-
     <div id="modal-registro" class="fixed inset-0 z-[1200] hidden flex items-center justify-center p-4 bg-black/95 backdrop-blur-2xl">
-
     <div class="bg-[#1c1614] w-full max-w-md border border-[#d4a373]/20 shadow-2xl relative p-8 md:p-10 rounded-sm">
-
-        
-
         <button onclick="cerrarModalRegistro()" class="absolute top-6 right-6 text-[#d4a373]/60 hover:text-[#d4a373] transition">
-
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" /></svg>
-
         </button>
-
-        
-
         <div class="text-center mb-8">
-
             <h2 class="serif-title text-[#d4a373] text-xl mb-2 uppercase tracking-widest font-bold">Unirse a Punto 506</h2>
-
             <p class="text-stone-400 text-[9px] uppercase tracking-[0.3em]">Déjanos tus datos y nos pondremos en contacto</p>
-
         </div>
-
-
-
 <form id="form-registro" class="space-y-5">
-
-
-
             <div>
-
                 <label class="block text-[8px] uppercase tracking-widest text-[#d4a373] mb-2 font-bold ml-1">Nombre del Negocio</label>
-
                 <input type="text" name="nombre_negocio" required class="input-registro" placeholder="Ej: Café de la Montaña">
-
             </div>
-
-
-
             <div>
-
                 <label class="block text-[8px] uppercase tracking-widest text-[#d4a373] mb-2 font-bold ml-1">Instagram del Negocio</label>
-
                 <input type="text" name="instagram" required class="input-registro" placeholder="@tu_usuario">
-
             </div>
-
-
-
             <div>
-
                 <label class="block text-[8px] uppercase tracking-widest text-[#d4a373] mb-2 font-bold ml-1">Número de Contacto</label>
-
                 <input type="tel" name="telefono" required class="input-registro" placeholder="WhatsApp o celular">
-
             </div>
-
-
-
             <div class="pt-4">
-
                 <button type="submit" class="w-full py-4 bg-[#d4a373] text-[#130f0e] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white transition-all duration-500 shadow-lg">
-
                     Enviar Información
-
                 </button>
-
             </div>
-
         </form>
-
     </div>
-
 </div>
-
 </body>
-
 </html>
