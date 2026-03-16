@@ -360,6 +360,7 @@ function verDetalle(id) {
     registrarActividad('ver_detalle', n.nombre);
     const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría solicitar más información.`);
     const mapsUrl = (n.maps_link && n.maps_link !== "null") ? n.maps_link : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(n.nombre + ' ' + n.direccion)}`;
+    
     // --- LÓGICA DE REDES SOCIALES DINÁMICA ---
     let botonesRedes = '';
     // Botón de Instagram (Solo si existe y no es "null")
@@ -380,6 +381,22 @@ function verDetalle(id) {
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>`;
     }
+
+    // --- LÓGICA BOTÓN MENÚ PREMIUM ---
+    let botonMenuPremium = '';
+    if (n.premium === true && n.url_menu && n.url_menu !== "null") {
+        botonMenuPremium = `
+            <div class="flex justify-center mb-8">
+                <a href="${n.url_menu}" target="_blank"
+                   onclick="registrarActividad('ver_menu_premium', '${n.nombre}'); gtag('event', 'view_menu', { 'business_name': '${n.nombre}' })"
+                   class="px-8 py-4 border-2 border-[#d4a373] text-[#d4a373] text-[10px] font-black uppercase tracking-[0.3em] hover:bg-[#d4a373] hover:text-black transition-all duration-500 flex items-center gap-3">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Ver Menú y Hacer Pedido
+                </a>
+            </div>
+        `;
+    }
+
     const modalContenido = document.getElementById('modal-content');
     modalContenido.innerHTML = `
         <div class="relative h-48 md:h-64 overflow-hidden">
@@ -395,6 +412,7 @@ function verDetalle(id) {
                 <h2 class="serif-title text-3xl md:text-4xl text-white uppercase tracking-[0.1em]">${n.nombre}</h2>
                 <div class="h-px w-16 bg-[#d4a373] mx-auto mt-6"></div>
             </div>
+            
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
                 <div class="space-y-6">
                      <div>
@@ -422,6 +440,9 @@ function verDetalle(id) {
                     </div>
                 </div>
             </div>
+
+            ${botonMenuPremium}
+
             <div class="flex justify-center gap-6 mb-12">
                 <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" 
                    target="_blank"
@@ -479,6 +500,7 @@ function verDetalle(id) {
     document.getElementById('modal-negocio').classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 }
+
 let cerrandoManual = false;
 function cerrarModal() {
     const modal = document.getElementById('modal-negocio');
@@ -491,9 +513,11 @@ function cerrarModal() {
     }
     setTimeout(() => { cerrandoManual = false; }, 100);
 }
+
 document.getElementById('modal-negocio').addEventListener('click', function(e) {
     if (e.target === this) cerrarModal();
 });
+
 function abrirModalRegistro() {
     const modal = document.getElementById('modal-registro');
     if (modal) {
@@ -501,6 +525,7 @@ function abrirModalRegistro() {
         document.body.style.overflow = 'hidden';
     }
 }
+
 function cerrarModalRegistro() {
     const modal = document.getElementById('modal-registro');
     if (modal) {
@@ -508,10 +533,12 @@ function cerrarModalRegistro() {
         document.body.style.overflow = 'auto';
     }
 }
+
 // Cerrar al hacer clic fuera del contenido
 document.getElementById('modal-registro')?.addEventListener('click', function(e) {
     if (e.target === this) cerrarModalRegistro();
 });
+
 // --- SISTEMA DE REGISTRO BLINDADO ---
 function abrirModalRegistro() {
     const modal = document.getElementById('modal-registro');
@@ -522,6 +549,7 @@ function abrirModalRegistro() {
         console.error("No se encontró el modal con ID: modal-registro");
     }
 }
+
 function cerrarModalRegistro() {
     const modal = document.getElementById('modal-registro');
     if (modal) {
@@ -529,12 +557,13 @@ function cerrarModalRegistro() {
         document.body.style.overflow = 'auto';
     }
 }
+
 // Configuración del envío (Se ejecuta una sola vez al cargar la página)
 document.addEventListener('DOMContentLoaded', () => {
     const registroForm = document.getElementById('form-registro') || document.getElementById('registro-form');
     if (registroForm) {
         registroForm.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Evita la redirección y el error 405
+            e.preventDefault(); 
             const btn = registroForm.querySelector('button[type="submit"]');
             const textoOriginal = btn.innerText;
             btn.innerText = "PROCESANDO...";
@@ -542,7 +571,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // CREAMOS LOS DATOS
             const formData = new FormData(registroForm);
             try {
-                // FORZAMOS LA URL AQUÍ (Usa el ID que me pasaste antes: xqedvowy)
                 const response = await fetch("https://formspree.io/f/xqedvowy", {
                     method: 'POST',
                     body: formData,
@@ -573,6 +601,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
 // --- INICIO DE LA APP ---
 loadData();
 registrarActividad('visita_pagina', 'Punto 506');
