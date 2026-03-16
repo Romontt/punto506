@@ -201,17 +201,21 @@ function renderCards(listaFiltrada) {
         grid.innerHTML = listaFiltrada.map((n, i) => {
             const badgeEstado = obtenerBadgeEstado(n);
             
-            // 1. Detectamos si el negocio es Premium
+            // 1. Identificación de nivel
             const esPremium = n.premium === true || n.premium === "true";
             const clasePremium = esPremium ? 'premium' : '';
             
-            // 2. Definimos el texto del botón según si es Premium o no
-            // Si es premium dice "Detalles y Menú", si no, dice "Detalles"
+            // 2. Lógica del Botón Dinámico
             const textoBoton = esPremium ? 'Detalles y Menú' : 'Detalles';
             
+            // Si es premium, agregamos sombra dorada (glow), borde más opaco y un sutil pulso
+            const estiloBoton = esPremium 
+                ? 'border-[#d4a373] shadow-[0_0_15px_rgba(212,163,115,0.3)] bg-[#d4a373]/5' 
+                : 'border-[#d4a373]/20';
+
             const botonesAccion = `
                 <button onclick="verDetalle(${n.id})" 
-                        class="mt-auto w-full py-3 md:py-4 text-[#d4a373] text-[8px] md:text-[9px] font-bold uppercase tracking-[0.5em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-700">
+                        class="mt-auto w-full py-3 md:py-4 text-[#d4a373] text-[8px] md:text-[9px] font-bold uppercase tracking-[0.5em] border ${estiloBoton} hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-700">
                     ${textoBoton}
                 </button>`;
 
@@ -222,7 +226,7 @@ function renderCards(listaFiltrada) {
                     ${badgeEstado}
                     <img src="${n.imagen}" 
                          class="w-full h-full object-cover sepia-[10%] group-hover:sepia-0 group-hover:scale-110 transition duration-[2s] ease-out" 
-                         alt="${n.nombre} - ${n.categoria} en Pococí" 
+                         alt="${n.nombre}" 
                          loading="lazy"> 
                     <div class="absolute inset-0 bg-gradient-to-t from-[#130f0e] via-transparent opacity-80"></div>
                     <div class="absolute top-4 left-4 text-[#d4a373] text-[6px] font-black tracking-[0.4em] uppercase bg-[#130f0e]/80 backdrop-blur-md px-2 py-1 border border-[#d4a373]/20">${n.categoria}</div>
