@@ -196,13 +196,41 @@ function renderCards(listaFiltrada) {
     if(landing) landing.classList.add('hidden');
     if(resultados) resultados.classList.remove('hidden');
     grid.style.opacity = '0';
+    
     setTimeout(() => {
         grid.innerHTML = listaFiltrada.map((n, i) => {
-            // Generamos el badge dinámico aquí
             const badgeEstado = obtenerBadgeEstado(n);
+            
+            // 1. Detectamos si el negocio es Premium
+            const esPremium = n.premium === true || n.premium === "true";
+            const clasePremium = esPremium ? 'premium' : '';
+            
+            // 2. Definimos los botones según el nivel del negocio
+            let botonesAccion = '';
+            if (esPremium) {
+                botonesAccion = `
+                    <div class="premium-actions flex gap-2 mt-auto">
+                        <button onclick="verDetalle(${n.id})" 
+                                class="btn-premium-detalles flex-1 py-3 text-[8px] font-black uppercase tracking-[0.3em] transition-all duration-500">
+                            Detalles
+                        </button>
+                        <a href="${n.menu_url || '#'}" target="_blank" 
+                           onclick="registrarActividad('ver_menu', '${n.nombre}')"
+                           class="btn-premium-menu flex-1 py-3 text-center text-[8px] font-black uppercase tracking-[0.3em] transition-all duration-500">
+                            Ver Menú
+                        </a>
+                    </div>`;
+            } else {
+                botonesAccion = `
+                    <button onclick="verDetalle(${n.id})" 
+                            class="mt-auto w-full py-3 md:py-4 text-[#d4a373] text-[8px] md:text-[9px] font-bold uppercase tracking-[0.5em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-700">
+                        Detalles
+                    </button>`;
+            }
+
             return `
-            <article class="group glass-card animate-reveal overflow-hidden"
-         style="animation-delay: ${i * 0.08}s; animation-fill-mode: forwards;">
+            <article class="group glass-card ${clasePremium} animate-reveal overflow-hidden flex flex-col"
+                     style="animation-delay: ${i * 0.08}s; animation-fill-mode: forwards;">
                 <div class="relative h-48 md:h-64 overflow-hidden">
                     ${badgeEstado}
                     <img src="${n.imagen}" 
@@ -217,10 +245,7 @@ function renderCards(listaFiltrada) {
                     <p class="elegant-italic text-stone-400 text-[11px] md:text-[14px] leading-relaxed line-clamp-2 mb-4 italic">
                         "${n.servicios_resumen}"
                     </p>
-                    <button onclick="verDetalle(${n.id})" 
-                            class="mt-auto w-full py-3 md:py-4 text-[#d4a373] text-[8px] md:text-[9px] font-bold uppercase tracking-[0.5em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-700">
-                        Detalles
-                    </button>
+                    ${botonesAccion}
                 </div>
             </article>`;
         }).join('');
