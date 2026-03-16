@@ -2,6 +2,8 @@
   {
     "id": 1,
     "nombre": "Uy Ke Rico",
+    "premium": true,
+    "url_menu": "https://punto506.montzucr.com/menu/Uy_ke_rico/index.html",
     "categoria": "Gastronomía",
     "etiquetas": ["Hamburguesas", "Servicio a Domicilio", "Comida Rápida", "Parrilla"],
     "keywords_busqueda": "hamburgueseria grill parrilla carne bbq barbacoa papas fritas cena comida rapida artesanal llevar domicilio delivery antojo moncha costillas cerdito pan artesanal glaseado cena noche comida urbana guapiles pococi",
