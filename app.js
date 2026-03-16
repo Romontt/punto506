@@ -201,32 +201,16 @@ function renderCards(listaFiltrada) {
         grid.innerHTML = listaFiltrada.map((n, i) => {
             const badgeEstado = obtenerBadgeEstado(n);
             
-            // 1. Detectamos si el negocio es Premium
+            // 1. Detectamos si el negocio es Premium para la clase visual solamente
             const esPremium = n.premium === true || n.premium === "true";
             const clasePremium = esPremium ? 'premium' : '';
             
-            // 2. Definimos los botones según el nivel del negocio
-            let botonesAccion = '';
-            if (esPremium) {
-                botonesAccion = `
-                    <div class="premium-actions flex gap-2 mt-auto">
-                        <button onclick="verDetalle(${n.id})" 
-                                class="btn-premium-detalles flex-1 py-3 text-[8px] font-black uppercase tracking-[0.3em] transition-all duration-500">
-                            Detalles
-                        </button>
-                        <a href="${n.menu_url || '#'}" target="_blank" 
-                           onclick="registrarActividad('ver_menu', '${n.nombre}')"
-                           class="btn-premium-menu flex-1 py-3 text-center text-[8px] font-black uppercase tracking-[0.3em] transition-all duration-500">
-                            Ver Menú
-                        </a>
-                    </div>`;
-            } else {
-                botonesAccion = `
-                    <button onclick="verDetalle(${n.id})" 
-                            class="mt-auto w-full py-3 md:py-4 text-[#d4a373] text-[8px] md:text-[9px] font-bold uppercase tracking-[0.5em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-700">
-                        Detalles
-                    </button>`;
-            }
+            // 2. Botón único para todos que cumple la función de abrir el modal
+            const botonesAccion = `
+                <button onclick="verDetalle(${n.id})" 
+                        class="mt-auto w-full py-3 md:py-4 text-[#d4a373] text-[8px] md:text-[9px] font-bold uppercase tracking-[0.5em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-700">
+                    Detalles y Menú
+                </button>`;
 
             return `
             <article class="group glass-card ${clasePremium} animate-reveal overflow-hidden flex flex-col"
