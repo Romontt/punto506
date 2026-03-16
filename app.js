@@ -201,15 +201,18 @@ function renderCards(listaFiltrada) {
         grid.innerHTML = listaFiltrada.map((n, i) => {
             const badgeEstado = obtenerBadgeEstado(n);
             
-            // 1. Detectamos si el negocio es Premium para la clase visual solamente
+            // 1. Detectamos si el negocio es Premium
             const esPremium = n.premium === true || n.premium === "true";
             const clasePremium = esPremium ? 'premium' : '';
             
-            // 2. Botón único para todos que cumple la función de abrir el modal
+            // 2. Definimos el texto del botón según si es Premium o no
+            // Si es premium dice "Detalles y Menú", si no, dice "Detalles"
+            const textoBoton = esPremium ? 'Detalles y Menú' : 'Detalles';
+            
             const botonesAccion = `
                 <button onclick="verDetalle(${n.id})" 
                         class="mt-auto w-full py-3 md:py-4 text-[#d4a373] text-[8px] md:text-[9px] font-bold uppercase tracking-[0.5em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-700">
-                    Detalles y Menú
+                    ${textoBoton}
                 </button>`;
 
             return `
