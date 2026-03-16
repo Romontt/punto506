@@ -188,7 +188,6 @@ function actualizarFlechasNav() {
             }
         });
     }
-}
 function renderCards(listaFiltrada) {
     const landing = document.getElementById('landing-categories');
     const resultados = document.getElementById('section-results');
@@ -205,28 +204,8 @@ function renderCards(listaFiltrada) {
             const esPremium = n.premium === true || n.premium === "true";
             const clasePremium = esPremium ? 'premium' : '';
             
-            // 2. Definimos los botones según el nivel del negocio
-            let botonesAccion = '';
-            if (esPremium) {
-                botonesAccion = `
-                    <div class="premium-actions flex gap-2 mt-auto">
-                        <button onclick="verDetalle(${n.id})" 
-                                class="btn-premium-detalles flex-1 py-3 text-[8px] font-black uppercase tracking-[0.3em] transition-all duration-500">
-                            Detalles
-                        </button>
-                        <a href="${n.menu_url || '#'}" target="_blank" 
-                           onclick="registrarActividad('ver_menu', '${n.nombre}')"
-                           class="btn-premium-menu flex-1 py-3 text-center text-[8px] font-black uppercase tracking-[0.3em] transition-all duration-500">
-                            Ver Menú
-                        </a>
-                    </div>`;
-            } else {
-                botonesAccion = `
-                    <button onclick="verDetalle(${n.id})" 
-                            class="mt-auto w-full py-3 md:py-4 text-[#d4a373] text-[8px] md:text-[9px] font-bold uppercase tracking-[0.5em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-700">
-                        Detalles
-                    </button>`;
-            }
+            // 2. Texto dinámico: Si es premium invitamos a ver el menú también
+            const textoBoton = esPremium ? 'Detalles y Menú' : 'Detalles';
 
             return `
             <article class="group glass-card ${clasePremium} animate-reveal overflow-hidden flex flex-col"
@@ -245,7 +224,10 @@ function renderCards(listaFiltrada) {
                     <p class="elegant-italic text-stone-400 text-[11px] md:text-[14px] leading-relaxed line-clamp-2 mb-4 italic">
                         "${n.servicios_resumen}"
                     </p>
-                    ${botonesAccion}
+                    <button onclick="verDetalle(${n.id})" 
+                            class="mt-auto w-full py-3 md:py-4 text-[#d4a373] text-[8px] md:text-[9px] font-bold uppercase tracking-[0.5em] border border-[#d4a373]/20 hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-700">
+                        ${textoBoton}
+                    </button>
                 </div>
             </article>`;
         }).join('');
@@ -360,9 +342,9 @@ function verDetalle(id) {
     registrarActividad('ver_detalle', n.nombre);
     const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría solicitar más información.`);
     const mapsUrl = (n.maps_link && n.maps_link !== "null") ? n.maps_link : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(n.nombre + ' ' + n.direccion)}`;
+    
     // --- LÓGICA DE REDES SOCIALES DINÁMICA ---
     let botonesRedes = '';
-    // Botón de Instagram (Solo si existe y no es "null")
     if (n.instagram && n.instagram !== "null") {
         botonesRedes += `
             <a href="${n.instagram}" target="_blank" 
@@ -371,7 +353,6 @@ function verDetalle(id) {
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.332 3.608 1.308.975.975 1.247 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.332 2.633-1.308 3.608-.975.975-2.242 1.247-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.332-3.608-1.308-.975-.975-1.247-2.242-1.308-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.332-2.633 1.308-3.608.975-.975 2.242-1.247 3.608-1.308 1.266-.058 1.646-.07 4.85-.07M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12s.014 3.667.072 4.947c.2 4.353 2.612 6.766 6.96 6.965 1.28.058 1.688.072 4.948.072s3.668-.014 4.948-.072c4.351-.2 6.763-2.612 6.96-6.965.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.353-2.612-6.765-6.96-6.965C15.668.014 15.26 0 12 0m0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324M12 16a4 4 0 110-8 4 4 0 010 8m6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881"/></svg>
             </a>`;
     }
-    // Botón de Facebook (Solo si existe y no es "null")
     if (n.facebook && n.facebook !== "null") {
         botonesRedes += `
             <a href="${n.facebook}" target="_blank" 
@@ -380,6 +361,23 @@ function verDetalle(id) {
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>`;
     }
+
+    // --- BOTÓN DE MENÚ PARA NEGOCIOS PREMIUM ---
+    let htmlBotonMenu = '';
+    if (n.premium === true || n.premium === "true") {
+        htmlBotonMenu = `
+            <div class="mb-12">
+                <a href="${n.menu_url || '#'}" target="_blank" 
+                   onclick="registrarActividad('ver_menu_modal', '${n.nombre}')"
+                   class="flex items-center justify-center gap-3 w-full py-5 bg-[#d4a373] text-[#130f0e] text-[11px] font-black uppercase tracking-[0.3em] hover:bg-white transition-all duration-500 shadow-2xl">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18 18.246 18.477 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Ver Menú y Hacer Pedido
+                </a>
+            </div>`;
+    }
+
     const modalContenido = document.getElementById('modal-content');
     modalContenido.innerHTML = `
         <div class="relative h-48 md:h-64 overflow-hidden">
@@ -422,6 +420,9 @@ function verDetalle(id) {
                     </div>
                 </div>
             </div>
+
+            ${htmlBotonMenu}
+
             <div class="flex justify-center gap-6 mb-12">
                 <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" 
                    target="_blank"
@@ -479,6 +480,7 @@ function verDetalle(id) {
     document.getElementById('modal-negocio').classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 }
+
 let cerrandoManual = false;
 function cerrarModal() {
     const modal = document.getElementById('modal-negocio');
@@ -491,9 +493,11 @@ function cerrarModal() {
     }
     setTimeout(() => { cerrandoManual = false; }, 100);
 }
+
 document.getElementById('modal-negocio').addEventListener('click', function(e) {
     if (e.target === this) cerrarModal();
 });
+
 function abrirModalRegistro() {
     const modal = document.getElementById('modal-registro');
     if (modal) {
@@ -501,6 +505,7 @@ function abrirModalRegistro() {
         document.body.style.overflow = 'hidden';
     }
 }
+
 function cerrarModalRegistro() {
     const modal = document.getElementById('modal-registro');
     if (modal) {
@@ -508,7 +513,7 @@ function cerrarModalRegistro() {
         document.body.style.overflow = 'auto';
     }
 }
-// Cerrar al hacer clic fuera del contenido
+
 document.getElementById('modal-registro')?.addEventListener('click', function(e) {
     if (e.target === this) cerrarModalRegistro();
 });
