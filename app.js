@@ -341,8 +341,24 @@ function verDetalle(id) {
     if (!n) return;
     registrarActividad('ver_detalle', n.nombre);
     const mensajeWA = encodeURIComponent(`¡Hola! Vi a ${n.nombre} en Punto 506 y me gustaría solicitar más información.`);
-    const mapsUrl = (n.maps_link && n.maps_link !== "null") ? n.maps_link : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(n.nombre + ' ' + n.direccion)}`;
     
+    // URL Corregida (Sin errores de llave)
+    const mapsUrl = (n.maps_link && n.maps_link !== "null") ? n.maps_link : `https://www.google.com/maps/search/${encodeURIComponent(n.nombre + ' ' + n.direccion)}`;
+    
+    // --- LÓGICA DE BOTÓN PREMIUM ---
+    let botonPremium = '';
+    if (n.premium === true || n.premium === "true") {
+        botonPremium = `
+            <div class="mt-8 flex justify-center">
+                <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${encodeURIComponent('¡Hola! Me gustaría ver el menú y hacer un pedido.')}" 
+                   target="_blank"
+                   class="w-full max-w-xs py-4 bg-[#d4a373] text-[#130f0e] text-[10px] font-black uppercase tracking-[0.3em] text-center hover:bg-white transition-all duration-300 shadow-xl">
+                    Ver Menú y Hacer Pedido
+                </a>
+            </div>
+        `;
+    }
+
     // --- LÓGICA DE REDES SOCIALES DINÁMICA ---
     let botonesRedes = '';
     if (n.instagram && n.instagram !== "null") {
@@ -362,22 +378,6 @@ function verDetalle(id) {
             </a>`;
     }
 
-    // --- BOTÓN DE MENÚ PARA NEGOCIOS PREMIUM ---
-    let htmlBotonMenu = '';
-    if (n.premium === true || n.premium === "true") {
-        htmlBotonMenu = `
-            <div class="mb-12">
-                <a href="${n.menu_url || '#'}" target="_blank" 
-                   onclick="registrarActividad('ver_menu_modal', '${n.nombre}')"
-                   class="flex items-center justify-center gap-3 w-full py-5 bg-[#d4a373] text-[#130f0e] text-[11px] font-black uppercase tracking-[0.3em] hover:bg-white transition-all duration-500 shadow-2xl">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18 18.246 18.477 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    Ver Menú y Hacer Pedido
-                </a>
-            </div>`;
-    }
-
     const modalContenido = document.getElementById('modal-content');
     modalContenido.innerHTML = `
         <div class="relative h-48 md:h-64 overflow-hidden">
@@ -393,7 +393,7 @@ function verDetalle(id) {
                 <h2 class="serif-title text-3xl md:text-4xl text-white uppercase tracking-[0.1em]">${n.nombre}</h2>
                 <div class="h-px w-16 bg-[#d4a373] mx-auto mt-6"></div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-8">
                 <div class="space-y-6">
                      <div>
                         <h4 class="text-[9px] uppercase tracking-[0.4em] font-black text-stone-500 mb-3">La Experiencia</h4>
@@ -421,9 +421,9 @@ function verDetalle(id) {
                 </div>
             </div>
 
-            ${htmlBotonMenu}
+            ${botonPremium}
 
-            <div class="flex justify-center gap-6 mb-12">
+            <div class="flex justify-center gap-6 mb-12 mt-10">
                 <a href="https://api.whatsapp.com/send?phone=${n.whatsapp}&text=${mensajeWA}" 
                    target="_blank"
                    onclick="registrarActividad('clic_whatsapp', '${n.nombre}'); gtag('event', 'contact', { 'method': 'WhatsApp', 'business_name': '${n.nombre}' })"
@@ -435,6 +435,7 @@ function verDetalle(id) {
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="11" r="3" stroke-width="1.5"/></svg>
                 </a>
             </div>
+            
             <div class="border-t border-white/5 pt-10">
                 <div id="form-wrapper">
                     <h3 class="text-[9px] text-stone-500 uppercase tracking-[0.4em] mb-6 text-center italic">¿Cómo fue tu experiencia? Tu feedback es valioso</h3>
@@ -454,6 +455,8 @@ function verDetalle(id) {
             </div>
         </div>
     `;
+
+    // Lógica del formulario de feedback
     const form = document.getElementById('feedback-form');
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -476,47 +479,11 @@ function verDetalle(id) {
             submitBtn.disabled = false;
         }
     });
+
     history.pushState({ step: 'modal' }, "", "#detalle");
     document.getElementById('modal-negocio').classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 }
-
-let cerrandoManual = false;
-function cerrarModal() {
-    const modal = document.getElementById('modal-negocio');
-    if (!modal || modal.classList.contains('hidden')) return;
-    cerrandoManual = true;
-    modal.classList.add('hidden');
-    document.body.style.overflow = 'auto';
-    if (window.location.hash === "#detalle") {
-        history.back();
-    }
-    setTimeout(() => { cerrandoManual = false; }, 100);
-}
-
-document.getElementById('modal-negocio').addEventListener('click', function(e) {
-    if (e.target === this) cerrarModal();
-});
-
-function abrirModalRegistro() {
-    const modal = document.getElementById('modal-registro');
-    if (modal) {
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-function cerrarModalRegistro() {
-    const modal = document.getElementById('modal-registro');
-    if (modal) {
-        modal.classList.add('hidden');
-        document.body.style.overflow = 'auto';
-    }
-}
-
-document.getElementById('modal-registro')?.addEventListener('click', function(e) {
-    if (e.target === this) cerrarModalRegistro();
-});
 // --- SISTEMA DE REGISTRO BLINDADO ---
 function abrirModalRegistro() {
     const modal = document.getElementById('modal-registro');
