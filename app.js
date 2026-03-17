@@ -205,13 +205,13 @@ function renderCards(listaFiltrada) {
             const esPremium = n.premium === true || n.premium === "true";
             const clasePremium = esPremium ? 'premium' : '';
             
-            // 2. Lógica del Badge "Menú Disponible" (Posicionado sobre la imagen, abajo a la izquierda)
+            // 2. Lógica del Badge "Menú Disponible" (Posicionado abajo a la DERECHA)
             const badgeMenu = esPremium ? `
-                <div class="absolute bottom-4 left-4 z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-[#d4a373]/40 bg-[#130f0e]/90 backdrop-blur-md shadow-[0_0_15px_rgba(212,163,115,0.4)] animate-pulse-slow">
+                <div class="absolute bottom-2 right-4 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-sm border border-[#d4a373]/30 bg-[#130f0e]/95 backdrop-blur-md shadow-[0_4px_10px_rgba(0,0,0,0.5)] transition-transform duration-500 group-hover:-translate-y-1">
                     <svg class="w-3 h-3 text-[#d4a373]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                     </svg>
-                    <span class="text-[8px] font-black text-[#d4a373] tracking-[0.2em] uppercase">Menú Disponible</span>
+                    <span class="text-[7.5px] font-black text-[#d4a373] tracking-[0.15em] uppercase">Menú Disponible</span>
                 </div>
             ` : '';
             
