@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú Digital | Punto 506</title>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCCTHXBBP7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SCCTHXBBP7');
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -225,6 +234,15 @@
         function enviarPedido() {
             if (!verificarHorario()) { alert("Lo sentimos, el negocio está cerrado."); return; }
             if (carrito.length === 0) return;
+
+            // REGISTRO DE EVENTO EN GOOGLE ANALYTICS
+            if (typeof gtag === 'function') {
+                gtag('event', 'enviar_pedido_whatsapp', {
+                    'negocio': CONFIG.nombreNegocio,
+                    'valor_total': carrito.reduce((sum, item) => sum + item.precio, 0),
+                    'cantidad_items': carrito.length
+                });
+            }
 
             const total = carrito.reduce((sum, item) => sum + item.precio, 0);
             const notas = document.getElementById('order-notes').value;
