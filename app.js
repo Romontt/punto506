@@ -205,13 +205,13 @@ function renderCards(listaFiltrada) {
             const esPremium = n.premium === true || n.premium === "true";
             const clasePremium = esPremium ? 'premium' : '';
             
-            // 2. Lógica del Badge "Menú Disponible" (Solo para Premium)
+            // 2. Lógica del Badge "Menú Disponible" (Posicionado sobre la imagen, abajo a la izquierda)
             const badgeMenu = esPremium ? `
-                <div class="inline-flex items-center gap-1.5 ml-2 px-2 py-0.5 rounded-full border border-[#d4a373]/40 bg-[#d4a373]/10 shadow-[0_0_8px_rgba(212,163,115,0.3)] vertical-middle">
-                    <svg class="w-2.5 h-2.5 text-[#d4a373]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="absolute bottom-4 left-4 z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-[#d4a373]/40 bg-[#130f0e]/90 backdrop-blur-md shadow-[0_0_15px_rgba(212,163,115,0.4)] animate-pulse-slow">
+                    <svg class="w-3 h-3 text-[#d4a373]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                     </svg>
-                    <span class="text-[7px] font-black text-[#d4a373] tracking-tighter uppercase">Menú Disponible</span>
+                    <span class="text-[8px] font-black text-[#d4a373] tracking-[0.2em] uppercase">Menú Disponible</span>
                 </div>
             ` : '';
             
@@ -232,6 +232,7 @@ function renderCards(listaFiltrada) {
                      style="animation-delay: ${i * 0.08}s; animation-fill-mode: forwards;">
                 <div class="relative h-48 md:h-64 overflow-hidden">
                     ${badgeEstado}
+                    ${badgeMenu}
                     <img src="${n.imagen}" 
                          class="w-full h-full object-cover sepia-[10%] group-hover:sepia-0 group-hover:scale-110 transition duration-[2s] ease-out" 
                          alt="${n.nombre}" 
@@ -240,12 +241,9 @@ function renderCards(listaFiltrada) {
                     <div class="absolute top-4 left-4 text-[#d4a373] text-[6px] font-black tracking-[0.4em] uppercase bg-[#130f0e]/80 backdrop-blur-md px-2 py-1 border border-[#d4a373]/20">${n.categoria}</div>
                 </div>
                 <div class="p-5 md:p-8 text-center flex flex-col flex-grow">
-                    <div class="flex items-center justify-center mb-2">
-                        <h3 class="business-title text-base md:text-xl text-white uppercase tracking-wider font-bold group-hover:text-[#d4a373] transition-colors duration-500">
-                            ${n.nombre}
-                        </h3>
-                        ${badgeMenu}
-                    </div>
+                    <h3 class="business-title text-base md:text-xl text-white uppercase tracking-wider font-bold mb-2 group-hover:text-[#d4a373] transition-colors duration-500">
+                        ${n.nombre}
+                    </h3>
                     <p class="elegant-italic text-stone-400 text-[11px] md:text-[14px] leading-relaxed line-clamp-2 mb-4 italic">
                         "${n.servicios_resumen}"
                     </p>
