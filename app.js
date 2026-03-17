@@ -205,10 +205,18 @@ function renderCards(listaFiltrada) {
             const esPremium = n.premium === true || n.premium === "true";
             const clasePremium = esPremium ? 'premium' : '';
             
-            // 2. Lógica del Botón Dinámico
-            const textoBoton = esPremium ? 'Detalles y Menú' : 'Detalles';
+            // 2. Lógica del Badge "Menú Disponible" (Solo para Premium)
+            const badgeMenu = esPremium ? `
+                <div class="inline-flex items-center gap-1.5 ml-2 px-2 py-0.5 rounded-full border border-[#d4a373]/40 bg-[#d4a373]/10 shadow-[0_0_8px_rgba(212,163,115,0.3)] vertical-middle">
+                    <svg class="w-2.5 h-2.5 text-[#d4a373]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    <span class="text-[7px] font-black text-[#d4a373] tracking-tighter uppercase">Menú Disponible</span>
+                </div>
+            ` : '';
             
-            // Si es premium, agregamos sombra dorada (glow), borde más opaco y un sutil pulso
+            // 3. Lógica del Botón Dinámico
+            const textoBoton = esPremium ? 'Detalles y Menú' : 'Detalles';
             const estiloBoton = esPremium 
                 ? 'border-[#d4a373] shadow-[0_0_15px_rgba(212,163,115,0.3)] bg-[#d4a373]/5' 
                 : 'border-[#d4a373]/20';
@@ -232,7 +240,12 @@ function renderCards(listaFiltrada) {
                     <div class="absolute top-4 left-4 text-[#d4a373] text-[6px] font-black tracking-[0.4em] uppercase bg-[#130f0e]/80 backdrop-blur-md px-2 py-1 border border-[#d4a373]/20">${n.categoria}</div>
                 </div>
                 <div class="p-5 md:p-8 text-center flex flex-col flex-grow">
-                    <h3 class="business-title text-base md:text-xl text-white uppercase tracking-wider font-bold mb-2 group-hover:text-[#d4a373] transition-colors duration-500">${n.nombre}</h3>
+                    <div class="flex items-center justify-center mb-2">
+                        <h3 class="business-title text-base md:text-xl text-white uppercase tracking-wider font-bold group-hover:text-[#d4a373] transition-colors duration-500">
+                            ${n.nombre}
+                        </h3>
+                        ${badgeMenu}
+                    </div>
                     <p class="elegant-italic text-stone-400 text-[11px] md:text-[14px] leading-relaxed line-clamp-2 mb-4 italic">
                         "${n.servicios_resumen}"
                     </p>
