@@ -34,6 +34,12 @@
 
         .btn-closed { background-color: #2a2423 !important; color: #555 !important; cursor: not-allowed !important; border-color: transparent !important; }
         #business-status { line-height: 1.5; }
+
+        /* Estilos para el Acordeón */
+        .category-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, opacity 0.3s ease; opacity: 0; }
+        .category-content.open { max-height: 2000px; opacity: 1; margin-top: 1.5rem; }
+        .chevron-icon { transition: transform 0.3s ease; }
+        .chevron-icon.rotate { transform: rotate(180deg); }
     </style>
 </head>
 <body class="pb-32">
@@ -57,7 +63,7 @@
         <p id="business-status" class="text-[11px] tracking-[0.4em] mt-2 uppercase font-bold">Verificando disponibilidad...</p>
     </header>
 
-    <main id="menu-container" class="max-w-md md:max-w-6xl mx-auto px-6 mt-12 space-y-16"></main>
+    <main id="menu-container" class="max-w-md md:max-w-6xl mx-auto px-6 mt-12 space-y-4"></main>
 
     <div id="cart-bar" class="fixed bottom-0 left-0 right-0 bg-[#1c1614] border-t border-[#d4a373]/30 p-4 transform translate-y-full transition-transform duration-300 shadow-[0_-10px_20px_rgba(0,0,0,0.5)] z-40">
         <div class="max-w-md mx-auto">
@@ -103,8 +109,7 @@
             ]
         };
 
-        // Al ser un negocio de estética, el horario es por cita
-        const HORARIO = { diasPermitidos: [1, 2, 3, 4, 5, 6] }; // Lunes a Sábado
+        const HORARIO = { diasPermitidos: [1, 2, 3, 4, 5, 6] };
         let currentSlide = 0;
         let carrito = [];
 
@@ -120,25 +125,18 @@
             const ahora = new Date();
             const diaActual = ahora.getDay(); 
             const esDiaPermitido = HORARIO.diasPermitidos.includes(diaActual);
-            
             const statusLabel = document.getElementById('business-status');
             const btns = [document.getElementById('btn-enviar-main'), document.getElementById('btn-enviar-modal')];
 
             if (esDiaPermitido) {
                 statusLabel.innerText = "Lunes a Sábado | Previa Cita";
                 statusLabel.style.color = "#d4a373";
-                btns.forEach(b => { 
-                    b.classList.remove('btn-closed'); 
-                    b.innerText = "Solicitar Cita"; 
-                });
+                btns.forEach(b => { b.classList.remove('btn-closed'); b.innerText = "Solicitar Cita"; });
                 return true;
             } else {
                 statusLabel.innerHTML = "Cerrado hoy Domingo";
                 statusLabel.style.color = "#a8a29e";
-                btns.forEach(b => { 
-                    b.classList.add('btn-closed'); 
-                    b.innerText = "Local Cerrado"; 
-                });
+                btns.forEach(b => { b.classList.add('btn-closed'); b.innerText = "Local Cerrado"; });
                 return false;
             }
         }
@@ -164,29 +162,44 @@
 
         setInterval(() => moveSlider(1), 6000);
 
+        function toggleCategory(catId) {
+            const content = document.getElementById(`cat-content-${catId}`);
+            const icon = document.getElementById(`icon-${catId}`);
+            content.classList.toggle('open');
+            icon.classList.toggle('rotate');
+        }
+
         function renderMenu() {
             const container = document.getElementById('menu-container');
             if (typeof MENU_DATA !== 'undefined') {
                 container.innerHTML = "";
-                MENU_DATA.forEach(cat => {
-                    let html = `<section>
-                        <h2 class="serif-title text-sm tracking-[0.4em] mb-10 border-b border-[#d4a373]/10 pb-2 uppercase text-center md:text-left">${cat.categoria}</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-12">`;
+                MENU_DATA.forEach((cat, index) => {
+                    let html = `
+                    <section class="border-b border-white/5 pb-4">
+                        <button onclick="toggleCategory(${index})" class="w-full flex justify-between items-center py-4 text-left group">
+                            <h2 class="serif-title text-sm tracking-[0.3em] uppercase group-hover:text-white transition-colors">${cat.categoria}</h2>
+                            <svg id="icon-${index}" class="chevron-icon w-5 h-5 text-[#d4a373]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        
+                        <div id="cat-content-${index}" class="category-content">
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-6">`;
                     
                     cat.items.forEach(item => {
                         html += `
-                            <div class="flex justify-between items-start bg-white/5 md:bg-transparent p-4 md:p-0 rounded-lg border border-white/5 md:border-none">
+                            <div class="flex justify-between items-start bg-white/5 p-4 rounded-lg border border-white/5">
                                 <div class="flex-1 pr-4">
-                                    <h3 class="text-white font-bold text-sm uppercase tracking-wider">${item.nombre}</h3>
-                                    <p class="text-stone-500 text-[11px] mt-1 leading-relaxed line-clamp-3">${item.desc}</p>
+                                    <h3 class="text-white font-bold text-xs uppercase tracking-wider">${item.nombre}</h3>
+                                    <p class="text-stone-500 text-[10px] mt-1 leading-relaxed line-clamp-2">${item.desc}</p>
                                     <span class="text-[#d4a373] font-bold text-sm block mt-2">₡${item.precio.toLocaleString()}</span>
                                 </div>
-                                <button onclick="agregarAlCarrito(${item.id})" class="border border-[#d4a373]/40 p-2.5 hover:bg-[#d4a373] hover:text-black transition-all active:scale-90 flex-shrink-0">
+                                <button onclick="agregarAlCarrito(${item.id})" class="border border-[#d4a373]/40 p-2 hover:bg-[#d4a373] hover:text-black transition-all active:scale-90 flex-shrink-0">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-width="2.5"/></svg>
                                 </button>
                             </div>`;
                     });
-                    html += `</div></section>`;
+                    html += `</div></div></section>`;
                     container.innerHTML += html;
                 });
             }
@@ -290,9 +303,10 @@
 
             const total = carrito.reduce((sum, item) => sum + item.precio, 0);
             const notas = document.getElementById('order-notes').value;
+            
             let texto = `📍 *NUEVA CITA DESDE PUNTO 506*\n`;
-    texto += `----------------------------------\n`;
-    texto += `¡Hola! Me gustaría solicitar una cita en *${CONFIG.nombreNegocio}* para los siguientes servicios:\n\n`;
+            texto += `----------------------------------\n`;
+            texto += `¡Hola! Me gustaría solicitar una cita en *${CONFIG.nombreNegocio}* para los siguientes servicios:\n\n`;
             
             const resumen = {};
             carrito.forEach(i => resumen[i.nombre] = (resumen[i.nombre] || 0) + 1);
