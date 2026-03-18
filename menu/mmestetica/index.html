@@ -290,7 +290,9 @@
 
             const total = carrito.reduce((sum, item) => sum + item.precio, 0);
             const notas = document.getElementById('order-notes').value;
-            let texto = `¡Hola! Me gustaría solicitar una cita en *${CONFIG.nombreNegocio}* para los siguientes servicios:\n\n`;
+            let texto = `📍 *NUEVA CITA DESDE PUNTO 506*\n`;
+    texto += `----------------------------------\n`;
+    texto += `¡Hola! Me gustaría solicitar una cita en *${CONFIG.nombreNegocio}* para los siguientes servicios:\n\n`;
             
             const resumen = {};
             carrito.forEach(i => resumen[i.nombre] = (resumen[i.nombre] || 0) + 1);
