@@ -25,7 +25,6 @@
             position: relative;
         }
 
-        /* Fondo personalizado */
         body::before {
             content: "";
             position: fixed;
@@ -33,7 +32,7 @@
             background-image: url('fondouy.webp'); 
             background-size: cover;
             background-position: center;
-            opacity: 0.12; /* Ajustado para que no distraiga del menú */
+            opacity: 0.12;
             z-index: -1;
             pointer-events: none;
         }
@@ -44,7 +43,6 @@
 
         .btn-closed { background-color: #2a2423 !important; color: #555 !important; cursor: not-allowed !important; border-color: transparent !important; }
 
-        /* Estilo de tarjetas de items */
         .item-card {
             background: rgba(28, 22, 20, 0.6);
             border: 1px solid rgba(212, 163, 115, 0.1);
@@ -110,7 +108,7 @@
                 <span id="cart-total" class="text-2xl font-black text-white tracking-tighter">₡0</span>
             </div>
             <div class="flex gap-3">
-                <button onclick="toggleCartModal(true)" class="flex-1 border border-gold/40 text-gold py-4 font-black text-[10px] uppercase tracking-[0.2em] rounded-xl">Revisar</button>
+                <button onclick="toggleCartModal(true)" class="flex-1 border border-gold/40 text-gold py-4 font-black text-[10px] uppercase tracking-[0.2em] rounded-xl hover:bg-gold/5">Revisar</button>
                 <button id="btn-enviar-main" onclick="enviarPedido()" class="flex-[2] bg-gold text-black py-4 font-black text-[10px] uppercase tracking-[0.2em] rounded-xl shadow-lg shadow-yellow-900/20 transition-all">Pedir por WhatsApp</button>
             </div>
         </div>
@@ -122,7 +120,7 @@
             <button onclick="toggleCartModal(false)" class="text-white/50 text-[10px] font-black uppercase bg-white/5 px-4 py-2 rounded-full border border-white/10">Cerrar</button>
         </div>
         <div id="cart-items-list" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
-        <div class="p-6 border-t border-white/5">
+        <div class="p-6 border-t border-white/5 bg-[#0a0a0a]">
             <label class="text-[10px] text-gold font-black uppercase tracking-widest block mb-3">Notas para el chef:</label>
             <textarea id="order-notes" placeholder="Ej. Sin cebolla, extra salsa..." class="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-sm text-white focus:border-gold transition-colors resize-none" rows="2"></textarea>
         </div>
@@ -188,7 +186,7 @@
                     
                     cat.items.forEach(item => {
                         html += `
-                            <div class="item-card flex justify-between items-center p-5 rounded-2xl group">
+                            <div class="item-card flex justify-between items-center p-5 rounded-2xl group transition-all">
                                 <div class="flex-1 pr-6">
                                     <h3 class="text-white font-black text-sm uppercase tracking-tight group-hover:text-gold transition-colors">${item.nombre}</h3>
                                     <p class="text-stone-500 text-[11px] mt-1 leading-snug italic font-medium">${item.desc}</p>
@@ -252,7 +250,7 @@
             if(carrito.length > 0) bar.classList.remove('translate-y-full');
             else bar.classList.add('translate-y-full');
 
-            document.getElementById('cart-count').innerText = `${carrito.length} ARTÍCULOS`;
+            document.getElementById('cart-count').innerText = `${carrito.length} ${carrito.length === 1 ? 'ARTÍCULO' : 'ARTÍCULOS'}`;
             document.getElementById('cart-total').innerText = `₡${total.toLocaleString()}`;
             document.getElementById('modal-total').innerText = `₡${total.toLocaleString()}`;
 
@@ -266,12 +264,12 @@
 
             const list = document.getElementById('cart-items-list');
             if (carrito.length === 0) {
-                list.innerHTML = `<p class="text-center text-stone-600 uppercase text-[10px] mt-10 tracking-[0.2em]">Carrito Vacío</p>`;
+                list.innerHTML = `<div class="flex flex-col items-center justify-center h-full opacity-20"><p class="serif-title text-sm uppercase tracking-[0.3em]">Carrito Vacío</p></div>`;
             } else {
                 list.innerHTML = Object.keys(resumen).map(nombre => `
                     <div class="flex justify-between items-center bg-white/5 p-5 rounded-2xl border border-white/10">
                         <div class="flex-1">
-                            <h4 class="text-white text-[11px] font-black uppercase">${nombre}</h4>
+                            <h4 class="text-white text-[11px] font-black uppercase tracking-tight">${nombre}</h4>
                             <p class="text-gold font-black text-xs mt-1">₡${(resumen[nombre].cantidad * resumen[nombre].precioUnitario).toLocaleString()}</p>
                         </div>
                         <div class="flex items-center gap-4">
@@ -280,6 +278,9 @@
                                 <span class="px-3 text-xs font-black text-white">${resumen[nombre].cantidad}</span>
                                 <button onclick="sumarItem('${nombre}')" class="w-8 h-8 flex items-center justify-center text-gold font-black">+</button>
                             </div>
+                            <button onclick="eliminarDelCarrito('${nombre}')" class="text-red-500/30 hover:text-red-500 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-width="2" stroke-linecap="round"/></svg>
+                            </button>
                         </div>
                     </div>
                 `).join('');
@@ -287,19 +288,19 @@
         }
 
         function enviarPedido() {
-            if (!verificarHorario()) { alert("Lo sentimos, el negocio está cerrado."); return; }
+            if (!verificarHorario()) { alert("Lo sentimos, Uy Ke Rico está cerrado en este momento."); return; }
             if (carrito.length === 0) return;
 
             const total = carrito.reduce((sum, item) => sum + item.precio, 0);
             const notas = document.getElementById('order-notes').value;
-            let texto = `*UY KE RICO* 🍖✨\n_Pedido desde Punto 506_\n\n`;
+            let texto = `*UY KE RICO* 🍖✨\n_Nuevo Pedido desde Punto 506_\n\n`;
             
             const resumen = {};
             carrito.forEach(i => resumen[i.nombre] = (resumen[i.nombre] || 0) + 1);
             for(let prod in resumen) texto += `✅ *${resumen[prod]}x* ${prod}\n`;
             
             if(notas.trim() !== "") texto += `\n*NOTAS:* _${notas}_\n`;
-            texto += `\n*TOTAL: ₡${total.toLocaleString()}*\n\n¿Me confirman el pedido?`;
+            texto += `\n*TOTAL: ₡${total.toLocaleString()}*\n\n¿Me confirman el pedido para proceder?`;
             
             window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(texto)}`, '_blank');
         }
