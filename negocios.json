@@ -888,7 +888,7 @@
     "descripcion": "En Brigadeiros by Karito son especialistas en dulces artesanales diseñados para hacer tus momentos especiales aún más dulces. Ofrecen brigadeiros gourmet, fresas del amor, mesas dulces completas y queques personalizados, ideales para celebraciones familiares, reuniones con amigos y eventos empresariales. Atienden bajo pedido para garantizar la frescura de cada detalle.",
     "horario": "Atención Bajo Pedido | Coordinar Entrega",
     "estado_horario": {
-      "tipo": "cita",
+      "tipo": "reserva",
       "config": null
     },
     "direccion": "Barrio La Urba, Guápiles",
