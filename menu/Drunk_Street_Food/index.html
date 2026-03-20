@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drunk Street Food | Punto 506 Guápiles</title>
+    <meta name="description" content="Pedí las mejores Smash Burgers y alitas de Drunk Street Food a través de Punto 506. Menú digital con envío directo a WhatsApp.">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCCTHXBBP7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SCCTHXBBP7');
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* --- FONDO CON IMAGEN TRANSPARENTE --- */
+        body { 
+            background-color: #0c0c0c; 
+            color: #e2e8f0; 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('fondomenu.webp'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- ESTILOS DE LA PÁGINA --- */
+        .serif-title { font-family: 'Cinzel', serif; color: #ff6b00; }
+        .bg-drunk { background-color: #ff6b00; }
+        .text-drunk { color: #ff6b00; }
+
+        .btn-closed { background-color: #222 !important; color: #555 !important; cursor: not-allowed !important; border-color: transparent !important; }
+        
+        /* Estilo de tarjetas de items */
+        .item-card {
+            background: rgba(15, 15, 15, 0.7);
+            border: 1px solid rgba(255, 107, 0, 0.1);
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+            border-radius: 1rem;
+        }
+        .item-card:hover {
+            border-color: rgba(255, 107, 0, 0.4);
+            background: rgba(255, 107, 0, 0.05);
+        }
+
+        #cart-modal {
+            background-color: rgba(0, 0, 0, 0.98); 
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="pb-32">
+
+  <div class="max-w-7xl mx-auto px-4 mt-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="relative h-64 md:h-[350px] overflow-hidden rounded-xl border border-white/5 group">
+                <img src="h.webp" class="w-full h-full object-cover grayscale-[10%] contrast-110 group-hover:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6">
+                    <span class="text-[8px] text-drunk font-black uppercase tracking-[0.4em] mb-1">Recomendado</span>
+                    <h3 class="serif-title text-xl md:text-2xl text-white uppercase italic">Smash Burgers</h3>
+                </div>
+            </div>
+
+            <div class="relative h-64 md:h-[350px] overflow-hidden rounded-xl border border-white/5 group">
+                <img src="p.webp" class="w-full h-full object-cover grayscale-[10%] contrast-110 group-hover:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6">
+                    <span class="text-[8px] text-drunk font-black uppercase tracking-[0.4em] mb-1">Crujientes</span>
+                    <h3 class="serif-title text-xl md:text-2xl text-white uppercase italic">Papas Especiales</h3>
+                </div>
+            </div>
+
+            <div class="relative h-64 md:h-[350px] overflow-hidden rounded-xl border border-white/5 group">
+                <img src="a.webp" class="w-full h-full object-cover grayscale-[10%] contrast-110 group-hover:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6">
+                    <span class="text-[8px] text-drunk font-black uppercase tracking-[0.4em] mb-1">Favoritas</span>
+                    <h3 class="serif-title text-xl md:text-2xl text-white uppercase italic">Alitas Lovers</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <header class="py-12 text-center border-b border-white/5 bg-[#0f0f0f] relative mt-4">
+        <button onclick="window.location.href='https://punto506.montzucr.com'" class="absolute left-6 top-6 flex items-center gap-2 text-drunk hover:text-white transition-colors group">
+            <svg class="w-4 h-4 transition-transform group-active:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M15 19l-7-7 7-7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="text-[11px] uppercase tracking-[0.2em] font-black">Directorio</span>
+        </button>
+
+        <h1 id="store-name" class="serif-title text-4xl md:text-6xl tracking-[0.1em] uppercase mt-6">DRUNK</h1>
+        <p class="text-white font-black italic tracking-[0.4em] text-[10px] -mt-1 opacity-80 uppercase">Street Food</p>
+        <p id="business-status" class="text-[10px] tracking-[0.3em] mt-6 uppercase font-bold italic">Verificando horario...</p>
+    </header>
+
+    <main id="menu-container" class="max-w-md md:max-w-6xl mx-auto px-6 mt-16 space-y-20"></main>
+
+    <div id="cart-bar" class="fixed bottom-0 left-0 right-0 bg-[#0f0f0f] border-t-2 border-drunk p-5 transform translate-y-full transition-transform duration-300 shadow-[0_-15px_30px_rgba(0,0,0,0.8)] z-40">
+        <div class="max-w-md mx-auto">
+            <div class="flex justify-between items-center mb-4 px-1">
+                <span id="cart-count" class="text-[10px] text-drunk font-black uppercase tracking-[0.2em]">0 ARTÍCULOS</span>
+                <span id="cart-total" class="text-2xl font-black text-white tracking-tighter">₡0</span>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="toggleCartModal(true)" class="flex-1 border border-drunk/40 text-drunk py-4 font-black text-[10px] uppercase tracking-[0.2em] rounded-xl hover:bg-drunk/5 transition-colors">Revisar</button>
+                <button id="btn-enviar-main" onclick="enviarPedido()" class="flex-[2] bg-drunk text-black py-4 font-black text-[10px] uppercase tracking-[0.2em] rounded-xl shadow-lg shadow-orange-600/20 active:scale-95 transition-all">Pedir por WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cart-modal" class="fixed inset-0 bg-black backdrop-blur-md z-50 transition-transform duration-500 translate-y-full flex flex-col">
+        <div class="p-6 border-b border-white/10 flex justify-between items-center bg-[#0f0f0f]">
+            <h2 class="serif-title text-xl uppercase italic tracking-widest">Tu Comanda</h2>
+            <button onclick="toggleCartModal(false)" class="text-white/50 text-[10px] font-black uppercase bg-white/5 px-4 py-2 rounded-full border border-white/10">Cerrar</button>
+        </div>
+        <div id="cart-items-list" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
+        <div class="p-6 border-t border-white/5 bg-[#0a0a0a]">
+            <label class="text-[10px] text-drunk font-black uppercase tracking-widest block mb-3">Notas para la cocina:</label>
+            <textarea id="order-notes" placeholder="Ej. Sin cebolla, alitas bien tostadas..." class="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-sm text-white focus:outline-none focus:border-drunk transition-colors resize-none" rows="2"></textarea>
+        </div>
+        <div class="p-6 bg-[#0f0f0f] border-t border-drunk">
+            <div class="flex justify-between mb-6 px-2">
+                <span class="text-stone-500 uppercase text-[10px] font-black tracking-widest">Total a pagar</span>
+                <span id="modal-total" class="text-drunk font-black text-2xl tracking-tighter">₡0</span>
+            </div>
+            <button id="btn-enviar-modal" onclick="enviarPedido()" class="w-full bg-drunk text-black py-5 font-black text-xs uppercase tracking-[0.2em] rounded-2xl shadow-xl shadow-orange-600/30">Confirmar Pedido</button>
+        </div>
+    </div>
+
+    <script src="productos.js"></script>
+    <script>
+        const CONFIG = {
+            nombreNegocio: "Drunk Street Food",
+            whatsapp: "50684966116"
+        };
+
+        const HORARIO = { apertura: 17, cierre: 23, diasPermitidos: [0, 1, 2, 3, 4, 5, 6] };
+        let carrito = [];
+
+        function inicializar() {
+            document.title = `${CONFIG.nombreNegocio} | Punto 506`;
+            renderMenu();
+            verificarHorario();
+        }
+
+        function verificarHorario() {
+            const ahora = new Date();
+            const horaActual = ahora.getHours();
+            const diaActual = ahora.getDay(); 
+            const esDiaAbierto = HORARIO.diasPermitidos.includes(diaActual);
+            const esHoraAbierta = horaActual >= HORARIO.apertura && horaActual < HORARIO.cierre;
+            const estaAbierto = esDiaAbierto && esHoraAbierta;
+            
+            const statusLabel = document.getElementById('business-status');
+            const btns = [document.getElementById('btn-enviar-main'), document.getElementById('btn-enviar-modal')];
+
+            if (estaAbierto) {
+                statusLabel.innerText = "● Abierto Ahora";
+                statusLabel.style.color = "#22c55e";
+                btns.forEach(b => { b.classList.remove('btn-closed'); b.innerText = "Enviar Pedido"; });
+            } else {
+                let mensaje = "Cerrado hoy";
+                if (horaActual < HORARIO.apertura) mensaje = "○ Cerrado <br> Abre hoy a las 5:00 PM";
+                else mensaje = "○ Cerrado por hoy <br> Abre mañana a las 5:00 PM";
+                
+                statusLabel.innerHTML = mensaje;
+                statusLabel.style.color = "#666";
+                btns.forEach(b => { b.classList.add('btn-closed'); b.innerText = "Local Cerrado"; });
+            }
+            return estaAbierto;
+        }
+
+        function renderMenu() {
+            const container = document.getElementById('menu-container');
+            if (typeof MENU_DATA !== 'undefined') {
+                container.innerHTML = "";
+                MENU_DATA.forEach(cat => {
+                    let html = `<section>
+                        <h2 class="text-drunk font-black text-[10px] tracking-[0.6em] mb-10 border-l-4 border-drunk pl-4 uppercase">${cat.categoria}</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">`;
+                    
+                    cat.items.forEach(item => {
+                        html += `
+                            <div class="item-card flex justify-between items-center p-5 rounded-2xl group transition-all">
+                                <div class="flex-1 pr-6">
+                                    <h3 class="text-white font-black text-sm uppercase tracking-tight group-hover:text-drunk transition-colors">${item.nombre}</h3>
+                                    <p class="text-stone-500 text-[11px] mt-1 leading-snug italic font-medium">${item.desc}</p>
+                                    <span class="text-drunk font-black text-base block mt-3 tracking-tighter">₡${item.precio.toLocaleString()}</span>
+                                </div>
+                                <button onclick="agregarAlCarrito(${item.id})" class="bg-white/5 border border-white/10 p-4 rounded-xl hover:bg-drunk hover:text-black transition-all active:scale-90 flex-shrink-0">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-width="3" stroke-linecap="round"/></svg>
+                                </button>
+                            </div>`;
+                    });
+                    html += `</div></section>`;
+                    container.innerHTML += html;
+                });
+            }
+        }
+
+        function agregarAlCarrito(id) {
+            let item;
+            MENU_DATA.forEach(c => {
+                let found = c.items.find(i => i.id === id);
+                if(found) item = { ...found, cartId: Date.now() };
+            });
+            if(item) { carrito.push(item); actualizarUI(); }
+        }
+
+        function sumarItem(nombre) {
+            let itemOriginal;
+            MENU_DATA.forEach(c => {
+                let found = c.items.find(i => i.nombre === nombre);
+                if(found) itemOriginal = found;
+            });
+            if(itemOriginal) {
+                carrito.push({ ...itemOriginal, cartId: Date.now() });
+                actualizarUI();
+            }
+        }
+
+        function restarItem(nombre) {
+            const index = carrito.findLastIndex(item => item.nombre === nombre);
+            if (index !== -1) {
+                carrito.splice(index, 1);
+                actualizarUI();
+            }
+            if(carrito.length === 0) toggleCartModal(false);
+        }
+
+        function eliminarDelCarrito(nombre) {
+            carrito = carrito.filter(item => item.nombre !== nombre);
+            actualizarUI();
+            if(carrito.length === 0) toggleCartModal(false);
+        }
+
+        function toggleCartModal(show) {
+            document.getElementById('cart-modal').style.transform = show ? 'translateY(0%)' : 'translateY(100%)';
+        }
+
+        function actualizarUI() {
+            const bar = document.getElementById('cart-bar');
+            const total = carrito.reduce((sum, item) => sum + item.precio, 0);
+            
+            if(carrito.length > 0) bar.classList.remove('translate-y-full');
+            else bar.classList.add('translate-y-full');
+
+            document.getElementById('cart-count').innerText = `${carrito.length} ARTÍCULOS`;
+            document.getElementById('cart-total').innerText = `₡${total.toLocaleString()}`;
+            document.getElementById('modal-total').innerText = `₡${total.toLocaleString()}`;
+
+            const resumen = {};
+            carrito.forEach(item => {
+                if (!resumen[item.nombre]) {
+                    resumen[item.nombre] = { cantidad: 0, precioUnitario: item.precio };
+                }
+                resumen[item.nombre].cantidad++;
+            });
+
+            const list = document.getElementById('cart-items-list');
+            if (carrito.length === 0) {
+                list.innerHTML = `<div class="flex flex-col items-center justify-center h-full opacity-20"><p class="serif-title text-sm uppercase tracking-[0.3em]">Carrito Vacío</p></div>`;
+            } else {
+                list.innerHTML = Object.keys(resumen).map(nombre => `
+                    <div class="flex justify-between items-center bg-white/5 p-5 rounded-2xl border border-white/10">
+                        <div class="flex-1">
+                            <h4 class="text-white text-[11px] font-black uppercase tracking-tight">${nombre}</h4>
+                            <p class="text-drunk font-black text-xs mt-1">₡${(resumen[nombre].cantidad * resumen[nombre].precioUnitario).toLocaleString()}</p>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center bg-black/40 rounded-lg p-1 border border-white/10">
+                                <button onclick="restarItem('${nombre}')" class="w-8 h-8 flex items-center justify-center text-drunk font-black">-</button>
+                                <span class="px-3 text-xs font-black text-white">${resumen[nombre].cantidad}</span>
+                                <button onclick="sumarItem('${nombre}')" class="w-8 h-8 flex items-center justify-center text-drunk font-black">+</button>
+                            </div>
+                            <button onclick="eliminarDelCarrito('${nombre}')" class="text-red-500/40 hover:text-red-500 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-width="2" stroke-linecap="round"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function enviarPedido() {
+            if (!verificarHorario()) { alert("Lo sentimos, Drunk Street Food está cerrado en este momento."); return; }
+            if (carrito.length === 0) return;
+
+            const total = carrito.reduce((sum, item) => sum + item.precio, 0);
+            const notas = document.getElementById('order-notes').value;
+            let texto = `*DRUNK STREET FOOD* 🍔🔥\n_Nuevo Pedido desde Punto 506_\n\n`;
+            
+            const resumen = {};
+            carrito.forEach(i => resumen[i.nombre] = (resumen[i.nombre] || 0) + 1);
+            for(let prod in resumen) texto += `✅ *${resumen[prod]}x* ${prod}\n`;
+            
+            if(notas.trim() !== "") texto += `\n*NOTAS:* _${notas}_\n`;
+            texto += `\n*TOTAL: ₡${total.toLocaleString()}*\n\n¿Me confirman el pedido para proceder con el pago?`;
+            
+            window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(texto)}`, '_blank');
+        }
+
+        window.onload = inicializar;
+        setInterval(verificarHorario, 60000);
+    </script>
+</body>
+</html>
