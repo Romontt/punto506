@@ -17,7 +17,35 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #0a0a0a; color: #e2e8f0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        /* --- FONDO CON IMAGEN TRANSPARENTE --- */
+        body { 
+            background-color: #0c0c0c; /* Color base oscuro */
+            color: #e2e8f0; 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden;
+            position: relative; /* Necesario para el pseudoelemento */
+        }
+
+        /* Pseudoelemento para la imagen de fondo */
+        body::before {
+            content: "";
+            position: fixed; /* Fijo para que cubra toda la pantalla al hacer scroll */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* RUTA DE TU IMAGEN */
+            background-image: url('fondomenu.webp'); 
+            background-size: cover; /* Cubre todo el espacio */
+            background-position: center; /* Centrada */
+            background-repeat: no-repeat;
+            /* --- AJUSTA LA TRANSPARENCIA AQUÍ --- */
+            opacity: 0.15; /* 0.0 (invisible) a 1.0 (opaca). 0.15 es muy sutil */
+            z-index: -1; /* Lo pone detrás de todo el contenido */
+            pointer-events: none; /* Evita que interfiera con los clics */
+        }
+
+        /* --- ESTILOS DE LA PÁGINA --- */
         .serif-title { font-family: 'Cinzel', serif; color: #ff6b00; } /* Naranja Drunk */
         .bg-drunk { background-color: #ff6b00; }
         .border-drunk { border-color: #ff6b00; }
@@ -30,22 +58,33 @@
             .slide { height: 55vh; }
         }
         
+        /* Capa oscura sobre las fotos del slider para legibilidad del texto */
         .slide-caption-bg {
-            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 70%, transparent 100%);
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 70%, transparent 100%);
         }
 
-        .btn-closed { background-color: #1a1a1a !important; color: #444 !important; cursor: not-allowed !important; border-color: transparent !important; }
+        /* Botones de local cerrado */
+        .btn-closed { background-color: #222 !important; color: #555 !important; cursor: not-allowed !important; border-color: transparent !important; }
         #business-status { line-height: 1.5; }
 
-        /* Estilo de tarjetas de items */
+        /* Estilo de tarjetas de items del menú */
         .item-card {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,107,0,0.05);
+            background: rgba(15, 15, 15, 0.7); /* Fondo oscuro con leve transparencia */
+            border: 1px solid rgba(255, 107, 0, 0.1);
+            backdrop-blur: sm; /* Leve desenfoque detrás de la tarjeta */
             transition: all 0.3s ease;
+            border-radius: 1rem; /* rounded-2xl */
         }
         .item-card:hover {
-            border-color: rgba(255,107,0,0.3);
-            background: rgba(255,107,0,0.03);
+            border-color: rgba(255, 107, 0, 0.4);
+            background: rgba(255, 107, 0, 0.05);
+        }
+
+        /* --- MODAL DEL CARRITO OSCURO Y DESENFOCADO --- */
+        #cart-modal {
+            /* bg-black con backdrop-blur para que no se enrede lo de atrás */
+            background-color: rgba(0, 0, 0, 0.98); 
+            backdrop-filter: blur(8px); /* Efecto Pro de desenfoque */
         }
     </style>
 </head>
