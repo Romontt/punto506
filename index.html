@@ -28,6 +28,7 @@
     <meta property="og:image" content="https://punto506.montzucr.com/img/og-preview.webp"> <meta property="og:url" content="https://punto506.montzucr.com/">
     <meta property="og:type" content="website">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Montserrat:wght@700&family=Baskervville:italic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos.css">
     <style>
@@ -240,27 +241,39 @@
     <script src="horarios.js"></script>
 <script src="app.js"></script>
     <script>
-      // --- FUNCIÓN DE ANALYTICS MEJORADA ---
-function registrarClickNegocio(nombreNegocio, plataforma) {
-    // 1. Esto imprimirá en la consola de tu navegador (F12) para que confirmes que el clic funciona
-    console.log("Intentando enviar evento:", nombreNegocio, plataforma);
-    // 2. Intentar enviar vía gtag (forma directa)
+// 1. Configuración de Conexión
+// Sustituye con tus credenciales reales de Supabase
+const _supabase = supabase.createClient('https://yfqxnjohojtbjevrmbmq.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcXhuam9ob2p0YmpldnJtYm1xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MjI4ODgsImV4cCI6MjA4ODM5ODg4OH0.ze32GU0sW7EZ5oicnLFlHpthtLcSTUxZ9rlHSyQLFso');
+// 2. Función Maestra de Rastreo
+async function registrarActividad(tipo, valor) {
+    // Validamos que existan datos antes de procesar
+    if (!tipo || !valor) return;
+    console.log(`[LOG] Evento: ${tipo} | Detalle: ${valor}`);
+    // A. Google Analytics (GA4)
     if (typeof gtag === 'function') {
-        gtag('event', 'click_negocio', {
-            'business_name': nombreNegocio,
-            'platform': plataforma,
-            'transport_type': 'beacon',
-            'send_to': 'G-SCCTHXBBP7' // Forzamos el envío a tu ID específico
-        });
-    } 
-    // 3. También lo enviamos al dataLayer por si usas GTM
-    if (typeof dataLayer !== 'undefined') {
-        dataLayer.push({
-            'event': 'click_negocio',
-            'business_name': nombreNegocio,
-            'platform': plataforma
+        gtag('event', tipo, {
+            'item_id': valor.toLowerCase().replace(/\s+/g, '_'), // ID normalizado
+            'item_name': valor,
+            'proyecto': 'Punto 506'
         });
     }
+    // B. Supabase (Inserción Silenciosa)
+    // Usamos .then() para que la UI no se bloquee esperando la respuesta de la DB
+    _supabase
+        .from('registros_actividad')
+        .insert([{ 
+            tipo_evento: tipo, 
+            nombre_negocio: valor, 
+            fecha: new Date().toISOString() 
+        }])
+        .then(({ error }) => {
+            if (error) console.warn("Supabase Sync Error:", error.message);
+        });
+}
+// 3. Función específica para clics
+function registrarClickNegocio(nombreNegocio, plataforma) {
+    const detalle = `${nombreNegocio} (${plataforma})`;
+    registrarActividad('click_red_social', detalle);
 }
         const legalTexts = {
             terminos: `
