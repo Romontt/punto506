@@ -874,18 +874,18 @@
     "lng": -83.785632,
     "maps_link": "https://wa.me/50688744168"
   },
-  {
+ {
     "id": 36,
     "nombre": "Brigadeiros by Karito",
     "categoria": "Gastronomía",
-    "etiquetas": ["Repostería", "Postres", "Artesanal", "Bajo Pedido", "Dulces", "Eventos"],
-    "keywords_busqueda": "dulces repostería artesanal postres brigadeiros fresas con chocolate queques personalizados mesas dulces eventos especiales cumpleaños guápiles la urba karito detalles comestibles celebraciones",
-    "servicios_resumen": "Tienda especializada en dulces artesanales, brigadeiros, fresas gourmet y mesas dulces para eventos especiales.",
+    "etiquetas": ["Dulces Brasileños", "Repostería", "Artesanal", "Bajo Pedido", "Postres", "Eventos"],
+    "keywords_busqueda": "dulces brasileños repostería artesanal postres tradicionales brasil brigadeiros gourmet fresas con chocolate queques personalizados mesas dulces eventos especiales cumpleaños guápiles la urba karito detalles comestibles celebraciones",
+    "servicios_resumen": "Tienda especializada en dulces brasileños artesanales, brigadeiros gourmet, fresas y mesas dulces exclusivas.",
     "instagram": "https://www.instagram.com/brigadeirosbykarito/",
     "facebook": "null",
     "imagen": "img/logos/brigadeiros-by-karito.webp",
     "whatsapp": "+50671433709",
-    "descripcion": "En Brigadeiros by Karito son especialistas en dulces artesanales diseñados para hacer tus momentos especiales aún más dulces. Ofrecen brigadeiros gourmet, fresas del amor, mesas dulces completas y queques personalizados, ideales para celebraciones familiares, reuniones con amigos y eventos empresariales. Atienden bajo pedido para garantizar la frescura de cada detalle.",
+    "descripcion": "Brigadeiros by Karito es una tienda de dulces especializada en la elaboración de dulces brasileños artesanales. Su especialidad son los brigadeiros gourmet, ofreciendo una experiencia auténtica y llena de sabor para momentos especiales. Además, cuentan con fresas del amor, mesas dulces completas y queques personalizados, ideales para celebraciones familiares o eventos empresariales. Atienden bajo pedido para garantizar la frescura y calidad de cada detalle brasileño.",
     "horario": "Atención Bajo Pedido | Coordinar Entrega",
     "estado_horario": {
       "tipo": "reserva",
@@ -894,6 +894,6 @@
     "direccion": "Barrio La Urba, Guápiles",
     "lat": 10.210120962816182,
     "lng": -83.79245053440758,
-    "maps_link": "https://maps.app.goo.gl/DnCKohjQXu2u1uTX6"
+    "maps_link": "https://wa.me/50671433709"
   }
 ]
