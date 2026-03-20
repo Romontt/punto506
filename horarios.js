@@ -2,6 +2,7 @@ function obtenerBadgeEstado(n) {
     if (!n.estado_horario) return '';
 
     const ahora = new Date();
+    // Ajuste opcional: Si el servidor no está en CR, podrías necesitar forzar la hora local aquí
     const diaActual = ahora.getDay(); 
     const horaActual = ahora.getHours() + (ahora.getMinutes() / 60);
 
@@ -25,26 +26,34 @@ function obtenerBadgeEstado(n) {
             const inicio = hInicio + (mInicio / 60);
             const fin = hFin + (mFin / 60);
 
+            // 1. ESTÁ ABIERTO AHORA
             if (horaActual >= inicio && horaActual < fin) {
                 const minRestantes = (fin - horaActual) * 60;
-
-                // CIERRA PRONTO (Menos de 30 min)
                 if (minRestantes <= 30) {
                     return `<div class="absolute top-4 right-4 z-20 flex items-center gap-1.5 bg-black/70 backdrop-blur-xl border border-orange-500/50 px-3 py-1.5 shadow-lg">
                                 <span class="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></span>
                                 <span class="text-orange-400 text-[9px] font-black uppercase tracking-[0.2em]">Cierra Pronto</span>
                             </div>`;
                 }
-
-                // ABIERTO NORMAL
                 return `<div class="absolute top-4 right-4 z-20 flex items-center gap-1.5 bg-black/70 backdrop-blur-xl border border-emerald-500/50 px-3 py-1.5 shadow-lg">
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                             <span class="text-emerald-400 text-[9px] font-black uppercase tracking-[0.2em]">Abierto Ahora</span>
                         </div>`;
             }
+
+            // 2. NUEVA LÓGICA: ABRE HOY MÁS TARDE
+            if (horaActual < inicio) {
+                return `<div class="absolute top-4 right-4 z-20 flex flex-col items-end gap-1 bg-black/80 backdrop-blur-xl border border-white/10 px-3 py-1.5 shadow-xl">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-zinc-600"></span>
+                                <span class="text-zinc-400 text-[9px] font-black uppercase tracking-[0.2em]">Cerrado</span>
+                            </div>
+                            <span class="text-[#d4a373] text-[9px] font-bold uppercase tracking-tight">Abre hoy a las ${rangoHoy[0]}</span>
+                        </div>`;
+            }
         }
 
-        // CERRADO: Buscar cuándo abre
+        // 3. CERRADO: BUSCAR PRÓXIMOS DÍAS (Igual que antes)
         const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
         let proximoDia = null;
         let diaEncontrado = "";
