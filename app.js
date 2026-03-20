@@ -106,6 +106,7 @@ function renderLanding() {
     `).join('');
 }
 function seleccionarCategoria(id) {
+    registrarActividad('seleccion_categoria', id);
     ejecutarTransicion(() => {
         categoriaActual = id;
         etiquetaActual = null;
@@ -278,17 +279,24 @@ function renderSubCategorias() {
     hint.className = "absolute right-0 top-0 bottom-0 flex items-center pr-2 pointer-events-none transition-opacity duration-300 md:hidden";
     hint.innerHTML = `<svg class="w-4 h-4 text-[#d4a373] animate-bounce-x" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
     etiquetas.forEach(tag => {
-        const btn = document.createElement('button');
-        btn.innerText = tag.toUpperCase();
-        const activo = etiquetaActual === tag;
-        btn.className = `whitespace-nowrap text-[8px] tracking-[0.4em] px-5 py-2.5 border transition-all duration-700 ${activo ? 'border-[#d4a373] text-[#d4a373] font-bold bg-[#d4a373]/5' : 'border-transparent text-stone-500 hover:text-stone-200'}`;
-        btn.onclick = () => {
-            etiquetaActual = (etiquetaActual === tag) ? null : tag;
-            renderSubCategorias();
-            aplicarFiltrosCombinados();
-        };
-        scrollContainer.appendChild(btn);
-    });
+    const btn = document.createElement('button'); // Primero creamos el botón
+    btn.innerText = tag.toUpperCase();
+    const activo = etiquetaActual === tag;
+    
+    btn.className = `whitespace-nowrap text-[8px] tracking-[0.4em] px-5 py-2.5 border transition-all duration-700 ${activo ? 'border-[#d4a373] text-[#d4a373] font-bold bg-[#d4a373]/5' : 'border-transparent text-stone-500 hover:text-stone-200'}`;
+    btn.onclick = () => {
+        const nuevoEstado = (etiquetaActual === tag) ? null : tag;
+    
+        // Registro en Supabase solo cuando activan el filtro
+        if (nuevoEstado !== null) {
+            registrarActividad('filtro_etiqueta', tag);
+        }
+        etiquetaActual = nuevoEstado;
+        renderSubCategorias();
+        aplicarFiltrosCombinados();
+    };
+    scrollContainer.appendChild(btn);
+});
     contenedorBase.appendChild(scrollContainer);
     contenedorBase.appendChild(hint);
     scrollContainer.addEventListener('scroll', () => {
@@ -331,18 +339,39 @@ function aplicarFiltrosCombinados() {
         renderLanding();
     }
 }
+let timeoutBusqueda = null; // Variable para controlar el tiempo de espera al escribir
+
 function initFilters() {
     const input = document.getElementById('busqueda');
-    if(input) input.addEventListener('input', () => aplicarFiltrosCombinados());
+    
+    if (input) {
+        input.addEventListener('input', () => {
+            // 1. Ejecutamos el filtro visual como siempre
+            aplicarFiltrosCombinados();
+
+            // 2. Lógica para registrar la búsqueda en Supabase (Debounce)
+            // Esperamos 1.5 segundos después de que el usuario deja de escribir
+            clearTimeout(timeoutBusqueda);
+            timeoutBusqueda = setTimeout(() => {
+                const valor = input.value.trim();
+                // Solo registramos si la búsqueda tiene al menos 3 caracteres
+                if (valor.length >= 3) {
+                    registrarActividad('busqueda_usuario', valor);
+                }
+            }, 1500); 
+        });
+    }
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
-            // Evitamos que el navegador haga cosas raras con el scroll por defecto
             const catValue = btn.getAttribute('data-cat');
-            if(catValue === 'todos') {
+            
+            if (catValue === 'todos') {
+                // Si vuelve al inicio, podemos registrar que limpió filtros
+                registrarActividad('filtro_limpiado', 'todos');
                 volverInicio();
             } else {
-                // IMPORTANTE: Llamamos a seleccionarCategoria directamente
-                // Esto saltará la lógica de la landing.
+                // IMPORTANTE: Al seleccionar categoría desde el menú superior
+                // ya se llamará a registrarActividad dentro de seleccionarCategoria(id)
                 seleccionarCategoria(catValue);
             }
         });
@@ -383,7 +412,6 @@ function verDetalle(id) {
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>`;
     }
-
     // --- LÓGICA BOTÓN MENÚ PREMIUM ---
     let botonMenuPremium = '';
     if (n.premium === true && n.url_menu && n.url_menu !== "null") {
@@ -398,7 +426,6 @@ function verDetalle(id) {
             </div>
         `;
     }
-
     const modalContenido = document.getElementById('modal-content');
     modalContenido.innerHTML = `
         <div class="relative h-48 md:h-64 overflow-hidden">
