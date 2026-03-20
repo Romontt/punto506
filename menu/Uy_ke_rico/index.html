@@ -1,238 +1,534 @@
 <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Uy Ke Rico | Punto 506 Guápiles</title>
-    
+
+    <title>Menú Digital Uy Ke Rico | Punto 506 Guápiles</title>
+
+<meta name="description" content="Hacé tu pedido en línea en Uy Ke Rico a través de Punto 506. Menú actualizado de hamburguesas, papas y más con envío directo a WhatsApp.">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCCTHXBBP7"></script>
+
+    <script>
+
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag(){dataLayer.push(arguments);}
+
+      gtag('js', new Date());
+
+      gtag('config', 'G-SCCTHXBBP7');
+
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
-    
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
-        /* Identidad Visual Uy Ke Rico: Negro, Naranja Fuego y Rojo */
-        body { background-color: #0c0a09; color: #fafaf9; font-family: 'Oswald', sans-serif; }
-        .logo-font { font-family: 'Bangers', cursive; color: #f57c00; letter-spacing: 2px; }
-        .bg-fire { background: linear-gradient(135deg, #f57c00 0%, #b71c1c 100%); }
-        .border-fire { border-color: #f57c00; }
-        .text-fire { color: #f57c00; }
 
-        /* Estilos de la Interfaz */
-        #slider-container { display: flex; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .slide { min-width: 100%; height: 300px; position: relative; }
-        .slide-overlay { background: linear-gradient(transparent, rgba(12,10,9,0.9)); }
-        
-        .btn-closed { filter: grayscale(1); opacity: 0.6; cursor: not-allowed; }
-        .status-badge { padding: 4px 12px; border-radius: 99px; font-size: 10px; font-weight: bold; text-transform: uppercase; }
+        body { background-color: #130f0e; color: #e2e8f0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        .serif-title { font-family: 'Cinzel', serif; color: #d4a373; }
+
+        .bg-gold { background-color: #d4a373; }
+
+        #slider-container { display: flex; transition: transform 0.7s ease-in-out; }
+
+        .slide { min-width: 100%; position: relative; height: 350px; }
+
+        @media (min-width: 768px) {
+
+            .slide { height: 55vh; }
+
+        }
+
+        .slide-caption-bg {
+
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 70%, transparent 100%);
+
+        }
+
+        .btn-closed { background-color: #2a2423 !important; color: #555 !important; cursor: not-allowed !important; border-color: transparent !important; }
+
+        #business-status { line-height: 1.5; }
+
     </style>
-</head>
-<body class="pb-24">
 
-    <div class="relative overflow-hidden border-b-4 border-fire">
-        <div id="slider-container">
-            </div>
-        <div class="absolute inset-0 slide-overlay pointer-events-none"></div>
-        
-        <div class="absolute top-4 left-1/2 -translate-x-1/2 z-20">
-            <div class="bg-black p-2 rounded-full border-2 border-fire shadow-xl">
-                <img src="logo.png" alt="Uy Ke Rico Logo" class="w-16 h-16 object-contain">
-            </div>
-        </div>
+</head>
+
+<body class="pb-32">
+
+    <div class="relative w-full overflow-hidden bg-black border-b border-[#d4a373]/30">
+
+        <div id="slider-container"></div>
+
+        <button onclick="moveSlider(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 backdrop-blur-sm border border-white/5 hover:bg-[#d4a373] hover:text-black text-white/50 w-10 h-10 flex items-center justify-center rounded-full transition-all z-20">❮</button>
+
+        <button onclick="moveSlider(1)" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 backdrop-blur-sm border border-white/5 hover:bg-[#d4a373] hover:text-black text-white/50 w-10 h-10 flex items-center justify-center rounded-full transition-all z-20">❯</button>
+
     </div>
 
-    <header class="py-8 px-6 text-center">
-        <h1 class="logo-font text-5xl uppercase italic drop-shadow-md">Uy Ke Rico!</h1>
-        <p class="text-[10px] tracking-[0.3em] uppercase text-stone-400 mt-1">Fast Food & Grill • Guápiles</p>
-        
-        <div class="mt-4 flex justify-center">
-            <span id="business-status" class="status-badge bg-stone-800 text-stone-400">Verificando...</span>
-        </div>
+    <header class="py-12 text-center border-b border-[#d4a373]/20 bg-[#1c1614] relative">
+
+      <button onclick="window.location.href='https://punto506.montzucr.com'" class="absolute left-6 top-6 flex items-center gap-2 text-[#d4a373] hover:text-white transition-colors group">
+
+    <svg class="w-4 h-4 transition-transform group-active:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+        <path d="M15 19l-7-7 7-7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+    </svg>
+
+    <span class="text-[13px] uppercase tracking-[0.2em] font-black">Volver al Directorio</span>
+
+</button>
+
+        <h1 id="store-name" class="serif-title text-3xl md:text-5xl tracking-[0.2em] uppercase mt-6">Cargando...</h1>
+
+        <p id="business-status" class="text-[11px] tracking-[0.4em] mt-2 uppercase font-bold">Verificando horario...</p>
+
     </header>
 
-    <main id="menu-container" class="max-w-2xl mx-auto px-4 space-y-12"></main>
+    <main id="menu-container" class="max-w-md md:max-w-6xl mx-auto px-6 mt-12 space-y-16"></main>
 
-    <div id="cart-bar" class="fixed bottom-0 left-0 right-0 bg-[#1c1917] border-t-2 border-fire p-4 translate-y-full transition-transform z-40 shadow-2xl">
-        <div class="max-w-md mx-auto flex items-center justify-between">
-            <div>
-                <p id="cart-count" class="text-[10px] font-bold text-fire uppercase">0 Productos</p>
-                <p id="cart-total" class="text-2xl font-bold">₡0</p>
+    <div id="cart-bar" class="fixed bottom-0 left-0 right-0 bg-[#1c1614] border-t border-[#d4a373]/30 p-4 transform translate-y-full transition-transform duration-300 shadow-[0_-10px_20px_rgba(0,0,0,0.5)] z-40">
+
+        <div class="max-w-md mx-auto">
+
+            <div class="flex justify-between items-center mb-3 px-1">
+
+                <span id="cart-count" class="text-[10px] text-[#d4a373] font-bold uppercase tracking-wider">0 ARTÍCULOS</span>
+
+                <span id="cart-total" class="text-xl font-bold text-white tracking-tight">₡0</span>
+
             </div>
-            <button onclick="toggleCartModal(true)" class="bg-fire text-white px-8 py-3 rounded-lg font-bold uppercase text-sm transform active:scale-95 transition-all">
-                Ver Mi Pedido
-            </button>
+
+            <div class="flex gap-2">
+
+                <button onclick="toggleCartModal(true)" class="flex-1 border border-[#d4a373]/50 text-[#d4a373] py-3 font-black text-[10px] uppercase tracking-[0.2em] rounded-sm">Ver Carrito</button>
+
+                <button id="btn-enviar-main" onclick="enviarPedido()" class="flex-[1.5] bg-gold text-[#130f0e] py-3 font-black text-[10px] uppercase tracking-[0.2em] rounded-sm">Enviar Pedido</button>
+
+            </div>
+
         </div>
+
     </div>
 
-    <div id="cart-modal" class="fixed inset-0 bg-black/98 z-50 translate-y-full transition-transform duration-500 flex flex-col">
-        <div class="p-6 border-b border-fire/20 flex justify-between items-center">
-            <h2 class="logo-font text-2xl">Tu Pedido</h2>
-            <button onclick="toggleCartModal(false)" class="text-fire font-bold">VOLVER</button>
-        </div>
-        
-        <div id="cart-items-list" class="flex-1 overflow-y-auto p-6 space-y-4 font-sans"></div>
+    <div id="cart-modal" class="fixed inset-0 bg-black/95 z-50 transition-transform duration-500 translate-y-full flex flex-col">
 
-        <div class="p-6 bg-stone-900">
-            <textarea id="order-notes" placeholder="¿Alguna instrucción especial? (ej. Sin cebolla)" class="w-full bg-black border border-stone-700 rounded-lg p-3 text-sm focus:border-fire outline-none mb-4 h-20 font-sans"></textarea>
-            <div class="flex justify-between items-center mb-6 px-2">
-                <span class="uppercase text-xs font-bold text-stone-400">Total a pagar:</span>
-                <span id="modal-total" class="text-3xl font-bold text-fire">₡0</span>
-            </div>
-            <button id="btn-enviar-final" onclick="enviarPedido()" class="w-full bg-fire py-5 rounded-xl font-bold text-lg shadow-lg active:scale-95 transition-all">
-                CONFIRMAR POR WHATSAPP
-            </button>
+        <div class="p-6 border-b border-[#d4a373]/20 flex justify-between items-center bg-[#1c1614]">
+
+            <h2 class="serif-title text-lg uppercase tracking-widest">Tu Pedido</h2>
+
+            <button onclick="toggleCartModal(false)" class="text-[#d4a373] text-sm font-bold uppercase">Cerrar</button>
+
         </div>
+
+        <div id="cart-items-list" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
+
+        <div class="p-6 border-t border-white/5">
+
+            <label class="text-[10px] text-[#d4a373] font-bold uppercase tracking-widest block mb-2">Notas del Pedido:</label>
+
+            <textarea id="order-notes" placeholder="Ej. Sin cebolla, extra salsa..." class="w-full bg-white/5 border border-[#d4a373]/20 rounded p-3 text-sm text-white focus:outline-none resize-none" rows="2"></textarea>
+
+        </div>
+
+        <div class="p-6 bg-[#1c1614] border-t border-[#d4a373]/20">
+
+            <div class="flex justify-between mb-4">
+
+                <span class="text-stone-500 uppercase text-xs tracking-widest">Total Estimado</span>
+
+                <span id="modal-total" class="text-[#d4a373] font-bold">₡0</span>
+
+            </div>
+
+            <button id="btn-enviar-modal" onclick="enviarPedido()" class="w-full bg-gold text-[#130f0e] py-4 font-black text-xs uppercase tracking-widest">Confirmar y Enviar</button>
+
+        </div>
+
     </div>
 
     <script src="productos.js"></script>
+
     <script>
+
         const CONFIG = {
-            nombre: "Uy Ke Rico",
+
+            nombreNegocio: "Uy Ke Rico",
+
             whatsapp: "50689537426",
-            fotos: [
-                { url: 'papas.webp', t: 'Las Mejores Papas' },
-                { url: 'costilla.webp', t: 'Costillas BBQ' },
-                { url: 'hamburguesa.webp', t: 'Smash Burgers' }
+
+            fotosSlider: [
+
+                { url: 'papas.webp', nombre: 'Papas Especiales' },
+
+                { url: 'costilla.webp', nombre: 'Costilla BBQ' },
+
+                { url: 'combo1.webp', nombre: 'Combo 1' }
+
             ]
+
         };
 
-        // Horario basado en tus imágenes: Jue-Sáb, 6PM-10PM
-        const HORARIO = { apertura: 18, cierre: 22, dias: [4, 5, 6] };
+        const HORARIO = { apertura: 18, cierre: 22, diasPermitidos: [4, 5, 6] };
+
+        let currentSlide = 0;
+
         let carrito = [];
 
         function inicializar() {
+
+            document.title = `${CONFIG.nombreNegocio} | Punto 506`;
+
+            document.getElementById('store-name').innerText = CONFIG.nombreNegocio;
+
             renderSlider();
+
             renderMenu();
-            setInterval(checkStatus, 10000);
-            checkStatus();
+
+            verificarHorario();
+
         }
 
-        function checkStatus() {
-            const now = new Date();
-            const isOpen = HORARIO.dias.includes(now.getDay()) && 
-                           now.getHours() >= HORARIO.apertura && 
-                           now.getHours() < HORARIO.cierre;
-            
-            const badge = document.getElementById('business-status');
-            const btn = document.getElementById('btn-enviar-final');
+        function verificarHorario() {
 
-            if(isOpen) {
-                badge.innerText = "Abierto ahora";
-                badge.className = "status-badge bg-green-900 text-green-400";
-                btn.classList.remove('btn-closed');
+            const ahora = new Date();
+
+            const horaActual = ahora.getHours();
+
+            const diaActual = ahora.getDay(); 
+
+            const esDiaAbierto = HORARIO.diasPermitidos.includes(diaActual);
+
+            const esHoraAbierta = horaActual >= HORARIO.apertura && horaActual < HORARIO.cierre;
+
+            const estaAbierto = esDiaAbierto && esHoraAbierta;
+
+            const statusLabel = document.getElementById('business-status');
+
+            const btns = [document.getElementById('btn-enviar-main'), document.getElementById('btn-enviar-modal')];
+
+            if (estaAbierto) {
+
+                statusLabel.innerText = "Abierto ahora";
+
+                statusLabel.style.color = "#22c55e";
+
+                btns.forEach(b => { b.classList.remove('btn-closed'); b.innerText = "Enviar Pedido"; });
+
             } else {
-                badge.innerHTML = "Cerrado • Abre Jue, Vie y Sáb a las 6:00 PM";
-                badge.className = "status-badge bg-red-900/30 text-red-500";
-                btn.classList.add('btn-closed');
+
+                let mensaje = "Cerrado hoy";
+
+                if (!esDiaAbierto) mensaje = "Abrimos Jueves, Viernes y Sábados <br> De 06:00 PM a 10:00 PM";
+
+                else if (horaActual < HORARIO.apertura) mensaje = "Cerrado <br> Abre hoy a las 6:00 PM";
+
+                
+
+                statusLabel.innerHTML = mensaje;
+
+                statusLabel.style.color = "#a8a29e";
+
+                btns.forEach(b => { b.classList.add('btn-closed'); b.innerText = "Local Cerrado"; });
+
             }
-            return isOpen;
+
+            return estaAbierto;
+
         }
 
         function renderSlider() {
-            document.getElementById('slider-container').innerHTML = CONFIG.fotos.map(f => `
+
+            const slider = document.getElementById('slider-container');
+
+            slider.innerHTML = CONFIG.fotosSlider.map(foto => `
+
                 <div class="slide">
-                    <img src="${f.url}" class="w-full h-full object-cover">
-                    <div class="absolute bottom-4 left-6 z-10">
-                        <h3 class="logo-font text-3xl text-white drop-shadow-lg">${f.t}</h3>
+
+                    <img src="${foto.url}" class="w-full h-full object-cover">
+
+                    <div class="absolute bottom-0 left-0 w-full p-8 slide-caption-bg">
+
+                        <span class="text-[9px] uppercase tracking-[0.5em] text-[#d4a373] block mb-1 font-black">Recomendado</span>
+
+                        <h3 class="serif-title text-2xl text-white tracking-[0.1em] uppercase italic">${foto.nombre}</h3>
+
                     </div>
+
                 </div>
+
             `).join('');
+
         }
+
+        function moveSlider(direction) {
+
+            const slider = document.getElementById('slider-container');
+
+            currentSlide = (currentSlide + direction + CONFIG.fotosSlider.length) % CONFIG.fotosSlider.length;
+
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+        }
+
+        setInterval(() => moveSlider(1), 6000);
 
         function renderMenu() {
+
             const container = document.getElementById('menu-container');
+
             if (typeof MENU_DATA !== 'undefined') {
-                container.innerHTML = MENU_DATA.map(cat => `
-                    <section>
-                        <h2 class="logo-font text-2xl mb-6 border-b-2 border-fire/30 inline-block pr-8 uppercase">${cat.categoria}</h2>
-                        <div class="space-y-4">
-                            ${cat.items.map(item => `
-                                <div class="bg-stone-900/50 p-4 rounded-2xl flex justify-between items-center border border-white/5">
-                                    <div class="flex-1 pr-4">
-                                        <h4 class="font-bold text-lg uppercase tracking-tight">${item.nombre}</h4>
-                                        <p class="text-stone-500 text-xs font-sans mt-1 line-clamp-2">${item.desc}</p>
-                                        <span class="text-fire font-bold text-xl block mt-1">₡${item.precio.toLocaleString()}</span>
-                                    </div>
-                                    <button onclick="addToCart(${item.id})" class="bg-stone-800 text-fire w-12 h-12 rounded-xl flex items-center justify-center active:bg-fire active:text-white transition-all">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-width="3"/></svg>
-                                    </button>
+
+                container.innerHTML = "";
+
+                MENU_DATA.forEach(cat => {
+
+                    let html = `<section>
+
+                        <h2 class="serif-title text-sm tracking-[0.4em] mb-10 border-b border-[#d4a373]/10 pb-2 uppercase text-center md:text-left">${cat.categoria}</h2>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-12">`;
+
+                    
+
+                    cat.items.forEach(item => {
+
+                        html += `
+
+                            <div class="flex justify-between items-start bg-white/5 md:bg-transparent p-4 md:p-0 rounded-lg border border-white/5 md:border-none">
+
+                                <div class="flex-1 pr-4">
+
+                                    <h3 class="text-white font-bold text-sm uppercase tracking-wider">${item.nombre}</h3>
+
+                                    <p class="text-stone-500 text-[11px] mt-1 leading-relaxed line-clamp-3">${item.desc}</p>
+
+                                    <span class="text-[#d4a373] font-bold text-sm block mt-2">₡${item.precio.toLocaleString()}</span>
+
                                 </div>
-                            `).join('')}
-                        </div>
-                    </section>
-                `).join('');
+
+                                <button onclick="agregarAlCarrito(${item.id})" class="border border-[#d4a373]/40 p-2.5 hover:bg-[#d4a373] hover:text-black transition-all active:scale-90 flex-shrink-0">
+
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-width="2.5"/></svg>
+
+                                </button>
+
+                            </div>`;
+
+                    });
+
+                    html += `</div></section>`;
+
+                    container.innerHTML += html;
+
+                });
+
             }
+
         }
 
-        function addToCart(id) {
+        function agregarAlCarrito(id) {
+
             let item;
+
             MENU_DATA.forEach(c => {
+
                 let found = c.items.find(i => i.id === id);
+
                 if(found) item = { ...found, cartId: Date.now() };
+
             });
-            if(item) {
-                carrito.push(item);
-                updateUI();
-                // Animación simple de feedback
-                const bar = document.getElementById('cart-bar');
-                bar.classList.add('scale-105');
-                setTimeout(() => bar.classList.remove('scale-105'), 200);
+
+            if(item) { carrito.push(item); actualizarUI(); }
+
+        }
+
+        function sumarItem(nombre) {
+
+            let itemOriginal;
+
+            MENU_DATA.forEach(c => {
+
+                let found = c.items.find(i => i.nombre === nombre);
+
+                if(found) itemOriginal = found;
+
+            });
+
+            if(itemOriginal) {
+
+                carrito.push({ ...itemOriginal, cartId: Date.now() });
+
+                actualizarUI();
+
             }
+
         }
 
-        function updateUI() {
-            const total = carrito.reduce((s, i) => s + i.precio, 0);
-            document.getElementById('cart-bar').classList.toggle('translate-y-full', carrito.length === 0);
-            document.getElementById('cart-count').innerText = `${carrito.length} ${carrito.length === 1 ? 'ARTÍCULO' : 'ARTÍCULOS'}`;
-            document.getElementById('cart-total').innerText = `₡${total.toLocaleString()}`;
-            document.getElementById('modal-total').innerText = `₡${total.toLocaleString()}`;
-            
-            // Agrupar para el modal
-            const groups = carrito.reduce((acc, i) => {
-                acc[i.nombre] = (acc[i.nombre] || { c: 0, p: i.precio });
-                acc[i.nombre].c++;
-                return acc;
-            }, {});
+        function restarItem(nombre) {
 
-            document.getElementById('cart-items-list').innerHTML = Object.keys(groups).map(name => `
-                <div class="flex justify-between items-center bg-stone-900 p-4 rounded-xl border border-white/5">
-                    <div>
-                        <p class="font-bold text-white uppercase">${groups[name].c}x ${name}</p>
-                        <p class="text-fire text-sm">₡${(groups[name].c * groups[name].p).toLocaleString()}</p>
-                    </div>
-                    <div class="flex gap-2">
-                        <button onclick="removeFromCart('${name}')" class="text-stone-500 p-2">Eliminar</button>
-                    </div>
-                </div>
-            `).join('') || '<p class="text-center text-stone-600 uppercase py-10">Tu pedido está vacío</p>';
-        }
+            const index = carrito.findLastIndex(item => item.nombre === nombre);
 
-        function removeFromCart(name) {
-            carrito = carrito.filter(i => i.nombre !== name);
-            updateUI();
+            if (index !== -1) {
+
+                carrito.splice(index, 1);
+
+                actualizarUI();
+
+            }
+
             if(carrito.length === 0) toggleCartModal(false);
+
+        }
+
+        function eliminarDelCarrito(nombre) {
+
+            carrito = carrito.filter(item => item.nombre !== nombre);
+
+            actualizarUI();
+
+            if(carrito.length === 0) toggleCartModal(false);
+
         }
 
         function toggleCartModal(show) {
+
             document.getElementById('cart-modal').style.transform = show ? 'translateY(0%)' : 'translateY(100%)';
+
+        }
+
+        function actualizarUI() {
+
+            const bar = document.getElementById('cart-bar');
+
+            const total = carrito.reduce((sum, item) => sum + item.precio, 0);
+
+            if(carrito.length > 0) bar.classList.remove('translate-y-full');
+
+            else bar.classList.add('translate-y-full');
+
+            document.getElementById('cart-count').innerText = `${carrito.length} ARTÍCULOS`;
+
+            document.getElementById('cart-total').innerText = `₡${total.toLocaleString()}`;
+
+            document.getElementById('modal-total').innerText = `₡${total.toLocaleString()}`;
+
+            const resumen = {};
+
+            carrito.forEach(item => {
+
+                if (!resumen[item.nombre]) {
+
+                    resumen[item.nombre] = { cantidad: 0, precioUnitario: item.precio };
+
+                }
+
+                resumen[item.nombre].cantidad++;
+
+            });
+
+
+
+            const list = document.getElementById('cart-items-list');
+
+            if (carrito.length === 0) {
+
+                list.innerHTML = `<p class="text-center text-stone-600 uppercase text-[10px] mt-10 tracking-[0.2em]">Tu carrito está vacío</p>`;
+
+            } else {
+
+                list.innerHTML = Object.keys(resumen).map(nombre => `
+
+                    <div class="flex justify-between items-center bg-white/5 p-4 border border-white/5">
+
+                        <div class="flex-1">
+
+                            <h4 class="text-white text-xs font-bold uppercase">${resumen[nombre].cantidad}x ${nombre}</h4>
+
+                            <p class="text-[#d4a373] text-[10px]">₡${(resumen[nombre].cantidad * resumen[nombre].precioUnitario).toLocaleString()}</p>
+
+                        </div>
+
+                        <div class="flex items-center gap-3">
+
+                            <div class="flex items-center border border-[#d4a373]/30 rounded overflow-hidden">
+
+                                <button onclick="restarItem('${nombre}')" class="px-3 py-1 bg-white/5 text-[#d4a373] hover:bg-[#d4a373] hover:text-black transition-colors">-</button>
+
+                                <span class="px-3 text-xs font-bold text-white bg-white/10">${resumen[nombre].cantidad}</span>
+
+                                <button onclick="sumarItem('${nombre}')" class="px-3 py-1 bg-white/5 text-[#d4a373] hover:bg-[#d4a373] hover:text-black transition-colors">+</button>
+
+                            </div>
+
+                            <button onclick="eliminarDelCarrito('${nombre}')" class="text-red-500/60 p-1 ml-2">
+
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-width="2"/></svg>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `).join('');
+
+            }
+
         }
 
         function enviarPedido() {
-            if(!checkStatus()) { alert("¡Uy! Ahorita estamos cerrados. Abrimos de Jueves a Sábado a las 6:00 PM."); return; }
-            if(carrito.length === 0) return;
 
-            const total = carrito.reduce((s, i) => s + i.precio, 0);
+            if (!verificarHorario()) { alert("Lo sentimos, el negocio está cerrado."); return; }
+
+            if (carrito.length === 0) return;
+
+            if (typeof gtag === 'function') {
+
+                gtag('event', 'enviar_pedido_whatsapp', {
+
+                    'negocio': CONFIG.nombreNegocio,
+
+                    'valor_total': carrito.reduce((sum, item) => sum + item.precio, 0),
+
+                    'cantidad_items': carrito.length
+
+                });
+
+            }
+
+            const total = carrito.reduce((sum, item) => sum + item.precio, 0);
+
             const notas = document.getElementById('order-notes').value;
-            let msg = `*¡Hola Uy Ke Rico!* 🍔🔥\nQuiero hacer este pedido:\n\n`;
-            
-            const resumen = carrito.reduce((acc, i) => { acc[i.nombre] = (acc[i.nombre] || 0) + 1; return acc; }, {});
-            for(let p in resumen) msg += `✅ *${resumen[p]}x* ${p}\n`;
-            
-            if(notas) msg += `\n*Notas:* _${notas}_`;
-            msg += `\n\n💰 *Total: ₡${total.toLocaleString()}*`;
-            
-            window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
+
+            let texto = `¡Hola! Quiero hacer un pedido desde *Punto 506* (${CONFIG.nombreNegocio}):\n\n`;
+
+            const resumen = {};
+
+            carrito.forEach(i => resumen[i.nombre] = (resumen[i.nombre] || 0) + 1);
+
+            for(let prod in resumen) texto += `• ${resumen[prod]}x ${prod}\n`;
+
+            if(notas.trim() !== "") texto += `\n*Notas:* _${notas}_\n`;
+
+            texto += `\n*Total: ₡${total.toLocaleString()}*\n\n¿Me confirman el pedido?`;
+            window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(texto)}`, '_blank');
+
         }
 
         window.onload = inicializar;
+
+        setInterval(verificarHorario, 60000);
     </script>
 </body>
+
 </html>
