@@ -86,7 +86,7 @@
         </div>
     </div>
 
-    <div id="cart-modal" class="fixed inset-0 bg-black/98 z-50 transition-transform duration-500 translate-y-full flex flex-col">
+    <div id="cart-modal" class="fixed inset-0 bg-black backdrop-blur-md z-50 transition-transform duration-500 translate-y-full flex flex-col">
         <div class="p-6 border-b border-white/10 flex justify-between items-center bg-[#0f0f0f]">
             <h2 class="serif-title text-xl uppercase italic tracking-widest">Tu Comanda</h2>
             <button onclick="toggleCartModal(false)" class="text-white/50 text-[10px] font-black uppercase bg-white/5 px-4 py-2 rounded-full border border-white/10">Cerrar</button>
@@ -272,7 +272,7 @@
                 </div>`;
             } else {
                 list.innerHTML = Object.keys(resumen).map(nombre => `
-                    <div class="flex justify-between items-center bg-white/5 p-5 rounded-2xl border border-white/5">
+    <div class="flex justify-between items-center bg-white/5 p-5 rounded-2xl border border-white/10">
                         <div class="flex-1">
                             <h4 class="text-white text-[11px] font-black uppercase tracking-tight">${nombre}</h4>
                             <p class="text-drunk font-black text-xs mt-1">₡${(resumen[nombre].cantidad * resumen[nombre].precioUnitario).toLocaleString()}</p>
