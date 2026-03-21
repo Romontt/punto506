@@ -895,5 +895,27 @@
     "lat": 10.210120962816182,
     "lng": -83.79245053440758,
     "maps_link": "https://wa.me/50671433709"
-  }
+  },
+  {
+    "id": 37,
+    "nombre": "Chic Beauty Salon",
+    "categoria": "Estética",
+    "etiquetas": ["Salón Vegano", "Productos Orgánicos", "Spa Capilar", "Maquillaje", "Pestañas", "Cuidado del Cabello"],
+    "keywords_busqueda": "chic beauty salon guápiles salón de belleza vegano orgánico spa capilar maquillaje profesional extensiones de pestañas cuidado del cabello tratamientos naturales estilista profesional english spoken atención personalizada citas previas guapiles belleza orgánica",
+    "servicios_resumen": "Primer Salón Vegano y Orgánico en Guápiles. Especialistas en Spa Capilar, maquillaje y cuidado integral del cabello.",
+    "instagram": "https://www.instagram.com/chicbeautysalon1/",
+    "facebook": "null",
+    "imagen": "img/logos/chic-beauty-salon.webp", 
+    "whatsapp": "+50685130266",
+    "descripcion": "Chic Beauty Salon es el primer salón vegano y orgánico en Guápiles, ofreciendo una experiencia de belleza consciente y exclusiva. Se especializan en Spa Capilar, servicios completos de cabello, maquillaje profesional y pestañas. Con un enfoque en la atención personalizada y el uso de productos de alta calidad respetuosos con el ambiente, brindan un servicio bilingüe (English Spoken) principalmente bajo cita previa para garantizar una experiencia única.",
+    "horario": "Lunes a Sábado: 8:00 a.m. - 7:00 p.m.",
+    "estado_horario": {
+      "tipo": "reserva",
+      "config": null
+    },
+    "direccion": "Guápiles",
+    "lat": 10.218527318573049,
+    "lng": -83.78313259391126,
+    "maps_link": "https://maps.app.goo.gl/ouniF9R2ypDu9Tvv7"
+}
 ]
