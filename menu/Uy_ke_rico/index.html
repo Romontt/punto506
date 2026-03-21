@@ -135,7 +135,10 @@
     </div>
 
     <script src="productos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
+        const supabase = supabase.createClient('https://yfqxnjohojtbjevrmbmq.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcXhuam9ob2p0YmpldnJtYm1xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MjI4ODgsImV4cCI6MjA4ODM5ODg4OH0.ze32GU0sW7EZ5oicnLFlHpthtLcSTUxZ9rlHSyQLFso');
+
         const CONFIG = {
             nombreNegocio: "Uy Ke Rico",
             whatsapp: "50689537426"
@@ -144,9 +147,18 @@
         const HORARIO = { apertura: 18, cierre: 22, diasPermitidos: [4, 5, 6] };
         let carrito = [];
 
+        async function registrarEvento(tipo) {
+            try {
+                await supabase.from('registros_actividad').insert([
+                    { tipo_evento: tipo, nombre_negocio: CONFIG.nombreNegocio }
+                ]);
+            } catch (e) { console.error("Error stats:", e); }
+        }
+
         function inicializar() {
             renderMenu();
             verificarHorario();
+            registrarEvento('visita_pagina');
         }
 
         function verificarHorario() {
@@ -291,6 +303,10 @@
         function enviarPedido() {
             if (!verificarHorario()) { alert("Lo sentimos, Uy Ke Rico está cerrado en este momento."); return; }
             if (carrito.length === 0) return;
+
+            // Registro en Supabase y Analytics
+            registrarEvento('envio_pedido_whatsapp');
+            gtag('event', 'generar_lead', { 'event_label': 'Pedido WhatsApp - Uy Ke Rico' });
 
             const total = carrito.reduce((sum, item) => sum + item.precio, 0);
             const notas = document.getElementById('order-notes').value;
