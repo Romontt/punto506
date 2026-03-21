@@ -319,14 +319,17 @@
 
             const total = carrito.reduce((sum, item) => sum + item.precio, 0);
             const notas = document.getElementById('order-notes').value;
-            let texto = `*UY KE RICO* 🍖✨\n_Nuevo Pedido desde Punto 506_\n\n`;
+            
+            let texto = `¡Hola! Quiero hacer un pedido desde *Punto 506* (${CONFIG.nombreNegocio}):\n\n`;
             
             const resumen = {};
             carrito.forEach(i => resumen[i.nombre] = (resumen[i.nombre] || 0) + 1);
-            for(let prod in resumen) texto += `✅ *${resumen[prod]}x* ${prod}\n`;
             
-            if(notas.trim() !== "") texto += `\n*NOTAS:* _${notas}_\n`;
-            texto += `\n*TOTAL: ₡${total.toLocaleString()}*\n\n¿Me confirman el pedido para proceder?`;
+            for(let prod in resumen) texto += `• ${resumen[prod]}x ${prod}\n`;
+            
+            if(notas.trim() !== "") texto += `\n*Notas:* _${notas}_\n`;
+            
+            texto += `\n*Total: ₡${total.toLocaleString()}*\n\n¿Me confirman el pedido?`;
             
             window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(texto)}`, '_blank');
         }
