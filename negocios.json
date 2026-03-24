@@ -917,5 +917,84 @@
     "lat": 10.218527318573049,
     "lng": -83.78313259391126,
     "maps_link": "https://maps.app.goo.gl/ouniF9R2ypDu9Tvv7"
+},
+  {
+    "id": 38,
+    "nombre": "Patitas Pet Shop",
+    "categoria": "Servicios",
+    "etiquetas": ["Tienda de Mascotas", "Accesorios", "Alimento", "Cuidado Animal"],
+    "keywords_busqueda": "patitas pet shop guápiles tienda de mascotas accesorios para perros gatos ropa para mascotas correas camas alimentos premium suplementos higiene animal envíos costa rica veterinaria artículos para mascotas guapiles pococí patitas petshop",
+    "servicios_resumen": "Tienda física y virtual en Guápiles. Especialistas en accesorios, alimentación y cuidado integral para perros y gatos.",
+    "instagram": "https://www.instagram.com/patitas.pet1/",
+    "facebook": "null",
+    "imagen": "img/logos/patitas-pet.webp", 
+    "whatsapp": "+50662615140",
+    "descripcion": "Patitas Pet Shop es tu aliado en el cuidado de tus mejores amigos en Guápiles. Ofrecemos una amplia variedad de productos que incluyen desde alimentos balanceados y suplementos hasta ropa exclusiva, accesorios de paseo y artículos de higiene. Contamos con tienda física y realizamos envíos a todo el país, garantizando siempre la mejor calidad para el bienestar de tus mascotas.",
+    "horario": "Lunes a Sábado: 8:00 a.m. - 5:30 p.m.",
+    "estado_horario": {
+      "tipo": "horario",
+      "config": {
+        "1": ["8:00", "17:30"],
+        "2": ["8:00", "17:30"],
+        "3": ["8:00", "17:30"],
+        "4": ["8:00", "17:30"],
+        "5": ["8:00", "17:30"],
+        "6": ["8:00", "17:30"]
+    },
+    "direccion": "Guápiles",
+    "lat": 10.223728358137208,
+    "lng": -83.78882507321727,
+    "maps_link": "https://maps.app.goo.gl/Uiwcx6rvKoikTpdT8"
+},
+    {
+    "id": 39,
+    "nombre": "The Dollhouse Beauty Academy",
+    "categoria": "Estética",
+    "etiquetas": ["Academia de Belleza", "Curso de Uñas", "Extensiones de Pestañas", "Formación Profesional"],
+    "keywords_busqueda": "the dollhouse beauty academy guápiles cursos de belleza academia de uñas pestañas lashista profesional manicurista enseñanza formación técnica estética guapiles lecciones de belleza diseño de mirada frente a panadería samuel",
+    "servicios_resumen": "Academia de formación profesional especializada en técnicas avanzadas de uñas y pestañas desde 2020.",
+    "instagram": "https://www.instagram.com/the_dollhouse29/",
+    "facebook": "https://www.facebook.com/profile.php?id=61582626276409",
+    "imagen": "img/logos/the-dollhouse.webp", 
+    "whatsapp": "+50661862085",
+    "descripcion": "The Dollhouse Beauty Academy funciona como un centro de enseñanza en Guápiles, orientado a la capacitación de profesionales en la industria de la estética. La Academia se especializa en el arte de las uñas y extensiones de pestañas, ofreciendo cursos certificados y actualizaciones en las últimas tendencias. Se trabaja exclusivamente bajo cita previa para garantizar una atención personalizada y un entorno de aprendizaje óptimo."
+    "horario": "Martes a Sábado: 9:00 a.m. - 5:00 p.m.",
+    "estado_horario": {
+      "tipo": "reserva",
+      "config": null
+    },
+    "direccion": "Frente a Panadería Samuel, Guápiles",
+    "lat": 10.212422,
+    "lng": -83.789333,
+    "maps_link": "https://maps.app.goo.gl/NxACgJ4diA3vVMJc6"
+},
+  {
+    "id": 40,
+    "nombre": "Velux Alambrismo Artístico",
+    "categoria": "Servicios",
+    "etiquetas": ["Academia de Alambrismo", "Taller de Bisutería", "Tienda de Insumos", "Clases de Arte"],
+    "keywords_busqueda": "velux alambrismo artístico guápiles taller de bisutería clases de alambrismo costa rica academia de arte bisuterapia materiales para bisutería insumos para joyería artesanal cursos presenciales y online guapiles centro calzado d'moda",
+    "servicios_resumen": "Academia especializada en alambrismo artístico y bisutería, ofreciendo formación profesional y venta de insumos especializados.",
+    "instagram": "https://www.instagram.com/veluxalambrismo.cr/",
+    "facebook": "null",
+    "imagen": "img/logos/velux-alambrismo.webp", 
+    "whatsapp": "+50684077685",
+    "descripcion": "Velux Alambrismo Artístico opera como una academia y tienda especializada en el arte del alambrismo y la bisutería en Guápiles. Ofrecen formación a través de clases presenciales y virtuales enfocadas en la bisuterapia, promoviendo la creatividad y la conexión personal. Además de su faceta educativa, el local funciona como punto de venta de insumos y materiales para la creación de joyería artesanal.",
+    "horario": "Lunes a Viernes: 1:00 p.m. - 4:00 p.m. | Sábados: 9:00 a.m. - 1:00 p.m.",
+    "estado_horario": {
+      "tipo": "horario",
+      "config": {
+        "1": ["13:00", "16:00"],
+        "2": ["13:00", "16:00"],
+        "3": ["13:00", "16:00"],
+        "4": ["13:00", "16:00"],
+        "5": ["13:00", "16:00"],
+        "6": ["09:00", "13:00"]
+      }
+    },
+    "direccion": "25 metros este de Palí, segunda planta de zapatería D’Moda, Guápiles",
+    "lat": 10.218969964007837,
+    "lng": -83.78745098412068,
+    "maps_link": "https://maps.app.goo.gl/MbffLeecedjG9xZE9"
 }
 ]
