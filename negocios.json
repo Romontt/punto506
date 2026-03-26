@@ -720,6 +720,8 @@
   {
     "id": 30,
     "nombre": "Drunk Street Food / El Lab",
+    "premium": true,
+    "url_menu": "https://punto506.montzucr.com/menu/Drunk_Street_Food/index.html",
     "categoria": "Gastronomía",
     "etiquetas": ["Hamburguesas", "Servicio a Domicilio", "Comida Rápida", "Snacks"],
     "keywords_busqueda": "comida rapida street food hamburguesas smash burger alitas de pollo wings papas fritas nachos palitos de queso mozarrella sticks cena domicilio express guapiles el lab drunk lab cargadas salsas",
