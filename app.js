@@ -308,11 +308,13 @@ function aplicarFiltrosCombinados() {
     const busquedaElement = document.getElementById('busqueda');
     const busqueda = busquedaElement ? normalizar(busquedaElement.value) : '';
     const tituloSeccion = document.getElementById('categoria-titulo');
+    
     if(tituloSeccion) {
         tituloSeccion.innerText = categoriaActual === 'todos' ? 'Nuestra Colección' : categoriaActual;
     }
-    const filtrados = negociosRaw.filter(n => {
-        // --- FILTRADO DE NEGOCIOS ---
+
+    // 1. Filtrado inicial (lo que ya tenías)
+    let filtrados = negociosRaw.filter(n => {
         const coincideBusqueda = 
             normalizar(n.nombre).includes(busqueda) || 
             normalizar(n.servicios_resumen).includes(busqueda) ||
@@ -320,22 +322,36 @@ function aplicarFiltrosCombinados() {
             normalizar(n.keywords_busqueda || "").includes(busqueda) || 
             (n.descripcion && normalizar(n.descripcion).includes(busqueda)) || 
             (n.etiquetas && n.etiquetas.some(etq => normalizar(etq).includes(busqueda)));
+            
         const coincideCategoria = categoriaActual === 'todos' || normalizar(n.categoria) === normalizar(categoriaActual);
         const coincideEtiqueta = !etiquetaActual || (n.etiquetas && n.etiquetas.includes(etiquetaActual));
+        
         return coincideBusqueda && coincideCategoria && coincideEtiqueta;
     });
-    // --- CONTROL DE VISIBILIDAD (EL ÚLTIMO CAMBIO) ---
+
+    // --- 2. LÓGICA DE ORDENAMIENTO PREMIUM (NUEVO) ---
+    // Ordenamos para que los que tienen premium: true suban al principio
+    filtrados.sort((a, b) => {
+        const aPremium = a.premium === true || a.premium === "true";
+        const bPremium = b.premium === true || b.premium === "true";
+        
+        if (aPremium && !bPremium) return -1; // 'a' sube
+        if (!aPremium && bPremium) return 1;  // 'b' sube
+        return 0; // Se mantienen igual si ambos son premium o ambos normales
+    });
+    // ------------------------------------------------
+
+    // 3. Control de visibilidad y renderizado
     const tieneBusqueda = busqueda !== '';
     const esCategoriaReal = categoriaActual !== 'todos' && categoriaActual !== null;
+    
     if (tieneBusqueda || esCategoriaReal) {
-        // Forzamos visibilidad de resultados y ocultamos landing SIEMPRE que no sea "todos"
         document.getElementById('section-results').classList.remove('hidden');
         document.getElementById('landing-categories').classList.add('hidden');
-        renderCards(filtrados);
+        renderCards(filtrados); // Aquí ya van ordenados
         gestionarVisibilidadHeader(categoriaActual);
         renderSubCategorias(); 
     } else {
-        // Solo volvemos a la landing si realmente estamos en 'todos' y sin buscar nada
         renderLanding();
     }
 }
