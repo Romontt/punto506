@@ -1,5 +1,5 @@
 // --- CONFIGURACIÓN DE SUPABASE ---
-import { initEntrevistas } from './entrevistas.js';
+import { initEntrevistas } from './components/Entrevistas/Uy_Ke_Rico/entrevistas.js';
 // ... el resto de tus configuraciones de Supabase (SUPABASE_URL, etc)
 const SUPABASE_URL = 'https://yfqxnjohojtbjevrmbmq.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_NLDSfBo4DC3hPdbjgxHvJQ_MsI7JYLH';
