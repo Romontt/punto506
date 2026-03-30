@@ -56,7 +56,7 @@ export function initEntrevistas() {
                         <div class="p-5 text-center">
                             <h3 class="business-title text-base text-white uppercase tracking-wider font-bold mb-2">Uy Ke Rico</h3>
                             <p class="elegant-italic text-stone-400 text-[11px] leading-relaxed italic mb-4">Descubre la historia del sabor 100% guapileño.</p>
-                             <button onclick="window.open('https://www.youtube.com/watch?v=TU_ID_DE_VIDEO', '_blank')" 
+                             <button onclick="window.open('https://youtu.be/0OVvZqsCFlI', '_blank')" 
                                      class="w-full py-3 text-[#A67C52] text-[8px] font-bold uppercase tracking-[0.5em] border border-[#A67C52]/20 hover:bg-[#A67C52] hover:text-[#130f0e] transition-all duration-700">
                                 Ver entrevista completa
                             </button>
