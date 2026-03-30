@@ -1,4 +1,6 @@
 // --- CONFIGURACIÓN DE SUPABASE ---
+import { initEntrevistas } from './entrevistas.js';
+// ... el resto de tus configuraciones de Supabase (SUPABASE_URL, etc)
 const SUPABASE_URL = 'https://yfqxnjohojtbjevrmbmq.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_NLDSfBo4DC3hPdbjgxHvJQ_MsI7JYLH';
 async function registrarActividad(tipo, negocio) {
@@ -648,5 +650,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- INICIO DE LA APP ---
+// --- INICIO DE LA APP ---
 loadData();
+initEntrevistas(); // <--- Agregamos esto aquí
 registrarActividad('visita_pagina', 'Punto 506');
