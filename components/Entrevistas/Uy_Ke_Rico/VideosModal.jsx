@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { X } from 'lucide-react';
-import { supabase } from '../../lib/supabase'; // Ajusta la ruta a tu cliente de supabase
+import { supabase } from '../../../lib/supabase'; // Asegúrate que esta ruta sea correcta
 import VideoCard from './VideoCard';
 
 const VideosModal = ({ onClose }) => {
@@ -18,21 +18,21 @@ const VideosModal = ({ onClose }) => {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-      <div className="bg-[#121212] border border-[#D4AF37]/30 w-full max-w-4xl max-h-[85vh] overflow-hidden rounded-2xl flex flex-col relative">
+    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm">
+      <div className="bg-[#0f0f0f] border border-[#D4AF37]/30 w-full max-w-4xl max-h-[85vh] overflow-hidden rounded-3xl flex flex-col relative">
         
-        {/* Header */}
-        <div className="p-6 border-b border-gray-800 flex justify-between items-center">
+        {/* Encabezado */}
+        <div className="p-6 border-b border-white/10 flex justify-between items-center">
           <div>
-            <h2 className="text-[#D4AF37] text-2xl font-serif font-bold uppercase tracking-tight">Entrevistas Punto 506</h2>
-            <p className="text-gray-400 text-sm mt-1">Conoce quién está detrás de los negocios y emprendimientos locales.</p>
+            <h2 className="text-[#D4AF37] text-2xl font-bold uppercase">Entrevistas Punto 506</h2>
+            <p className="text-gray-400 text-sm">Conoce quién está detrás de los negocios y emprendimientos.</p>
           </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-white transition">
+          <button onClick={onClose} className="text-gray-400 hover:text-white">
             <X size={28} />
           </button>
         </div>
 
-        {/* Grid de Videos */}
+        {/* Cuadrícula de videos */}
         <div className="p-6 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-6">
           {videos.map((vid) => (
             <VideoCard key={vid.id} video={vid} />
