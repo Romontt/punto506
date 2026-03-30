@@ -565,28 +565,7 @@ document.getElementById('modal-negocio').addEventListener('click', function(e) {
     if (e.target === this) cerrarModal();
 });
 
-function abrirModalRegistro() {
-    const modal = document.getElementById('modal-registro');
-    if (modal) {
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-function cerrarModalRegistro() {
-    const modal = document.getElementById('modal-registro');
-    if (modal) {
-        modal.classList.add('hidden');
-        document.body.style.overflow = 'auto';
-    }
-}
-
-// Cerrar al hacer clic fuera del contenido
-document.getElementById('modal-registro')?.addEventListener('click', function(e) {
-    if (e.target === this) cerrarModalRegistro();
-});
-
-// --- SISTEMA DE REGISTRO BLINDADO ---
+// --- SISTEMA DE GESTIÓN DE MODALES (REGISTRO) ---
 function abrirModalRegistro() {
     const modal = document.getElementById('modal-registro');
     if (modal) {
@@ -605,7 +584,12 @@ function cerrarModalRegistro() {
     }
 }
 
-// Configuración del envío (Se ejecuta una sola vez al cargar la página)
+// Cerrar al hacer clic fuera del contenido
+document.getElementById('modal-registro')?.addEventListener('click', function(e) {
+    if (e.target === this) cerrarModalRegistro();
+});
+
+// Configuración del envío del Formulario de Registro
 document.addEventListener('DOMContentLoaded', () => {
     const registroForm = document.getElementById('form-registro') || document.getElementById('registro-form');
     if (registroForm) {
@@ -615,7 +599,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const textoOriginal = btn.innerText;
             btn.innerText = "PROCESANDO...";
             btn.disabled = true;
-            // CREAMOS LOS DATOS
+
             const formData = new FormData(registroForm);
             try {
                 const response = await fetch("https://formspree.io/f/xqedvowy", {
@@ -649,8 +633,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// --- INICIO DE LA APP ---
+// --- EXPOSICIÓN GLOBAL PARA COMPATIBILIDAD ---
+// Esto permite que los botones del HTML sigan encontrando las funciones
+window.abrirModalRegistro = abrirModalRegistro;
+window.cerrarModalRegistro = cerrarModalRegistro;
+window.verDetalle = verDetalle;
+window.cerrarModal = cerrarModal;
+
 // --- INICIO DE LA APP ---
 loadData();
-initEntrevistas(); // <--- Agregamos esto aquí
+if (typeof initEntrevistas === 'function') {
+    initEntrevistas(); 
+}
 registrarActividad('visita_pagina', 'Punto 506');
