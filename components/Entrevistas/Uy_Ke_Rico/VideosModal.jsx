@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { X } from 'lucide-react';
-import { supabase } from '../../../lib/supabase'; // Asegúrate que esta ruta sea correcta
+import { supabase } from '../../../supabase.js';// Asegúrate que esta ruta sea correcta
 import VideoCard from './VideoCard';
 
 const VideosModal = ({ onClose }) => {
