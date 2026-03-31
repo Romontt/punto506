@@ -43,12 +43,11 @@ export function initEntrevistas() {
                         <path d="M6 18L18 6M6 6l12 12" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </button>
-
-                 <div class="text-center mb-10 md:mb-14">
-                        <span class="text-[#A67C52] text-[7px] md:text-[9px] font-light tracking-[0.7em] uppercase block mb-3">Punto 506 Presenta</span>
-                        <h2 class="text-2xl md:text-4xl text-white uppercase tracking-[0.15em] font-extralight italic" style="font-family: serif;">Voces que Inspiran</h2>
-                        <div class="h-px w-10 md:w-14 bg-[#A67C52]/40 mx-auto mt-5"></div>
-                    </div>
+<div class="text-center mb-8 md:mb-12">
+                    <span class="text-[#A67C52] text-[8px] md:text-[10px] font-black tracking-[0.5em] uppercase block mb-2">Historias locales</span>
+                    <h2 class="text-xl md:text-3xl text-white uppercase tracking-[0.1em] font-light">Conoce a los Emprendedores</h2>
+                    <div class="h-px w-12 md:w-16 bg-[#A67C52]/50 mx-auto mt-4 md:mt-6"></div>
+                </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 overflow-y-auto max-h-[55vh] pr-2 custom-scrollbar">
                         
