@@ -3,11 +3,11 @@
 export function initEntrevistas() {
     const videoID = "0OVvZqsCFlI"; // ID confirmado de Uy Ke Rico
 
-    // 1. Crear el botón flotante PREMIUM
+    // 1. Crear el botón flotante PREMIUM (Posición ajustada a bottom-24)
     const button = document.createElement('button');
     button.id = 'btn-entrevistas-flotante';
     button.className = `
-        fixed bottom-6 right-6 z-[99] 
+        fixed bottom-24 right-6 z-[99] 
         flex items-center gap-2.5 
         bg-[#130f0e] border border-[#A67C52] 
         text-[#A67C52] px-5 py-2.5 md:px-6 md:py-2.5
@@ -32,7 +32,7 @@ export function initEntrevistas() {
     if (!modal) {
         modal = document.createElement('div');
         modal.id = modalId;
-        modal.className = "fixed inset-0 z-[100] hidden bg-black/98 backdrop-blur-xl flex items-center justify-center p-4 md:p-6 transition-opacity duration-500";
+        modal.className = "fixed inset-0 z-[100] hidden bg-black/98 backdrop-blur-xl flex items-center justify-center p-4 md:p-6 transition-opacity duration-300";
         modal.innerHTML = `
             <div class="relative w-full max-w-lg md:max-w-4xl bg-[#0a0a0a] border border-[#A67C52]/30 overflow-hidden shadow-[0_0_60px_rgba(0,0,0,1)] rounded-sm">
                 
