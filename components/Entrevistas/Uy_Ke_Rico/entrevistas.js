@@ -13,13 +13,11 @@ export function initEntrevistas() {
     const logEvent = async (tipo_evento) => {
         try {
             await supabase
-                .from('registros_activity') // <--- NOMBRE DE TU TABLA SEGÚN CAPTURA
+                .from('registros_actividad') // Nombre de la tabla según tu DB
                 .insert([
                     { 
-                        tipo_evento: tipo_evento, // <--- COLUMNA SEGÚN CAPTURA
-                        nombre_negocio: 'Punto 506 - Entrevistas' // <--- COLUMNA SEGÚN CAPTURA
-                        // Nota: 'video_id' y 'platform' no se ven en tu captura, 
-                        // por lo que se omiten para evitar errores de inserción.
+                        tipo_evento: tipo_evento, // Columna según tu DB
+                        nombre_negocio: 'Punto 506 - Entrevistas' // Columna según tu DB
                     }
                 ]);
         } catch (error) {
