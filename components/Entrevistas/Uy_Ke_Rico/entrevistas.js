@@ -72,9 +72,9 @@ export function initEntrevistas() {
                             <h3 class="text-sm md:text-base text-white uppercase tracking-[0.2em] font-light mb-2">Uy Ke Rico</h3>
                             <p class="text-stone-500 text-[10px] md:text-[11px] font-light italic mb-6 leading-relaxed">"Descubre la historia del sabor 100% guapileño"</p>
                             
-                            <button id="play-btn-${videoID}" 
+                            <button id="youtube-btn-${videoID}" 
                                     class="inline-block px-8 py-2 text-[#A67C52] text-[8px] font-bold uppercase tracking-[0.5em] border border-[#A67C52]/20 hover:bg-[#A67C52] hover:text-black transition-all duration-700">
-                                Ver Entrevista
+                                Ver en YouTube
                             </button>
                         </div>
                     </div>
@@ -85,7 +85,7 @@ export function initEntrevistas() {
         document.body.appendChild(modal);
     }
 
-    // Función para cargar el video (Embed)
+    // Función para cargar el video (Embed) dentro de la página
     const loadVideo = () => {
         const container = document.getElementById(`video-container-${videoID}`);
         container.innerHTML = `
@@ -97,6 +97,11 @@ export function initEntrevistas() {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 allowfullscreen>
             </iframe>`;
+    };
+
+    // Función para abrir en YouTube externo
+    const openYouTubeExternal = () => {
+        window.open(`https://youtu.be/${videoID}`, '_blank');
     };
 
     // 3. Agregar el botón al body
@@ -128,7 +133,9 @@ export function initEntrevistas() {
     button.onclick = openModal;
     document.getElementById('close-entrevistas').onclick = closeModal;
     document.getElementById(`thumb-${videoID}`).onclick = loadVideo;
-    document.getElementById(`play-btn-${videoID}`).onclick = loadVideo;
+    
+    // El botón inferior ahora redirige a YouTube
+    document.getElementById(`youtube-btn-${videoID}`).onclick = openYouTubeExternal;
 
     modal.onclick = (e) => { if (e.target === modal) closeModal(); };
 }
