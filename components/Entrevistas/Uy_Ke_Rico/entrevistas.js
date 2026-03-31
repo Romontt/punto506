@@ -44,8 +44,7 @@ export function initEntrevistas() {
                     </svg>
                 </button>
 
-                <div class="relative z-10 p-8 md:p-14">
-                    <div class="text-center mb-10 md:mb-14">
+                 <div class="text-center mb-10 md:mb-14">
                         <span class="text-[#A67C52] text-[7px] md:text-[9px] font-light tracking-[0.7em] uppercase block mb-3">Punto 506 Presenta</span>
                         <h2 class="text-2xl md:text-4xl text-white uppercase tracking-[0.15em] font-extralight italic" style="font-family: serif;">Voces que Inspiran</h2>
                         <div class="h-px w-10 md:w-14 bg-[#A67C52]/40 mx-auto mt-5"></div>
