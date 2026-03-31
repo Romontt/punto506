@@ -1,7 +1,24 @@
 // entrevistas.js
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+// Configuración de Supabase con tus credenciales
+const supabaseUrl = 'https://yfqxnjohojtbjevrmbmq.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcXhuam9ob2p0YmpldnJtYm1xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MjI4ODgsImV4cCI6MjA4ODM5ODg4OH0.ze32GU0sW7EZ5oicnLFlHpthtLcSTUxZ9rlHSyQLFso';
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 export function initEntrevistas() {
     const videoID = "0OVvZqsCFlI"; // ID confirmado de Uy Ke Rico
+
+    // Función interna para registrar eventos
+    const logEvent = async (tipo_evento) => {
+        try {
+            await supabase
+                .from('interacciones') // Asegúrate que el nombre de la tabla sea correcto en tu BD
+                .insert([{ event_type: tipo_evento, video_id: videoID, platform: 'Punto 506' }]);
+        } catch (error) {
+            console.error('Error logging event:', error);
+        }
+    };
 
     // 1. Crear el botón flotante PREMIUM (Posición ajustada a bottom-24)
     const button = document.createElement('button');
@@ -87,6 +104,7 @@ export function initEntrevistas() {
 
     // Función para cargar el video (Embed) dentro de la página
     const loadVideo = () => {
+        logEvent('play_video'); // <--- MEDICIÓN: PLAY VIDEO
         const container = document.getElementById(`video-container-${videoID}`);
         container.innerHTML = `
             <iframe 
@@ -101,6 +119,7 @@ export function initEntrevistas() {
 
     // Función para abrir en YouTube externo
     const openYouTubeExternal = () => {
+        logEvent('ver_youtube'); // <--- MEDICIÓN: VER YOUTUBE
         window.open(`https://youtu.be/${videoID}`, '_blank');
     };
 
@@ -109,6 +128,7 @@ export function initEntrevistas() {
 
     // 4. Lógica de modales
     const openModal = () => {
+        logEvent('entrevistas'); // <--- MEDICIÓN: CLIC BOTÓN FLOTANTE
         modal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
     };
