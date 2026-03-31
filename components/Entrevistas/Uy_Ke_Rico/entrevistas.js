@@ -9,12 +9,19 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 export function initEntrevistas() {
     const videoID = "0OVvZqsCFlI"; // ID confirmado de Uy Ke Rico
 
-    // Función interna para registrar eventos
+    // Función interna para registrar eventos (AJUSTADA A TU TABLA ACTUAL)
     const logEvent = async (tipo_evento) => {
         try {
             await supabase
-                .from('interacciones') // Asegúrate que el nombre de la tabla sea correcto en tu BD
-                .insert([{ event_type: tipo_evento, video_id: videoID, platform: 'Punto 506' }]);
+                .from('registros_activity') // <--- NOMBRE DE TU TABLA SEGÚN CAPTURA
+                .insert([
+                    { 
+                        tipo_evento: tipo_evento, // <--- COLUMNA SEGÚN CAPTURA
+                        nombre_negocio: 'Punto 506 - Entrevistas' // <--- COLUMNA SEGÚN CAPTURA
+                        // Nota: 'video_id' y 'platform' no se ven en tu captura, 
+                        // por lo que se omiten para evitar errores de inserción.
+                    }
+                ]);
         } catch (error) {
             console.error('Error logging event:', error);
         }
@@ -104,7 +111,7 @@ export function initEntrevistas() {
 
     // Función para cargar el video (Embed) dentro de la página
     const loadVideo = () => {
-        logEvent('play_video'); // <--- MEDICIÓN: PLAY VIDEO
+        logEvent('play_video_entrevista'); 
         const container = document.getElementById(`video-container-${videoID}`);
         container.innerHTML = `
             <iframe 
@@ -119,7 +126,7 @@ export function initEntrevistas() {
 
     // Función para abrir en YouTube externo
     const openYouTubeExternal = () => {
-        logEvent('ver_youtube'); // <--- MEDICIÓN: VER YOUTUBE
+        logEvent('click_youtube_externo'); 
         window.open(`https://youtu.be/${videoID}`, '_blank');
     };
 
@@ -128,7 +135,7 @@ export function initEntrevistas() {
 
     // 4. Lógica de modales
     const openModal = () => {
-        logEvent('entrevistas'); // <--- MEDICIÓN: CLIC BOTÓN FLOTANTE
+        logEvent('abrir_modal_entrevistas'); 
         modal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
     };
@@ -136,7 +143,6 @@ export function initEntrevistas() {
     const closeModal = () => {
         modal.classList.add('hidden');
         document.body.style.overflow = 'auto';
-        // Limpiamos el video al cerrar para que deje de sonar
         document.getElementById(`video-container-${videoID}`).innerHTML = `
             <div id="thumb-${videoID}" class="absolute inset-0 z-10 cursor-pointer">
                 <img src="https://img.youtube.com/vi/${videoID}/hqdefault.jpg" class="w-full h-full object-cover opacity-70" alt="Entrevista">
@@ -146,15 +152,12 @@ export function initEntrevistas() {
                     </div>
                 </div>
             </div>`;
-        // Re-asignamos el evento al nuevo thumb creado
         document.getElementById(`thumb-${videoID}`).onclick = loadVideo;
     };
 
     button.onclick = openModal;
     document.getElementById('close-entrevistas').onclick = closeModal;
     document.getElementById(`thumb-${videoID}`).onclick = loadVideo;
-    
-    // El botón inferior ahora redirige a YouTube
     document.getElementById(`youtube-btn-${videoID}`).onclick = openYouTubeExternal;
 
     modal.onclick = (e) => { if (e.target === modal) closeModal(); };
