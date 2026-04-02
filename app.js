@@ -635,6 +635,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- EXPOSICIÓN GLOBAL PARA COMPATIBILIDAD ---
 // Esto permite que los botones del HTML sigan encontrando las funciones
+window.seleccionarCategoria = seleccionarCategoria;
+window.volverInicio = volverInicio;
 window.abrirModalRegistro = abrirModalRegistro;
 window.cerrarModalRegistro = cerrarModalRegistro;
 window.verDetalle = verDetalle;
