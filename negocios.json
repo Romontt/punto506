@@ -1028,5 +1028,56 @@
   "lat": 10.21574650622535,
   "lng": -83.79291566227167,
   "maps_link": "https://www.google.com/maps/search/?api=1&query=10.21574650622535,-83.79291566227167"
+},
+  {
+  "id": 42,
+  "nombre": "Academia de Futbol LDA - Guápiles",
+  "categoria": "Deportes & Recreación",
+  "etiquetas": ["Fútbol", "Entrenamiento", "Niños y Jóvenes", "Formación Integral"],
+  "keywords_busqueda": "academia de futbol lda guápiles liga deportiva alajuelense entrenamiento para niños formación deportiva torneos linafa festivales visorias examen médico escuela de fútbol barrio jesús pococí",
+  "servicios_resumen": "Formación integral en fútbol para niños y jóvenes de 5 a 17 años. Entrenamientos especializados y participación en torneos nacionales.",
+  "instagram": "null",
+  "facebook": "https://www.facebook.com/profile.php?id=100083011523602",
+  "imagen": "img/logos/lda-guapiles.webp",
+  "whatsapp": "+50688541499",
+  "descripcion": "La Academia de Futbol LDA en Guápiles ofrece una formación deportiva de alto nivel para categorías desde la U7 hasta la U15 (edades de 5 a 17 años). Con entrenamientos los martes y sábados en la cancha de Barrio Jesús, brindamos un enfoque integral que incluye visorias, exámenes médicos y la participación en torneos como InterLiga, LINAFA y festivales deportivos.",
+  "horario": "Martes y Sábados: Consultar horarios por categoría",
+  "estado_horario": {
+    "tipo": "siempre_abierto",
+    "config": {}
+  },
+  "direccion": "Cancha de fútbol, Barrio Jesús, Guápiles",
+  "lat": 10.228964,
+  "lng": -83.807677,
+  "maps_link": "https://maps.app.goo.gl/zp45z7eFoWBMegFZ7"
+},
+  {
+  "id": 43,
+  "nombre": "Distribuidora Mareas",
+  "categoria": "Moda y comercio",
+  "etiquetas": ["Tienda Física y Virtual", "Venta al por Mayor", "Ropa y Accesorios", "Hogar"],
+  "keywords_busqueda": "distribuidora mareas guápiles tienda de ropa por mayor y detalle camisas de futbol saprissa liguilla shorts trajes de baño verano blusas cortinas juegos de cama moda para damas caballeros y niños ventas virtuales pococí",
+  "servicios_resumen": "Tienda física y virtual con ventas al por mayor y detalle. Amplia variedad en moda casual, deportiva y artículos para el hogar.",
+  "instagram": "https://www.instagram.com/distribuidora_mareass/",
+  "facebook": "null",
+  "imagen": "img/logos/distribuidora-mareas.webp",
+  "whatsapp": "+50685044694",
+  "descripcion": "Distribuidora Mareas es tu aliado en Guápiles para compras al por mayor y al detalle. Ofreciendo un catálogo variado que incluye desde camisetas deportivas y trajes de baño hasta artículos para el hogar. Cuentan con atención física y envíos a través de su plataforma virtual para todo público.",
+  "horario": "Lunes a Sábado: 9:00 a.m. - 6:00 p.m.",
+  "estado_horario": {
+    "tipo": "horario",
+    "config": {
+      "1": ["09:00", "18:00"],
+      "2": ["09:00", "18:00"],
+      "3": ["09:00", "18:00"],
+      "4": ["09:00", "18:00"],
+      "5": ["09:00", "18:00"],
+      "6": ["09:00", "18:00"]
+    }
+  },
+  "direccion": "Junto a la Fonda de Guerrero, Guápiles.",
+  "lat": 10.213836642761098,
+  "lng": -83.78916537676214,
+  "maps_link": "https://maps.app.goo.gl/6Q2BJakJt2C21dBd7"
 }
 ]
