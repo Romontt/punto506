@@ -114,6 +114,10 @@ function seleccionarCategoria(id) {
     ejecutarTransicion(() => {
         categoriaActual = id;
         etiquetaActual = null;
+        const botonMenu = document.querySelector(`.filter-btn[data-cat="${id}"]`);
+        if (botonMenu) {
+            activarBoton(botonMenu); // Usamos tu función existente
+        }
         // APAGAR LANDING Y PRENDER RESULTADOS
         const landing = document.getElementById('landing-categories');
         const resultados = document.getElementById('section-results');
@@ -403,6 +407,8 @@ function activarBoton(btn) {
         b.classList.add('text-stone-500', 'border-transparent');
     });
     btn.classList.add('text-[#d4a373]', 'border-[#d4a373]', 'font-black');
+    btn.classList.remove('text-stone-500', 'border-transparent');
+    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 }
 // --- MODAL DETALLE ---
 function verDetalle(id) {
