@@ -74,7 +74,7 @@
 {
     "id": 4,
     "nombre": "Montiel Diseño y Fotografía",
-    "categoria": "Servicios",
+    "categoria": "eventos",
     "etiquetas": ["Profesionales", "Eventos", "Diseño"],
     "keywords_busqueda": "fotos sesiones graduacion boda quinceanos marca logo identidad visual publicidad camara video recuerdos arte creativo diseño grafico montiel fotografia retratos edicion sesiones de fotos guapiles fotografo bodas postales empresarial",
     "servicios_resumen": "Fotografía de eventos y sesiones, diseño de identidad visual y logotipos profesionales.",
@@ -147,7 +147,7 @@
   {
     "id": 7,
     "nombre": "AC Fitness Center",
-    "categoria": "Salud",
+    "categoria": "deporte y recreacion",
     "etiquetas": ["Gimnasios", "Natación", "Yoga", "Fitness"],
     "keywords_busqueda": "gym gimnasio piscina nadar ejercicio entrenamiento yoga cardio pesas funcional deporte salud cuerpo baile natacion semiolimpica",
     "servicios_resumen": "Único gimnasio con piscina semi-olímpica, natación, cardio dance y yoga.",
@@ -169,7 +169,7 @@
   {
     "id": 8,
     "nombre": "Centro Recreativo Aguas Claras",
-    "categoria": "Turismo",
+    "categoria": "Turismo", "deporte y recreacion",
     "etiquetas": ["Balneario", "Piscinas", "Toboganes", "Restaurante", "Recreación"],
     "keywords_busqueda": "balneario recreacion familia ninos paseo piscinas toboganes restaurante diversion fin de semana verano sol helados cocteles",
     "servicios_resumen": "Balneario familiar con toboganes para niños y adultos, restaurante, heladería y coctelería.",
@@ -501,7 +501,7 @@
   {
     "id": 21,
     "nombre": "Azalea Accesorios",
-    "categoria": "Servicios",
+    "categoria": "moda y comercio",
     "etiquetas": ["Tienda Virtual", "Moda", "A Domicilio"],
     "keywords_busqueda": "joyas bisuteria aretes anillos cadenas collares pulseras regalos mujer emprendimiento mayorista oro plata acero inoxidable envios correos de costa rica joyeria por mayor detalle regalos brillo accesorios dama",
     "servicios_resumen": "Joyería de alta calidad al por mayor y detalle con envíos a todo el país.",
@@ -857,7 +857,7 @@
   {
     "id": 35,
     "nombre": "Alma Inquebrantable",
-    "categoria": "Servicios",
+    "categoria": "moda y comercio",
     "etiquetas": ["Tienda Virtual", "Moda", "A Domicilio"],
     "keywords_busqueda": "ropa mujer chicas accesorios joyeria virtual tienda online guapiles blusas jeans vestidos bisuteria moda femenina emprendimiento gemelas vargas ropa dama outfits juvenil envios",
     "servicios_resumen": "Tienda virtual especializada en ropa, joyería y accesorios exclusivos para chicas.",
