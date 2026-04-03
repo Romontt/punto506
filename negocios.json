@@ -169,7 +169,7 @@
   {
     "id": 8,
     "nombre": "Centro Recreativo Aguas Claras",
-    "categoria": "Turismo", "deporte y recreacion",
+    "categoria": "Turismo",
     "etiquetas": ["Balneario", "Piscinas", "Toboganes", "Restaurante", "Recreación"],
     "keywords_busqueda": "balneario recreacion familia ninos paseo piscinas toboganes restaurante diversion fin de semana verano sol helados cocteles",
     "servicios_resumen": "Balneario familiar con toboganes para niños y adultos, restaurante, heladería y coctelería.",
