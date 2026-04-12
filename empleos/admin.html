@@ -1,103 +1,84 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master Panel | Punto 506</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Cinzel:wght@700&display=swap" rel="stylesheet">
-    <style>
-        body { background-color: #0a0a0a; font-family: 'Inter', sans-serif; }
-        .glass { background: rgba(18, 18, 18, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(212, 163, 115, 0.1); }
-        .module-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); background: #121212; border: 1px solid rgba(255,255,255,0.03); }
-        .module-card:hover { border-color: #d4a373; transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-    </style>
-</head>
-<body class="text-stone-300 min-h-screen">
+// Función para ver/ocultar la clave
+function toggleClave() {
+    const input = document.getElementById('clave-maestra');
+    input.type = input.type === 'password' ? 'text' : 'password';
+}
 
-    <div id="gatekeeper" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#0a0a0a] p-6">
-        <div class="max-w-md w-full glass p-10 rounded-3xl text-center shadow-2xl">
-            <div class="w-16 h-16 border border-[#d4a373]/40 rounded-full flex items-center justify-center mx-auto mb-8">
-                <span class="text-[#d4a373] font-bold text-xl">506</span>
-            </div>
-            <h2 class="serif-title text-white text-xl tracking-[0.4em] uppercase mb-8">Acceso Maestro</h2>
-            <div class="relative mb-6">
-                <input type="password" id="clave-maestra" placeholder="PALABRA CLAVE" 
-                    class="w-full bg-black border border-white/5 p-4 rounded-xl text-center tracking-[0.8em] text-[#d4a373] outline-none focus:border-[#d4a373]/50 transition-all">
-            </div>
-            <button onclick="intentarLogin()" class="w-full bg-[#d4a373] text-black font-black text-[10px] py-4 rounded-xl tracking-[0.3em] uppercase hover:brightness-110 transition-all">
-                Verificar Identidad
-            </button>
-            <p id="error-msg" class="text-red-500 text-[9px] mt-6 uppercase tracking-widest hidden font-bold">Acceso Denegado</p>
-        </div>
-    </div>
+// Función principal de Login conectada a Supabase
+async function intentarLogin() {
+    const intento = document.getElementById('clave-maestra').value;
+    const errorCont = document.getElementById('error-container');
+    const btn = document.querySelector('button[onclick="intentarLogin()"]');
 
-    <div id="dashboard" class="hidden opacity-0 transition-opacity duration-700">
-        <nav class="p-8 border-b border-white/5 flex justify-between items-center bg-[#0a0a0a]/50 sticky top-0 backdrop-blur-md">
-            <div>
-                <h1 class="text-white font-bold tracking-tighter text-2xl italic">Punto 506 <span class="text-[#d4a373] not-italic">Admin</span></h1>
-                <p class="text-[8px] uppercase tracking-[0.5em] text-stone-500 mt-1">Panel de Control General</p>
-            </div>
-            <button onclick="logout()" class="text-[9px] bg-white/5 px-6 py-2 rounded-full uppercase tracking-widest hover:bg-red-500/10 hover:text-red-400 transition-all">Cerrar</button>
-        </nav>
+    if (!intento) return;
 
-        <main class="max-w-6xl mx-auto p-8 md:p-16">
-            <div class="mb-12">
-                <span class="text-[#d4a373] text-[10px] uppercase tracking-[0.6em] block mb-2">Bienvenido</span>
-                <h2 class="serif-title text-3xl text-white uppercase tracking-widest">Módulos de Gestión</h2>
-            </div>
+    // Feedback visual de carga
+    btn.innerText = "VERIFICANDO...";
+    btn.disabled = true;
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <a href="admin-empleos.html" class="module-card p-10 rounded-3xl group">
-                    <div class="w-14 h-14 bg-[#d4a373]/5 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-[#d4a373]/10 transition-all">
-                        <svg class="w-6 h-6 text-[#d4a373]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-width="1.2"/></svg>
-                    </div>
-                    <h3 class="text-white font-bold text-xl mb-3 tracking-tight">Gestión de Empleos</h3>
-                    <p class="text-sm text-stone-500 leading-relaxed mb-6">Aprobar nuevas solicitudes o eliminar puestos expirados.</p>
-                    <span class="text-[#d4a373] text-[9px] font-bold uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all">Abrir Módulo →</span>
-                </a>
+    try {
+        // Llamamos a la función RPC de Supabase
+        // clave_intento es el nombre del parámetro que definiste en el SQL
+        const { data: esValido, error } = await supabase.rpc('login_admin', { 
+            clave_intento: intento 
+        });
 
-                <div class="module-card p-10 rounded-3xl opacity-30 cursor-not-allowed">
-                    <div class="w-14 h-14 bg-stone-800 rounded-2xl flex items-center justify-center mb-8">
-                        <svg class="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-width="1.2"/></svg>
-                    </div>
-                    <h3 class="text-stone-400 font-bold text-xl mb-3 tracking-tight">Directorio Punto 506</h3>
-                    <p class="text-xs text-stone-600">Configuración de negocios y categorías.</p>
-                </div>
-            </div>
-        </main>
-    </div>
+        if (error) throw error;
 
-    <script src="../supabase.js"></script>
-    <script>
-        const gate = document.getElementById('gatekeeper');
-        const dash = document.getElementById('dashboard');
-        const errorMsg = document.getElementById('error-msg');
-
-        async function intentarLogin() {
-            const clave = document.getElementById('clave-maestra').value;
+        if (esValido === true) {
+            // ÉXITO: Guardamos el estado en la sesión
+            sessionStorage.setItem('key_admin_506', intento); 
             
-            // Llamamos a tu función de base de datos 'login_admin'
-            const { data, error } = await supabase.rpc('login_admin', { 
-                clave_intento: clave 
-            });
-
-            if (data === true) {
-                sessionStorage.setItem('key_admin', clave); // Guardamos para aprobar luego
-                gate.style.display = 'none';
+            // Animación de salida
+            document.getElementById('gatekeeper').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('gatekeeper').style.display = 'none';
+                const dash = document.getElementById('dashboard');
                 dash.classList.remove('hidden');
-                setTimeout(() => dash.classList.add('opacity-100'), 100);
-            } else {
-                errorMsg.classList.remove('hidden');
-                document.getElementById('clave-maestra').value = '';
-            }
+                setTimeout(() => dash.classList.add('opacity-100'), 50);
+            }, 500);
+        } else {
+            // FALLO: La base de datos dijo que no
+            mostrarError();
         }
+    } catch (err) {
+        console.error("Error de autenticación:", err);
+        mostrarError();
+    } finally {
+        btn.innerText = "VERIFICAR IDENTIDAD";
+        btn.disabled = false;
+    }
+}
 
-        function logout() {
+function mostrarError() {
+    const errorCont = document.getElementById('error-container');
+    errorCont.classList.remove('hidden');
+    document.getElementById('clave-maestra').value = '';
+    
+    // Animación de sacudida en el cuadro
+    const glass = document.querySelector('.glass');
+    glass.classList.add('animate-shake');
+    setTimeout(() => glass.classList.remove('animate-shake'), 500);
+}
+
+function logout() {
+    sessionStorage.clear();
+    window.location.reload();
+}
+
+// Al cargar, verificamos si ya había una sesión activa
+document.addEventListener('DOMContentLoaded', async () => {
+    const savedKey = sessionStorage.getItem('key_admin_506');
+    if (savedKey) {
+        // Validamos la llave guardada para estar seguros
+        const { data } = await supabase.rpc('login_admin', { clave_intento: savedKey });
+        if (data === true) {
+            document.getElementById('gatekeeper').style.display = 'none';
+            const dash = document.getElementById('dashboard');
+            dash.classList.remove('hidden');
+            dash.classList.add('opacity-100');
+        } else {
             sessionStorage.clear();
-            window.location.reload();
         }
-    </script>
-</body>
-</html>
+    }
+});
