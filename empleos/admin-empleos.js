@@ -46,6 +46,8 @@ async function cargarSolicitudes(filtro = 'todas') {
 
     listaFiltrada.forEach(job => {
         const card = document.createElement('div');
+        // ASIGNAMOS EL ID AQUÍ PARA QUE EL BORRADO VISUAL FUNCIONE
+        card.id = `card-${job.id}`;
         card.className = "glass neon-border p-5 rounded-3xl flex flex-col gap-4 group hover:bg-white/[0.05]";
         
         card.innerHTML = `
@@ -112,6 +114,7 @@ window.eliminar = async (id) => {
         if (elemento) elemento.style.display = 'flex'; // Si falló, lo volvemos a mostrar
     }
 };
+
 window.cargarSolicitudes = cargarSolicitudes;
 
 // Carga inicial
