@@ -8,59 +8,127 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #0a0a0a; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .glass { background: rgba(18, 18, 18, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(212, 163, 115, 0.1); }
-        .module-card { transition: all 0.4s ease; background: #121212; border: 1px solid rgba(255,255,255,0.03); }
-        .module-card:hover { border-color: #d4a373; transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        /* Paleta: Azul Navy Profundo, Blanco y Gris Plata */
+        body { background-color: #050b1a; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        
+        .glass { 
+            background: rgba(15, 23, 42, 0.8); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+        
+        .module-card { 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            background: #0f172a; 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+        }
+        
+        .module-card:hover { 
+            border-color: #3b82f6; 
+            transform: translateY(-5px); 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4); 
+        }
+
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             25% { transform: translateX(-10px); }
             75% { transform: translateX(10px); }
         }
         .animate-shake { animation: shake 0.4s ease-in-out; }
+
+        /* Estilo para el input de clave */
+        .input-navy {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #f8fafc;
+            transition: all 0.3s ease;
+        }
+        .input-navy:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+        }
     </style>
 </head>
-<body class="text-stone-300 min-h-screen">
+<body class="text-slate-300 min-h-screen">
 
-    <div id="gatekeeper" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#0a0a0a] p-6 transition-all duration-500">
-        <div class="max-w-md w-full glass p-10 rounded-3xl text-center shadow-2xl border border-[#d4a373]/20">
-            <div class="w-16 h-16 border border-[#d4a373]/40 rounded-full flex items-center justify-center mx-auto mb-8">
-                <span class="text-[#d4a373] font-bold text-xl">506</span>
+    <div id="gatekeeper" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#050b1a] p-6 transition-all duration-500">
+        <div class="max-w-md w-full glass p-10 rounded-[2rem] text-center shadow-2xl border-t border-white/10">
+            <div class="w-16 h-16 border-2 border-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-8 rotate-3 shadow-[0_0_20px_rgba(59,130,246,0.5)]">
+                <span class="text-white font-bold text-xl uppercase italic">506</span>
             </div>
-            <h2 class="serif-title text-white text-xl tracking-[0.4em] uppercase mb-8">Acceso Maestro</h2>
+            
+            <h2 class="text-white text-xs tracking-[0.6em] uppercase mb-8 font-light">Acceso Privado Maestro</h2>
+            
             <div class="relative mb-6">
-                <input type="password" id="clave-maestra" placeholder="PALABRA CLAVE" 
-                    class="w-full bg-black border border-white/5 p-4 rounded-xl text-center tracking-[0.4em] text-[#d4a373] outline-none focus:border-[#d4a373]/50 transition-all font-mono">
+                <input type="password" id="clave-maestra" placeholder="DIGITE LA LLAVE" 
+                    class="input-navy w-full p-4 rounded-xl text-center tracking-[0.4em] outline-none font-mono text-sm"
+                    onkeypress="if(event.key === 'Enter') intentarLogin()">
+                
+                <button onclick="toggleClave()" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors">
+                    <svg id="eye-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                </button>
             </div>
-            <button onclick="intentarLogin()" id="btn-login" class="w-full bg-[#d4a373] text-black font-black text-[10px] py-4 rounded-xl tracking-[0.3em] uppercase hover:bg-[#c29262] transition-all mb-4">
+
+            <button onclick="intentarLogin()" id="btn-login" class="w-full bg-blue-600 text-white font-bold text-[10px] py-4 rounded-xl tracking-[0.3em] uppercase hover:bg-blue-500 shadow-lg shadow-blue-900/20 transition-all mb-4">
                 Verificar Identidad
             </button>
+            
             <div id="error-container" class="hidden">
-                <p class="text-red-500 text-[9px] uppercase tracking-widest font-bold bg-red-500/10 py-2 rounded">Acceso Denegado</p>
+                <p class="text-red-400 text-[10px] uppercase tracking-widest font-bold">Llave Incorrecta</p>
             </div>
         </div>
     </div>
 
     <div id="dashboard" class="hidden opacity-0 transition-opacity duration-700">
-        <nav class="p-8 border-b border-white/5 flex justify-between items-center bg-[#0a0a0a]/50 sticky top-0 backdrop-blur-md z-50">
-            <h1 class="text-white font-bold text-2xl italic">Punto 506 <span class="text-[#d4a373] not-italic">Admin</span></h1>
-            <button onclick="logout()" class="text-[9px] bg-white/5 px-6 py-2 rounded-full uppercase tracking-widest hover:text-red-400 transition-all">Cerrar Sesión</button>
+        <nav class="p-6 border-b border-white/5 flex justify-between items-center bg-[#050b1a]/80 sticky top-0 backdrop-blur-md z-50">
+            <div>
+                <h1 class="text-white font-black text-xl tracking-tighter italic">PUNTO 506 <span class="text-blue-500 not-italic">ADMIN</span></h1>
+                <div class="h-1 w-full bg-blue-600 rounded-full mt-1"></div>
+            </div>
+            <button onclick="logout()" class="text-[9px] border border-white/10 px-6 py-2 rounded-full uppercase tracking-widest hover:bg-red-500/20 hover:text-red-400 transition-all">Salir del Sistema</button>
         </nav>
+
         <main class="max-w-6xl mx-auto p-8 md:p-16">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <a href="admin-empleos.html" class="module-card p-10 rounded-3xl group">
-                    <h3 class="text-white font-bold text-xl mb-3">Gestión de Empleos</h3>
-                    <p class="text-sm text-stone-500 mb-6">Aprobar o eliminar puestos.</p>
-                    <span class="text-[#d4a373] text-[9px] font-bold uppercase tracking-[0.2em]">Abrir Módulo →</span>
+            <div class="mb-12">
+                <span class="text-blue-500 text-[10px] uppercase tracking-[0.8em] block mb-2 font-bold">Panel Personal</span>
+                <h2 class="text-4xl text-white font-bold tracking-tight">Módulos de Control</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <a href="admin-empleos.html" class="module-card p-10 rounded-[2.5rem] group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+                        <svg class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10 4h4v2h-4V4z"/></svg>
+                    </div>
+                    
+                    <div class="w-12 h-12 bg-blue-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    
+                    <h3 class="text-white font-bold text-2xl mb-2">Empleos</h3>
+                    <p class="text-sm text-slate-500 mb-6">Administrar vacantes y solicitudes de la zona.</p>
+                    <div class="flex items-center text-blue-500 text-[10px] font-bold uppercase tracking-widest">
+                        Entrar <span class="ml-2 group-hover:translate-x-2 transition-transform">→</span>
+                    </div>
                 </a>
+
+                <div class="module-card p-10 rounded-[2.5rem] opacity-40 cursor-not-allowed grayscale">
+                    <div class="w-12 h-12 bg-slate-800 rounded-xl mb-6"></div>
+                    <h3 class="text-slate-400 font-bold text-2xl mb-2">Directorio</h3>
+                    <p class="text-sm text-slate-600">Configuración de comercios locales.</p>
+                </div>
             </div>
         </main>
     </div>
 
     <script>
-        // 1. CONFIGURACIÓN DIRECTA (Para evitar el error de supabase.js)
-        const SUPABASE_URL = 'https://svkyczglvidntguqduej.supabase.co'; // <--- PEGA TU URL AQUÍ
-        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN2a3ljemdsdmlkbnRndXFkdWVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5MDAwODEsImV4cCI6MjA5MDQ3NjA4MX0.gASHvLpE4xrSKY0ll5Votnz1oBAtrTXWnT7ww__Tdpg'; // <--- PEGA TU KEY AQUÍ
+        // CONFIGURACIÓN SUPABASE
+        const SUPABASE_URL = 'https://svkyczglvidntguqduej.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN2a3ljemdsdmlkbnRndXFkdWVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5MDAwODEsImV4cCI6MjA5MDQ3NjA4MX0.gASHvLpE4xrSKY0ll5Votnz1oBAtrTXWnT7ww__Tdpg';
         
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -70,15 +138,20 @@
         const inputClave = document.getElementById('clave-maestra');
         const btnLogin = document.getElementById('btn-login');
 
+        // Función Ver/Ocultar Clave
+        function toggleClave() {
+            inputClave.type = inputClave.type === 'password' ? 'text' : 'password';
+        }
+
         async function intentarLogin() {
             const clave = inputClave.value.trim();
             if (!clave) return;
 
-            btnLogin.innerText = "VERIFICANDO...";
+            btnLogin.innerText = "ACCEDIENDO...";
             btnLogin.disabled = true;
+            errorCont.classList.add('hidden');
 
             try {
-                // Llamamos a la función que vimos en tu captura de Supabase
                 const { data, error } = await _supabase.rpc('login_admin', { 
                     clave_intento: clave 
                 });
@@ -87,9 +160,12 @@
 
                 if (data === true) {
                     sessionStorage.setItem('key_admin', clave);
-                    gate.style.display = 'none';
-                    dash.classList.remove('hidden');
-                    setTimeout(() => dash.classList.add('opacity-100'), 50);
+                    gate.style.opacity = '0';
+                    setTimeout(() => {
+                        gate.style.display = 'none';
+                        dash.classList.remove('hidden');
+                        setTimeout(() => dash.classList.add('opacity-100'), 50);
+                    }, 500);
                 } else {
                     mostrarError();
                 }
@@ -112,6 +188,15 @@
         function logout() {
             sessionStorage.clear();
             window.location.reload();
+        }
+
+        // Auto-login si la sesión está activa
+        window.onload = () => {
+            const key = sessionStorage.getItem('key_admin');
+            if (key) {
+                inputClave.value = key;
+                intentarLogin();
+            }
         }
     </script>
 </body>
