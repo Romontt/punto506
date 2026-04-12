@@ -1,7 +1,7 @@
 async function cargarEmpleos() {
     const contenedor = document.getElementById('contenedor-empleos');
 
-    // Solo pedimos los que están aprobados
+    // Jalar datos de la tabla 'empleos'
     const { data: empleos, error } = await supabase
         .from('empleos')
         .select('*')
@@ -9,29 +9,35 @@ async function cargarEmpleos() {
         .order('created_at', { ascending: false });
 
     if (error) {
-        console.error("Error cargando empleos:", error);
+        console.error(error);
         return;
     }
 
     if (empleos.length === 0) {
-        contenedor.innerHTML = `<p class="text-center text-gray-500 col-span-full">Por el momento no hay vacantes disponibles. ¡Vuelve pronto!</p>`;
+        contenedor.innerHTML = `
+            <div class="col-span-full text-center p-20 border border-dashed border-stone-800 rounded-2xl">
+                <p class="elegant-italic text-stone-500">No hay vacantes activas por el momento.</p>
+            </div>`;
         return;
     }
 
-    // Limpiamos el cargando y dibujamos las tarjetas
     contenedor.innerHTML = '';
-    
+
     empleos.forEach(empleo => {
         contenedor.innerHTML += `
-            <div class="bg-gray-800 rounded-2xl overflow-hidden shadow-2xl border border-gray-700 transition transform hover:scale-105">
-                <img src="${empleo.afiche_url}" alt="${empleo.titulo_puesto}" class="w-full h-auto object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-teal-400">${empleo.titulo_puesto}</h3>
-                    <p class="text-gray-300 mb-4">${empleo.nombre_comercio}</p>
-                    <a href="https://wa.me/${empleo.whatsapp_contacto}?text=Hola,%20vigo%20su%20anuncio%20en%20Punto506" 
-                       target="_blank"
-                       class="block w-full text-center bg-teal-600 hover:bg-teal-500 text-white font-bold py-3 rounded-xl transition">
-                        Aplicar por WhatsApp
+            <div class="glass-card animate-reveal">
+                <div class="relative overflow-hidden group h-80">
+                    <img src="${empleo.afiche_url}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Afiche">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#130f0e] to-transparent opacity-60"></div>
+                </div>
+                <div class="p-8">
+                    <span class="text-[10px] tracking-[0.2em] text-[#d4a373] uppercase font-bold">${empleo.nombre_comercio}</span>
+                    <h3 class="business-title text-xl mt-2 mb-6">${empleo.titulo_puesto}</h3>
+                    
+                    <a href="https://wa.me/${empleo.whatsapp_contacto}?text=Hola,%20vi%20la%20vacante%20de%20${empleo.titulo_puesto}%20en%20Punto506" 
+                       target="_blank" 
+                       class="w-full">
+                        <button class="w-full">POSTULAR POR WHATSAPP</button>
                     </a>
                 </div>
             </div>
@@ -39,5 +45,4 @@ async function cargarEmpleos() {
     });
 }
 
-// Ejecutamos la carga al abrir la página
 document.addEventListener('DOMContentLoaded', cargarEmpleos);
