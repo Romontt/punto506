@@ -7,64 +7,64 @@ const form = document.getElementById('form-publicar');
 const btnEnviar = document.getElementById('btn-enviar');
 const mensajeExito = document.getElementById('mensaje-exito');
 
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+// SEGURO: Solo ejecutar si el formulario existe en la página actual
+if (form) {
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-    btnEnviar.innerText = "SUBIENDO AFICHE...";
-    btnEnviar.disabled = true;
+        btnEnviar.innerText = "SUBIENDO AFICHE...";
+        btnEnviar.disabled = true;
 
-    const nombreComercio = document.getElementById('nombre_comercio').value;
-    const tituloPuesto = document.getElementById('titulo_puesto').value;
-    const fileInput = document.getElementById('afiche_file');
-    const file = fileInput.files[0];
+        const nombreComercio = document.getElementById('nombre_comercio').value;
+        const tituloPuesto = document.getElementById('titulo_puesto').value;
+        const fileInput = document.getElementById('afiche_file');
+        const file = fileInput.files[0];
 
-    try {
-        if (!file) throw new Error("Debes seleccionar una imagen.");
+        try {
+            if (!file) throw new Error("Debes seleccionar una imagen.");
 
-        // 1. Nombre único para el archivo en el storage
-        const fileExt = file.name.split('.').pop();
-        const fileName = `${Date.now()}-${Math.floor(Math.random() * 1000)}.${fileExt}`;
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${Date.now()}-${Math.floor(Math.random() * 1000)}.${fileExt}`;
 
-        // 2. Subir al Bucket 'afiches-empleos'
-        const { data: uploadData, error: uploadError } = await _supabase.storage
-            .from('afiches-empleos')
-            .upload(fileName, file);
+            // 1. Subir al Bucket 'afiches-empleos'
+            const { data: uploadData, error: uploadError } = await _supabase.storage
+                .from('afiches-empleos')
+                .upload(fileName, file);
 
-        if (uploadError) throw uploadError;
+            if (uploadError) throw uploadError;
 
-        // 3. Obtener URL Pública
-        const { data: { publicUrl } } = _supabase.storage
-            .from('afiches-empleos')
-            .getPublicUrl(fileName);
+            // 2. Obtener URL Pública
+            const { data: { publicUrl } } = _supabase.storage
+                .from('afiches-empleos')
+                .getPublicUrl(fileName);
 
-        // 4. Insertar en tabla 'empleos'
-        btnEnviar.innerText = "PROCESANDO...";
-        const { error: insertError } = await _supabase
-            .from('empleos')
-            .insert([
-                { 
-                    nombre_comercio: nombreComercio, 
-                    titulo_puesto: tituloPuesto, 
-                    afiche_url: publicUrl,
-                    aprobado: false 
-                }
-            ]);
+            // 3. Insertar en tabla 'empleos'
+            btnEnviar.innerText = "PROCESANDO...";
+            const { error: insertError } = await _supabase
+                .from('empleos')
+                .insert([
+                    { 
+                        nombre_comercio: nombreComercio, 
+                        titulo_puesto: tituloPuesto, 
+                        afiche_url: publicUrl,
+                        aprobado: false 
+                    }
+                ]);
 
-        if (insertError) throw insertError;
+            if (insertError) throw insertError;
 
-        // Éxito
-        form.classList.add('hidden');
-        mensajeExito.classList.remove('hidden');
-        
-        // Redirige de vuelta a la bolsa de empleos local (index.html en la misma carpeta)
-        setTimeout(() => {
-            window.location.href = 'index.html';
-        }, 4000);
+            form.classList.add('hidden');
+            mensajeExito.classList.remove('hidden');
+            
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 4000);
 
-    } catch (err) {
-        console.error("Error:", err);
-        alert("Hubo un error: " + err.message);
-        btnEnviar.innerText = "Enviar para Aprobación";
-        btnEnviar.disabled = false;
-    }
-});
+        } catch (err) {
+            console.error("Error:", err);
+            alert("Hubo un error: " + err.message);
+            btnEnviar.innerText = "Enviar para Aprobación";
+            btnEnviar.disabled = false;
+        }
+    });
+}
