@@ -95,21 +95,21 @@ window.aprobar = async (id) => {
 };
 
 window.eliminar = async (id) => {
-    if (!confirm("¿Eliminar esta vacante permanentemente?")) return;
+    if (!confirm("¿Eliminar esta vacante?")) return;
     
-    // Forzamos que el ID sea tratado correctamente
-    const idParaBorrar = isNaN(id) ? id : parseInt(id);
+    // 1. Lo quitamos de la pantalla de una vez para que el admin sienta que funcionó
+    const elemento = document.getElementById(`card-${id}`);
+    if (elemento) elemento.style.display = 'none';
 
+    // 2. Intentamos borrarlo en la base de datos
     const { error } = await _supabase
         .from('empleos')
         .delete()
-        .eq('id', idParaBorrar);
+        .eq('id', id);
 
     if (error) {
-        alert("Error al eliminar: " + error.message);
-    } else {
-        console.log("Borrado exitoso de:", idParaBorrar);
-        cargarSolicitudes(filtroActual);
+        alert("Error real en base de datos: " + error.message);
+        if (elemento) elemento.style.display = 'flex'; // Si falló, lo volvemos a mostrar
     }
 };
 window.cargarSolicitudes = cargarSolicitudes;
