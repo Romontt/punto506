@@ -62,11 +62,11 @@ async function cargarSolicitudes(filtro = 'todas') {
 
             <div class="flex gap-2 mt-2">
                 ${!job.aprobado ? `
-                    <button onclick="aprobar(${job.id})" class="flex-1 bg-white text-black text-[10px] font-black uppercase py-4 rounded-xl hover:bg-[#d4a373] transition-all duration-300">Aprobar Ahora</button>
+                    <button onclick="aprobar('${job.id}')" class="flex-1 bg-white text-black text-[10px] font-black uppercase py-4 rounded-xl hover:bg-[#d4a373] transition-all duration-300">Aprobar Ahora</button>
                 ` : `
                     <div class="flex-1 bg-white/5 border border-white/10 text-stone-400 text-[9px] font-bold uppercase py-4 rounded-xl text-center">Publicado</div>
                 `}
-                <button onclick="eliminar(${job.id})" class="px-5 bg-red-500/10 text-red-500 border border-red-500/10 rounded-xl hover:bg-red-500 hover:text-white transition-all">
+                <button onclick="eliminar('${job.id}')" class="px-5 bg-red-500/10 text-red-500 border border-red-500/10 rounded-xl hover:bg-red-500 hover:text-white transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                     </svg>
