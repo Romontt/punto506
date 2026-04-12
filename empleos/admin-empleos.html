@@ -13,7 +13,16 @@
 
     <nav class="border-b border-[#d4a373]/10 py-6 px-8">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <h1 class="serif-title text-xl tracking-[0.2em] text-white uppercase font-normal">Panel de Control</h1>
+            <div class="flex items-center gap-6">
+                <a href="admin.html" class="flex items-center gap-2 group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-stone-500 group-hover:text-[#d4a373] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <span class="text-[9px] uppercase tracking-widest text-stone-500 group-hover:text-[#d4a373] transition-colors font-bold">Volver al Panel</span>
+                </a>
+                <div class="h-4 w-[1px] bg-white/10"></div>
+                <h1 class="serif-title text-xl tracking-[0.2em] text-white uppercase font-normal">Panel de Control</h1>
+            </div>
             <button onclick="cerrarSesion()" class="text-[9px] uppercase tracking-widest text-red-500 hover:text-white transition-colors">Cerrar Sesión</button>
         </div>
     </nav>
