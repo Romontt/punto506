@@ -97,31 +97,33 @@
         const inputClave = document.getElementById('clave-maestra');
         const btnLogin = document.getElementById('btn-login');
 
-        // Función para ver/ocultar clave
         function toggleClave() {
             inputClave.type = inputClave.type === 'password' ? 'text' : 'password';
         }
 
         async function intentarLogin() {
-            const clave = inputClave.value;
-            if (!clave) return;
+            const claveInput = inputClave.value.trim();
+            if (!claveInput) return;
 
-            // Feedback visual
             btnLogin.innerText = "VERIFICANDO...";
             btnLogin.disabled = true;
             errorCont.classList.add('hidden');
 
             try {
-                // Llamada a la función RPC de Supabase
+                // Ejecutamos la función RPC. 
+                // clave_intento es el parámetro que veo en tu captura de Supabase.
                 const { data, error } = await supabase.rpc('login_admin', { 
-                    clave_intento: clave 
+                    clave_intento: claveInput 
                 });
 
-                if (error) throw error;
+                if (error) {
+                    console.error("Error en RPC:", error.message);
+                    mostrarError();
+                    return;
+                }
 
                 if (data === true) {
-                    // ÉXITO
-                    sessionStorage.setItem('key_admin', clave);
+                    sessionStorage.setItem('key_admin', claveInput);
                     gate.style.opacity = '0';
                     setTimeout(() => {
                         gate.style.display = 'none';
@@ -129,11 +131,10 @@
                         setTimeout(() => dash.classList.add('opacity-100'), 50);
                     }, 500);
                 } else {
-                    // FALLO
                     mostrarError();
                 }
             } catch (err) {
-                console.error("Error de login:", err);
+                console.error("Error inesperado:", err);
                 mostrarError();
             } finally {
                 btnLogin.innerText = "VERIFICAR IDENTIDAD";
@@ -154,16 +155,20 @@
             window.location.reload();
         }
 
-        // Auto-login si ya existe la sesión válida
+        // Auto-login mejorado
         document.addEventListener('DOMContentLoaded', async () => {
             const savedKey = sessionStorage.getItem('key_admin');
             if (savedKey) {
-                const { data } = await supabase.rpc('login_admin', { clave_intento: savedKey });
-                if (data === true) {
-                    gate.style.display = 'none';
-                    dash.classList.remove('hidden');
-                    dash.classList.add('opacity-100');
-                } else {
+                try {
+                    const { data } = await supabase.rpc('login_admin', { clave_intento: savedKey });
+                    if (data === true) {
+                        gate.style.display = 'none';
+                        dash.classList.remove('hidden');
+                        dash.classList.add('opacity-100');
+                    } else {
+                        sessionStorage.clear();
+                    }
+                } catch (e) {
                     sessionStorage.clear();
                 }
             }
