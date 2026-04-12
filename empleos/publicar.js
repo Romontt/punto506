@@ -21,22 +21,23 @@ form.addEventListener('submit', async (e) => {
     try {
         if (!file) throw new Error("Debes seleccionar una imagen.");
 
+        // 1. Nombre único para el archivo en el storage
         const fileExt = file.name.split('.').pop();
         const fileName = `${Date.now()}-${Math.floor(Math.random() * 1000)}.${fileExt}`;
 
-        // 1. Subir al Bucket
+        // 2. Subir al Bucket 'afiches-empleos'
         const { data: uploadData, error: uploadError } = await _supabase.storage
             .from('afiches-empleos')
             .upload(fileName, file);
 
         if (uploadError) throw uploadError;
 
-        // 2. Obtener URL Pública
+        // 3. Obtener URL Pública
         const { data: { publicUrl } } = _supabase.storage
             .from('afiches-empleos')
             .getPublicUrl(fileName);
 
-        // 3. Insertar en tabla
+        // 4. Insertar en tabla 'empleos'
         btnEnviar.innerText = "PROCESANDO...";
         const { error: insertError } = await _supabase
             .from('empleos')
@@ -51,13 +52,14 @@ form.addEventListener('submit', async (e) => {
 
         if (insertError) throw insertError;
 
-        // Éxito y Redirección a Empleos
+        // Éxito
         form.classList.add('hidden');
         mensajeExito.classList.remove('hidden');
         
+        // Redirección corregida a la bolsa de empleos local
         setTimeout(() => {
-            window.location.href = 'index.html'; // Redirige al index de la carpeta actual (Empleos)
-        }, 3000);
+            window.location.href = 'index.html';
+        }, 4000);
 
     } catch (err) {
         console.error("Error:", err);
