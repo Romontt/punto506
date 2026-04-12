@@ -97,19 +97,21 @@ window.aprobar = async (id) => {
 window.eliminar = async (id) => {
     if (!confirm("¿Eliminar esta vacante permanentemente?")) return;
     
+    // Forzamos que el ID sea tratado correctamente
+    const idParaBorrar = isNaN(id) ? id : parseInt(id);
+
     const { error } = await _supabase
         .from('empleos')
         .delete()
-        .eq('id', id);
+        .eq('id', idParaBorrar);
 
     if (error) {
         alert("Error al eliminar: " + error.message);
     } else {
-        // Recargamos usando el filtro actual para que la lista se actualice de verdad
+        console.log("Borrado exitoso de:", idParaBorrar);
         cargarSolicitudes(filtroActual);
     }
 };
-
 window.cargarSolicitudes = cargarSolicitudes;
 
 // Carga inicial
