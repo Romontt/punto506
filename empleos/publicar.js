@@ -10,39 +10,59 @@ const mensajeExito = document.getElementById('mensaje-exito');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    btnEnviar.innerText = "ENVIANDO...";
+    btnEnviar.innerText = "SUBIENDO IMAGEN...";
     btnEnviar.disabled = true;
 
-    // Captura de datos - Asegúrate de que los IDs coincidan con tu HTML
     const nombreComercio = document.getElementById('nombre_comercio').value;
     const tituloPuesto = document.getElementById('titulo_puesto').value;
-    const aficheUrl = document.getElementById('afiche_url').value;
+    const fileInput = document.getElementById('afiche_file');
+    const file = fileInput.files[0];
 
     try {
-        // INSERT coincidiendo exactamente con tus columnas de la captura
-        const { error } = await _supabase
+        if (!file) throw new Error("Debes seleccionar una imagen.");
+
+        // 1. Generar un nombre único para el archivo
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Math.random()}.${fileExt}`;
+        const filePath = `${fileName}`;
+
+        // 2. Subir imagen al Bucket 'afiches-empleos'
+        const { data: uploadData, error: uploadError } = await _supabase.storage
+            .from('afiches-empleos')
+            .upload(filePath, file);
+
+        if (uploadError) throw uploadError;
+
+        // 3. Obtener la URL pública de la imagen subida
+        const { data: { publicUrl } } = _supabase.storage
+            .from('afiches-empleos')
+            .getPublicUrl(filePath);
+
+        // 4. Insertar los datos en la tabla 'empleos'
+        btnEnviar.innerText = "GUARDANDO DATOS...";
+        const { error: insertError } = await _supabase
             .from('empleos')
             .insert([
                 { 
                     nombre_comercio: nombreComercio, 
-                    titulo_puesto: tituloPuesto, // Nombre exacto de tu tabla
-                    afiche_url: aficheUrl,       // Nombre exacto de tu tabla
-                    aprobado: false              // Para que tú lo valides luego
+                    titulo_puesto: tituloPuesto, 
+                    afiche_url: publicUrl, // Aquí guardamos la URL que generó el Storage
+                    aprobado: false 
                 }
             ]);
 
-        if (error) throw error;
+        if (insertError) throw insertError;
 
-        // Éxito
+        // Éxito total
         form.classList.add('hidden');
         mensajeExito.classList.remove('hidden');
         
         setTimeout(() => {
-            window.location.href = 'index.html';
+            window.location.href = '../index.html';
         }, 3000);
 
     } catch (err) {
-        console.error("Error detalle:", err);
+        console.error("Error completo:", err);
         alert("Error: " + err.message);
         btnEnviar.innerText = "Enviar para Aprobación";
         btnEnviar.disabled = false;
