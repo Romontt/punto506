@@ -59,13 +59,13 @@ async function renderEmpleos() {
                 <span class="serif-title text-[8px] text-[#d4a373] tracking-[0.3em] uppercase font-bold">${emp.nombre_comercio}</span>
                 <h3 class="serif-title text-base mt-2 mb-6 text-white leading-tight tracking-wide">${emp.titulo_puesto}</h3>
                 
-                <a href="https://wa.me/${emp.whatsapp_contacto.replace(/\s+/g, '')}" 
-                   target="_blank" 
-                   class="mt-auto block">
-                    <button class="w-full py-4 border border-[#d4a373]/30 text-[#d4a373] text-[9px] font-black uppercase tracking-[0.2em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-300 rounded-xl">
-                        Postular por WhatsApp
-                    </button>
-                </a>
+                <a href="https://wa.me/${emp.whatsapp_contacto ? emp.whatsapp_contacto.replace(/\s+/g, '') : ''}" 
+   target="_blank" 
+   class="mt-auto block ${!emp.whatsapp_contacto ? 'pointer-events-none opacity-50' : ''}">
+    <button class="w-full py-4 border border-[#d4a373]/30 text-[#d4a373] text-[9px] font-black uppercase tracking-[0.2em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-300 rounded-xl">
+        ${emp.whatsapp_contacto ? 'Postular por WhatsApp' : 'Sin contacto disponible'}
+    </button>
+</a>
             </div>
         </div>
     `).join('');
