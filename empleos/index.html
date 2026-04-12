@@ -6,30 +6,39 @@
     <title>Bolsa de Empleo | Punto 506</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css"> 
 </head>
-<body class="bg-gray-900 text-white font-sans">
+<body class="bg-[#130f0e] text-white">
 
-    <nav class="bg-teal-700 p-4 shadow-lg">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold tracking-tighter">PUNTO<span class="text-yellow-400">506</span></h1>
-            <a href="publicar.html" class="bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-bold py-2 px-4 rounded-full transition text-sm">
-                + Publicar Vacante
-            </a>
+    <nav class="p-6 flex justify-between items-center border-bottom border-[rgba(212,163,115,0.1)]">
+        <div class="brand-container">
+            <div class="iso-emblem nav-logo-iso rounded-full">
+                <span class="text-[10px] text-[#d4a373] font-bold">506</span>
+            </div>
+            <span class="nav-brand-name">PUNTO 506</span>
         </div>
+        <a href="publicar.html" class="bg-[#d4a373] text-[#130f0e] px-4 py-2 rounded-lg text-[10px] font-black tracking-widest uppercase hover:scale-105 transition-all">
+            + Publicar
+        </a>
     </nav>
 
-    <header class="py-10 text-center">
-        <h2 class="text-4xl font-extrabold mb-2">Bolsa de Empleo</h2>
-        <p class="text-gray-400">Encuentra las mejores oportunidades en la zona de Pococí</p>
+    <header class="header-texture text-center py-20">
+        <h1 class="serif-title text-4xl md:text-5xl text-[#d4a373] animate-reveal">BOLSA DE EMPLEO</h1>
+        <p class="elegant-italic text-stone-400 mt-4 opacity-80">Oportunidades que impulsan el talento local</p>
     </header>
 
-    <main class="container mx-auto px-4 pb-20">
+    <main class="container mx-auto px-6 -mt-10">
         <div id="contenedor-empleos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="animate-pulse text-center text-gray-500 col-span-full">
-                Cargando oportunidades...
+            <div class="col-span-full text-center py-20 animate-pulse text-[#d4a373]">
+                Buscando vacantes...
             </div>
         </div>
     </main>
+
+    <footer class="header-texture mt-20 py-10 text-center">
+        <p class="text-[9px] tracking-[0.3em] text-stone-500 uppercase">Punto 506 &copy; 2026 - Pococí, Costa Rica</p>
+    </footer>
 
     <script src="../supabase.js"></script> <script src="empleos.js"></script>
 </body>
