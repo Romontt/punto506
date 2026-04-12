@@ -1,84 +1,173 @@
-// Función para ver/ocultar la clave
-function toggleClave() {
-    const input = document.getElementById('clave-maestra');
-    input.type = input.type === 'password' ? 'text' : 'password';
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Panel | Punto 506</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #0a0a0a; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .glass { background: rgba(18, 18, 18, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(212, 163, 115, 0.1); }
+        .module-card { transition: all 0.4s ease; background: #121212; border: 1px solid rgba(255,255,255,0.03); }
+        .module-card:hover { border-color: #d4a373; transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        .animate-shake { animation: shake 0.4s ease-in-out; }
+        input::-ms-reveal, input::-ms-clear { display: none; }
+    </style>
+</head>
+<body class="text-stone-300 min-h-screen">
 
-// Función principal de Login conectada a Supabase
-async function intentarLogin() {
-    const intento = document.getElementById('clave-maestra').value;
-    const errorCont = document.getElementById('error-container');
-    const btn = document.querySelector('button[onclick="intentarLogin()"]');
-
-    if (!intento) return;
-
-    // Feedback visual de carga
-    btn.innerText = "VERIFICANDO...";
-    btn.disabled = true;
-
-    try {
-        // Llamamos a la función RPC de Supabase
-        // clave_intento es el nombre del parámetro que definiste en el SQL
-        const { data: esValido, error } = await supabase.rpc('login_admin', { 
-            clave_intento: intento 
-        });
-
-        if (error) throw error;
-
-        if (esValido === true) {
-            // ÉXITO: Guardamos el estado en la sesión
-            sessionStorage.setItem('key_admin_506', intento); 
+    <div id="gatekeeper" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#0a0a0a] p-6 transition-all duration-500">
+        <div class="max-w-md w-full glass p-10 rounded-3xl text-center shadow-2xl border border-[#d4a373]/20">
+            <div class="w-16 h-16 border border-[#d4a373]/40 rounded-full flex items-center justify-center mx-auto mb-8">
+                <span class="text-[#d4a373] font-bold text-xl">506</span>
+            </div>
+            <h2 class="serif-title text-white text-xl tracking-[0.4em] uppercase mb-8">Acceso Maestro</h2>
             
-            // Animación de salida
-            document.getElementById('gatekeeper').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('gatekeeper').style.display = 'none';
-                const dash = document.getElementById('dashboard');
-                dash.classList.remove('hidden');
-                setTimeout(() => dash.classList.add('opacity-100'), 50);
-            }, 500);
-        } else {
-            // FALLO: La base de datos dijo que no
-            mostrarError();
+            <div class="relative mb-6">
+                <input type="password" id="clave-maestra" placeholder="PALABRA CLAVE" 
+                    class="w-full bg-black border border-white/5 p-4 rounded-xl text-center tracking-[0.4em] text-[#d4a373] outline-none focus:border-[#d4a373]/50 transition-all font-mono"
+                    onkeypress="if(event.key === 'Enter') intentarLogin()">
+                
+                <button onclick="toggleClave()" class="absolute right-4 top-1/2 -translate-y-1/2 text-stone-600 hover:text-[#d4a373] transition-colors">
+                    <svg id="eye-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path id="eye-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                </button>
+            </div>
+
+            <button onclick="intentarLogin()" id="btn-login" class="w-full bg-[#d4a373] text-black font-black text-[10px] py-4 rounded-xl tracking-[0.3em] uppercase hover:bg-[#c29262] transition-all mb-4">
+                Verificar Identidad
+            </button>
+            
+            <div id="error-container" class="hidden">
+                <p class="text-red-500 text-[9px] uppercase tracking-widest font-bold bg-red-500/10 py-2 rounded">Acceso Denegado: Palabra incorrecta</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboard" class="hidden opacity-0 transition-opacity duration-700">
+        <nav class="p-8 border-b border-white/5 flex justify-between items-center bg-[#0a0a0a]/50 sticky top-0 backdrop-blur-md z-50">
+            <div>
+                <h1 class="text-white font-bold tracking-tighter text-2xl italic">Punto 506 <span class="text-[#d4a373] not-italic">Admin</span></h1>
+                <p class="text-[8px] uppercase tracking-[0.5em] text-stone-500 mt-1">Panel de Control General</p>
+            </div>
+            <button onclick="logout()" class="text-[9px] bg-white/5 px-6 py-2 rounded-full uppercase tracking-widest hover:bg-red-500/10 hover:text-red-400 transition-all">Cerrar Sesión</button>
+        </nav>
+
+        <main class="max-w-6xl mx-auto p-8 md:p-16">
+            <div class="mb-12">
+                <span class="text-[#d4a373] text-[10px] uppercase tracking-[0.6em] block mb-2">Bienvenido</span>
+                <h2 class="serif-title text-3xl text-white uppercase tracking-widest">Módulos de Gestión</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <a href="admin-empleos.html" class="module-card p-10 rounded-3xl group">
+                    <div class="w-14 h-14 bg-[#d4a373]/5 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-[#d4a373]/10 transition-all text-[#d4a373]">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-width="1.2"/></svg>
+                    </div>
+                    <h3 class="text-white font-bold text-xl mb-3 tracking-tight">Gestión de Empleos</h3>
+                    <p class="text-sm text-stone-500 leading-relaxed mb-6">Aprobar nuevas solicitudes o eliminar puestos expirados.</p>
+                    <span class="text-[#d4a373] text-[9px] font-bold uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all">Abrir Módulo →</span>
+                </a>
+
+                <div class="module-card p-10 rounded-3xl opacity-30 cursor-not-allowed">
+                    <div class="w-14 h-14 bg-stone-800 rounded-2xl flex items-center justify-center mb-8">
+                        <svg class="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-width="1.2"/></svg>
+                    </div>
+                    <h3 class="text-stone-400 font-bold text-xl mb-3 tracking-tight">Directorio Punto 506</h3>
+                    <p class="text-xs text-stone-600">Configuración de negocios y categorías.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../supabase.js"></script>
+    <script>
+        const gate = document.getElementById('gatekeeper');
+        const dash = document.getElementById('dashboard');
+        const errorCont = document.getElementById('error-container');
+        const inputClave = document.getElementById('clave-maestra');
+        const btnLogin = document.getElementById('btn-login');
+
+        // Función para ver/ocultar clave
+        function toggleClave() {
+            inputClave.type = inputClave.type === 'password' ? 'text' : 'password';
         }
-    } catch (err) {
-        console.error("Error de autenticación:", err);
-        mostrarError();
-    } finally {
-        btn.innerText = "VERIFICAR IDENTIDAD";
-        btn.disabled = false;
-    }
-}
 
-function mostrarError() {
-    const errorCont = document.getElementById('error-container');
-    errorCont.classList.remove('hidden');
-    document.getElementById('clave-maestra').value = '';
-    
-    // Animación de sacudida en el cuadro
-    const glass = document.querySelector('.glass');
-    glass.classList.add('animate-shake');
-    setTimeout(() => glass.classList.remove('animate-shake'), 500);
-}
+        async function intentarLogin() {
+            const clave = inputClave.value;
+            if (!clave) return;
 
-function logout() {
-    sessionStorage.clear();
-    window.location.reload();
-}
+            // Feedback visual
+            btnLogin.innerText = "VERIFICANDO...";
+            btnLogin.disabled = true;
+            errorCont.classList.add('hidden');
 
-// Al cargar, verificamos si ya había una sesión activa
-document.addEventListener('DOMContentLoaded', async () => {
-    const savedKey = sessionStorage.getItem('key_admin_506');
-    if (savedKey) {
-        // Validamos la llave guardada para estar seguros
-        const { data } = await supabase.rpc('login_admin', { clave_intento: savedKey });
-        if (data === true) {
-            document.getElementById('gatekeeper').style.display = 'none';
-            const dash = document.getElementById('dashboard');
-            dash.classList.remove('hidden');
-            dash.classList.add('opacity-100');
-        } else {
+            try {
+                // Llamada a la función RPC de Supabase
+                const { data, error } = await supabase.rpc('login_admin', { 
+                    clave_intento: clave 
+                });
+
+                if (error) throw error;
+
+                if (data === true) {
+                    // ÉXITO
+                    sessionStorage.setItem('key_admin', clave);
+                    gate.style.opacity = '0';
+                    setTimeout(() => {
+                        gate.style.display = 'none';
+                        dash.classList.remove('hidden');
+                        setTimeout(() => dash.classList.add('opacity-100'), 50);
+                    }, 500);
+                } else {
+                    // FALLO
+                    mostrarError();
+                }
+            } catch (err) {
+                console.error("Error de login:", err);
+                mostrarError();
+            } finally {
+                btnLogin.innerText = "VERIFICAR IDENTIDAD";
+                btnLogin.disabled = false;
+            }
+        }
+
+        function mostrarError() {
+            errorCont.classList.remove('hidden');
+            inputClave.value = '';
+            const glassBox = document.querySelector('.glass');
+            glassBox.classList.add('animate-shake');
+            setTimeout(() => glassBox.classList.remove('animate-shake'), 500);
+        }
+
+        function logout() {
             sessionStorage.clear();
+            window.location.reload();
         }
-    }
-});
+
+        // Auto-login si ya existe la sesión válida
+        document.addEventListener('DOMContentLoaded', async () => {
+            const savedKey = sessionStorage.getItem('key_admin');
+            if (savedKey) {
+                const { data } = await supabase.rpc('login_admin', { clave_intento: savedKey });
+                if (data === true) {
+                    gate.style.display = 'none';
+                    dash.classList.remove('hidden');
+                    dash.classList.add('opacity-100');
+                } else {
+                    sessionStorage.clear();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
