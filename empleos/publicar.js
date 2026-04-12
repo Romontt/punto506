@@ -56,7 +56,7 @@ form.addEventListener('submit', async (e) => {
         form.classList.add('hidden');
         mensajeExito.classList.remove('hidden');
         
-        // Redirección a la bolsa de empleos local (misma carpeta)
+        // Redirige de vuelta a la bolsa de empleos local (index.html en la misma carpeta)
         setTimeout(() => {
             window.location.href = 'index.html';
         }, 4000);
