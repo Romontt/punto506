@@ -7,7 +7,11 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const adminKey = sessionStorage.getItem('key_admin');
 if (!adminKey) window.location.href = 'admin.html';
 
+// Variable para rastrear en qué filtro estamos actualmente
+let filtroActual = 'pendientes';
+
 async function cargarSolicitudes(filtro = 'todas') {
+    filtroActual = filtro; // Guardamos el filtro actual
     const container = document.getElementById('solicitudes-container');
     const counterTotal = document.getElementById('counter-total');
     
@@ -42,7 +46,6 @@ async function cargarSolicitudes(filtro = 'todas') {
 
     listaFiltrada.forEach(job => {
         const card = document.createElement('div');
-        // Estilo Glassmorphism mejorado
         card.className = "glass neon-border p-5 rounded-3xl flex flex-col gap-4 group hover:bg-white/[0.05]";
         
         card.innerHTML = `
@@ -77,7 +80,7 @@ async function cargarSolicitudes(filtro = 'todas') {
     });
 }
 
-// FUNCIONES GLOBALES (Aseguramos que window las vea)
+// FUNCIONES GLOBALES
 window.aprobar = async (id) => {
     const { error } = await _supabase
         .from('empleos')
@@ -87,7 +90,6 @@ window.aprobar = async (id) => {
     if (error) {
         alert("Error al aprobar: " + error.message);
     } else {
-        // Recargar con el filtro de aprobadas para ver el cambio
         cargarSolicitudes('aprobadas');
     }
 };
@@ -100,8 +102,12 @@ window.eliminar = async (id) => {
         .delete()
         .eq('id', id);
 
-    if (error) alert("Error: " + error.message);
-    else cargarSolicitudes();
+    if (error) {
+        alert("Error al eliminar: " + error.message);
+    } else {
+        // Recargamos usando el filtro actual para que la lista se actualice de verdad
+        cargarSolicitudes(filtroActual);
+    }
 };
 
 window.cargarSolicitudes = cargarSolicitudes;
