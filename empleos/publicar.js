@@ -17,6 +17,7 @@ if (form) {
 
         const nombreComercio = document.getElementById('nombre_comercio').value;
         const tituloPuesto = document.getElementById('titulo_puesto').value;
+        const whatsappContacto = document.getElementById('whatsapp_contacto').value; // Capturamos el WhatsApp
         const fileInput = document.getElementById('afiche_file');
         const file = fileInput.files[0];
 
@@ -46,6 +47,7 @@ if (form) {
                     { 
                         nombre_comercio: nombreComercio, 
                         titulo_puesto: tituloPuesto, 
+                        whatsapp_contacto: whatsappContacto, // Guardamos el WhatsApp en la DB
                         afiche_url: publicUrl,
                         aprobado: false 
                     }
