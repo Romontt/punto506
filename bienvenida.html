@@ -13,7 +13,8 @@
                 extend: {
                     colors: {
                         'p506-gold': '#d4a373',
-                        'p506-dark': '#0f0c0b',
+                        'p506-dark': '#0a0908',
+                        'p506-bronze': '#bc8a5f',
                     },
                     fontFamily: {
                         'serif-title': ['Cinzel', 'serif'],
@@ -24,66 +25,113 @@
         }
     </script>
     <style>
-        .serif-title { font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 0.15em; }
-        .sans-body { font-family: 'Inter', sans-serif; }
+        .serif-title { font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 0.2em; }
         
+        /* Fondo con gradiente animado sutil */
+        body {
+            background: radial-gradient(circle at top center, #1c1917 0%, #0a0908 100%);
+        }
+
+        /* Texto con efecto metálico */
+        .text-gradient {
+            background: linear-gradient(to bottom, #fef3c7 0%, #d4a373 50%, #b45309 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Tarjetas elegantes */
         .opcion-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(212, 163, 115, 0.2);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 1px solid rgba(212, 163, 115, 0.15);
+            position: relative;
+            overflow: hidden;
         }
+
+        .opcion-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 163, 115, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .opcion-card:hover::before {
+            left: 100%;
+        }
+
         .opcion-card:hover {
-            border-color: rgba(212, 163, 115, 0.8);
-            background-color: rgba(212, 163, 115, 0.05);
-            transform: translateY(-8px);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+            border-color: rgba(212, 163, 115, 0.6);
+            background: rgba(212, 163, 115, 0.08);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.7);
         }
-        .bg-pattern {
-            background-image: radial-gradient(circle at 2px 2px, rgba(212, 163, 115, 0.05) 1px, transparent 0);
-            background-size: 40px 40px;
+
+        .logo-glow {
+            box-shadow: 0 0 40px rgba(212, 163, 115, 0.15);
         }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-card { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
     </style>
 </head>
-<body class="bg-p506-dark text-stone-200 min-h-screen sans-body flex flex-col items-center justify-center bg-pattern p-6">
+<body class="bg-p506-dark text-stone-300 min-h-screen flex flex-col items-center justify-center p-6 selection:bg-p506-gold selection:text-black">
 
-    <header class="text-center mb-16 animate-fade-in">
-        <div class="w-24 h-24 rounded-full flex items-center justify-center border-2 border-p506-gold/40 mx-auto mb-6 bg-black shadow-2xl">
-            <span class="serif-title text-3xl text-p506-gold font-bold">506</span>
+    <header class="text-center mb-20">
+        <div class="w-28 h-28 rounded-full flex items-center justify-center border border-p506-gold/30 mx-auto mb-8 bg-black/50 logo-glow backdrop-blur-sm relative group">
+            <div class="absolute inset-0 rounded-full border border-p506-gold/10 animate-ping group-hover:animate-none"></div>
+            <span class="serif-title text-4xl text-p506-gold font-bold">506</span>
         </div>
-        <h1 class="serif-title text-4xl md:text-6xl text-white tracking-[0.25em] mb-4">Punto 506</h1>
-        <p class="text-p506-gold text-[10px] md:text-xs uppercase tracking-[0.5em] font-light">Descubre • Conecta • Destaca</p>
+        <h1 class="serif-title text-5xl md:text-7xl mb-4 font-bold tracking-[0.3em] text-gradient">Punto 506</h1>
+        <div class="flex items-center justify-center gap-4">
+            <div class="h-[1px] w-12 bg-gradient-to-r from-transparent to-p506-gold/50"></div>
+            <p class="text-p506-gold text-xs uppercase tracking-[0.6em] font-medium opacity-80">Descubre • Conecta • Destaca</p>
+            <div class="h-[1px] w-12 bg-gradient-to-l from-transparent to-p506-gold/50"></div>
+        </div>
     </header>
 
-    <nav class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl w-full">
+    <nav class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl w-full">
         
-        <a href="/directorio" class="opcion-card bg-black/40 backdrop-blur-md p-10 rounded-2xl text-center group">
-            <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">🔍</div>
-            <h2 class="serif-title text-sm text-white mb-2 tracking-widest">Directorio</h2>
-            <p class="text-stone-500 text-[10px] uppercase tracking-tighter">Comercios y Servicios</p>
+        <a href="/directorio" class="opcion-card bg-stone-900/20 backdrop-blur-xl p-12 rounded-3xl text-center group animate-card" style="animation-delay: 0.1s;">
+            <div class="text-5xl mb-8 filter grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-110">🔍</div>
+            <h2 class="serif-title text-sm text-white mb-3 tracking-widest group-hover:text-p506-gold transition-colors">Directorio</h2>
+            <div class="h-[1px] w-8 bg-p506-gold/20 mx-auto group-hover:w-16 transition-all duration-500"></div>
+            <p class="mt-4 text-stone-500 text-[9px] uppercase tracking-widest font-semibold">Comercios locales</p>
         </a>
 
-        <a href="/entrevistas" class="opcion-card bg-black/40 backdrop-blur-md p-10 rounded-2xl text-center group">
-            <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">🎙️</div>
-            <h2 class="serif-title text-sm text-white mb-2 tracking-widest">Entrevistas</h2>
-            <p class="text-stone-500 text-[10px] uppercase tracking-tighter">Historias Locales</p>
+        <a href="/entrevistas" class="opcion-card bg-stone-900/20 backdrop-blur-xl p-12 rounded-3xl text-center group animate-card" style="animation-delay: 0.2s;">
+            <div class="text-5xl mb-8 filter grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-110">🎙️</div>
+            <h2 class="serif-title text-sm text-white mb-3 tracking-widest group-hover:text-p506-gold transition-colors">Entrevistas</h2>
+            <div class="h-[1px] w-8 bg-p506-gold/20 mx-auto group-hover:w-16 transition-all duration-500"></div>
+            <p class="mt-4 text-stone-500 text-[9px] uppercase tracking-widest font-semibold">Historias de Pococí</p>
         </a>
 
-        <a href="/empleos" class="opcion-card bg-black/40 backdrop-blur-md p-10 rounded-2xl text-center group">
-            <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">💼</div>
-            <h2 class="serif-title text-sm text-white mb-2 tracking-widest">Empleos</h2>
-            <p class="text-stone-500 text-[10px] uppercase tracking-tighter">Vacantes en Pococí</p>
+        <a href="/empleos" class="opcion-card bg-stone-900/20 backdrop-blur-xl p-12 rounded-3xl text-center group animate-card" style="animation-delay: 0.3s;">
+            <div class="text-5xl mb-8 filter grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-110">💼</div>
+            <h2 class="serif-title text-sm text-white mb-3 tracking-widest group-hover:text-p506-gold transition-colors">Empleos</h2>
+            <div class="h-[1px] w-8 bg-p506-gold/20 mx-auto group-hover:w-16 transition-all duration-500"></div>
+            <p class="mt-4 text-stone-500 text-[9px] uppercase tracking-widest font-semibold">Oportunidades</p>
         </a>
 
-        <a href="/eventos" class="opcion-card bg-p506-gold/10 backdrop-blur-md p-10 rounded-2xl text-center group border-p506-gold/50 relative overflow-hidden">
-            <div class="absolute top-0 right-0 bg-p506-gold text-black text-[8px] px-3 py-1 font-black uppercase tracking-widest">Nuevo</div>
-            <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">🎭</div>
-            <h2 class="serif-title text-sm text-p506-gold mb-2 tracking-widest font-bold">Eventos</h2>
-            <p class="text-p506-gold/60 text-[10px] uppercase tracking-tighter">Qué hacer hoy</p>
+        <a href="/eventos" class="opcion-card bg-p506-gold/[0.03] backdrop-blur-xl p-12 rounded-3xl text-center group animate-card border-p506-gold/40" style="animation-delay: 0.4s;">
+            <div class="absolute top-4 right-4 bg-p506-gold text-black text-[7px] px-3 py-1 font-black uppercase tracking-widest rounded-full shadow-lg">New</div>
+            <div class="text-5xl mb-8 transform group-hover:scale-110 transition-all duration-500">🎭</div>
+            <h2 class="serif-title text-sm text-p506-gold mb-3 tracking-widest font-bold">Eventos</h2>
+            <div class="h-[1px] w-12 bg-p506-gold mx-auto"></div>
+            <p class="mt-4 text-p506-gold/60 text-[9px] uppercase tracking-widest font-semibold">Cartelera Local</p>
         </a>
 
     </nav>
 
-    <footer class="mt-20 text-center opacity-40">
-        <p class="text-[9px] uppercase tracking-[0.3em] serif-title">© 2026 Punto 506 | Un proyecto de MontZu</p>
+    <footer class="mt-24 text-center">
+        <div class="opacity-30 hover:opacity-100 transition-opacity duration-500">
+            <p class="text-[10px] uppercase tracking-[0.4em] serif-title mb-2">Punto 506 • San José • Costa Rica</p>
+            <p class="text-[8px] uppercase tracking-[0.2em] font-light">© 2026 Crafted by MontZu</p>
+        </div>
     </footer>
 
 </body>
