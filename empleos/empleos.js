@@ -4,15 +4,22 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+// Detectar si es móvil
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
 // Función global para manejar el contacto
-window.handleContactClick = function(link) {
+window.handleContactClick = function(link, contacto, esEmail) {
     if (link === '#' || !link) return;
     
+    // Si es PC y es Email, mostramos el contacto directamente
+    if (!isMobile && esEmail) {
+        alert(`Para postularte, envía tu CV al correo: ${contacto}`);
+        return;
+    }
+
     if (link.startsWith('mailto:')) {
-        // En PC window.open con mailto suele forzar la apertura mejor que location.href
-        window.open(link, '_self');
+        window.location.href = link;
     } else {
-        // WhatsApp siempre en pestaña nueva
         window.open(link, '_blank');
     }
 };
@@ -26,12 +33,11 @@ window.compartirPuesto = async function(titulo, comercio) {
     };
 
     try {
-        if (navigator.share) {
+        if (navigator.share && isMobile) {
             await navigator.share(shareData);
         } else {
-            // Respaldo para PC si no soporta Share API
             await navigator.clipboard.writeText(`${shareData.text} ${shareData.url}`);
-            alert('¡Enlace copiado al portapapeles!');
+            alert('¡Enlace copiado al portapapeles para compartir!');
         }
     } catch (err) {
         console.log('Error al compartir:', err);
@@ -75,7 +81,6 @@ async function renderEmpleos() {
     }
 
     grid.innerHTML = empleos.map(emp => {
-        // LÓGICA DE DETECCIÓN DE CONTACTO
         const contacto = emp.whatsapp_contacto ? emp.whatsapp_contacto.trim() : '';
         const esEmail = contacto.includes('@');
         
@@ -87,7 +92,8 @@ async function renderEmpleos() {
             textoBoton = 'Sin contacto disponible';
         } else if (esEmail) {
             linkAccion = `mailto:${contacto}`;
-            textoBoton = 'Enviar Correo';
+            // Cambio de texto dinámico para PC
+            textoBoton = !isMobile ? 'Ver Contacto' : 'Enviar Correo';
         } else {
             const numLimpio = contacto.replace(/\s+/g, '').replace(/\+/g, '');
             linkAccion = `https://wa.me/${numLimpio}`;
@@ -103,8 +109,8 @@ async function renderEmpleos() {
                          alt="Vacante ${emp.titulo_puesto}">
                     
                     <button onclick="compartirPuesto('${emp.titulo_puesto}', '${emp.nombre_comercio}')" 
-                            class="absolute top-4 left-4 z-20 bg-black/60 hover:bg-[#d4a373] text-white hover:text-black p-2.5 rounded-full border border-white/10 transition-all duration-300 backdrop-blur-md flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                            class="absolute top-4 left-4 z-20 bg-[#d4a373] text-black p-2.5 rounded-full border border-white/10 transition-transform active:scale-95 backdrop-blur-md flex items-center justify-center shadow-lg shadow-black/50">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                     </button>
 
                     <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 z-10">
@@ -116,7 +122,7 @@ async function renderEmpleos() {
                     <span class="serif-title text-[8px] text-[#d4a373] tracking-[0.3em] uppercase font-bold">${emp.nombre_comercio}</span>
                     <h3 class="serif-title text-base mt-2 mb-6 text-white leading-tight tracking-wide">${emp.titulo_puesto}</h3>
                     
-                    <button onclick="handleContactClick('${linkAccion}')" 
+                    <button onclick="handleContactClick('${linkAccion}', '${contacto}', ${esEmail})" 
                             class="mt-auto w-full py-4 border border-[#d4a373]/30 text-[#d4a373] text-[9px] font-black uppercase tracking-[0.2em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-300 rounded-xl ${!contacto ? 'pointer-events-none opacity-50' : ''}">
                         ${textoBoton}
                     </button>
