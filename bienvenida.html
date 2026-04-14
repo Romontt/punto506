@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punto 506 | Bienvenido</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'p506-gold': '#d4a373',
+                        'p506-dark': '#0f0c0b',
+                    },
+                    fontFamily: {
+                        'serif-title': ['Cinzel', 'serif'],
+                        'sans-body': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .serif-title { font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 0.15em; }
+        .sans-body { font-family: 'Inter', sans-serif; }
+        
+        .opcion-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(212, 163, 115, 0.2);
+        }
+        .opcion-card:hover {
+            border-color: rgba(212, 163, 115, 0.8);
+            background-color: rgba(212, 163, 115, 0.05);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+        .bg-pattern {
+            background-image: radial-gradient(circle at 2px 2px, rgba(212, 163, 115, 0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-p506-dark text-stone-200 min-h-screen sans-body flex flex-col items-center justify-center bg-pattern p-6">
+
+    <header class="text-center mb-16 animate-fade-in">
+        <div class="w-24 h-24 rounded-full flex items-center justify-center border-2 border-p506-gold/40 mx-auto mb-6 bg-black shadow-2xl">
+            <span class="serif-title text-3xl text-p506-gold font-bold">506</span>
+        </div>
+        <h1 class="serif-title text-4xl md:text-6xl text-white tracking-[0.25em] mb-4">Punto 506</h1>
+        <p class="text-p506-gold text-[10px] md:text-xs uppercase tracking-[0.5em] font-light">Descubre • Conecta • Destaca</p>
+    </header>
+
+    <nav class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl w-full">
+        
+        <a href="/directorio" class="opcion-card bg-black/40 backdrop-blur-md p-10 rounded-2xl text-center group">
+            <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">🔍</div>
+            <h2 class="serif-title text-sm text-white mb-2 tracking-widest">Directorio</h2>
+            <p class="text-stone-500 text-[10px] uppercase tracking-tighter">Comercios y Servicios</p>
+        </a>
+
+        <a href="/entrevistas" class="opcion-card bg-black/40 backdrop-blur-md p-10 rounded-2xl text-center group">
+            <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">🎙️</div>
+            <h2 class="serif-title text-sm text-white mb-2 tracking-widest">Entrevistas</h2>
+            <p class="text-stone-500 text-[10px] uppercase tracking-tighter">Historias Locales</p>
+        </a>
+
+        <a href="/empleos" class="opcion-card bg-black/40 backdrop-blur-md p-10 rounded-2xl text-center group">
+            <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">💼</div>
+            <h2 class="serif-title text-sm text-white mb-2 tracking-widest">Empleos</h2>
+            <p class="text-stone-500 text-[10px] uppercase tracking-tighter">Vacantes en Pococí</p>
+        </a>
+
+        <a href="/eventos" class="opcion-card bg-p506-gold/10 backdrop-blur-md p-10 rounded-2xl text-center group border-p506-gold/50 relative overflow-hidden">
+            <div class="absolute top-0 right-0 bg-p506-gold text-black text-[8px] px-3 py-1 font-black uppercase tracking-widest">Nuevo</div>
+            <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">🎭</div>
+            <h2 class="serif-title text-sm text-p506-gold mb-2 tracking-widest font-bold">Eventos</h2>
+            <p class="text-p506-gold/60 text-[10px] uppercase tracking-tighter">Qué hacer hoy</p>
+        </a>
+
+    </nav>
+
+    <footer class="mt-20 text-center opacity-40">
+        <p class="text-[9px] uppercase tracking-[0.3em] serif-title">© 2026 Punto 506 | Un proyecto de MontZu</p>
+    </footer>
+
+</body>
+</html>
