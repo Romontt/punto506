@@ -46,10 +46,13 @@ async function renderEmpleos() {
     // Renderizado de las tarjetas
     grid.innerHTML = empleos.map(emp => `
         <div class="glass-card animate-reveal flex flex-col h-full bg-[#1c1614]/40 border border-white/5 rounded-2xl overflow-hidden group hover:border-[#d4a373]/50 transition-all duration-500">
-            <div class="relative overflow-hidden h-64 bg-black">
+            
+            <div class="relative overflow-hidden bg-black flex items-center justify-center" style="min-height: 320px; max-height: 400px;">
                 <img src="${emp.afiche_url}" 
-                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100" 
-                     alt="Vacante ${emp.titulo_puesto}">
+                     class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" 
+                     alt="Vacante ${emp.titulo_puesto}"
+                     style="display: block;">
+                
                 <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
                     <span class="text-[8px] text-[#d4a373] font-black uppercase tracking-widest">Nuevo</span>
                 </div>
@@ -60,12 +63,12 @@ async function renderEmpleos() {
                 <h3 class="serif-title text-base mt-2 mb-6 text-white leading-tight tracking-wide">${emp.titulo_puesto}</h3>
                 
                 <a href="https://wa.me/${emp.whatsapp_contacto ? emp.whatsapp_contacto.replace(/\s+/g, '') : ''}" 
-   target="_blank" 
-   class="mt-auto block ${!emp.whatsapp_contacto ? 'pointer-events-none opacity-50' : ''}">
-    <button class="w-full py-4 border border-[#d4a373]/30 text-[#d4a373] text-[9px] font-black uppercase tracking-[0.2em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-300 rounded-xl">
-        ${emp.whatsapp_contacto ? 'Postular por WhatsApp' : 'Sin contacto disponible'}
-    </button>
-</a>
+                   target="_blank" 
+                   class="mt-auto block ${!emp.whatsapp_contacto ? 'pointer-events-none opacity-50' : ''}">
+                    <button class="w-full py-4 border border-[#d4a373]/30 text-[#d4a373] text-[9px] font-black uppercase tracking-[0.2em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-300 rounded-xl">
+                        ${emp.whatsapp_contacto ? 'Postular por WhatsApp' : 'Sin contacto disponible'}
+                    </button>
+                </a>
             </div>
         </div>
     `).join('');
