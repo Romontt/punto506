@@ -47,19 +47,14 @@ async function renderEmpleos() {
     grid.innerHTML = empleos.map(emp => `
         <div class="glass-card animate-reveal flex flex-col h-full bg-[#1c1614]/40 border border-white/5 rounded-2xl overflow-hidden group hover:border-[#d4a373]/50 transition-all duration-500">
             
-            <div class="relative overflow-hidden bg-black flex items-center justify-center" style="min-height: 350px; max-height: 450px;">
+            <div class="relative overflow-hidden bg-black flex items-center justify-center" style="min-height: 320px; max-height: 400px;">
                 <img src="${emp.afiche_url}" 
-                     class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 opacity-95 group-hover:opacity-100" 
+                     class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" 
                      alt="Vacante ${emp.titulo_puesto}"
-                     onclick="window.open('${emp.afiche_url}', '_blank')"
-                     style="cursor: zoom-in;">
+                     style="display: block;">
                 
                 <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
                     <span class="text-[8px] text-[#d4a373] font-black uppercase tracking-widest">Nuevo</span>
-                </div>
-
-                <div class="absolute bottom-2 inset-x-0 text-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                    <span class="text-[7px] text-white/50 uppercase tracking-widest bg-black/40 px-2 py-1 rounded-full">Clic para ampliar</span>
                 </div>
             </div>
             
