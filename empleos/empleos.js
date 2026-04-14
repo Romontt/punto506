@@ -47,6 +47,7 @@ async function renderEmpleos() {
         
         let linkAccion = '';
         let textoBoton = '';
+        let targetAttr = '_blank'; // Por defecto para WhatsApp
 
         if (!contacto) {
             linkAccion = '#';
@@ -54,11 +55,13 @@ async function renderEmpleos() {
         } else if (esEmail) {
             linkAccion = `mailto:${contacto}`;
             textoBoton = 'Enviar Correo';
+            targetAttr = '_self'; // Para correo es mejor usar _self
         } else {
             // Asumimos que es número si no tiene @
             const numLimpio = contacto.replace(/\s+/g, '').replace(/\+/g, '');
             linkAccion = `https://wa.me/${numLimpio}`;
             textoBoton = 'Postular por WhatsApp';
+            targetAttr = '_blank';
         }
 
         return `
@@ -79,7 +82,7 @@ async function renderEmpleos() {
                     <h3 class="serif-title text-base mt-2 mb-6 text-white leading-tight tracking-wide">${emp.titulo_puesto}</h3>
                     
                     <a href="${linkAccion}" 
-                       target="_blank" 
+                       target="${targetAttr}" 
                        class="mt-auto block ${!contacto ? 'pointer-events-none opacity-50' : ''}">
                         <button class="w-full py-4 border border-[#d4a373]/30 text-[#d4a373] text-[9px] font-black uppercase tracking-[0.2em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-300 rounded-xl">
                             ${textoBoton}
