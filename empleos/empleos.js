@@ -5,7 +5,6 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 async function renderEmpleos() {
-    // Asegúrate de que en tu HTML el id sea "grid-empleos"
     const grid = document.getElementById('grid-empleos');
     
     if (!grid) {
@@ -13,7 +12,6 @@ async function renderEmpleos() {
         return;
     }
 
-    // Mostrar un estado de carga inicial
     grid.innerHTML = `
         <div class="col-span-full text-center py-20 opacity-40">
             <div class="w-10 h-10 border-2 border-[#d4a373]/20 border-t-[#d4a373] rounded-full animate-spin mx-auto mb-4"></div>
@@ -43,15 +41,13 @@ async function renderEmpleos() {
         return;
     }
 
-    // Renderizado de las tarjetas
     grid.innerHTML = empleos.map(emp => `
         <div class="glass-card animate-reveal flex flex-col h-full bg-[#1c1614]/40 border border-white/5 rounded-2xl overflow-hidden group hover:border-[#d4a373]/50 transition-all duration-500">
             
-            <div class="relative overflow-hidden bg-black flex items-center justify-center" style="min-height: 320px; max-height: 400px;">
+            <div class="relative overflow-hidden bg-black flex items-center justify-center" style="aspect-ratio: 4/5; width: 100%;">
                 <img src="${emp.afiche_url}" 
                      class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" 
-                     alt="Vacante ${emp.titulo_puesto}"
-                     style="display: block;">
+                     alt="Vacante ${emp.titulo_puesto}">
                 
                 <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
                     <span class="text-[8px] text-[#d4a373] font-black uppercase tracking-widest">Nuevo</span>
@@ -74,5 +70,4 @@ async function renderEmpleos() {
     `).join('');
 }
 
-// Ejecutar la función cuando el documento esté listo
 document.addEventListener('DOMContentLoaded', renderEmpleos);
