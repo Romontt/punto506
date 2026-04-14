@@ -6,15 +6,18 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // Función global para manejar el contacto
 window.handleContactClick = function(link) {
-    if (link === '#') return;
+    if (link === '#' || !link) return;
+    
     if (link.startsWith('mailto:')) {
-        window.location.href = link;
+        // En PC window.open con mailto suele forzar la apertura mejor que location.href
+        window.open(link, '_self');
     } else {
+        // WhatsApp siempre en pestaña nueva
         window.open(link, '_blank');
     }
 };
 
-// NUEVA: Función global para compartir
+// Función global para compartir
 window.compartirPuesto = async function(titulo, comercio) {
     const shareData = {
         title: `Vacante: ${titulo}`,
@@ -72,6 +75,7 @@ async function renderEmpleos() {
     }
 
     grid.innerHTML = empleos.map(emp => {
+        // LÓGICA DE DETECCIÓN DE CONTACTO
         const contacto = emp.whatsapp_contacto ? emp.whatsapp_contacto.trim() : '';
         const esEmail = contacto.includes('@');
         
@@ -99,11 +103,11 @@ async function renderEmpleos() {
                          alt="Vacante ${emp.titulo_puesto}">
                     
                     <button onclick="compartirPuesto('${emp.titulo_puesto}', '${emp.nombre_comercio}')" 
-                            class="absolute top-4 left-4 bg-black/60 hover:bg-[#d4a373] text-white hover:text-black p-2 rounded-full border border-white/10 transition-all duration-300 backdrop-blur-md">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                            class="absolute top-4 left-4 z-20 bg-black/60 hover:bg-[#d4a373] text-white hover:text-black p-2.5 rounded-full border border-white/10 transition-all duration-300 backdrop-blur-md flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                     </button>
 
-                    <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+                    <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 z-10">
                         <span class="text-[8px] text-[#d4a373] font-black uppercase tracking-widest">Nuevo</span>
                     </div>
                 </div>
