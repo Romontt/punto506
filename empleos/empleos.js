@@ -4,6 +4,19 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+// Función global para manejar el clic y asegurar compatibilidad en PC y Móvil
+window.handleContactClick = function(link) {
+    if (link === '#') return;
+    
+    if (link.startsWith('mailto:')) {
+        // En PC, mailto funciona mejor abriendo en la misma ventana
+        window.location.href = link;
+    } else {
+        // WhatsApp siempre en pestaña nueva
+        window.open(link, '_blank');
+    }
+};
+
 async function renderEmpleos() {
     const grid = document.getElementById('grid-empleos');
     
@@ -55,7 +68,6 @@ async function renderEmpleos() {
             linkAccion = `mailto:${contacto}`;
             textoBoton = 'Enviar Correo';
         } else {
-            // Asumimos que es número si no tiene @
             const numLimpio = contacto.replace(/\s+/g, '').replace(/\+/g, '');
             linkAccion = `https://wa.me/${numLimpio}`;
             textoBoton = 'Postular por WhatsApp';
@@ -78,13 +90,10 @@ async function renderEmpleos() {
                     <span class="serif-title text-[8px] text-[#d4a373] tracking-[0.3em] uppercase font-bold">${emp.nombre_comercio}</span>
                     <h3 class="serif-title text-base mt-2 mb-6 text-white leading-tight tracking-wide">${emp.titulo_puesto}</h3>
                     
-                    <a href="${linkAccion}" 
-                       target="_blank" 
-                       class="mt-auto block ${!contacto ? 'pointer-events-none opacity-50' : ''}">
-                        <button class="w-full py-4 border border-[#d4a373]/30 text-[#d4a373] text-[9px] font-black uppercase tracking-[0.2em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-300 rounded-xl">
-                            ${textoBoton}
-                        </button>
-                    </a>
+                    <button onclick="handleContactClick('${linkAccion}')" 
+                            class="mt-auto w-full py-4 border border-[#d4a373]/30 text-[#d4a373] text-[9px] font-black uppercase tracking-[0.2em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-300 rounded-xl ${!contacto ? 'pointer-events-none opacity-50' : ''}">
+                        ${textoBoton}
+                    </button>
                 </div>
             </div>
         `;
