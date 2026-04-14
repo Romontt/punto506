@@ -1,3 +1,4 @@
+// Configuración de Supabase
 const SUPABASE_URL = 'https://svkyczglvidntguqduej.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN2a3ljemdsdmlkbnRndXFkdWVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5MDAwODEsImV4cCI6MjA5MDQ3NjA4MX0.gASHvLpE4xrSKY0ll5Votnz1oBAtrTXWnT7ww__Tdpg';
 
@@ -17,7 +18,8 @@ if (form) {
 
         const nombreComercio = document.getElementById('nombre_comercio').value;
         const tituloPuesto = document.getElementById('titulo_puesto').value;
-        const whatsappContacto = document.getElementById('whatsapp_contacto').value; // Capturamos el WhatsApp
+        // Capturamos el contacto (puede ser número o email)
+        const contactoInput = document.getElementById('whatsapp_contacto').value; 
         const fileInput = document.getElementById('afiche_file');
         const file = fileInput.files[0];
 
@@ -47,7 +49,7 @@ if (form) {
                     { 
                         nombre_comercio: nombreComercio, 
                         titulo_puesto: tituloPuesto, 
-                        whatsapp_contacto: whatsappContacto, // Guardamos el WhatsApp en la DB
+                        whatsapp_contacto: contactoInput, // Guardamos el contacto (num/email) en la DB
                         afiche_url: publicUrl,
                         aprobado: false 
                     }
