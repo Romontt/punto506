@@ -7,7 +7,10 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 async function renderEmpleos() {
     const grid = document.getElementById('grid-empleos');
     
-    if (!grid) return;
+    if (!grid) {
+        console.error("No se encontró el contenedor #grid-empleos");
+        return;
+    }
 
     grid.innerHTML = `
         <div class="col-span-full text-center py-20 opacity-40">
@@ -16,7 +19,6 @@ async function renderEmpleos() {
         </div>
     `;
 
-    // SEGURIDAD: Traemos los datos forzando que no haya caché
     const { data: empleos, error } = await _supabase
         .from('empleos')
         .select('*')
@@ -24,47 +26,69 @@ async function renderEmpleos() {
         .order('created_at', { ascending: false });
 
     if (error) {
-        console.error("Error crítico:", error);
-        grid.innerHTML = `<p class="text-red-500 text-center col-span-full">Error de conexión: ${error.message}</p>`;
+        console.error("Error al obtener empleos:", error);
+        grid.innerHTML = `<p class="text-red-500 text-center col-span-full">Error al cargar los empleos.</p>`;
         return;
     }
 
-    if (!empleos || empleos.length === 0) {
+    if (empleos.length === 0) {
         grid.innerHTML = `
             <div class="col-span-full text-center py-20 border border-white/5 rounded-3xl bg-white/5">
-                <p class="text-stone-500 uppercase tracking-[0.3em] text-[10px]">No hay vacantes aprobadas actualmente.</p>
+                <p class="text-stone-500 uppercase tracking-[0.3em] text-[10px]">No hay vacantes disponibles en este momento.</p>
             </div>
         `;
         return;
     }
 
-    grid.innerHTML = empleos.map(emp => `
-        <div class="glass-card animate-reveal flex flex-col h-full bg-[#1c1614]/40 border border-white/5 rounded-2xl overflow-hidden group hover:border-[#d4a373]/50 transition-all duration-500">
-            
-            <div class="relative overflow-hidden bg-black flex items-center justify-center" style="aspect-ratio: 1/1; width: 100%;">
-                <img src="${emp.afiche_url}" 
-                     class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" 
-                     alt="Vacante ${emp.titulo_puesto}">
+    grid.innerHTML = empleos.map(emp => {
+        // LÓGICA DE DETECCIÓN DE CONTACTO
+        const contacto = emp.whatsapp_contacto ? emp.whatsapp_contacto.trim() : '';
+        const esEmail = contacto.includes('@');
+        
+        let linkAccion = '';
+        let textoBoton = '';
+
+        if (!contacto) {
+            linkAccion = '#';
+            textoBoton = 'Sin contacto disponible';
+        } else if (esEmail) {
+            linkAccion = `mailto:${contacto}`;
+            textoBoton = 'Enviar Correo';
+        } else {
+            // Asumimos que es número si no tiene @
+            const numLimpio = contacto.replace(/\s+/g, '').replace(/\+/g, '');
+            linkAccion = `https://wa.me/${numLimpio}`;
+            textoBoton = 'Postular por WhatsApp';
+        }
+
+        return `
+            <div class="glass-card animate-reveal flex flex-col h-full bg-[#1c1614]/40 border border-white/5 rounded-2xl overflow-hidden group hover:border-[#d4a373]/50 transition-all duration-500">
                 
-                <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
-                    <span class="text-[8px] text-[#d4a373] font-black uppercase tracking-widest">Nuevo</span>
+                <div class="relative overflow-hidden bg-black flex items-center justify-center" style="min-height: 320px; max-height: 400px;">
+                    <img src="${emp.afiche_url}" 
+                         class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" 
+                         alt="Vacante ${emp.titulo_puesto}">
+                    
+                    <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+                        <span class="text-[8px] text-[#d4a373] font-black uppercase tracking-widest">Nuevo</span>
+                    </div>
+                </div>
+                
+                <div class="p-6 flex flex-col flex-grow">
+                    <span class="serif-title text-[8px] text-[#d4a373] tracking-[0.3em] uppercase font-bold">${emp.nombre_comercio}</span>
+                    <h3 class="serif-title text-base mt-2 mb-6 text-white leading-tight tracking-wide">${emp.titulo_puesto}</h3>
+                    
+                    <a href="${linkAccion}" 
+                       target="_blank" 
+                       class="mt-auto block ${!contacto ? 'pointer-events-none opacity-50' : ''}">
+                        <button class="w-full py-4 border border-[#d4a373]/30 text-[#d4a373] text-[9px] font-black uppercase tracking-[0.2em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-300 rounded-xl">
+                            ${textoBoton}
+                        </button>
+                    </a>
                 </div>
             </div>
-            
-            <div class="p-6 flex flex-col flex-grow">
-                <span class="serif-title text-[8px] text-[#d4a373] tracking-[0.3em] uppercase font-bold">${emp.nombre_comercio}</span>
-                <h3 class="serif-title text-base mt-2 mb-6 text-white leading-tight tracking-wide">${emp.titulo_puesto}</h3>
-                
-                <a href="https://wa.me/${emp.whatsapp_contacto ? emp.whatsapp_contacto.replace(/\s+/g, '') : ''}" 
-                   target="_blank" 
-                   class="mt-auto block ${!emp.whatsapp_contacto ? 'pointer-events-none opacity-50' : ''}">
-                    <button class="w-full py-4 border border-[#d4a373]/30 text-[#d4a373] text-[9px] font-black uppercase tracking-[0.2em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-300 rounded-xl">
-                        ${emp.whatsapp_contacto ? 'Postular por WhatsApp' : 'Sin contacto disponible'}
-                    </button>
-                </a>
-            </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
 }
 
 document.addEventListener('DOMContentLoaded', renderEmpleos);
