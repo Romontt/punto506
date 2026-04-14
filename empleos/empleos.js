@@ -4,16 +4,34 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// Función global para manejar el clic y asegurar compatibilidad en PC y Móvil
+// Función global para manejar el contacto
 window.handleContactClick = function(link) {
     if (link === '#') return;
-    
     if (link.startsWith('mailto:')) {
-        // En PC, mailto funciona mejor abriendo en la misma ventana
         window.location.href = link;
     } else {
-        // WhatsApp siempre en pestaña nueva
         window.open(link, '_blank');
+    }
+};
+
+// NUEVA: Función global para compartir
+window.compartirPuesto = async function(titulo, comercio) {
+    const shareData = {
+        title: `Vacante: ${titulo}`,
+        text: `Mira esta oportunidad de empleo en ${comercio} a través de Punto 506.`,
+        url: window.location.href
+    };
+
+    try {
+        if (navigator.share) {
+            await navigator.share(shareData);
+        } else {
+            // Respaldo para PC si no soporta Share API
+            await navigator.clipboard.writeText(`${shareData.text} ${shareData.url}`);
+            alert('¡Enlace copiado al portapapeles!');
+        }
+    } catch (err) {
+        console.log('Error al compartir:', err);
     }
 };
 
@@ -54,7 +72,6 @@ async function renderEmpleos() {
     }
 
     grid.innerHTML = empleos.map(emp => {
-        // LÓGICA DE DETECCIÓN DE CONTACTO
         const contacto = emp.whatsapp_contacto ? emp.whatsapp_contacto.trim() : '';
         const esEmail = contacto.includes('@');
         
@@ -81,6 +98,11 @@ async function renderEmpleos() {
                          class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" 
                          alt="Vacante ${emp.titulo_puesto}">
                     
+                    <button onclick="compartirPuesto('${emp.titulo_puesto}', '${emp.nombre_comercio}')" 
+                            class="absolute top-4 left-4 bg-black/60 hover:bg-[#d4a373] text-white hover:text-black p-2 rounded-full border border-white/10 transition-all duration-300 backdrop-blur-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                    </button>
+
                     <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
                         <span class="text-[8px] text-[#d4a373] font-black uppercase tracking-widest">Nuevo</span>
                     </div>
