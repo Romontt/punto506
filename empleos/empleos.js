@@ -7,10 +7,7 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 async function renderEmpleos() {
     const grid = document.getElementById('grid-empleos');
     
-    if (!grid) {
-        console.error("No se encontró el contenedor #grid-empleos");
-        return;
-    }
+    if (!grid) return;
 
     grid.innerHTML = `
         <div class="col-span-full text-center py-20 opacity-40">
@@ -19,7 +16,7 @@ async function renderEmpleos() {
         </div>
     `;
 
-    // Consulta: Solo traemos los que están marcados como aprobados
+    // SEGURIDAD: Traemos los datos forzando que no haya caché
     const { data: empleos, error } = await _supabase
         .from('empleos')
         .select('*')
@@ -27,15 +24,15 @@ async function renderEmpleos() {
         .order('created_at', { ascending: false });
 
     if (error) {
-        console.error("Error al obtener empleos:", error);
-        grid.innerHTML = `<p class="text-red-500 text-center col-span-full">Error al cargar los empleos.</p>`;
+        console.error("Error crítico:", error);
+        grid.innerHTML = `<p class="text-red-500 text-center col-span-full">Error de conexión: ${error.message}</p>`;
         return;
     }
 
-    if (empleos.length === 0) {
+    if (!empleos || empleos.length === 0) {
         grid.innerHTML = `
             <div class="col-span-full text-center py-20 border border-white/5 rounded-3xl bg-white/5">
-                <p class="text-stone-500 uppercase tracking-[0.3em] text-[10px]">No hay vacantes disponibles en este momento.</p>
+                <p class="text-stone-500 uppercase tracking-[0.3em] text-[10px]">No hay vacantes aprobadas actualmente.</p>
             </div>
         `;
         return;
@@ -44,7 +41,7 @@ async function renderEmpleos() {
     grid.innerHTML = empleos.map(emp => `
         <div class="glass-card animate-reveal flex flex-col h-full bg-[#1c1614]/40 border border-white/5 rounded-2xl overflow-hidden group hover:border-[#d4a373]/50 transition-all duration-500">
             
-            <div class="relative overflow-hidden bg-black flex items-center justify-center" style="aspect-ratio: 4/5; width: 100%;">
+            <div class="relative overflow-hidden bg-black flex items-center justify-center" style="aspect-ratio: 1/1; width: 100%;">
                 <img src="${emp.afiche_url}" 
                      class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" 
                      alt="Vacante ${emp.titulo_puesto}">
