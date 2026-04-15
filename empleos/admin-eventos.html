@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Eventos | Punto 506</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body { background-color: #050b1a; font-family: 'Inter', sans-serif; color: #d1d5db; }
@@ -88,8 +87,8 @@
     </div>
 
     <script type="module">
-        // Ajustado para buscar en la carpeta principal si este archivo está en una subcarpeta
-        import { supabase } from '../supabase.js';
+        // Importamos el cliente limpio que no tiene conflictos de esquema
+        import { supabaseEventos } from '../supabase-eventos.js';
 
         const form = document.getElementById('form-evento');
         const aficheInput = document.getElementById('afiche');
@@ -131,20 +130,24 @@
             btn.disabled = true;
 
             const file = aficheInput.files[0];
-            const fileName = `${Date.now()}_${file.name}`;
+            // Nombre de archivo único para evitar sobrescribir
+            const fileName = `${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
 
             try {
-                const { data: storageData, error: storageError } = await supabase.storage
-                    .from('afiches-eventos')
+                // 1. Subir imagen al Bucket 'afiches'
+                const { data: storageData, error: storageError } = await supabaseEventos.storage
+                    .from('afiches')
                     .upload(fileName, file);
 
                 if (storageError) throw storageError;
 
-                const { data: urlData } = supabase.storage
-                    .from('afiches-eventos')
+                // 2. Obtener la URL pública de la imagen
+                const { data: urlData } = supabaseEventos.storage
+                    .from('afiches')
                     .getPublicUrl(fileName);
 
-                const { error: dbError } = await supabase
+                // 3. Insertar datos en la tabla 'eventos' (Esquema Public)
+                const { error: dbError } = await supabaseEventos
                     .from('eventos')
                     .insert([{
                         titulo: document.getElementById('titulo').value,
@@ -162,8 +165,8 @@
                 location.reload();
 
             } catch (err) {
-                console.error(err);
-                alert('Error al publicar: ' + err.message);
+                console.error("Error completo:", err);
+                alert('Error al publicar: ' + (err.message || 'Error desconocido'));
             } finally {
                 btn.innerText = "PUBLICAR EVENTO";
                 btn.disabled = false;
