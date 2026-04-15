@@ -104,14 +104,16 @@
     </main>
 
     <script type="module">
-        import { supabase } from './supabase.js';
+        // Importamos el cliente específico para eventos
+        import { supabaseEventos } from './supabase-eventos.js';
 
         async function cargarEventos() {
             const grid = document.getElementById('eventos-grid');
             const noEvents = document.getElementById('no-events');
 
             try {
-                const { data: eventos, error } = await supabase
+                // Usamos supabaseEventos que apunta al esquema public
+                const { data: eventos, error } = await supabaseEventos
                     .from('eventos')
                     .select('*')
                     .eq('aprobado', true)
@@ -166,6 +168,7 @@
                 });
 
             } catch (err) {
+                console.error("Error cargando eventos:", err);
                 grid.innerHTML = `<p class="text-[var(--gold)] col-span-full text-center text-[10px] tracking-[0.4em]">ERROR DE SINCRONIZACIÓN</p>`;
             }
         }
