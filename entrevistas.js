@@ -2,6 +2,7 @@ import { supabase } from './supabase.js';
 
 export async function cargarEntrevistas() {
     const grid = document.getElementById('grid-entrevistas');
+    const countDisplay = document.getElementById('count-stories');
     
     const { data, error } = await supabase
         .from('videos_punto506')
@@ -9,45 +10,48 @@ export async function cargarEntrevistas() {
         .order('created_at', { ascending: false });
 
     if (error) {
-        grid.innerHTML = `<div class="col-span-full py-10 text-center text-red-400 text-xs uppercase tracking-widest">Error al conectar con las historias</div>`;
+        grid.innerHTML = `<div class="col-span-full py-10 text-center text-red-400 text-[10px] uppercase tracking-widest">Error de conexión</div>`;
         return;
     }
 
-    grid.innerHTML = data.map(vid => {
+    // Actualizar contador
+    if (countDisplay) countDisplay.innerText = data.length;
+
+    grid.innerHTML = data.map((vid, index) => {
         const videoId = vid.video_id.split('/').pop().replace('watch?v=', '');
         
         return `
-            <article class="video-card rounded-3xl overflow-hidden flex flex-col h-full group">
-                <div class="relative aspect-video overflow-hidden bg-stone-900">
+            <article class="video-card rounded-2xl overflow-hidden flex flex-col group h-full" style="animation: fadeInUp 0.8s ease forwards; animation-delay: ${index * 0.1}s;">
+                <div class="relative aspect-video overflow-hidden">
                     <iframe 
                         width="100%" height="100%" 
-                        src="https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0" 
-                        title="${vid.nombre_negocio}" 
+                        src="https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0&showinfo=0" 
                         frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen
-                        class="opacity-80 group-hover:opacity-100 transition-opacity">
+                        class="grayscale-[0.5] group-hover:grayscale-0 transition-all duration-700">
                     </iframe>
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-black/60 backdrop-blur-md text-[#d4a373] text-[7px] font-bold px-2 py-1 rounded border border-[#d4a373]/30 uppercase tracking-widest">Episodio ${data.length - index}</span>
+                    </div>
                 </div>
 
-                <div class="p-8 flex flex-col flex-grow">
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="w-8 h-[1px] bg-p506-gold/40"></span>
-                        <span class="text-[9px] uppercase tracking-[0.3em] text-p506-gold font-semibold">Pococí Local</span>
-                    </div>
-                    
-                    <h2 class="serif-title text-lg text-white group-hover:text-p506-gold transition-colors mb-3 leading-tight">
+                <div class="p-6 flex flex-col flex-grow">
+                    <h2 class="serif-title text-sm text-white group-hover:text-[#d4a373] transition-colors mb-3 leading-snug">
                         ${vid.nombre_negocio}
                     </h2>
                     
-                    <p class="text-stone-500 text-xs leading-relaxed italic mb-8 flex-grow">
-                        "${vid.descripcion_corta}"
+                    <p class="text-stone-500 text-[11px] leading-relaxed mb-6 flex-grow line-clamp-3">
+                        ${vid.descripcion_corta}
                     </p>
 
-                    <div class="mt-auto flex justify-between items-center group/btn">
-                        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-white/80 hover:text-p506-gold transition-all">
-                            Ver Historia Completa
-                            <svg class="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <div class="pt-4 border-t border-white/5 flex justify-between items-center mt-auto">
+                        <div class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-[#d4a373] animate-pulse"></div>
+                            <span class="text-[8px] text-stone-500 uppercase tracking-tighter">Pococí, Limón</span>
+                        </div>
+                        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="text-[9px] font-black text-white hover:text-[#d4a373] transition-colors flex items-center gap-2">
+                            EXPANDIR
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </a>
                     </div>
                 </div>
