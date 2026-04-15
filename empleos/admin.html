@@ -8,7 +8,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* Paleta: Azul Navy Profundo, Blanco y Gris Plata */
         body { background-color: #050b1a; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         
         .glass { 
@@ -36,7 +35,6 @@
         }
         .animate-shake { animation: shake 0.4s ease-in-out; }
 
-        /* Estilo para el input de clave */
         .input-navy {
             background: rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -56,14 +54,12 @@
             <div class="w-16 h-16 border-2 border-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-8 rotate-3 shadow-[0_0_20px_rgba(59,130,246,0.5)]">
                 <span class="text-white font-bold text-xl uppercase italic">506</span>
             </div>
-            
             <h2 class="text-white text-xs tracking-[0.6em] uppercase mb-8 font-light">Acceso Privado Maestro</h2>
             
             <div class="relative mb-6">
                 <input type="password" id="clave-maestra" placeholder="DIGITE LA LLAVE" 
                     class="input-navy w-full p-4 rounded-xl text-center tracking-[0.4em] outline-none font-mono text-sm"
                     onkeypress="if(event.key === 'Enter') intentarLogin()">
-                
                 <button onclick="toggleClave()" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors">
                     <svg id="eye-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -75,10 +71,7 @@
             <button onclick="intentarLogin()" id="btn-login" class="w-full bg-blue-600 text-white font-bold text-[10px] py-4 rounded-xl tracking-[0.3em] uppercase hover:bg-blue-500 shadow-lg shadow-blue-900/20 transition-all mb-4">
                 Verificar Identidad
             </button>
-            
-            <div id="error-container" class="hidden">
-                <p class="text-red-400 text-[10px] uppercase tracking-widest font-bold">Llave Incorrecta</p>
-            </div>
+            <div id="error-container" class="hidden text-red-400 text-[10px] uppercase tracking-widest font-bold">Llave Incorrecta</div>
         </div>
     </div>
 
@@ -102,15 +95,25 @@
                     <div class="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
                         <svg class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10 4h4v2h-4V4z"/></svg>
                     </div>
-                    
                     <div class="w-12 h-12 bg-blue-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                        </svg>
+                        <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                     </div>
-                    
                     <h3 class="text-white font-bold text-2xl mb-2">Empleos</h3>
                     <p class="text-sm text-slate-500 mb-6">Administrar vacantes y solicitudes de la zona.</p>
+                    <div class="flex items-center text-blue-500 text-[10px] font-bold uppercase tracking-widest">
+                        Entrar <span class="ml-2 group-hover:translate-x-2 transition-transform">→</span>
+                    </div>
+                </a>
+
+                <a href="admin-eventos.html" class="module-card p-10 rounded-[2.5rem] group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+                        <svg class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5z"/></svg>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    </div>
+                    <h3 class="text-white font-bold text-2xl mb-2">Eventos</h3>
+                    <p class="text-sm text-slate-500 mb-6">Gestionar cartelera y afiches de Pococí.</p>
                     <div class="flex items-center text-blue-500 text-[10px] font-bold uppercase tracking-widest">
                         Entrar <span class="ml-2 group-hover:translate-x-2 transition-transform">→</span>
                     </div>
@@ -126,7 +129,6 @@
     </div>
 
     <script>
-        // CONFIGURACIÓN SUPABASE
         const SUPABASE_URL = 'https://svkyczglvidntguqduej.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN2a3ljemdsdmlkbnRndXFkdWVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5MDAwODEsImV4cCI6MjA5MDQ3NjA4MX0.gASHvLpE4xrSKY0ll5Votnz1oBAtrTXWnT7ww__Tdpg';
         
@@ -138,7 +140,6 @@
         const inputClave = document.getElementById('clave-maestra');
         const btnLogin = document.getElementById('btn-login');
 
-        // Función Ver/Ocultar Clave
         function toggleClave() {
             inputClave.type = inputClave.type === 'password' ? 'text' : 'password';
         }
@@ -152,10 +153,7 @@
             errorCont.classList.add('hidden');
 
             try {
-                const { data, error } = await _supabase.rpc('login_admin', { 
-                    clave_intento: clave 
-                });
-
+                const { data, error } = await _supabase.rpc('login_admin', { clave_intento: clave });
                 if (error) throw error;
 
                 if (data === true) {
@@ -190,7 +188,6 @@
             window.location.reload();
         }
 
-        // Auto-login si la sesión está activa
         window.onload = () => {
             const key = sessionStorage.getItem('key_admin');
             if (key) {
