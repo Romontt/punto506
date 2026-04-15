@@ -3,40 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrevistas | Punto 506</title>
+    
+    <title>Entrevistas | Punto 506 - Historias de Pococí</title>
+    <meta name="description" content="Descubre las historias detrás de los comercios y emprendedores más emblemáticos de Pococí, Guápiles. Conoce el rostro del éxito local.">
+    <meta name="keywords" content="Pococí, Guápiles, Entrevistas, Comercio Local, Punto 506, Emprendedores Limón">
+    
+    <meta property="og:title" content="Entrevistas Punto 506 | Historias con Sabor Local">
+    <meta property="og:description" content="Conoce a los protagonistas del comercio en Pococí.">
+    <meta property="og:image" content="https://punto506.com/img/og-entrevistas.jpg"> <meta property="og:type" content="website">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <style>
-        .serif-title { font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 0.15em; }
-        body { background: radial-gradient(circle at top center, #1c1917 0%, #0a0908 100%); min-height: screen; }
+        .serif-title { font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 0.2em; }
+        
+        body { 
+            background: #0a0908;
+            overflow-x: hidden;
+        }
+
+        /* Luces de fondo ambientales */
+        .ambient-light {
+            position: fixed;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(212, 163, 115, 0.05) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(80px);
+        }
+
         .text-gradient {
             background: linear-gradient(to bottom, #fef3c7 0%, #d4a373 50%, #b45309 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .video-card { 
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); 
-            border: 1px solid rgba(212, 163, 115, 0.1); 
+
+        /* Tarjeta Estilo Cine */
+        .video-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 163, 115, 0.1);
+            transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
         }
-        .video-card:hover { 
-            border-color: #d4a373; 
-            transform: translateY(-8px); 
-            box-shadow: 0 20px 40px -20px rgba(0,0,0,0.8); 
+
+        .video-card:hover {
+            border-color: rgba(212, 163, 115, 0.5);
+            transform: translateY(-10px) scale(1.01);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Efecto de decoración en el título */
+        .title-underline {
+            height: 2px;
+            width: 60px;
+            background: linear-gradient(90deg, #d4a373, transparent);
+            margin-top: 8px;
         }
     </style>
 </head>
-<body class="text-stone-300 p-6 md:p-12">
+<body class="text-stone-300 font-['Inter']">
 
-    <header class="max-w-6xl mx-auto mb-16">
-        <a href="/" class="text-p506-gold text-[10px] uppercase tracking-[0.4em] mb-4 inline-block hover:opacity-70 transition">← Inicio</a>
-        <h1 class="serif-title text-4xl md:text-5xl text-white font-bold text-gradient">Entrevistas</h1>
-        <p class="text-[#d4a373] text-xs uppercase tracking-[0.4em] mt-2 opacity-80 font-semibold">Historias con Sabor Local</p>
+    <div class="ambient-light top-[-10%] left-[-10%]"></div>
+    <div class="ambient-light bottom-[-10%] right-[-10%]"></div>
+
+    <nav class="max-w-7xl mx-auto p-6 flex justify-between items-center">
+        <a href="/" class="group flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full border border-p506-gold/30 flex items-center justify-center text-p506-gold group-hover:border-p506-gold transition-all text-xs">
+                506
+            </div>
+            <span class="text-[10px] uppercase tracking-[0.4em] text-p506-gold/60 group-hover:text-p506-gold transition-all">Regresar</span>
+        </a>
+    </nav>
+
+    <header class="max-w-7xl mx-auto px-6 py-12 md:py-20 text-center md:text-left">
+        <div class="inline-block px-3 py-1 border border-p506-gold/20 rounded-full mb-6">
+            <span class="text-[9px] uppercase tracking-[0.5em] text-p506-gold/80">Contenido Exclusivo</span>
+        </div>
+        <h1 class="serif-title text-5xl md:text-7xl font-bold text-gradient mb-4">Entrevistas</h1>
+        <p class="max-w-2xl text-stone-500 text-sm md:text-base leading-relaxed tracking-wide">
+            Exploramos el corazón comercial de Pococí a través de las voces de sus protagonistas. Historias de esfuerzo, tradición y visión.
+        </p>
+        <div class="title-underline mx-auto md:mx-0"></div>
     </header>
 
-    <main id="grid-entrevistas" class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="col-span-full text-center py-20">
-            <p class="animate-pulse uppercase tracking-[0.3em] text-[10px] text-p506-gold">Conectando con la base de datos...</p>
+    <main class="max-w-7xl mx-auto px-6 pb-24">
+        <div id="grid-entrevistas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="animate-pulse bg-white/5 h-80 rounded-2xl"></div>
+            <div class="animate-pulse bg-white/5 h-80 rounded-2xl"></div>
+            <div class="animate-pulse bg-white/5 h-80 rounded-2xl"></div>
         </div>
     </main>
+
+    <footer class="border-t border-white/5 py-12 text-center">
+        <p class="serif-title text-[10px] text-p506-gold/40">Punto 506 • El Directorio de Pococí</p>
+    </footer>
 
     <script type="module">
         import { cargarEntrevistas } from './entrevistas.js';
