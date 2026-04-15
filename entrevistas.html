@@ -10,9 +10,8 @@
     
     <style>
         .serif-title { font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 0.15em; }
-        body { background: #0a0908; color: #d1d5db; selection-background-color: #d4a373; selection-color: black; }
+        body { background: #0a0908; color: #d1d5db; }
 
-        /* Fondo con textura de "Circuito" o Red Comercial */
         .bg-pattern {
             position: fixed; inset: 0;
             background-image: radial-gradient(rgba(212, 163, 115, 0.05) 1px, transparent 1px);
@@ -25,21 +24,19 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        /* Card Compacta y Premium - Ajuste de Borde */
+        /* Card con diseño de video predominante */
         .video-card {
             background: rgba(18, 16, 15, 0.8);
-            border-bottom: 2px solid rgba(212, 163, 115, 0.1);
+            border-left: 3px solid rgba(212, 163, 115, 0.1);
             transition: all 0.4s ease;
         }
 
         .video-card:hover {
-            border-bottom-color: #d4a373;
+            border-left-color: #d4a373;
             background: rgba(28, 25, 23, 1);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px -20px rgba(0,0,0,0.8);
+            transform: translateY(-4px);
         }
 
-        /* Badge de Pococí - Estilo Deportivo/Ferroso */
         .pococi-badge {
             background: linear-gradient(90deg, #d4a373 0%, #bc8a5f 100%);
             color: #000;
@@ -48,61 +45,59 @@
             clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
         }
 
-        /* Estilo para el Logo Redondo Oficial */
-        .logo-punto506 {
-            box-shadow: 0 0 25px rgba(212, 163, 115, 0.25);
-            transition: all 0.5s ease;
+        /* Estilo del Logo Redondo del Index */
+        .iso-emblem {
+            border: 2px solid #d4a373;
+            transition: all 0.3s ease;
         }
-        
-        .logo-punto506:hover {
+        .iso-emblem:hover {
+            box-shadow: 0 0 15px rgba(212, 163, 115, 0.4);
             transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(212, 163, 115, 0.4);
         }
     </style>
 </head>
-<body class="font-['Inter'] antialiased p-4 md:p-8 selection:bg-p506-gold selection:text-black">
+<body class="font-['Inter'] antialiased p-4 md:p-8">
 
     <div class="bg-pattern"></div>
 
-    <header class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 mb-16 border-b border-white/5 pb-10">
-        <div class="flex items-center gap-8">
-            <a href="/" class="logo-punto506 group flex-shrink-0">
-                <div class="w-16 h-16 rounded-full border-2 border-p506-gold/40 flex items-center justify-center text-p506-gold bg-black/60 shadow-inner group-hover:border-p506-gold/80 transition-all">
-                    <span class="serif-title text-2xl font-black">506</span>
+    <header class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 mb-12 border-b border-white/5 pb-8">
+        <div class="flex items-center gap-6">
+            <a href="/" class="flex flex-col items-center gap-2 group">
+                <div class="w-14 h-14 iso-emblem rounded-full flex items-center justify-center bg-black/40">
+                    <span class="serif-title text-xl text-[#d4a373] font-bold">506</span>
                 </div>
             </a>
             <div>
-                <h1 class="serif-title text-3xl md:text-5xl font-bold text-gradient tracking-tight">Historias de Pococí</h1>
-                <div class="flex items-center gap-3 mt-1 font-sans-body">
-                    <span class="pococi-badge text-[8px] md:text-[9px] uppercase tracking-widest font-black">Limón • Costa Rica</span>
-                    <p class="text-stone-500 text-[10px] md:text-xs uppercase tracking-[0.3em] font-light">Directorio • Punto 506</p>
+                <h1 class="serif-title text-3xl md:text-4xl font-bold text-gradient">Historias de Pococí</h1>
+                <div class="flex items-center gap-2 mt-1">
+                    <span class="pococi-badge text-[8px] uppercase tracking-tighter">Cantón de Pococí</span>
+                    <p class="text-stone-500 text-[9px] uppercase tracking-[0.3em]">Directorio Comercial • Punto 506</p>
                 </div>
             </div>
         </div>
         
-        <div class="flex gap-10 font-sans-body">
+        <div class="flex gap-10">
             <div class="text-right">
-                <span class="block text-p506-gold font-black text-2xl leading-none" id="count-stories">--</span>
-                <span class="text-[8px] uppercase tracking-widest text-stone-600 font-bold">Documentales</span>
+                <span class="block text-p506-gold font-bold text-xl leading-none" id="count-stories">--</span>
+                <span class="text-[7px] uppercase tracking-widest text-stone-600 font-bold">Entrevistas</span>
             </div>
             <div class="text-right">
-                <span class="block text-white font-black text-2xl leading-none">Pococí</span>
-                <span class="text-[8px] uppercase tracking-widest text-stone-600 font-bold">Región Atlántica</span>
+                <span class="block text-white font-bold text-xl leading-none">LIMÓN</span>
+                <span class="text-[7px] uppercase tracking-widest text-stone-600 font-bold">Región Atlántica</span>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto pb-24">
-        <div id="grid-entrevistas" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
-            <div class="h-64 bg-white/5 animate-pulse rounded-t-2xl"></div>
-            <div class="h-64 bg-white/5 animate-pulse rounded-t-2xl"></div>
+    <main class="max-w-7xl mx-auto">
+        <div id="grid-entrevistas" class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+            <div class="h-64 bg-white/5 animate-pulse rounded-r-2xl"></div>
+            <div class="h-64 bg-white/5 animate-pulse rounded-r-2xl"></div>
         </div>
     </main>
 
-    <footer class="mt-auto max-w-7xl mx-auto border-t border-white/5 py-12 flex flex-col sm:flex-row justify-between items-center gap-6">
-        <p class="text-[10px] text-stone-600 uppercase tracking-[0.4em] font-medium">© 2026 Crafted by MontZu • Pococí Digital</p>
-        <div class="h-[1px] w-24 bg-p506-gold/20 hidden sm:block"></div>
-        <p class="text-[10px] text-stone-700 uppercase tracking-widest font-black serif-title">Punto 506</p>
+    <footer class="mt-20 max-w-7xl mx-auto border-t border-white/5 py-10 flex justify-between items-center">
+        <p class="text-[8px] text-stone-600 uppercase tracking-[0.5em]">© 2026 Crafted by MontZu</p>
+        <div class="h-[1px] w-20 bg-p506-gold/20"></div>
     </footer>
 
     <script type="module">
