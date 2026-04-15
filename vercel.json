@@ -17,5 +17,6 @@
       "source": "/empleos",
       "destination": "/empleos/index.html"
     }
-  ]
+  ],
+  "trailingSlash": false
 }
