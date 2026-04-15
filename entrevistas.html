@@ -132,31 +132,31 @@
         <div class="h-[1px] w-20 bg-p506-gold/20"></div>
     </footer>
 
-    <script type="module">
-        import { cargarEntrevistas } from './entrevistas.js';
-        import { supabase } from './supabase.js';
+   <script type="module">
+    import { cargarEntrevistas } from './entrevistas.js';
+    import { supabaseActividad } from './supabase.js'; // Importamos la de actividad
 
-        async function registrarEntrada() {
-            try {
-                const { error } = await supabase
-                    .from('registros_actividad')
-                    .insert([
-                        { 
-                            tipo_evento: 'visita_pagina', 
-                            nombre_negocio: 'Punto 506 - Entrevistas',
-                            fecha: new Date().toISOString() 
-                        }
-                    ]);
-                if (error) console.error('Error al registrar actividad:', error);
-            } catch (err) {
-                console.error('Error de conexión con Supabase:', err);
-            }
+    async function registrarEntrada() {
+        try {
+            const { error } = await supabaseActividad // Usamos la instancia de actividad
+                .from('registros_actividad')
+                .insert([
+                    { 
+                        tipo_evento: 'visita_pagina', 
+                        nombre_negocio: 'Punto 506 - Entrevistas',
+                        fecha: new Date().toISOString() 
+                    }
+                ]);
+            if (error) console.error('Error al registrar:', error);
+        } catch (err) {
+            console.error('Falla de conexión:', err);
         }
+    }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            cargarEntrevistas();
-            registrarEntrada();
-        });
-    </script>
+    document.addEventListener('DOMContentLoaded', () => {
+        cargarEntrevistas();
+        registrarEntrada();
+    });
+</script>
 </body>
 </html>
