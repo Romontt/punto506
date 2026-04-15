@@ -26,7 +26,7 @@
         </header>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-            <section class="glass-panel p-8 rounded-3xl">
+            <section class="glass-panel p-8 rounded-3xl h-fit">
                 <form id="form-evento" class="space-y-6">
                     <div>
                         <label class="block text-xs uppercase tracking-widest text-slate-500 mb-2">Nombre del Evento</label>
@@ -56,17 +56,22 @@
 
                     <div>
                         <label class="block text-xs uppercase tracking-widest text-slate-500 mb-2">Subir Afiche (Vertical recomendado)</label>
-                        <input type="file" id="afiche" accept="image/*" class="text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500 cursor-pointer" required>
+                        <input type="file" id="afiche" accept="image/*" class="text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-slate-700 file:text-white hover:file:bg-slate-600 cursor-pointer" required>
                     </div>
 
-                    <button type="submit" id="btn-save" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-blue-900/20">
-                        PUBLICAR EVENTO
-                    </button>
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <button type="button" id="btn-preview" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-4 rounded-xl transition-all border border-slate-700">
+                            GENERAR PREVIEW
+                        </button>
+                        <button type="submit" id="btn-save" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-blue-900/20">
+                            PUBLICAR EVENTO
+                        </button>
+                    </div>
                 </form>
             </section>
 
             <section>
-                <h2 class="text-xs uppercase tracking-[0.3em] text-slate-500 mb-6 text-center">Vista Previa en Tiempo Real</h2>
+                <h2 class="text-xs uppercase tracking-[0.3em] text-slate-500 mb-6 text-center">Vista Previa de la Tarjeta</h2>
                 <div class="preview-card max-w-[320px] mx-auto shadow-2xl">
                     <div id="preview-img-container" class="h-96 bg-slate-800 flex items-center justify-center overflow-hidden">
                         <span id="preview-placeholder" class="text-slate-600 text-sm">Sin imagen seleccionada</span>
@@ -74,7 +79,7 @@
                     </div>
                     <div class="p-6">
                         <span id="preview-date" class="text-blue-500 text-[10px] font-bold uppercase tracking-widest">FECHA DEL EVENTO</span>
-                        <h3 id="preview-title" class="text-white font-bold text-xl mt-1">Título del Evento</h3>
+                        <h3 id="preview-title" class="text-white font-bold text-xl mt-1 lowercase first-letter:uppercase">Título del Evento</h3>
                         <p id="preview-location" class="text-slate-500 text-sm mt-1 italic">Ubicación del local</p>
                     </div>
                 </div>
@@ -89,9 +94,10 @@
         const aficheInput = document.getElementById('afiche');
         const imgOutput = document.getElementById('img-output');
         const placeholder = document.getElementById('preview-placeholder');
+        const btnPreview = document.getElementById('btn-preview');
 
-        // Manejo de Preview de TEXTO (Corregido con evento input global)
-        form.addEventListener('input', () => {
+        // FUNCIÓN PARA GENERAR PREVIEW
+        const generarPreview = () => {
             const tituloVal = document.getElementById('titulo').value;
             const lugarVal = document.getElementById('lugar').value;
             const fechaVal = document.getElementById('fecha').value;
@@ -101,16 +107,11 @@
             document.getElementById('preview-location').innerText = lugarVal || 'Ubicación del local';
             
             if(fechaVal) {
-                // Formateo simple para la preview
                 document.getElementById('preview-date').innerText = `${fechaVal} | ${horaVal || '--:--'}`;
-            } else {
-                document.getElementById('preview-date').innerText = 'FECHA DEL EVENTO';
             }
-        });
 
-        // Manejo de Preview de IMAGEN (Corregido)
-        aficheInput.addEventListener('change', function() {
-            const file = this.files[0];
+            // Procesar Imagen para Preview
+            const file = aficheInput.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
@@ -120,9 +121,12 @@
                 }
                 reader.readAsDataURL(file);
             }
-        });
+        };
 
-        // Proceso de Guardado
+        // Asignar función al botón de preview
+        btnPreview.addEventListener('click', generarPreview);
+
+        // PROCESO DE PUBLICACIÓN (GUARDADO)
         form.onsubmit = async (e) => {
             e.preventDefault();
             const btn = document.getElementById('btn-save');
@@ -160,7 +164,7 @@
 
                 if (dbError) throw dbError;
 
-                alert('¡Evento publicado con éxito!');
+                alert('¡Evento publicado con éxito en Punto 506!');
                 location.reload();
 
             } catch (err) {
