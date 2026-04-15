@@ -88,7 +88,8 @@
     </div>
 
     <script type="module">
-        import { supabase } from './supabase.js';
+        // Ajustado para buscar en la carpeta principal si este archivo está en una subcarpeta
+        import { supabase } from '../supabase.js';
 
         const form = document.getElementById('form-evento');
         const aficheInput = document.getElementById('afiche');
@@ -96,7 +97,6 @@
         const placeholder = document.getElementById('preview-placeholder');
         const btnPreview = document.getElementById('btn-preview');
 
-        // FUNCIÓN PARA GENERAR PREVIEW
         const generarPreview = () => {
             const tituloVal = document.getElementById('titulo').value;
             const lugarVal = document.getElementById('lugar').value;
@@ -110,7 +110,6 @@
                 document.getElementById('preview-date').innerText = `${fechaVal} | ${horaVal || '--:--'}`;
             }
 
-            // Procesar Imagen para Preview
             const file = aficheInput.files[0];
             if (file) {
                 const reader = new FileReader();
@@ -123,10 +122,8 @@
             }
         };
 
-        // Asignar función al botón de preview
         btnPreview.addEventListener('click', generarPreview);
 
-        // PROCESO DE PUBLICACIÓN (GUARDADO)
         form.onsubmit = async (e) => {
             e.preventDefault();
             const btn = document.getElementById('btn-save');
@@ -137,19 +134,16 @@
             const fileName = `${Date.now()}_${file.name}`;
 
             try {
-                // 1. Subir imagen a Storage
                 const { data: storageData, error: storageError } = await supabase.storage
                     .from('afiches-eventos')
                     .upload(fileName, file);
 
                 if (storageError) throw storageError;
 
-                // 2. Obtener URL pública
                 const { data: urlData } = supabase.storage
                     .from('afiches-eventos')
                     .getPublicUrl(fileName);
 
-                // 3. Guardar en Tabla Eventos
                 const { error: dbError } = await supabase
                     .from('eventos')
                     .insert([{
