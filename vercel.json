@@ -1,5 +1,6 @@
 {
   "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
     {
       "source": "/",
@@ -12,6 +13,10 @@
     {
       "source": "/eventos",
       "destination": "/eventos.html"
+    },
+    {
+      "source": "/empleos/index.html",
+      "destination": "/empleos/index.html"
     }
   ]
 }
