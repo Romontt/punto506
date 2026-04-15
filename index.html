@@ -44,39 +44,30 @@
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 20px 40px -15px rgba(0,0,0,0.7);
         }
-        .logo-glow { box-shadow: 0 0 40px rgba(212, 163, 115, 0.05); }
+        .logo-glow { box-shadow: 0 0 40px rgba(212, 163, 115, 0.15); }
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .animate-card { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
-
-        /* Estilo del emblema circular del logo */
-        .iso-emblem {
-            border: 1px solid rgba(212, 163, 115, 0.3);
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-        }
     </style>
 </head>
 <body class="bg-p506-dark text-stone-300 min-h-screen flex flex-col items-center justify-center p-4 md:p-6 selection:bg-p506-gold">
 
-    <header class="mb-10 md:mb-20">
-        <div class="flex items-center gap-4 md:gap-6">
-            <div class="flex flex-col items-center gap-1 md:gap-2">
-                <div class="w-12 h-12 md:w-16 md:h-16 iso-emblem rounded-full flex items-center justify-center logo-glow relative group overflow-hidden">
-                    <div class="absolute inset-0 rounded-full border border-p506-gold/10 animate-ping group-hover:animate-none"></div>
-                    <span class="serif-title text-[10px] md:text-[14px] text-[#d4a373] font-bold z-10">506</span>
-                </div>
-                <span class="text-[#d4a373] text-[6px] md:text-[7px] tracking-[0.3em] font-black uppercase opacity-80">BY MONTZU CR</span>
+    <header class="text-center mb-10 md:mb-20">
+        <div class="flex flex-col items-center mb-6 md:mb-8 group">
+            <div class="w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center border border-p506-gold/30 bg-black/50 logo-glow backdrop-blur-sm relative mb-2">
+                <div class="absolute inset-0 rounded-full border border-p506-gold/10 animate-ping group-hover:animate-none"></div>
+                <span class="serif-title text-2xl md:text-3xl text-p506-gold font-bold">506</span>
             </div>
+            <span class="text-p506-gold text-[6px] md:text-[8px] tracking-[0.4em] font-black uppercase opacity-80">BY MONTZU CR</span>
+        </div>
 
-            <div class="h-10 md:h-16 w-[1px] bg-[#d4a373]/20"></div>
-
-            <div class="flex flex-col justify-center">
-                <h1 class="serif-title text-2xl md:text-5xl tracking-[0.3em] text-white uppercase font-normal leading-none text-gradient">Punto 506</h1>
-                <p class="text-p506-gold/80 uppercase tracking-[0.4em] text-[7px] md:text-[9px] font-medium mt-1 md:mt-3">Descubre • Conecta • Destaca</p>
-            </div>
+        <h1 class="serif-title text-3xl md:text-7xl mb-2 md:mb-4 font-bold tracking-[0.2em] md:tracking-[0.3em] text-gradient">Punto 506</h1>
+        <div class="flex items-center justify-center gap-2 md:gap-4 font-sans-body">
+            <div class="h-[1px] w-6 md:w-12 bg-gradient-to-r from-transparent to-p506-gold/50"></div>
+            <p class="text-p506-gold text-[8px] md:text-xs uppercase tracking-[0.3em] md:tracking-[0.6em] font-medium opacity-80">Descubre • Conecta • Destaca</p>
+            <div class="h-[1px] w-6 md:w-12 bg-gradient-to-l from-transparent to-p506-gold/50"></div>
         </div>
     </header>
 
@@ -103,7 +94,7 @@
             <p class="mt-3 text-stone-500 text-[8px] md:text-[9px] uppercase tracking-widest font-semibold">Oportunidades</p>
         </a>
 
-        <a href="/eventos" class="opcion-card bg-p506-gold/[0.03] backdrop-blur-xl p-6 md:p-12 rounded-2xl md:rounded-3xl text-center group group animate-card border-p506-gold/40" style="animation-delay: 0.4s;">
+        <a href="/eventos" class="opcion-card bg-p506-gold/[0.03] backdrop-blur-xl p-6 md:p-12 rounded-2xl md:rounded-3xl text-center group animate-card border-p506-gold/40" style="animation-delay: 0.4s;">
             <div class="absolute top-2 right-2 md:top-4 md:right-4 bg-p506-gold text-black text-[6px] md:text-[7px] px-2 md:px-3 py-0.5 md:py-1 font-black uppercase tracking-widest rounded-full">New</div>
             <div class="text-3xl md:text-5xl mb-4 md:mb-8 group-hover:scale-110 transition-transform duration-500">🎭</div>
             <h2 class="serif-title text-[10px] md:text-sm text-p506-gold mb-2 tracking-widest font-bold">Eventos</h2>
