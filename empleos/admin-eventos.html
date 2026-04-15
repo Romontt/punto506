@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Eventos | Punto 506</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050b1a; font-family: 'Inter', sans-serif; color: #d1d5db; }
+        .glass-panel { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .input-field { background: #0a0f1d; border: 1px solid #1e293b; color: white; padding: 12px; border-radius: 8px; width: 100%; outline: none; }
+        .input-field:focus { border-color: #3b82f6; }
+        .preview-card { border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 16px; overflow: hidden; background: #0f172a; }
+    </style>
+</head>
+<body class="p-4 md:p-10">
+
+    <div class="max-w-6xl mx-auto">
+        <header class="flex justify-between items-center mb-10">
+            <div>
+                <a href="admin.html" class="text-blue-500 text-xs uppercase tracking-widest hover:underline">← Volver al Panel</a>
+                <h1 class="text-3xl font-bold text-white mt-2">Publicar Nuevo Evento</h1>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <section class="glass-panel p-8 rounded-3xl">
+                <form id="form-evento" class="space-y-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-slate-500 mb-2">Nombre del Evento</label>
+                        <input type="text" id="titulo" class="input-field" placeholder="Ej: Concierto en Vivo - Bar 506" required>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-slate-500 mb-2">Fecha</label>
+                            <input type="date" id="fecha" class="input-field" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-slate-500 mb-2">Hora</label>
+                            <input type="time" id="hora" class="input-field" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-slate-500 mb-2">Lugar (Negocio)</label>
+                        <input type="text" id="lugar" class="input-field" placeholder="Ej: Guápiles, Centro Comercial" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-slate-500 mb-2">Link de WhatsApp o Entradas</label>
+                        <input type="url" id="link" class="input-field" placeholder="https://wa.me/506...">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-slate-500 mb-2">Subir Afiche (Vertical recomendado)</label>
+                        <input type="file" id="afiche" accept="image/*" class="text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500 cursor-pointer" required>
+                    </div>
+
+                    <button type="submit" id="btn-save" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-blue-900/20">
+                        PUBLICAR EVENTO
+                    </button>
+                </form>
+            </section>
+
+            <section>
+                <h2 class="text-xs uppercase tracking-[0.3em] text-slate-500 mb-6 text-center">Vista Previa en Tiempo Real</h2>
+                <div class="preview-card max-w-[320px] mx-auto shadow-2xl">
+                    <div id="preview-img-container" class="h-96 bg-slate-800 flex items-center justify-center overflow-hidden">
+                        <span id="preview-placeholder" class="text-slate-600 text-sm">Sin imagen seleccionada</span>
+                        <img id="img-output" class="hidden w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <span id="preview-date" class="text-blue-500 text-[10px] font-bold uppercase tracking-widest">FECHA DEL EVENTO</span>
+                        <h3 id="preview-title" class="text-white font-bold text-xl mt-1">Título del Evento</h3>
+                        <p id="preview-location" class="text-slate-500 text-sm mt-1 italic">Ubicación del local</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script type="module">
+        import { supabase } from './supabase.js';
+
+        const form = document.getElementById('form-evento');
+        const aficheInput = document.getElementById('afiche');
+        const imgOutput = document.getElementById('img-output');
+        const placeholder = document.getElementById('preview-placeholder');
+
+        // Manejo de Preview
+        form.addEventListener('input', () => {
+            document.getElementById('preview-title').innerText = document.getElementById('titulo').value || 'Título del Evento';
+            document.getElementById('preview-location').innerText = document.getElementById('lugar').value || 'Ubicación del local';
+            document.getElementById('preview-date').innerText = document.getElementById('fecha').value || 'FECHA DEL EVENTO';
+        });
+
+        aficheInput.onchange = evt => {
+            const [file] = aficheInput.files;
+            if (file) {
+                imgOutput.src = URL.createObjectURL(file);
+                imgOutput.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+            }
+        }
+
+        // Proceso de Guardado
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-save');
+            btn.innerText = "SUBIENDO...";
+            btn.disabled = true;
+
+            const file = aficheInput.files[0];
+            const fileName = `${Date.now()}_${file.name}`;
+
+            try {
+                // 1. Subir imagen a Storage
+                const { data: storageData, error: storageError } = await supabase.storage
+                    .from('afiches-eventos')
+                    .upload(fileName, file);
+
+                if (storageError) throw storageError;
+
+                // 2. Obtener URL pública
+                const { data: urlData } = supabase.storage
+                    .from('afiches-eventos')
+                    .getPublicUrl(fileName);
+
+                // 3. Guardar en Tabla Eventos
+                const { error: dbError } = await supabase
+                    .from('eventos')
+                    .insert([{
+                        titulo: document.getElementById('titulo').value,
+                        fecha: document.getElementById('fecha').value,
+                        hora: document.getElementById('hora').value,
+                        lugar: document.getElementById('lugar').value,
+                        link_contacto: document.getElementById('link').value,
+                        imagen_url: urlData.publicUrl,
+                        aprobado: true
+                    }]);
+
+                if (dbError) throw dbError;
+
+                alert('¡Evento publicado con éxito!');
+                location.reload();
+
+            } catch (err) {
+                console.error(err);
+                alert('Error al publicar: ' + err.message);
+            } finally {
+                btn.innerText = "PUBLICAR EVENTO";
+                btn.disabled = false;
+            }
+        };
+    </script>
+</body>
+</html>
