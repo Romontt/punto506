@@ -1,0 +1,21 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/bienvenida.html"
+    },
+    {
+      "source": "/directorio",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/eventos",
+      "destination": "/eventos.html"
+    },
+    {
+      "source": "/empleos",
+      "destination": "/empleos/index.html"
+    }
+  ]
+}
