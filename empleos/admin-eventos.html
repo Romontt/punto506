@@ -90,21 +90,37 @@
         const imgOutput = document.getElementById('img-output');
         const placeholder = document.getElementById('preview-placeholder');
 
-        // Manejo de Preview
+        // Manejo de Preview de TEXTO (Corregido con evento input global)
         form.addEventListener('input', () => {
-            document.getElementById('preview-title').innerText = document.getElementById('titulo').value || 'Título del Evento';
-            document.getElementById('preview-location').innerText = document.getElementById('lugar').value || 'Ubicación del local';
-            document.getElementById('preview-date').innerText = document.getElementById('fecha').value || 'FECHA DEL EVENTO';
+            const tituloVal = document.getElementById('titulo').value;
+            const lugarVal = document.getElementById('lugar').value;
+            const fechaVal = document.getElementById('fecha').value;
+            const horaVal = document.getElementById('hora').value;
+
+            document.getElementById('preview-title').innerText = tituloVal || 'Título del Evento';
+            document.getElementById('preview-location').innerText = lugarVal || 'Ubicación del local';
+            
+            if(fechaVal) {
+                // Formateo simple para la preview
+                document.getElementById('preview-date').innerText = `${fechaVal} | ${horaVal || '--:--'}`;
+            } else {
+                document.getElementById('preview-date').innerText = 'FECHA DEL EVENTO';
+            }
         });
 
-        aficheInput.onchange = evt => {
-            const [file] = aficheInput.files;
+        // Manejo de Preview de IMAGEN (Corregido)
+        aficheInput.addEventListener('change', function() {
+            const file = this.files[0];
             if (file) {
-                imgOutput.src = URL.createObjectURL(file);
-                imgOutput.classList.remove('hidden');
-                placeholder.classList.add('hidden');
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imgOutput.src = e.target.result;
+                    imgOutput.classList.remove('hidden');
+                    placeholder.classList.add('hidden');
+                }
+                reader.readAsDataURL(file);
             }
-        }
+        });
 
         // Proceso de Guardado
         form.onsubmit = async (e) => {
