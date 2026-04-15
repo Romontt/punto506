@@ -15,8 +15,8 @@
       "destination": "/eventos.html"
     },
     {
-      "source": "/empleos/index.html",
-      "destination": "/empleos/index.html"
+      "source": "/empleos",
+      "destination": "/empleos/be.html"
     }
   ]
 }
