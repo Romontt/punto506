@@ -6,47 +6,41 @@
     <title>Entrevistas | Punto 506</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: { 'p506-gold': '#d4a373', 'p506-dark': '#0a0908' },
-                    fontFamily: { 'serif-title': ['Cinzel', 'serif'], 'sans-body': ['Inter', 'sans-serif'] }
-                }
-            }
-        }
-    </script>
     <style>
         .serif-title { font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 0.15em; }
-        body { background: radial-gradient(circle at top center, #1c1917 0%, #0a0908 100%); min-h-screen; }
-        .video-card { transition: all 0.4s ease; border: 1px solid rgba(212, 163, 115, 0.1); }
-        .video-card:hover { border-color: #d4a373; transform: translateY(-5px); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5); }
+        body { background: radial-gradient(circle at top center, #1c1917 0%, #0a0908 100%); min-height: screen; }
+        .text-gradient {
+            background: linear-gradient(to bottom, #fef3c7 0%, #d4a373 50%, #b45309 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .video-card { 
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); 
+            border: 1px solid rgba(212, 163, 115, 0.1); 
+        }
+        .video-card:hover { 
+            border-color: #d4a373; 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 40px -20px rgba(0,0,0,0.8); 
+        }
     </style>
 </head>
 <body class="text-stone-300 p-6 md:p-12">
 
-    <header class="max-w-6xl mx-auto mb-16 flex flex-col md:flex-row justify-between items-end gap-6">
-        <div>
-            <a href="/" class="text-p506-gold text-[10px] uppercase tracking-[0.4em] mb-4 flex items-center gap-2 hover:opacity-70 transition">
-                <span>← Volver al Inicio</span>
-            </a>
-            <h1 class="serif-title text-4xl md:text-5xl text-white font-bold">Entrevistas</h1>
-            <p class="text-p506-gold text-xs uppercase tracking-[0.4em] mt-2 opacity-80">Historias detrás del comercio de Pococí</p>
-        </div>
-        <div class="h-[1px] flex-grow bg-p506-gold/20 mb-3 hidden md:block"></div>
+    <header class="max-w-6xl mx-auto mb-16">
+        <a href="/" class="text-p506-gold text-[10px] uppercase tracking-[0.4em] mb-4 inline-block hover:opacity-70 transition">← Inicio</a>
+        <h1 class="serif-title text-4xl md:text-5xl text-white font-bold text-gradient">Entrevistas</h1>
+        <p class="text-[#d4a373] text-xs uppercase tracking-[0.4em] mt-2 opacity-80 font-semibold">Historias con Sabor Local</p>
     </header>
 
     <main id="grid-entrevistas" class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <p class="col-span-full text-center py-20 animate-pulse uppercase tracking-[0.3em] text-[10px]">Cargando historias...</p>
+        <div class="col-span-full text-center py-20">
+            <p class="animate-pulse uppercase tracking-[0.3em] text-[10px] text-p506-gold">Conectando con la base de datos...</p>
+        </div>
     </main>
 
-    <footer class="mt-20 text-center opacity-30 italic text-[10px] uppercase tracking-widest">
-        © 2026 Punto 506 • San José, Costa Rica
-    </footer>
-
     <script type="module">
-        import { cargarEntrevistasPagina } from './entrevistas.js';
-        document.addEventListener('DOMContentLoaded', cargarEntrevistasPagina);
+        import { cargarEntrevistas } from './entrevistas.js';
+        document.addEventListener('DOMContentLoaded', cargarEntrevistas);
     </script>
 </body>
 </html>
