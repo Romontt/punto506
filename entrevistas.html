@@ -3,9 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Entrevistas | Punto 506 - Historias de Pococí</title>
+    <meta name="description" content="Conoce las historias de éxito, retos y el lado humano de los comerciantes del Cantón de Pococí. Entrevistas exclusivas de Punto 506.">
+    <meta name="keywords" content="Pococí, Guápiles, Entrevistas, Comercio Local, Punto 506, Negocios Limón, Emprendedores Costa Rica">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="theme-color" content="#0a0908">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://punto506.montzucr.com/entrevistas">
+    <meta property="og:title" content="Historias de Pococí | Punto 506">
+    <meta property="og:description" content="Descubre el rostro detrás del comercio local en Guápiles y alrededores.">
+    <meta property="og:image" content="https://punto506.montzucr.com/img/og-preview.webp">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Historias de Pococí | Punto 506">
+    <meta property="twitter:description" content="Entrevistas exclusivas con el comercio de la zona atlántica.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Historias de Pococí",
+      "description": "Serie de video-entrevistas a comerciantes y emprendedores del Cantón de Pococí.",
+      "url": "https://punto506.montzucr.com/entrevistas",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Punto 506",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://punto506.montzucr.com/favicon.svg"
+        }
+      }
+    }
+    </script>
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
@@ -24,7 +58,6 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        /* Card con diseño de video predominante */
         .video-card {
             background: rgba(18, 16, 15, 0.8);
             border-left: 3px solid rgba(212, 163, 115, 0.1);
@@ -45,7 +78,6 @@
             clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
         }
 
-        /* Estilo del Logo Redondo del Index */
         .iso-emblem {
             border: 2px solid #d4a373;
             transition: all 0.3s ease;
@@ -102,7 +134,29 @@
 
     <script type="module">
         import { cargarEntrevistas } from './entrevistas.js';
-        document.addEventListener('DOMContentLoaded', cargarEntrevistas);
+        import { supabase } from './supabase.js';
+
+        async function registrarEntrada() {
+            try {
+                const { error } = await supabase
+                    .from('registros_actividad')
+                    .insert([
+                        { 
+                            tipo_evento: 'visita_pagina', 
+                            nombre_negocio: 'Punto 506 - Entrevistas',
+                            fecha: new Date().toISOString() 
+                        }
+                    ]);
+                if (error) console.error('Error al registrar actividad:', error);
+            } catch (err) {
+                console.error('Error de conexión con Supabase:', err);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            cargarEntrevistas();
+            registrarEntrada();
+        });
     </script>
 </body>
 </html>
