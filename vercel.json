@@ -12,10 +12,6 @@
     {
       "source": "/eventos",
       "destination": "/eventos.html"
-    },
-    {
-      "source": "/empleos",
-      "destination": "punto506.montzucr.com/empleos/index.html"
     }
   ]
 }
