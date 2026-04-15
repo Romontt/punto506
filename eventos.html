@@ -10,6 +10,7 @@
         :root {
             --gold: #d4a373;
             --dark: #130f0e;
+            --card-bg: #1c1817;
         }
         body { 
             background-color: var(--dark); 
@@ -21,27 +22,35 @@
         
         /* Tarjeta tipo Poster */
         .event-poster {
-            background: #1c1817;
+            background: var(--card-bg);
             border: 1px solid rgba(212, 163, 115, 0.1);
-            position: relative;
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .event-poster:hover {
-            transform: scale(1.02) translateY(-10px);
+            transform: translateY(-10px);
             border-color: var(--gold);
-            box-shadow: 0 0 40px rgba(212, 163, 115, 0.15);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
 
-        /* Efecto Glow en el hover */
-        .event-poster::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, var(--dark) 0%, transparent 100%);
-            opacity: 0.8;
-            transition: opacity 0.3s;
+        /* Contenedor de Imagen */
+        .poster-wrapper {
+            width: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            aspect-ratio: 3/4; /* Proporción vertical estándar de afiche */
+        }
+
+        .poster-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Muestra el afiche completo sin recortes */
         }
 
         /* Fecha estilo "Ticket" */
@@ -92,10 +101,10 @@
         </header>
 
         <div id="eventos-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            <div class="shimmer h-[500px] rounded-lg opacity-10"></div>
-            <div class="shimmer h-[500px] rounded-lg opacity-10"></div>
-            <div class="shimmer h-[500px] rounded-lg opacity-10"></div>
-            <div class="shimmer h-[500px] rounded-lg opacity-10"></div>
+            <div class="shimmer h-[600px] rounded-lg opacity-10"></div>
+            <div class="shimmer h-[600px] rounded-lg opacity-10"></div>
+            <div class="shimmer h-[600px] rounded-lg opacity-10"></div>
+            <div class="shimmer h-[600px] rounded-lg opacity-10"></div>
         </div>
 
         <div id="no-events" class="hidden text-center py-20">
@@ -104,7 +113,6 @@
     </main>
 
     <script type="module">
-        // Importamos el cliente específico para eventos
         import { supabaseEventos } from './supabase-eventos.js';
 
         async function cargarEventos() {
@@ -112,7 +120,6 @@
             const noEvents = document.getElementById('no-events');
 
             try {
-                // Usamos supabaseEventos que apunta al esquema public
                 const { data: eventos, error } = await supabaseEventos
                     .from('eventos')
                     .select('*')
@@ -133,32 +140,41 @@
                     const mes = fechaObj.toLocaleDateString('es-ES', { month: 'short' }).toUpperCase();
 
                     const card = document.createElement('div');
-                    card.className = 'event-poster rounded-xl group flex flex-col h-[520px]';
+                    card.className = 'event-poster rounded-xl group';
                     
                     card.innerHTML = `
-                        <div class="absolute inset-0 z-0">
-                            <img src="${evento.imagen_url}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                        </div>
-                        
-                        <div class="relative z-10 p-6 flex flex-col h-full justify-between">
-                            <div class="flex justify-between items-start">
+                        <div class="poster-wrapper relative">
+                            <img src="${evento.imagen_url}" alt="${evento.titulo}" loading="lazy">
+                            
+                            <div class="absolute top-0 left-4 z-20">
                                 <div class="ticket-date px-3 py-4 text-center min-w-[50px] font-black shadow-2xl">
                                     <span class="block text-xl leading-none">${dia}</span>
                                     <span class="text-[10px] tracking-tighter">${mes}</span>
                                 </div>
-                                <div class="bg-black/40 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+                            </div>
+
+                            <div class="absolute top-4 right-4 z-20">
+                                <div class="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
                                     <span class="text-[10px] text-white font-bold tracking-widest uppercase">${evento.hora}</span>
                                 </div>
                             </div>
+                        </div>
+                        
+                        <div class="p-6 flex flex-col flex-grow bg-[#1c1817] border-t border-white/5">
+                            <h3 class="serif-title text-xl text-white mb-2 leading-tight group-hover:text-[var(--gold)] transition-colors">
+                                ${evento.titulo}
+                            </h3>
+                            
+                            <div class="flex items-center gap-2 text-stone-400 text-xs mb-6 font-light italic">
+                                <svg class="w-3 h-3 text-[var(--gold)]" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                                </svg>
+                                ${evento.lugar}
+                            </div>
 
-                            <div class="transform transition-all duration-500">
-                                <h3 class="serif-title text-2xl text-white mb-2 leading-tight drop-shadow-lg">${evento.titulo}</h3>
-                                <div class="flex items-center gap-2 text-stone-300 text-xs mb-6 font-light italic">
-                                    <svg class="w-3 h-3 text-[var(--gold)]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
-                                    ${evento.lugar}
-                                </div>
+                            <div class="mt-auto">
                                 <a href="${evento.link_contacto || '#'}" target="_blank" 
-                                   class="btn-gold block w-full text-center py-3 text-[10px] font-black tracking-[0.3em] uppercase rounded-sm">
+                                   class="btn-gold block w-full text-center py-3 text-[10px] font-black tracking-[0.3em] uppercase rounded-sm shadow-lg">
                                     OBTENER INFORMACIÓN
                                 </a>
                             </div>
