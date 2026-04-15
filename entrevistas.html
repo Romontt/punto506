@@ -3,149 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Entrevistas | Punto 506 - Historias de Pococí</title>
-    <meta name="description" content="Descubre las historias detrás de los comercios y emprendedores más emblemáticos de Pococí.">
     
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Series",
-      "name": "Entrevistas Punto 506",
-      "description": "Historias de éxito y emprendimiento en el cantón de Pococí.",
-      "publisher": { "@type": "Organization", "name": "Punto 506" }
-    }
-    </script>
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
-        .serif-title { font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 0.25em; }
-        
-        body { background: #070707; color: #d1d5db; overflow-x: hidden; }
+        .serif-title { font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 0.15em; }
+        body { background: #0a0908; color: #d1d5db; }
 
-        /* Textura de fondo */
-        .grid-overlay {
-            position: fixed;
-            inset: 0;
-            background-image: radial-gradient(#d4a373 0.5px, transparent 0.5px);
-            background-size: 40px 40px;
-            opacity: 0.03;
-            pointer-events: none;
+        /* Fondo con textura de "Circuito" o Red Comercial */
+        .bg-pattern {
+            position: fixed; inset: 0;
+            background-image: radial-gradient(rgba(212, 163, 115, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
             z-index: -1;
         }
 
-        .ambient-light {
-            position: fixed;
-            width: 60vw; height: 60vw;
-            background: radial-gradient(circle, rgba(212, 163, 115, 0.07) 0%, rgba(0,0,0,0) 70%);
-            border-radius: 50%; z-index: -2; filter: blur(100px);
-        }
-
         .text-gradient {
-            background: linear-gradient(180deg, #fff 0%, #d4a373 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background: linear-gradient(to right, #fef3c7, #d4a373, #b45309);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        /* Tarjetas con efecto de profundidad */
+        /* Card Compacta y Premium */
         .video-card {
-            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.2) 100%);
-            border: 1px solid rgba(212, 163, 115, 0.1);
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-        }
-
-        .video-card::after {
-            content: ''; position: absolute; inset: 0;
-            border-radius: inherit; opacity: 0;
-            box-shadow: 0 0 30px rgba(212, 163, 115, 0.15);
-            transition: opacity 0.6s;
+            background: rgba(18, 16, 15, 0.8);
+            border-left: 3px solid rgba(212, 163, 115, 0.2);
+            transition: all 0.4s ease;
         }
 
         .video-card:hover {
-            transform: translateY(-12px);
-            border-color: rgba(212, 163, 115, 0.4);
+            border-left-color: #d4a373;
+            background: rgba(28, 25, 23, 1);
+            transform: translateX(8px);
         }
 
-        .video-card:hover::after { opacity: 1; }
-
-        /* Líneas decorativas animadas */
-        .separator {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(212, 163, 115, 0.5), transparent);
+        /* Badge de Pococí */
+        .pococi-badge {
+            background: linear-gradient(90deg, #d4a373 0%, #bc8a5f 100%);
+            color: #000;
+            font-weight: 900;
+            padding: 2px 10px;
+            clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
         }
     </style>
 </head>
-<body class="font-['Inter']">
+<body class="font-['Inter'] antialiased p-4 md:p-8">
 
-    <div class="grid-overlay"></div>
-    <div class="ambient-light top-[-20%] left-[-10%]"></div>
-    <div class="ambient-light bottom-[-20%] right-[-10%]"></div>
+    <div class="bg-pattern"></div>
 
-    <nav class="max-w-7xl mx-auto p-8 flex justify-between items-center">
-        <a href="/" class="group flex items-center gap-4">
-            <span class="w-12 h-12 rounded-full border border-p506-gold/20 flex items-center justify-center text-p506-gold font-bold group-hover:scale-110 group-hover:border-p506-gold transition-all">506</span>
-            <span class="text-[9px] uppercase tracking-[0.5em] text-stone-500 group-hover:text-white transition-colors">Volver a la base</span>
-        </a>
-    </nav>
-
-    <header class="max-w-7xl mx-auto px-6 pt-10 pb-20 grid md:grid-cols-2 gap-12 items-center">
-        <div>
-            <div class="flex items-center gap-4 mb-6">
-                <span class="h-[1px] w-12 bg-p506-gold"></span>
-                <span class="text-p506-gold text-[10px] uppercase tracking-[0.6em] font-bold">Documentales Locales</span>
-            </div>
-            <h1 class="serif-title text-6xl md:text-8xl font-bold text-gradient leading-none mb-6">Voces de<br>Pococí</h1>
-            <p class="max-w-md text-stone-400 text-sm md:text-base leading-relaxed mb-8">
-                Un archivo visual dedicado a preservar la historia de los negocios que dan vida a nuestro cantón. Historias reales, gente nuestra.
-            </p>
-            <div class="flex items-center gap-8">
-                <div>
-                    <span class="block text-2xl font-bold text-white" id="count-stories">0</span>
-                    <span class="text-[8px] uppercase tracking-widest text-p506-gold">Historias</span>
-                </div>
-                <div class="w-[1px] h-8 bg-white/10"></div>
-                <div>
-                    <span class="block text-2xl font-bold text-white">100%</span>
-                    <span class="text-[8px] uppercase tracking-widest text-p506-gold">Puntarenense</span>
+    <header class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 mb-12 border-b border-white/5 pb-8">
+        <div class="flex items-center gap-6">
+            <a href="/" class="w-14 h-14 rounded-xl border-2 border-p506-gold/20 flex items-center justify-center text-p506-gold font-black text-xl hover:border-p506-gold transition-all">506</a>
+            <div>
+                <h1 class="serif-title text-3xl md:text-4xl font-bold text-gradient">Historias de Pococí</h1>
+                <div class="flex items-center gap-2 mt-1">
+                    <span class="pococi-badge text-[8px] uppercase tracking-tighter">Cantón de Pococí</span>
+                    <p class="text-stone-500 text-[9px] uppercase tracking-[0.3em]">Directorio Comercial • Punto 506</p>
                 </div>
             </div>
         </div>
-        <div class="hidden md:block relative">
-            <div class="absolute inset-0 bg-p506-gold/10 blur-[100px] rounded-full"></div>
-            <img src="https://images.unsplash.com/photo-1598897349489-44769b7b1ace?auto=format&fit=crop&q=80&w=800" alt="Cinematic" class="rounded-2xl grayscale opacity-40 border border-white/5 shadow-2xl">
+        
+        <div class="flex gap-10">
+            <div class="text-right">
+                <span class="block text-p506-gold font-bold text-xl leading-none" id="count-stories">--</span>
+                <span class="text-[7px] uppercase tracking-widest text-stone-600 font-bold">Entrevistas</span>
+            </div>
+            <div class="text-right">
+                <span class="block text-white font-bold text-xl leading-none">LIMÓN</span>
+                <span class="text-[7px] uppercase tracking-widest text-stone-600 font-bold">Región Atlántica</span>
+            </div>
         </div>
     </header>
 
-    <div class="separator max-w-7xl mx-auto mb-20"></div>
-
-    <main class="max-w-7xl mx-auto px-6 pb-32">
-        <div id="grid-entrevistas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-            <div class="space-y-4">
-                <div class="aspect-video bg-white/5 rounded-xl animate-pulse"></div>
-                <div class="h-4 w-1/2 bg-white/5 animate-pulse"></div>
-            </div>
-            <div class="space-y-4">
-                <div class="aspect-video bg-white/5 rounded-xl animate-pulse"></div>
-                <div class="h-4 w-1/2 bg-white/5 animate-pulse"></div>
-            </div>
-            <div class="space-y-4">
-                <div class="aspect-video bg-white/5 rounded-xl animate-pulse"></div>
-                <div class="h-4 w-1/2 bg-white/5 animate-pulse"></div>
-            </div>
+    <main class="max-w-7xl mx-auto">
+        <div id="grid-entrevistas" class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            <div class="h-40 bg-white/5 animate-pulse rounded-r-2xl"></div>
+            <div class="h-40 bg-white/5 animate-pulse rounded-r-2xl"></div>
+            <div class="h-40 bg-white/5 animate-pulse rounded-r-2xl"></div>
+            <div class="h-40 bg-white/5 animate-pulse rounded-r-2xl"></div>
         </div>
     </main>
 
-    <footer class="bg-black/50 backdrop-blur-xl border-t border-white/5 py-16">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-            <div class="text-center md:text-left">
-                <h3 class="serif-title text-white text-xs mb-2">Punto 506</h3>
-                <p class="text-[9px] text-stone-500 uppercase tracking-widest">El pulso comercial de la zona atlántica</p>
-            </div>
-            <p class="text-[8px] text-stone-600 uppercase tracking-[0.4em]">© 2026 Crafted by MontZu</p>
-        </div>
+    <footer class="mt-20 max-w-7xl mx-auto border-t border-white/5 py-10 flex justify-between items-center">
+        <p class="text-[8px] text-stone-600 uppercase tracking-[0.5em]">© 2026 Crafted by MontZu</p>
+        <div class="h-[1px] w-20 bg-p506-gold/20"></div>
     </footer>
 
     <script type="module">
