@@ -36,7 +36,6 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
 
-        /* Contenedor de Imagen */
         .poster-wrapper {
             width: 100%;
             background: #000;
@@ -44,16 +43,15 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            aspect-ratio: 3/4; /* Proporción vertical estándar de afiche */
+            aspect-ratio: 3/4;
         }
 
         .poster-wrapper img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Muestra el afiche completo sin recortes */
+            object-fit: contain;
         }
 
-        /* Fecha estilo "Ticket" */
         .ticket-date {
             background: var(--gold);
             color: var(--dark);
@@ -81,18 +79,36 @@
             color: var(--dark);
         }
 
-        /* Separador de Sección */
         .section-divider {
             display: flex;
             align-items: center;
             gap: 1rem;
             margin-bottom: 2rem;
-            margin-top: 4rem;
+            margin-top: 1rem;
         }
         .section-divider div {
             height: 1px;
             flex-grow: 1;
             background: linear-gradient(to right, var(--gold), transparent);
+        }
+
+        /* Estilos para el Tab Nav */
+        .tab-nav-btn {
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        .tab-nav-btn.active {
+            color: var(--gold);
+        }
+        .tab-nav-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 2px;
+            background: var(--gold);
         }
     </style>
 </head>
@@ -109,14 +125,22 @@
     </nav>
 
     <main class="max-w-7xl mx-auto px-6 py-10">
-        <header class="mb-16 text-center">
+        <header class="mb-12 text-center">
             <h2 class="serif-title text-4xl md:text-6xl text-white mb-4 tracking-tight">PRÓXIMOS <span class="text-[var(--gold)]">EVENTOS</span></h2>
-            <p class="text-stone-400 font-light italic tracking-widest text-sm uppercase">Lo mejor de Pococí en un solo lugar</p>
+            
+            <div class="flex justify-center items-center gap-8 md:gap-12 mt-8 mb-4 border-b border-white/5 pb-6">
+                <button id="tab-discotecas" onclick="switchTab('discotecas')" class="tab-nav-btn active serif-title text-xs md:text-sm tracking-[0.3em] uppercase font-bold text-stone-400 hover:text-white">
+                    Nightlife & Discotecas
+                </button>
+                <button id="tab-shows" onclick="switchTab('shows')" class="tab-nav-btn serif-title text-xs md:text-sm tracking-[0.3em] uppercase font-bold text-stone-400 hover:text-white">
+                    Shows & Conciertos
+                </button>
+            </div>
         </header>
 
         <div id="section-discotecas" class="hidden">
             <div class="section-divider">
-                <h3 class="serif-title text-[var(--gold)] tracking-widest text-sm">NIGHTLIFE & DISCOTECAS</h3>
+                <h3 class="serif-title text-[var(--gold)] tracking-widest text-[10px] uppercase">Cartelera Nocturna</h3>
                 <div></div>
             </div>
             <div id="discotecas-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
@@ -124,8 +148,8 @@
 
         <div id="section-shows" class="hidden">
             <div class="section-divider">
-                <h3 class="serif-title text-stone-400 tracking-widest text-sm">SHOWS & CONCIERTOS</h3>
-                <div style="background: linear-gradient(to right, #444, transparent);"></div>
+                <h3 class="serif-title text-[var(--gold)] tracking-widest text-[10px] uppercase">Espectáculos en Vivo</h3>
+                <div></div>
             </div>
             <div id="shows-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
         </div>
@@ -138,12 +162,44 @@
         </div>
 
         <div id="no-events" class="hidden text-center py-20">
-            <p class="text-stone-500 serif-title text-xl tracking-widest">NO HAY FUNCIONES PROGRAMADAS</p>
+            <p class="text-stone-500 serif-title text-xl tracking-widest uppercase">No hay eventos en esta categoría</p>
         </div>
     </main>
 
     <script type="module">
         import { supabaseEventos } from './supabase-eventos.js';
+
+        // Variable global para controlar qué pestaña está activa
+        window.currentTab = 'discotecas'; 
+
+        window.switchTab = (tab) => {
+            window.currentTab = tab;
+            const secDiscotecas = document.getElementById('section-discotecas');
+            const secShows = document.getElementById('section-shows');
+            const btnDiscotecas = document.getElementById('tab-discotecas');
+            const btnShows = document.getElementById('tab-shows');
+
+            if (tab === 'discotecas') {
+                secDiscotecas.classList.remove('hidden');
+                secShows.classList.add('hidden');
+                btnDiscotecas.classList.add('active');
+                btnShows.classList.remove('active');
+            } else {
+                secDiscotecas.classList.add('hidden');
+                secShows.classList.remove('hidden');
+                btnDiscotecas.classList.remove('active');
+                btnShows.classList.add('active');
+            }
+            
+            // Verificar si la sección activa está vacía
+            const currentGrid = document.getElementById(`${tab}-grid`);
+            const noEvents = document.getElementById('no-events');
+            if (currentGrid.children.length === 0) {
+                noEvents.classList.remove('hidden');
+            } else {
+                noEvents.classList.add('hidden');
+            }
+        };
 
         function createEventCard(evento) {
             const fechaObj = new Date(evento.fecha + 'T00:00:00');
@@ -191,10 +247,7 @@
         async function cargarEventos() {
             const discotecasGrid = document.getElementById('discotecas-grid');
             const showsGrid = document.getElementById('shows-grid');
-            const sectionDiscotecas = document.getElementById('section-discotecas');
-            const sectionShows = document.getElementById('section-shows');
             const loaders = document.getElementById('loading-placeholders');
-            const noEvents = document.getElementById('no-events');
 
             try {
                 const { data: eventos, error } = await supabaseEventos
@@ -209,22 +262,19 @@
                 discotecasGrid.innerHTML = '';
                 showsGrid.innerHTML = '';
 
-                if (!eventos || eventos.length === 0) {
-                    noEvents.classList.remove('hidden');
-                    return;
+                if (eventos && eventos.length > 0) {
+                    eventos.forEach(evento => {
+                        const card = createEventCard(evento);
+                        if (evento.es_discoteca) {
+                            discotecasGrid.appendChild(card);
+                        } else {
+                            showsGrid.appendChild(card);
+                        }
+                    });
                 }
 
-                eventos.forEach(evento => {
-                    const card = createEventCard(evento);
-                    // Lógica booleana: si es_discoteca es true, va a discotecas, si no a shows
-                    if (evento.es_discoteca) {
-                        discotecasGrid.appendChild(card);
-                        sectionDiscotecas.classList.remove('hidden');
-                    } else {
-                        showsGrid.appendChild(card);
-                        sectionShows.classList.remove('hidden');
-                    }
-                });
+                // Iniciar en la pestaña por defecto
+                switchTab(window.currentTab);
 
             } catch (err) {
                 console.error("Error cargando eventos:", err);
