@@ -32,6 +32,14 @@
                         <input type="text" id="titulo" class="input-field" placeholder="Ej: Concierto en Vivo - Bar 506" required>
                     </div>
 
+                    <div class="p-4 bg-blue-900/10 border border-blue-500/20 rounded-xl flex items-center justify-between">
+                        <div>
+                            <label class="block text-sm font-semibold text-white">¿Es una Discoteca / Nightlife?</label>
+                            <p class="text-[10px] text-slate-500 uppercase tracking-wider">Aparecerá en la sección prioritaria</p>
+                        </div>
+                        <input type="checkbox" id="es_discoteca" class="w-6 h-6 accent-blue-600 cursor-pointer">
+                    </div>
+
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs uppercase tracking-widest text-slate-500 mb-2">Fecha</label>
@@ -72,7 +80,9 @@
             <section>
                 <h2 class="text-xs uppercase tracking-[0.3em] text-slate-500 mb-6 text-center">Vista Previa de la Tarjeta</h2>
                 <div class="preview-card max-w-[320px] mx-auto shadow-2xl">
-                    <div id="preview-img-container" class="h-96 bg-slate-800 flex items-center justify-center overflow-hidden">
+                    <div id="preview-img-container" class="h-96 bg-slate-800 flex items-center justify-center overflow-hidden relative">
+                        <div id="preview-badge" class="hidden absolute top-4 right-4 bg-blue-600 text-white text-[8px] font-black px-2 py-1 rounded-full z-10 uppercase tracking-widest">Discoteca</div>
+                        
                         <span id="preview-placeholder" class="text-slate-600 text-sm">Sin imagen seleccionada</span>
                         <img id="img-output" class="hidden w-full h-full object-cover">
                     </div>
@@ -87,7 +97,6 @@
     </div>
 
     <script type="module">
-        // Importamos el cliente limpio que no tiene conflictos de esquema
         import { supabaseEventos } from '../supabase-eventos.js';
 
         const form = document.getElementById('form-evento');
@@ -101,10 +110,15 @@
             const lugarVal = document.getElementById('lugar').value;
             const fechaVal = document.getElementById('fecha').value;
             const horaVal = document.getElementById('hora').value;
+            const esDiscotecaVal = document.getElementById('es_discoteca').checked;
 
             document.getElementById('preview-title').innerText = tituloVal || 'Título del Evento';
             document.getElementById('preview-location').innerText = lugarVal || 'Ubicación del local';
             
+            // Mostrar/Ocultar badge en preview
+            const badge = document.getElementById('preview-badge');
+            esDiscotecaVal ? badge.classList.remove('hidden') : badge.classList.add('hidden');
+
             if(fechaVal) {
                 document.getElementById('preview-date').innerText = `${fechaVal} | ${horaVal || '--:--'}`;
             }
@@ -130,23 +144,22 @@
             btn.disabled = true;
 
             const file = aficheInput.files[0];
-            // Nombre de archivo único para evitar sobrescribir
             const fileName = `${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
 
             try {
-                // 1. Subir imagen al Bucket 'afiches'
+                // 1. Subir imagen
                 const { data: storageData, error: storageError } = await supabaseEventos.storage
                     .from('afiches')
                     .upload(fileName, file);
 
                 if (storageError) throw storageError;
 
-                // 2. Obtener la URL pública de la imagen
+                // 2. Obtener URL
                 const { data: urlData } = supabaseEventos.storage
                     .from('afiches')
                     .getPublicUrl(fileName);
 
-                // 3. Insertar datos en la tabla 'eventos' (Esquema Public)
+                // 3. Insertar datos con el nuevo campo es_discoteca
                 const { error: dbError } = await supabaseEventos
                     .from('eventos')
                     .insert([{
@@ -156,6 +169,7 @@
                         lugar: document.getElementById('lugar').value,
                         link_contacto: document.getElementById('link').value,
                         imagen_url: urlData.publicUrl,
+                        es_discoteca: document.getElementById('es_discoteca').checked, // Guardamos el valor del check
                         aprobado: true
                     }]);
 
