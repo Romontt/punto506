@@ -138,12 +138,30 @@
             </div>
         </header>
 
-        <div id="section-discotecas" class="hidden">
-            <div class="section-divider">
-                <h3 class="serif-title text-[var(--gold)] tracking-widest text-[10px] uppercase">Cartelera Nocturna</h3>
-                <div></div>
+        <div id="section-discotecas" class="hidden space-y-16">
+            <div id="group-lab" class="hidden">
+                <div class="section-divider">
+                    <h3 class="serif-title text-[var(--gold)] tracking-widest text-[10px] uppercase">EL LAB</h3>
+                    <div></div>
+                </div>
+                <div id="lab-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
             </div>
-            <div id="discotecas-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+
+            <div id="group-lux" class="hidden">
+                <div class="section-divider">
+                    <h3 class="serif-title text-[var(--gold)] tracking-widest text-[10px] uppercase">LUX</h3>
+                    <div></div>
+                </div>
+                <div id="lux-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+            </div>
+
+            <div id="group-punta" class="hidden">
+                <div class="section-divider">
+                    <h3 class="serif-title text-[var(--gold)] tracking-widest text-[10px] uppercase">PUNTA MONA</h3>
+                    <div></div>
+                </div>
+                <div id="punta-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+            </div>
         </div>
 
         <div id="section-shows" class="hidden">
@@ -162,14 +180,13 @@
         </div>
 
         <div id="no-events" class="hidden text-center py-20">
-            <p class="text-stone-500 serif-title text-xl tracking-widest uppercase">No hay eventos en esta categoría</p>
+            <p class="text-stone-500 serif-title text-xl tracking-widest uppercase">No hay eventos programados</p>
         </div>
     </main>
 
     <script type="module">
         import { supabaseEventos } from './supabase-eventos.js';
 
-        // Variable global para controlar qué pestaña está activa
         window.currentTab = 'discotecas'; 
 
         window.switchTab = (tab) => {
@@ -178,26 +195,28 @@
             const secShows = document.getElementById('section-shows');
             const btnDiscotecas = document.getElementById('tab-discotecas');
             const btnShows = document.getElementById('tab-shows');
+            const noEvents = document.getElementById('no-events');
 
             if (tab === 'discotecas') {
                 secDiscotecas.classList.remove('hidden');
                 secShows.classList.add('hidden');
                 btnDiscotecas.classList.add('active');
                 btnShows.classList.remove('active');
+                
+                // Comprobar si hay alguna discoteca visible
+                const hasDiscos = !document.getElementById('group-lab').classList.contains('hidden') || 
+                                  !document.getElementById('group-lux').classList.contains('hidden') || 
+                                  !document.getElementById('group-punta').classList.contains('hidden');
+                hasDiscos ? noEvents.classList.add('hidden') : noEvents.classList.remove('hidden');
+
             } else {
                 secDiscotecas.classList.add('hidden');
                 secShows.classList.remove('hidden');
                 btnDiscotecas.classList.remove('active');
                 btnShows.classList.add('active');
-            }
-            
-            // Verificar si la sección activa está vacía
-            const currentGrid = document.getElementById(`${tab}-grid`);
-            const noEvents = document.getElementById('no-events');
-            if (currentGrid.children.length === 0) {
-                noEvents.classList.remove('hidden');
-            } else {
-                noEvents.classList.add('hidden');
+                
+                const showsGrid = document.getElementById('shows-grid');
+                showsGrid.children.length > 0 ? noEvents.classList.add('hidden') : noEvents.classList.remove('hidden');
             }
         };
 
@@ -245,9 +264,13 @@
         }
 
         async function cargarEventos() {
-            const discotecasGrid = document.getElementById('discotecas-grid');
-            const showsGrid = document.getElementById('shows-grid');
             const loaders = document.getElementById('loading-placeholders');
+            
+            // Grids
+            const labGrid = document.getElementById('lab-grid');
+            const luxGrid = document.getElementById('lux-grid');
+            const puntaGrid = document.getElementById('punta-grid');
+            const showsGrid = document.getElementById('shows-grid');
 
             try {
                 const { data: eventos, error } = await supabaseEventos
@@ -259,26 +282,34 @@
                 if (error) throw error;
                 
                 loaders.classList.add('hidden');
-                discotecasGrid.innerHTML = '';
-                showsGrid.innerHTML = '';
 
                 if (eventos && eventos.length > 0) {
                     eventos.forEach(evento => {
                         const card = createEventCard(evento);
+                        const lugarNormalizado = evento.lugar.toUpperCase();
+
                         if (evento.es_discoteca) {
-                            discotecasGrid.appendChild(card);
+                            if (lugarNormalizado.includes('LAB')) {
+                                labGrid.appendChild(card);
+                                document.getElementById('group-lab').classList.remove('hidden');
+                            } else if (lugarNormalizado.includes('LUX')) {
+                                luxGrid.appendChild(card);
+                                document.getElementById('group-lux').classList.remove('hidden');
+                            } else if (lugarNormalizado.includes('PUNTA MONA')) {
+                                puntaGrid.appendChild(card);
+                                document.getElementById('group-punta').classList.remove('hidden');
+                            }
                         } else {
                             showsGrid.appendChild(card);
                         }
                     });
                 }
 
-                // Iniciar en la pestaña por defecto
                 switchTab(window.currentTab);
 
             } catch (err) {
-                console.error("Error cargando eventos:", err);
-                loaders.innerHTML = `<p class="text-[var(--gold)] col-span-full text-center text-[10px] tracking-[0.4em]">ERROR DE SINCRONIZACIÓN</p>`;
+                console.error("Error:", err);
+                loaders.innerHTML = `<p class="text-[var(--gold)] col-span-full text-center text-[10px] tracking-[0.4em]">ERROR DE CONEXIÓN</p>`;
             }
         }
 
