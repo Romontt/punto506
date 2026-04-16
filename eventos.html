@@ -205,10 +205,11 @@
         import { supabaseEventos } from './supabase-eventos.js';
 
         // --- ANALÍTICA ---
+        // Asegúrate que la tabla en Supabase se llame exactamente 'registros_actividad'
         async function registrarActividad(tipo, nombre) {
             try {
                 await supabaseEventos
-                    .from('registros_actividad')
+                    .from('registros_actividad') 
                     .insert([{ 
                         tipo_evento: tipo, 
                         nombre_negocio: nombre,
@@ -219,9 +220,10 @@
             }
         }
 
-        // Registrar visita a la página
+        // Registrar visita inicial
         registrarActividad('visita_cartelera', 'Cartelera Punto 506');
 
+        // Función global para capturar el clic en "INFORMACIÓN"
         window.trackEventClick = (lugar, titulo) => {
             registrarActividad('interes_evento', `${lugar} | ${titulo}`);
         };
@@ -311,7 +313,7 @@
                     </div>
                     <div class="mt-auto">
                         <a href="${evento.link_contacto || '#'}" target="_blank" 
-                           onclick="trackEventClick('${evento.lugar}', '${evento.titulo}')"
+                           onclick="window.trackEventClick('${evento.lugar}', '${evento.titulo}')"
                            class="btn-gold block w-full text-center py-2 md:py-3 text-[8px] md:text-[10px] font-black tracking-[0.2em] md:tracking-[0.3em] uppercase rounded-sm shadow-lg">
                             INFORMACIÓN
                         </a>
