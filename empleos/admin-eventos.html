@@ -88,7 +88,7 @@
                     </div>
                     <div class="p-6">
                         <span id="preview-date" class="text-blue-500 text-[10px] font-bold uppercase tracking-widest">FECHA DEL EVENTO</span>
-                        <h3 id="preview-title" class="text-white font-bold text-xl mt-1 lowercase first-letter:uppercase">Título del Evento</h3>
+                        <h3 id="preview-title" class="text-white font-bold text-xl mt-1">Título del Evento</h3>
                         <p id="preview-location" class="text-slate-500 text-sm mt-1 italic">Ubicación del local</p>
                     </div>
                 </div>
@@ -112,10 +112,10 @@
             const horaVal = document.getElementById('hora').value;
             const esDiscotecaVal = document.getElementById('es_discoteca').checked;
 
+            // Se asigna el valor directo sin transformar el texto
             document.getElementById('preview-title').innerText = tituloVal || 'Título del Evento';
             document.getElementById('preview-location').innerText = lugarVal || 'Ubicación del local';
             
-            // Mostrar/Ocultar badge en preview
             const badge = document.getElementById('preview-badge');
             esDiscotecaVal ? badge.classList.remove('hidden') : badge.classList.add('hidden');
 
@@ -147,29 +147,26 @@
             const fileName = `${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
 
             try {
-                // 1. Subir imagen
                 const { data: storageData, error: storageError } = await supabaseEventos.storage
                     .from('afiches')
                     .upload(fileName, file);
 
                 if (storageError) throw storageError;
 
-                // 2. Obtener URL
                 const { data: urlData } = supabaseEventos.storage
                     .from('afiches')
                     .getPublicUrl(fileName);
 
-                // 3. Insertar datos con el nuevo campo es_discoteca
                 const { error: dbError } = await supabaseEventos
                     .from('eventos')
                     .insert([{
-                        titulo: document.getElementById('titulo').value,
+                        titulo: document.getElementById('titulo').value, // Se guarda exacto como se escribió
                         fecha: document.getElementById('fecha').value,
                         hora: document.getElementById('hora').value,
-                        lugar: document.getElementById('lugar').value,
+                        lugar: document.getElementById('lugar').value, // Se guarda exacto como se escribió
                         link_contacto: document.getElementById('link').value,
                         imagen_url: urlData.publicUrl,
-                        es_discoteca: document.getElementById('es_discoteca').checked, // Guardamos el valor del check
+                        es_discoteca: document.getElementById('es_discoteca').checked,
                         aprobado: true
                     }]);
 
