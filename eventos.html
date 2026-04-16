@@ -204,20 +204,20 @@
     <script type="module">
         import { supabaseEventos } from './supabase-eventos.js';
 
-        // --- ANALÍTICA ---
-        async function registrarActividad(tipo, nombre) {
-            try {
-                await supabaseEventos
-                    .from('registros_actividad') 
-                    .insert([{ 
-                        tipo_evento: tipo, 
-                        nombre_negocio: nombre,
-                        fecha: new Date().toISOString()
-                    }]);
-            } catch (err) {
-                console.error("Error analítica:", err);
-            }
-        }
+       // --- ANALÍTICA ---
+async function registrarActividad(tipo, nombre) {
+    try {
+        await supabaseEventos
+            .from('registros_actividad') // Nombre correcto de la tabla según tu imagen
+            .insert([{ 
+                tipo_evento: tipo,      // Nombre de columna: tipo_evento
+                nombre_negocio: nombre,  // Nombre de columna: nombre_negocio
+                fecha: new Date().toISOString()
+            }]);
+    } catch (err) {
+        console.error("Error analítica:", err);
+    }
+}
 
         // Registrar visita inicial
         registrarActividad('visita_cartelera', 'Cartelera Punto 506');
