@@ -134,28 +134,34 @@
         // CONFIGURACIÓN SUPABASE
         const SUPABASE_URL = 'https://yfqxnjohojtbjevrmbmq.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcXhuam9ob2p0YmpldnJtYm1xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MjI4ODgsImV4cCI6MjA4ODM5ODg4OH0.ze32GU0sW7EZ5oicnLFlHpthtLcSTUxZ9rlHSyQLFso';
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        
+        // Cambio clave: Renombrar 'supabaseClient' para evitar choque con el objeto global de la librería
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         // Registrar visita al cargar
         async function registrarVisita() {
-            await supabase.from('analitica').insert([
-                { tipo_evento: 'visita_pagina', nombre_negocio: 'Punto 506 - Inicio' }
-            ]);
+            try {
+                await supabaseClient.from('analitica').insert([
+                    { tipo_evento: 'visita_pagina', nombre_negocio: 'Punto 506 - Inicio' }
+                ]);
+            } catch (err) {
+                console.error("Error al registrar visita:", err);
+            }
         }
 
         // Registrar clic y redirigir
         async function trackClick(event, nombre) {
-            event.preventDefault(); // Detenemos el enlace un momento
+            event.preventDefault(); 
             const href = event.currentTarget.getAttribute('href');
             
             try {
-                await supabase.from('analitica').insert([
+                await supabaseClient.from('analitica').insert([
                     { tipo_evento: 'click_opcion', nombre_negocio: nombre }
                 ]);
             } catch (err) {
                 console.error("Error tracking click", err);
             } finally {
-                window.location.href = href; // Redirigimos pase lo que pase
+                window.location.href = href; 
             }
         }
 
