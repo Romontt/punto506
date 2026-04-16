@@ -202,22 +202,27 @@
     </main>
 
     <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
         import { supabaseEventos } from './supabase-eventos.js';
 
-       // --- ANALÍTICA ---
-async function registrarActividad(tipo, nombre) {
-    try {
-        await supabaseEventos
-            .from('registros_actividad') // Nombre correcto de la tabla según tu imagen
-            .insert([{ 
-                tipo_evento: tipo,      // Nombre de columna: tipo_evento
-                nombre_negocio: nombre,  // Nombre de columna: nombre_negocio
-                fecha: new Date().toISOString()
-            }]);
-    } catch (err) {
-        console.error("Error analítica:", err);
-    }
-}
+        // --- CONFIGURACIÓN ANALÍTICA INTERNA ---
+        const SB_URL = "https://yfqxnjohojtbjevrmbmq.supabase.co";
+        const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcXhuam9ob2p0YmpldnJtYm1xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MjI4ODgsImV4cCI6MjA4ODM5ODg4OH0.ze32GU0sW7EZ5oicnLFlHpthtLcSTUxZ9rlHSyQLFso";
+        const supabaseAdmin = createClient(SB_URL, SB_KEY);
+
+        async function registrarActividad(tipo, nombre) {
+            try {
+                await supabaseAdmin
+                    .from('registros_actividad')
+                    .insert([{ 
+                        tipo_evento: tipo, 
+                        nombre_negocio: nombre, 
+                        fecha: new Date().toISOString()
+                    }]);
+            } catch (err) {
+                console.error("Error analítica:", err);
+            }
+        }
 
         // Registrar visita inicial
         registrarActividad('visita_cartelera', 'Cartelera Punto 506');
@@ -314,7 +319,7 @@ async function registrarActividad(tipo, nombre) {
                         <a href="${evento.link_contacto || '#'}" target="_blank" 
                            onclick="window.trackEventClick('${evento.lugar}', '${evento.titulo}')"
                            class="btn-gold block w-full text-center py-2 md:py-3 text-[8px] md:text-[10px] font-black tracking-[0.2em] md:tracking-[0.3em] uppercase rounded-sm shadow-lg">
-                             INFORMACIÓN
+                              INFORMACIÓN
                         </a>
                     </div>
                 </div>
