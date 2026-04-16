@@ -20,7 +20,6 @@
         }
         .serif-title { font-family: 'Cinzel', serif; }
         
-        /* Tarjeta tipo Poster */
         .event-poster {
             background: var(--card-bg);
             border: 1px solid rgba(212, 163, 115, 0.1);
@@ -79,35 +78,23 @@
             color: var(--dark);
         }
 
-        .section-divider {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            margin-top: 1rem;
-        }
-        .section-divider div {
-            height: 1px;
-            flex-grow: 1;
-            background: linear-gradient(to right, var(--gold), transparent);
-        }
-
-        /* Estilos para el Tab Nav */
-        .tab-nav-btn {
+        /* Estilos para el Sub-Nav */
+        .sub-nav-btn {
             position: relative;
             transition: all 0.4s ease;
+            white-space: nowrap;
         }
-        .tab-nav-btn.active {
+        .sub-nav-btn.active {
             color: var(--gold);
+            font-weight: 800;
         }
-        .tab-nav-btn.active::after {
+        .sub-nav-btn.active::after {
             content: '';
             position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40%;
-            height: 2px;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 1px;
             background: var(--gold);
         }
     </style>
@@ -124,99 +111,60 @@
         <a href="index.html" class="text-[10px] tracking-[0.3em] text-stone-500 hover:text-[var(--gold)] uppercase transition-colors">Cerrar Cartelera</a>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-6 py-10">
-        <header class="mb-12 text-center">
-            <h2 class="serif-title text-4xl md:text-6xl text-white mb-4 tracking-tight">PRÓXIMOS <span class="text-[var(--gold)]">EVENTOS</span></h2>
-            
-            <div class="flex justify-center items-center gap-8 md:gap-12 mt-8 mb-4 border-b border-white/5 pb-6">
-                <button id="tab-discotecas" onclick="switchTab('discotecas')" class="tab-nav-btn active serif-title text-xs md:text-sm tracking-[0.3em] uppercase font-bold text-stone-400 hover:text-white">
-                    Nightlife & Discotecas
-                </button>
-                <button id="tab-shows" onclick="switchTab('shows')" class="tab-nav-btn serif-title text-xs md:text-sm tracking-[0.3em] uppercase font-bold text-stone-400 hover:text-white">
-                    Shows & Conciertos
-                </button>
-            </div>
-        </header>
-
-        <div id="section-discotecas" class="hidden space-y-16">
-            <div id="group-lab" class="hidden">
-                <div class="section-divider">
-                    <h3 class="serif-title text-[var(--gold)] tracking-widest text-[10px] uppercase">EL LAB</h3>
-                    <div></div>
-                </div>
-                <div id="lab-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
-            </div>
-
-            <div id="group-lux" class="hidden">
-                <div class="section-divider">
-                    <h3 class="serif-title text-[var(--gold)] tracking-widest text-[10px] uppercase">LUX</h3>
-                    <div></div>
-                </div>
-                <div id="lux-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
-            </div>
-
-            <div id="group-punta" class="hidden">
-                <div class="section-divider">
-                    <h3 class="serif-title text-[var(--gold)] tracking-widest text-[10px] uppercase">PUNTA MONA</h3>
-                    <div></div>
-                </div>
-                <div id="punta-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+    <div class="sticky top-0 z-50 bg-[#130f0e]/80 backdrop-blur-md border-b border-white/5 mb-8">
+        <div class="max-w-7xl mx-auto px-6 overflow-x-auto">
+            <div class="flex justify-center items-center gap-6 md:gap-12 py-4">
+                <button onclick="switchCategory('lab')" class="cat-btn sub-nav-btn active serif-title text-[9px] md:text-[11px] tracking-[0.2em] uppercase text-stone-400 hover:text-white">EL LAB</button>
+                <button onclick="switchCategory('lux')" class="cat-btn sub-nav-btn serif-title text-[9px] md:text-[11px] tracking-[0.2em] uppercase text-stone-400 hover:text-white">LUX</button>
+                <button onclick="switchCategory('punta')" class="cat-btn sub-nav-btn serif-title text-[9px] md:text-[11px] tracking-[0.2em] uppercase text-stone-400 hover:text-white">PUNTA MONA</button>
+                <button onclick="switchCategory('shows')" class="cat-btn sub-nav-btn serif-title text-[9px] md:text-[11px] tracking-[0.2em] uppercase text-stone-400 hover:text-white">SHOWS</button>
             </div>
         </div>
+    </div>
 
-        <div id="section-shows" class="hidden">
-            <div class="section-divider">
-                <h3 class="serif-title text-[var(--gold)] tracking-widest text-[10px] uppercase">Espectáculos en Vivo</h3>
-                <div></div>
-            </div>
-            <div id="shows-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+    <main class="max-w-7xl mx-auto px-6 pb-20">
+        <header class="mb-12 text-center">
+            <h2 class="serif-title text-4xl md:text-5xl text-white mb-4 tracking-tight">CARTELERA <span class="text-[var(--gold)]">DISPONIBLE</span></h2>
+        </header>
+
+        <div id="grid-container">
+            <div id="lab-section" class="cat-section grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+            <div id="lux-section" class="cat-section hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+            <div id="punta-section" class="cat-section hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+            <div id="shows-section" class="cat-section hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
         </div>
 
         <div id="loading-placeholders" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            <div class="shimmer h-[600px] rounded-lg opacity-10"></div>
-            <div class="shimmer h-[600px] rounded-lg opacity-10"></div>
-            <div class="shimmer h-[600px] rounded-lg opacity-10"></div>
-            <div class="shimmer h-[600px] rounded-lg opacity-10"></div>
+            <div class="shimmer h-[500px] rounded-lg opacity-10"></div>
+            <div class="shimmer h-[500px] rounded-lg opacity-10"></div>
+            <div class="shimmer h-[500px] rounded-lg opacity-10"></div>
+            <div class="shimmer h-[500px] rounded-lg opacity-10"></div>
         </div>
 
         <div id="no-events" class="hidden text-center py-20">
-            <p class="text-stone-500 serif-title text-xl tracking-widest uppercase">No hay eventos programados</p>
+            <p class="text-stone-500 serif-title text-xl tracking-widest uppercase">No hay eventos en esta categoría</p>
         </div>
     </main>
 
     <script type="module">
         import { supabaseEventos } from './supabase-eventos.js';
 
-        window.currentTab = 'discotecas'; 
+        window.switchCategory = (catId) => {
+            // Actualizar botones del nav
+            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
 
-        window.switchTab = (tab) => {
-            window.currentTab = tab;
-            const secDiscotecas = document.getElementById('section-discotecas');
-            const secShows = document.getElementById('section-shows');
-            const btnDiscotecas = document.getElementById('tab-discotecas');
-            const btnShows = document.getElementById('tab-shows');
+            // Actualizar secciones visibles
+            document.querySelectorAll('.cat-section').forEach(sec => sec.classList.add('hidden'));
+            const activeSection = document.getElementById(`${catId}-section`);
+            activeSection.classList.remove('hidden');
+
+            // Mostrar mensaje si está vacío
             const noEvents = document.getElementById('no-events');
-
-            if (tab === 'discotecas') {
-                secDiscotecas.classList.remove('hidden');
-                secShows.classList.add('hidden');
-                btnDiscotecas.classList.add('active');
-                btnShows.classList.remove('active');
-                
-                // Comprobar si hay alguna discoteca visible
-                const hasDiscos = !document.getElementById('group-lab').classList.contains('hidden') || 
-                                  !document.getElementById('group-lux').classList.contains('hidden') || 
-                                  !document.getElementById('group-punta').classList.contains('hidden');
-                hasDiscos ? noEvents.classList.add('hidden') : noEvents.classList.remove('hidden');
-
+            if (activeSection.children.length === 0) {
+                noEvents.classList.remove('hidden');
             } else {
-                secDiscotecas.classList.add('hidden');
-                secShows.classList.remove('hidden');
-                btnDiscotecas.classList.remove('active');
-                btnShows.classList.add('active');
-                
-                const showsGrid = document.getElementById('shows-grid');
-                showsGrid.children.length > 0 ? noEvents.classList.add('hidden') : noEvents.classList.remove('hidden');
+                noEvents.classList.add('hidden');
             }
         };
 
@@ -236,11 +184,6 @@
                             <span class="text-[10px] tracking-tighter">${mes}</span>
                         </div>
                     </div>
-                    <div class="absolute top-4 right-4 z-20">
-                        <div class="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
-                            <span class="text-[10px] text-white font-bold tracking-widest uppercase">${evento.hora}</span>
-                        </div>
-                    </div>
                 </div>
                 <div class="p-6 flex flex-col flex-grow bg-[#1c1817] border-t border-white/5">
                     <h3 class="serif-title text-xl text-white mb-2 leading-tight group-hover:text-[var(--gold)] transition-colors">
@@ -254,8 +197,8 @@
                     </div>
                     <div class="mt-auto">
                         <a href="${evento.link_contacto || '#'}" target="_blank" 
-                           class="btn-gold block w-full text-center py-3 text-[10px] font-black tracking-[0.3em] uppercase rounded-sm shadow-lg">
-                            OBTENER INFORMACIÓN
+                           class="btn-gold block w-full text-center py-3 text-[10px] font-black tracking-[0.3em] uppercase rounded-sm">
+                            INFO & RESERVAS
                         </a>
                     </div>
                 </div>
@@ -266,12 +209,6 @@
         async function cargarEventos() {
             const loaders = document.getElementById('loading-placeholders');
             
-            // Grids
-            const labGrid = document.getElementById('lab-grid');
-            const luxGrid = document.getElementById('lux-grid');
-            const puntaGrid = document.getElementById('punta-grid');
-            const showsGrid = document.getElementById('shows-grid');
-
             try {
                 const { data: eventos, error } = await supabaseEventos
                     .from('eventos')
@@ -280,36 +217,30 @@
                     .order('fecha', { ascending: true });
 
                 if (error) throw error;
-                
                 loaders.classList.add('hidden');
 
                 if (eventos && eventos.length > 0) {
                     eventos.forEach(evento => {
                         const card = createEventCard(evento);
-                        const lugarNormalizado = evento.lugar.toUpperCase();
+                        const lugar = evento.lugar.toUpperCase();
 
                         if (evento.es_discoteca) {
-                            if (lugarNormalizado.includes('LAB')) {
-                                labGrid.appendChild(card);
-                                document.getElementById('group-lab').classList.remove('hidden');
-                            } else if (lugarNormalizado.includes('LUX')) {
-                                luxGrid.appendChild(card);
-                                document.getElementById('group-lux').classList.remove('hidden');
-                            } else if (lugarNormalizado.includes('PUNTA MONA')) {
-                                puntaGrid.appendChild(card);
-                                document.getElementById('group-punta').classList.remove('hidden');
-                            }
+                            if (lugar.includes('LAB')) document.getElementById('lab-section').appendChild(card);
+                            else if (lugar.includes('LUX')) document.getElementById('lux-section').appendChild(card);
+                            else if (lugar.includes('PUNTA')) document.getElementById('punta-section').appendChild(card);
                         } else {
-                            showsGrid.appendChild(card);
+                            document.getElementById('shows-section').appendChild(card);
                         }
                     });
                 }
-
-                switchTab(window.currentTab);
+                
+                // Forzar verificación de estado inicial (EL LAB activo por defecto)
+                const labSec = document.getElementById('lab-section');
+                if(labSec.children.length === 0) document.getElementById('no-events').classList.remove('hidden');
 
             } catch (err) {
-                console.error("Error:", err);
-                loaders.innerHTML = `<p class="text-[var(--gold)] col-span-full text-center text-[10px] tracking-[0.4em]">ERROR DE CONEXIÓN</p>`;
+                console.error("Error cargando eventos:", err);
+                loaders.innerHTML = `<p class="text-[var(--gold)] col-span-full text-center py-10">ERROR DE CONEXIÓN</p>`;
             }
         }
 
