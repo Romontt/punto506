@@ -204,6 +204,29 @@
     <script type="module">
         import { supabaseEventos } from './supabase-eventos.js';
 
+        // --- ANALÍTICA ---
+        async function registrarActividad(tipo, nombre) {
+            try {
+                await supabaseEventos
+                    .from('registros_actividad')
+                    .insert([{ 
+                        tipo_evento: tipo, 
+                        nombre_negocio: nombre,
+                        fecha: new Date().toISOString()
+                    }]);
+            } catch (err) {
+                console.error("Error analítica:", err);
+            }
+        }
+
+        // Registrar visita a la página
+        registrarActividad('visita_cartelera', 'Cartelera Punto 506');
+
+        window.trackEventClick = (lugar, titulo) => {
+            registrarActividad('interes_evento', `${lugar} | ${titulo}`);
+        };
+        // -----------------
+
         window.currentTab = 'discotecas'; 
 
         window.switchTab = (tab) => {
@@ -288,6 +311,7 @@
                     </div>
                     <div class="mt-auto">
                         <a href="${evento.link_contacto || '#'}" target="_blank" 
+                           onclick="trackEventClick('${evento.lugar}', '${evento.titulo}')"
                            class="btn-gold block w-full text-center py-2 md:py-3 text-[8px] md:text-[10px] font-black tracking-[0.2em] md:tracking-[0.3em] uppercase rounded-sm shadow-lg">
                             INFORMACIÓN
                         </a>
