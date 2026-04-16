@@ -6,6 +6,7 @@
     <title>Punto 506 | Bienvenido</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <script>
         tailwind.config = {
@@ -51,7 +52,6 @@
         }
         .animate-card { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
 
-        /* Estilo del Logo Segmentado (Imagen) */
         .custom-logo-circle {
             background: conic-gradient(
                 #2a2420 0deg 45deg, 
@@ -92,28 +92,28 @@
 
     <nav class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 max-w-6xl w-full">
         
-        <a href="/directorio" class="opcion-card bg-stone-900/20 backdrop-blur-xl p-6 md:p-12 rounded-2xl md:rounded-3xl text-center group animate-card" style="animation-delay: 0.1s;">
+        <a href="/directorio" onclick="trackClick(event, 'Punto 506 - Directorio')" class="opcion-card bg-stone-900/20 backdrop-blur-xl p-6 md:p-12 rounded-2xl md:rounded-3xl text-center group animate-card" style="animation-delay: 0.1s;">
             <div class="text-3xl md:text-5xl mb-4 md:mb-8 group-hover:scale-110 transition-transform duration-500">🔍</div>
             <h2 class="serif-title text-[10px] md:text-sm text-white mb-2 tracking-widest group-hover:text-p506-gold">Directorio</h2>
             <div class="h-[1px] w-6 md:w-8 bg-p506-gold/20 mx-auto"></div>
             <p class="mt-3 text-stone-500 text-[8px] md:text-[9px] uppercase tracking-widest font-semibold">Comercios locales</p>
         </a>
 
-        <a href="/entrevistas" class="opcion-card bg-stone-900/20 backdrop-blur-xl p-6 md:p-12 rounded-2xl md:rounded-3xl text-center group animate-card" style="animation-delay: 0.2s;">
+        <a href="/entrevistas" onclick="trackClick(event, 'Punto 506 - Entrevistas')" class="opcion-card bg-stone-900/20 backdrop-blur-xl p-6 md:p-12 rounded-2xl md:rounded-3xl text-center group animate-card" style="animation-delay: 0.2s;">
             <div class="text-3xl md:text-5xl mb-4 md:mb-8 group-hover:scale-110 transition-transform duration-500">🎙️</div>
             <h2 class="serif-title text-[10px] md:text-sm text-white mb-2 tracking-widest group-hover:text-p506-gold">Entrevistas</h2>
             <div class="h-[1px] w-6 md:w-8 bg-p506-gold/20 mx-auto"></div>
             <p class="mt-3 text-stone-500 text-[8px] md:text-[9px] uppercase tracking-widest font-semibold">Historias de Pococí</p>
         </a>
 
-        <a href="/empleos/be.html" class="opcion-card bg-stone-900/20 backdrop-blur-xl p-6 md:p-12 rounded-2xl md:rounded-3xl text-center group animate-card" style="animation-delay: 0.3s;">
+        <a href="/empleos/be.html" onclick="trackClick(event, 'Punto 506 - Empleos')" class="opcion-card bg-stone-900/20 backdrop-blur-xl p-6 md:p-12 rounded-2xl md:rounded-3xl text-center group animate-card" style="animation-delay: 0.3s;">
             <div class="text-3xl md:text-5xl mb-4 md:mb-8 group-hover:scale-110 transition-transform duration-500">💼</div>
             <h2 class="serif-title text-[10px] md:text-sm text-white mb-2 tracking-widest group-hover:text-p506-gold">Empleos</h2>
             <div class="h-[1px] w-6 md:w-8 bg-p506-gold/20 mx-auto"></div>
             <p class="mt-3 text-stone-500 text-[8px] md:text-[9px] uppercase tracking-widest font-semibold">Oportunidades</p>
         </a>
 
-        <a href="/eventos" class="opcion-card bg-p506-gold/[0.03] backdrop-blur-xl p-6 md:p-12 rounded-2xl md:rounded-3xl text-center group animate-card border-p506-gold/40" style="animation-delay: 0.4s;">
+        <a href="/eventos" onclick="trackClick(event, 'Punto 506 - Eventos')" class="opcion-card bg-p506-gold/[0.03] backdrop-blur-xl p-6 md:p-12 rounded-2xl md:rounded-3xl text-center group animate-card border-p506-gold/40" style="animation-delay: 0.4s;">
             <div class="absolute top-2 right-2 md:top-4 md:right-4 bg-p506-gold text-black text-[6px] md:text-[7px] px-2 md:px-3 py-0.5 md:py-1 font-black uppercase tracking-widest rounded-full">New</div>
             <div class="text-3xl md:text-5xl mb-4 md:mb-8 group-hover:scale-110 transition-transform duration-500">🎭</div>
             <h2 class="serif-title text-[10px] md:text-sm text-p506-gold mb-2 tracking-widest font-bold">Eventos</h2>
@@ -130,5 +130,36 @@
         </div>
     </footer>
 
+    <script>
+        // CONFIGURACIÓN SUPABASE
+        const SUPABASE_URL = 'TU_URL_AQUI';
+        const SUPABASE_KEY = 'TU_KEY_AQUI';
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // Registrar visita al cargar
+        async function registrarVisita() {
+            await supabase.from('analitica').insert([
+                { tipo_evento: 'visita_pagina', nombre_negocio: 'Punto 506 - Inicio' }
+            ]);
+        }
+
+        // Registrar clic y redirigir
+        async function trackClick(event, nombre) {
+            event.preventDefault(); // Detenemos el enlace un momento
+            const href = event.currentTarget.getAttribute('href');
+            
+            try {
+                await supabase.from('analitica').insert([
+                    { tipo_evento: 'click_opcion', nombre_negocio: nombre }
+                ]);
+            } catch (err) {
+                console.error("Error tracking click", err);
+            } finally {
+                window.location.href = href; // Redirigimos pase lo que pase
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', registrarVisita);
+    </script>
 </body>
 </html>
