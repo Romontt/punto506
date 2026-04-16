@@ -51,7 +51,7 @@
         }
         .animate-card { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
 
-        /* Diseño del Logo Circular Basado en Imagen */
+        /* Estilo del Logo Segmentado (Imagen) */
         .custom-logo-circle {
             background: conic-gradient(
                 #2a2420 0deg 45deg, 
@@ -63,21 +63,22 @@
                 #2a2420 270deg 315deg, 
                 #1a1614 315deg 360deg
             );
-            border: 2px solid #5a4a3a;
+            border: 1px solid rgba(212, 163, 115, 0.3);
         }
     </style>
 </head>
 <body class="bg-p506-dark text-stone-300 min-h-screen flex flex-col items-center justify-center p-4 md:p-6 selection:bg-p506-gold">
 
     <header class="text-center mb-10 md:mb-20">
-        <div class="flex flex-col items-center mb-6 md:mb-8">
-            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center custom-logo-circle logo-glow relative mb-4">
-                <span class="serif-title text-3xl md:text-4xl text-[#d4a373] font-bold tracking-widest drop-shadow-lg">506</span>
+        <div class="flex flex-col items-center mb-6 md:mb-8 group">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center custom-logo-circle logo-glow backdrop-blur-sm relative mb-4">
+                <div class="absolute inset-0 rounded-full border border-p506-gold/20 animate-ping group-hover:animate-none"></div>
+                <span class="serif-title text-3xl md:text-4xl text-p506-gold font-bold z-10 drop-shadow-lg">506</span>
             </div>
             <div class="flex items-center gap-2">
-                <span class="text-[#d4a373] text-[7px] md:text-[9px] tracking-[0.4em] font-bold uppercase opacity-90">Punto 506</span>
-                <span class="text-[#d4a373]/40">•</span>
-                <span class="text-[#d4a373]/60 text-[6px] md:text-[8px] tracking-[0.3em] font-medium uppercase">BY MONTZU CR</span>
+                <span class="text-p506-gold text-[7px] md:text-[9px] tracking-[0.4em] font-black uppercase opacity-90">Punto 506</span>
+                <span class="text-p506-gold/30 font-light">|</span>
+                <span class="text-p506-gold/60 text-[6px] md:text-[8px] tracking-[0.3em] font-bold uppercase">BY MONTZU CR</span>
             </div>
         </div>
 
