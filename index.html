@@ -135,13 +135,12 @@
         const SUPABASE_URL = 'https://yfqxnjohojtbjevrmbmq.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcXhuam9ob2p0YmpldnJtYm1xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MjI4ODgsImV4cCI6MjA4ODM5ODg4OH0.ze32GU0sW7EZ5oicnLFlHpthtLcSTUxZ9rlHSyQLFso';
         
-        // Usamos 'supabaseClient' para que no choque con la variable global 'supabase' de la librería
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         // Registrar visita al cargar
         async function registrarVisita() {
             try {
-                await supabaseClient.from('analitica').insert([
+                await supabaseClient.from('registros_actividad').insert([
                     { tipo_evento: 'visita_pagina', nombre_negocio: 'Punto 506 - Inicio' }
                 ]);
             } catch (err) {
@@ -155,7 +154,7 @@
             const href = event.currentTarget.getAttribute('href');
             
             try {
-                await supabaseClient.from('analitica').insert([
+                await supabaseClient.from('registros_actividad').insert([
                     { tipo_evento: 'click_opcion', nombre_negocio: nombre }
                 ]);
             } catch (err) {
