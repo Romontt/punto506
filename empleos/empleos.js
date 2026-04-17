@@ -41,8 +41,12 @@ window.compartirPuesto = async function(titulo, comercio) {
 async function renderEmpleos() {
     const grid = document.getElementById('grid-empleos');
     
-    if (!grid) {
-        console.error("No se encontró el contenedor #grid-empleos");
+    if (!grid) return;
+
+    // VERIFICACIÓN CRÍTICA: Esperar a que Supabase esté listo
+    if (typeof _supabase === 'undefined') {
+        console.warn("Reintentando conexión con Supabase en 500ms...");
+        setTimeout(renderEmpleos, 500);
         return;
     }
 
@@ -53,77 +57,77 @@ async function renderEmpleos() {
         </div>
     `;
 
-    // Aquí usamos _supabase que viene de supabase.js
-    const { data: empleos, error } = await _supabase
-        .from('empleos')
-        .select('*')
-        .eq('aprobado', true)
-        .order('created_at', { ascending: false });
+    try {
+        const { data: empleos, error } = await _supabase
+            .from('empleos')
+            .select('*')
+            .eq('aprobado', true)
+            .order('created_at', { ascending: false });
 
-    if (error) {
-        console.error("Error al obtener empleos:", error);
-        grid.innerHTML = `<p class="text-red-500 text-center col-span-full">Error al cargar los empleos.</p>`;
-        return;
-    }
+        if (error) throw error;
 
-    if (empleos.length === 0) {
-        grid.innerHTML = `
-            <div class="col-span-full text-center py-20 border border-white/5 rounded-3xl bg-white/5">
-                <p class="text-stone-500 uppercase tracking-[0.3em] text-[10px]">No hay vacantes disponibles en este momento.</p>
-            </div>
-        `;
-        return;
-    }
-
-    grid.innerHTML = empleos.map(emp => {
-        const contacto = emp.whatsapp_contacto ? emp.whatsapp_contacto.trim() : '';
-        const esEmail = contacto.includes('@');
-        
-        let linkAccion = '';
-        let textoBoton = '';
-
-        if (!contacto) {
-            linkAccion = '#';
-            textoBoton = 'Sin contacto disponible';
-        } else if (esEmail) {
-            linkAccion = `mailto:${contacto}`;
-            textoBoton = !isMobile ? 'Ver Contacto' : 'Enviar Correo';
-        } else {
-            const numLimpio = contacto.replace(/\s+/g, '').replace(/\+/g, '');
-            linkAccion = `https://wa.me/${numLimpio}`;
-            textoBoton = 'Postular por WhatsApp';
+        if (!empleos || empleos.length === 0) {
+            grid.innerHTML = `
+                <div class="col-span-full text-center py-20 border border-white/5 rounded-3xl bg-white/5">
+                    <p class="text-stone-500 uppercase tracking-[0.3em] text-[10px]">No hay vacantes disponibles en este momento.</p>
+                </div>
+            `;
+            return;
         }
 
-        return `
-            <div class="glass-card animate-reveal flex flex-col h-full bg-[#1c1614]/40 border border-white/5 rounded-2xl overflow-hidden group hover:border-[#d4a373]/50 transition-all duration-500">
-                
-                <div class="relative overflow-hidden bg-black flex items-center justify-center" style="min-height: 320px; max-height: 400px;">
-                    <img src="${emp.afiche_url}" 
-                         class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" 
-                         alt="Vacante ${emp.titulo_puesto}">
-                    
-                    <button onclick="compartirPuesto('${emp.titulo_puesto}', '${emp.nombre_comercio}')" 
-                            class="absolute top-4 left-4 z-20 bg-[#d4a373] text-black p-2.5 rounded-full border border-white/10 transition-transform active:scale-95 backdrop-blur-md flex items-center justify-center shadow-lg shadow-black/50">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
-                    </button>
+        grid.innerHTML = empleos.map(emp => {
+            const contacto = emp.whatsapp_contacto ? emp.whatsapp_contacto.trim() : '';
+            const esEmail = contacto.includes('@');
+            
+            let linkAccion = '';
+            let textoBoton = '';
 
-                    <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 z-10">
-                        <span class="text-[8px] text-[#d4a373] font-black uppercase tracking-widest">Nuevo</span>
+            if (!contacto) {
+                linkAccion = '#';
+                textoBoton = 'Sin contacto disponible';
+            } else if (esEmail) {
+                linkAccion = `mailto:${contacto}`;
+                textoBoton = !isMobile ? 'Ver Contacto' : 'Enviar Correo';
+            } else {
+                const numLimpio = contacto.replace(/\s+/g, '').replace(/\+/g, '');
+                linkAccion = `https://wa.me/${numLimpio}`;
+                textoBoton = 'Postular por WhatsApp';
+            }
+
+            return `
+                <div class="glass-card animate-reveal flex flex-col h-full bg-[#1c1614]/40 border border-white/5 rounded-2xl overflow-hidden group hover:border-[#d4a373]/50 transition-all duration-500">
+                    <div class="relative overflow-hidden bg-black flex items-center justify-center" style="min-height: 320px; max-height: 400px;">
+                        <img src="${emp.afiche_url}" 
+                             class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" 
+                             alt="Vacante ${emp.titulo_puesto}">
+                        
+                        <button onclick="compartirPuesto('${emp.titulo_puesto}', '${emp.nombre_comercio}')" 
+                                class="absolute top-4 left-4 z-20 bg-[#d4a373] text-black p-2.5 rounded-full border border-white/10 transition-transform active:scale-95 backdrop-blur-md flex items-center justify-center shadow-lg shadow-black/50">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                        </button>
+
+                        <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 z-10">
+                            <span class="text-[8px] text-[#d4a373] font-black uppercase tracking-widest">Nuevo</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 flex flex-col flex-grow">
+                        <span class="serif-title text-[8px] text-[#d4a373] tracking-[0.3em] uppercase font-bold">${emp.nombre_comercio}</span>
+                        <h3 class="serif-title text-base mt-2 mb-6 text-white leading-tight tracking-wide">${emp.titulo_puesto}</h3>
+                        
+                        <button onclick="handleContactClick('${linkAccion}', '${contacto}', ${esEmail})" 
+                                class="mt-auto w-full py-4 border border-[#d4a373]/30 text-[#d4a373] text-[9px] font-black uppercase tracking-[0.2em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-300 rounded-xl ${!contacto ? 'pointer-events-none opacity-50' : ''}">
+                            ${textoBoton}
+                        </button>
                     </div>
                 </div>
-                
-                <div class="p-6 flex flex-col flex-grow">
-                    <span class="serif-title text-[8px] text-[#d4a373] tracking-[0.3em] uppercase font-bold">${emp.nombre_comercio}</span>
-                    <h3 class="serif-title text-base mt-2 mb-6 text-white leading-tight tracking-wide">${emp.titulo_puesto}</h3>
-                    
-                    <button onclick="handleContactClick('${linkAccion}', '${contacto}', ${esEmail})" 
-                            class="mt-auto w-full py-4 border border-[#d4a373]/30 text-[#d4a373] text-[9px] font-black uppercase tracking-[0.2em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-300 rounded-xl ${!contacto ? 'pointer-events-none opacity-50' : ''}">
-                        ${textoBoton}
-                    </button>
-                </div>
-            </div>
-        `;
-    }).join('');
+            `;
+        }).join('');
+
+    } catch (err) {
+        console.error("Error al obtener empleos:", err);
+        grid.innerHTML = `<p class="text-red-500 text-center col-span-full">Error de conexión con la base de datos.</p>`;
+    }
 }
 
 document.addEventListener('DOMContentLoaded', renderEmpleos);
