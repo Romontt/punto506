@@ -1,9 +1,3 @@
-// Configuración de Supabase
-const SUPABASE_URL = 'https://svkyczglvidntguqduej.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN2a3ljemdsdmlkbnRndXFkdWVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5MDAwODEsImV4cCI6MjA5MDQ3NjA4MX0.gASHvLpE4xrSKY0ll5Votnz1oBAtrTXWnT7ww__Tdpg';
-
-const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
 // Detectar si es móvil
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -59,6 +53,7 @@ async function renderEmpleos() {
         </div>
     `;
 
+    // Aquí usamos _supabase que viene de supabase.js
     const { data: empleos, error } = await _supabase
         .from('empleos')
         .select('*')
@@ -92,7 +87,6 @@ async function renderEmpleos() {
             textoBoton = 'Sin contacto disponible';
         } else if (esEmail) {
             linkAccion = `mailto:${contacto}`;
-            // Cambio de texto dinámico para PC
             textoBoton = !isMobile ? 'Ver Contacto' : 'Enviar Correo';
         } else {
             const numLimpio = contacto.replace(/\s+/g, '').replace(/\+/g, '');
