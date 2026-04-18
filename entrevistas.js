@@ -26,6 +26,7 @@ export async function cargarEntrevistas() {
                         width="100%" height="100%" 
                         src="https://www.youtube.com/embed/${videoId}?modestbranding=1" 
                         frameborder="0" allowfullscreen
+                        onplay="window.registrarActividad('play_video', '${vid.nombre_negocio}')"
                         class="grayscale-[0.3] group-hover:grayscale-0 transition-all duration-500">
                     </iframe>
                 </div>
@@ -45,7 +46,10 @@ export async function cargarEntrevistas() {
 
                     <div class="mt-4 flex items-center justify-between">
                         <span class="text-[7px] text-stone-600 font-bold uppercase tracking-widest">Pococí, CR</span>
-                        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="text-[8px] font-black text-white hover:text-p506-gold transition-all border-b border-white/10 pb-0.5 tracking-tighter">
+                        <a href="https://www.youtube.com/watch?v=${videoId}" 
+                           target="_blank" 
+                           onclick="window.registrarActividad('click_youtube_link', '${vid.nombre_negocio}')"
+                           class="text-[8px] font-black text-white hover:text-p506-gold transition-all border-b border-white/10 pb-0.5 tracking-tighter">
                             VER EN YOUTUBE →
                         </a>
                     </div>
