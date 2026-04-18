@@ -1,16 +1,44 @@
 // Configuración de Supabase
 const SUPABASE_URL = 'https://svkyczglvidntguqduej.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN2a3ljemdsdmlkbnRndXFkdWVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5MDAwODEsImV4cCI6MjA5MDQ3NjA4MX0.gASHvLpE4xrSKY0ll5Votnz1oBAtrTXWnT7ww__Tdpg';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN2a3ljemdsdmlkbnRndXFkdWVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5MDAwODEsImV4cCI6MjA4ODM5ODg4OH0.ze32GU0sW7EZ5oicnLFlHpthtLcSTUxZ9rlHSyQLFso'; // Usando la Key del proyecto de métricas
 
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// --- CONFIGURACIÓN ANALÍTICA INTERNA ---
+const SB_METRICAS_URL = "https://yfqxnjohojtbjevrmbmq.supabase.co";
+const SB_METRICAS_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcXhuam9ob2p0YmpldnJtYm1xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MjI4ODgsImV4cCI6MjA4ODM5ODg4OH0.ze32GU0sW7EZ5oicnLFlHpthtLcSTUxZ9rlHSyQLFso";
+const supabaseMetricas = supabase.createClient(SB_METRICAS_URL, SB_METRICAS_KEY);
+
+async function registrarActividad(tipo, detalle) {
+    try {
+        await supabaseMetricas
+            .from('registros_actividad')
+            .insert([{ 
+                tipo_evento: tipo, 
+                nombre_negocio: detalle, 
+                fecha: new Date().toISOString()
+            }]);
+    } catch (err) {
+        console.error("Error analítica:", err);
+    }
+}
+
+// Función global para el botón de publicar (llamada desde el HTML)
+window.trackPublicarClick = () => {
+    registrarActividad('clic_publicar_empleo', 'Usuario intenta publicar vacante');
+};
+// ---------------------------------------
 
 // Detectar si es móvil
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 // Función global para manejar el contacto
-window.handleContactClick = function(link, contacto, esEmail) {
+window.handleContactClick = function(link, contacto, esEmail, titulo, comercio) {
     if (link === '#' || !link) return;
     
+    // REGISTRO DE ANALÍTICA: Interés en el puesto
+    registrarActividad('interes_empleo', `${comercio} | ${titulo}`);
+
     // Si es PC y es Email, mostramos el contacto directamente
     if (!isMobile && esEmail) {
         alert(`Para postularte, envía tu CV al correo: ${contacto}`);
@@ -26,6 +54,9 @@ window.handleContactClick = function(link, contacto, esEmail) {
 
 // Función global para compartir
 window.compartirPuesto = async function(titulo, comercio) {
+    // REGISTRO DE ANALÍTICA: Compartir
+    registrarActividad('compartir_empleo', `${comercio} | ${titulo}`);
+
     const shareData = {
         title: `Vacante: ${titulo}`,
         text: `Mira esta oportunidad de empleo en ${comercio} a través de Punto 506.`,
@@ -92,7 +123,6 @@ async function renderEmpleos() {
             textoBoton = 'Sin contacto disponible';
         } else if (esEmail) {
             linkAccion = `mailto:${contacto}`;
-            // Cambio de texto dinámico para PC
             textoBoton = !isMobile ? 'Ver Contacto' : 'Enviar Correo';
         } else {
             const numLimpio = contacto.replace(/\s+/g, '').replace(/\+/g, '');
@@ -122,7 +152,7 @@ async function renderEmpleos() {
                     <span class="serif-title text-[8px] text-[#d4a373] tracking-[0.3em] uppercase font-bold">${emp.nombre_comercio}</span>
                     <h3 class="serif-title text-base mt-2 mb-6 text-white leading-tight tracking-wide">${emp.titulo_puesto}</h3>
                     
-                    <button onclick="handleContactClick('${linkAccion}', '${contacto}', ${esEmail})" 
+                    <button onclick="handleContactClick('${linkAccion}', '${contacto}', ${esEmail}, '${emp.titulo_puesto}', '${emp.nombre_comercio}')" 
                             class="mt-auto w-full py-4 border border-[#d4a373]/30 text-[#d4a373] text-[9px] font-black uppercase tracking-[0.2em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-300 rounded-xl ${!contacto ? 'pointer-events-none opacity-50' : ''}">
                         ${textoBoton}
                     </button>
@@ -132,4 +162,8 @@ async function renderEmpleos() {
     }).join('');
 }
 
-document.addEventListener('DOMContentLoaded', renderEmpleos);
+document.addEventListener('DOMContentLoaded', () => {
+    // Registro de visita inicial
+    registrarActividad('visita_empleos', 'Bolsa de Empleo Punto 506');
+    renderEmpleos();
+});
