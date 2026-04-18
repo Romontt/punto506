@@ -132,18 +132,19 @@
         <div class="h-[1px] w-20 bg-p506-gold/20"></div>
     </footer>
 
-   <script type="module">
+    <script type="module">
     import { cargarEntrevistas } from './entrevistas.js';
-    import { supabaseActividad } from './supabase.js'; // Importamos la de actividad
+    import { supabaseActividad } from './supabase.js';
 
-    async function registrarEntrada() {
+    // Función global para registrar cualquier tipo de evento (visita, play, click youtube)
+    window.registrarActividad = async (tipo, detalle) => {
         try {
-            const { error } = await supabaseActividad // Usamos la instancia de actividad
+            const { error } = await supabaseActividad
                 .from('registros_actividad')
                 .insert([
                     { 
-                        tipo_evento: 'visita_pagina', 
-                        nombre_negocio: 'Punto 506 - Entrevistas',
+                        tipo_evento: tipo, 
+                        nombre_negocio: detalle, 
                         fecha: new Date().toISOString() 
                     }
                 ]);
@@ -151,11 +152,12 @@
         } catch (err) {
             console.error('Falla de conexión:', err);
         }
-    }
+    };
 
     document.addEventListener('DOMContentLoaded', () => {
         cargarEntrevistas();
-        registrarEntrada();
+        // Registro de visita inicial
+        window.registrarActividad('visita_pagina', 'Punto 506 - Entrevistas');
     });
 </script>
 </body>
