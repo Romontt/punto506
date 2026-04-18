@@ -1,14 +1,14 @@
-// Configuración de Supabase
+// --- CONFIGURACIÓN BASE DE DATOS (EMPLEOS) ---
 const SUPABASE_URL = 'https://svkyczglvidntguqduej.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN2a3ljemdsdmlkbnRndXFkdWVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5MDAwODEsImV4cCI6MjA4ODM5ODg4OH0.ze32GU0sW7EZ5oicnLFlHpthtLcSTUxZ9rlHSyQLFso'; // Usando la Key del proyecto de métricas
-
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN2a3ljemdsdmlkbnRndXFkdWVqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5MDAwODEsImV4cCI6MjA5MDQ3NjA4MX0.gASHvLpE4xrSKY0ll5Votnz1oBAtrTXWnT7ww__Tdpg';
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// --- CONFIGURACIÓN ANALÍTICA INTERNA ---
+// --- CONFIGURACIÓN ANALÍTICA (MÉTRICAS) ---
 const SB_METRICAS_URL = "https://yfqxnjohojtbjevrmbmq.supabase.co";
 const SB_METRICAS_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcXhuam9ob2p0YmpldnJtYm1xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MjI4ODgsImV4cCI6MjA4ODM5ODg4OH0.ze32GU0sW7EZ5oicnLFlHpthtLcSTUxZ9rlHSyQLFso";
 const supabaseMetricas = supabase.createClient(SB_METRICAS_URL, SB_METRICAS_KEY);
 
+// Función para registrar eventos en la tabla de métricas
 async function registrarActividad(tipo, detalle) {
     try {
         await supabaseMetricas
@@ -27,7 +27,6 @@ async function registrarActividad(tipo, detalle) {
 window.trackPublicarClick = () => {
     registrarActividad('clic_publicar_empleo', 'Usuario intenta publicar vacante');
 };
-// ---------------------------------------
 
 // Detectar si es móvil
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -36,10 +35,9 @@ const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 window.handleContactClick = function(link, contacto, esEmail, titulo, comercio) {
     if (link === '#' || !link) return;
     
-    // REGISTRO DE ANALÍTICA: Interés en el puesto
+    // Registro de interés en el puesto
     registrarActividad('interes_empleo', `${comercio} | ${titulo}`);
 
-    // Si es PC y es Email, mostramos el contacto directamente
     if (!isMobile && esEmail) {
         alert(`Para postularte, envía tu CV al correo: ${contacto}`);
         return;
@@ -54,7 +52,6 @@ window.handleContactClick = function(link, contacto, esEmail, titulo, comercio) 
 
 // Función global para compartir
 window.compartirPuesto = async function(titulo, comercio) {
-    // REGISTRO DE ANALÍTICA: Compartir
     registrarActividad('compartir_empleo', `${comercio} | ${titulo}`);
 
     const shareData = {
@@ -163,7 +160,6 @@ async function renderEmpleos() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Registro de visita inicial
     registrarActividad('visita_empleos', 'Bolsa de Empleo Punto 506');
     renderEmpleos();
 });
