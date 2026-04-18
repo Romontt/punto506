@@ -122,17 +122,22 @@
 <body class="min-h-screen">
 
     <nav class="p-6 flex justify-between items-center max-w-7xl mx-auto">
-        <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="window.trackInternalClick('Logo Inicio', 'index.html')">
             <div class="w-10 h-10 rounded-full border border-[var(--gold)] flex items-center justify-center">
                 <span class="text-[var(--gold)] text-xs font-bold serif-title">506</span>
             </div>
             <span class="serif-title tracking-[0.3em] text-white text-sm hidden md:block uppercase">Punto 506</span>
         </div>
         <div class="flex items-center gap-6">
-            <a href="https://wa.me/50662117858?text=Hola!%20Me%20gustaría%20publicar%20un%20evento%20en%20Punto%20506" target="_blank" class="px-4 py-2 border border-[var(--gold)] text-[var(--gold)] text-[9px] md:text-[10px] tracking-[0.2em] font-black uppercase hover:bg-[var(--gold)] hover:text-black transition-all rounded-sm">
+            <a href="https://wa.me/50662117858?text=Hola!%20Me%20gustaría%20publicar%20un%20evento%20en%20Punto%20506" 
+               target="_blank" 
+               onclick="window.trackInternalClick('Publicar Evento WhatsApp', 'WhatsApp')"
+               class="px-4 py-2 border border-[var(--gold)] text-[var(--gold)] text-[9px] md:text-[10px] tracking-[0.2em] font-black uppercase hover:bg-[var(--gold)] hover:text-black transition-all rounded-sm">
                 Publica tu evento
             </a>
-            <a href="index.html" class="text-[10px] tracking-[0.3em] text-stone-500 hover:text-[var(--gold)] uppercase transition-colors">Cerrar Cartelera</a>
+            <a href="index.html" 
+               onclick="window.trackInternalClick('Cerrar Cartelera', 'index.html')"
+               class="text-[10px] tracking-[0.3em] text-stone-500 hover:text-[var(--gold)] uppercase transition-colors">Cerrar Cartelera</a>
         </div>
     </nav>
 
@@ -227,15 +232,22 @@
         // Registrar visita inicial
         registrarActividad('visita_cartelera', 'Cartelera Punto 506');
 
-        // Función global para capturar clics
+        // Función global para capturar clics en eventos específicos
         window.trackEventClick = (lugar, titulo) => {
             registrarActividad('interes_evento', `${lugar} | ${titulo}`);
+        };
+
+        // Función global para capturar clics en navegación/interfaz
+        window.trackInternalClick = (etiqueta, destino) => {
+            registrarActividad('click_interfaz', `Navegación: ${etiqueta}`);
+            if(destino !== 'WhatsApp') window.location.href = destino;
         };
         // -----------------
 
         window.currentTab = 'discotecas'; 
 
         window.switchTab = (tab) => {
+            registrarActividad('cambio_tab', `Sección: ${tab}`);
             window.currentTab = tab;
             const secDiscotecas = document.getElementById('section-discotecas');
             const secShows = document.getElementById('section-shows');
@@ -261,6 +273,7 @@
         };
 
         window.filterDisco = (disco) => {
+            registrarActividad('filtro_discoteca', `Filtro: ${disco}`);
             const buttons = document.querySelectorAll('.sub-tab-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             event.currentTarget.classList.add('active');
