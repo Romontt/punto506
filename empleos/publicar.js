@@ -61,7 +61,7 @@ if (form) {
             mensajeExito.classList.remove('hidden');
             
             setTimeout(() => {
-                window.location.href = 'index.html';
+                window.location.href = 'be.html';
             }, 4000);
 
         } catch (err) {
