@@ -117,6 +117,12 @@
             height: 1px;
             background: var(--gold);
         }
+
+        /* Estilos Modal */
+        #modal-terms {
+            backdrop-filter: blur(8px);
+            transition: all 0.4s ease;
+        }
     </style>
 </head>
 <body class="min-h-screen">
@@ -133,7 +139,7 @@
                target="_blank" 
                onclick="window.trackInternalClick('Publicar Evento WhatsApp', 'WhatsApp')"
                class="px-4 py-2 border border-[var(--gold)] text-[var(--gold)] text-[9px] md:text-[10px] tracking-[0.2em] font-black uppercase hover:bg-[var(--gold)] hover:text-black transition-all rounded-sm">
-                Publica tu evento
+                 Publica tu evento
             </a>
             <a href="index.html" 
                onclick="window.trackInternalClick('Cerrar Cartelera', 'index.html')"
@@ -206,6 +212,80 @@
         </div>
     </main>
 
+    <footer class="mt-20 border-t border-white/10 bg-black/40 pt-16 pb-8 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full border border-[var(--gold)] flex items-center justify-center">
+                        <span class="text-[var(--gold)] text-[10px] font-bold serif-title">506</span>
+                    </div>
+                    <span class="serif-title tracking-[0.2em] text-white text-xs uppercase">Punto 506</span>
+                </div>
+                <p class="text-stone-500 text-[10px] uppercase tracking-widest leading-relaxed">
+                    Tu conexión exclusiva con la cultura y el entretenimiento de la zona.
+                </p>
+            </div>
+
+            <div>
+                <h4 class="serif-title text-[var(--gold)] text-[11px] tracking-[0.3em] uppercase mb-6">Síguenos</h4>
+                <div class="flex gap-4">
+                    <a href="https://instagram.com" target="_blank" class="text-stone-400 hover:text-white transition-colors">
+                        <span class="text-[10px] tracking-widest uppercase">Instagram</span>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" class="text-stone-400 hover:text-white transition-colors">
+                        <span class="text-[10px] tracking-widest uppercase">Facebook</span>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="serif-title text-[var(--gold)] text-[11px] tracking-[0.3em] uppercase mb-6">Contacto</h4>
+                <ul class="text-stone-400 text-[10px] tracking-widest uppercase space-y-3">
+                    <li class="flex items-center gap-2">
+                        <span>WS:</span> <a href="https://wa.me/50662117858" class="hover:text-white">+506 6211-7858</a>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span>EM:</span> <a href="mailto:info@punto506.com" class="hover:text-white">info@punto506.com</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="serif-title text-[var(--gold)] text-[11px] tracking-[0.3em] uppercase mb-6">Legal</h4>
+                <button onclick="toggleModal(true)" class="text-stone-400 hover:text-white text-[10px] tracking-widest uppercase transition-colors">
+                    Términos y Condiciones
+                </button>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-stone-600 text-[9px] tracking-[0.4em] uppercase">&copy; 2026 PUNTO 506 | MONTZU CR</p>
+            <p class="text-stone-600 text-[9px] tracking-[0.4em] uppercase font-bold italic">Pococí, Costa Rica</p>
+        </div>
+    </footer>
+
+    <button id="btn-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
+            class="fixed bottom-8 right-8 w-12 h-12 bg-[#1c1817] border border-[var(--gold)]/30 text-[var(--gold)] rounded-full flex items-center justify-center opacity-0 transition-all duration-500 hover:bg-[var(--gold)] hover:text-black z-50">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+    </button>
+
+    <div id="modal-terms" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6 bg-black/90">
+        <div class="bg-[#1c1817] border border-[var(--gold)]/20 max-w-2xl w-full max-h-[80vh] overflow-y-auto p-8 rounded-lg shadow-2xl relative">
+            <button onclick="toggleModal(false)" class="absolute top-4 right-4 text-stone-500 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <h3 class="serif-title text-[var(--gold)] text-xl tracking-widest uppercase mb-6">Términos y Condiciones</h3>
+            <div class="text-stone-400 text-xs tracking-wide leading-loose space-y-4">
+                <p class="font-bold text-white uppercase italic text-[10px]">Descargo de Responsabilidad:</p>
+                <p>Punto 506 es exclusivamente una plataforma de difusión publicitaria y cartelera informativa de eventos en la región de Pococí.</p>
+                <p>No somos organizadores, promotores ni responsables de la ejecución, seguridad, logística o cambios de último momento de los eventos aquí listados, a menos que se especifique explícitamente lo contrario.</p>
+                <p>Cualquier consulta relacionada con entradas, reembolsos, requisitos de ingreso o comportamiento del personal en el evento debe dirigirse directamente al establecimiento o productora responsable mencionada en la información del evento.</p>
+                <p>Al utilizar este sitio, usted acepta que Punto 506 (y Montzu CR) no asume responsabilidad civil o legal por incidentes ocurridos en los lugares de los eventos publicados.</p>
+            </div>
+            <button onclick="toggleModal(false)" class="mt-8 w-full py-3 border border-[var(--gold)]/40 text-[var(--gold)] text-[10px] tracking-[0.3em] uppercase hover:bg-[var(--gold)] hover:text-black transition-all">Cerrar</button>
+        </div>
+    </div>
+
     <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
         import { supabaseEventos } from './supabase-eventos.js';
@@ -242,6 +322,31 @@
             registrarActividad('click_interfaz', `Navegación: ${etiqueta}`);
             if(destino !== 'WhatsApp') window.location.href = destino;
         };
+
+        // --- LÓGICA VOLVER ARRIBA ---
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('btn-top');
+            if (window.scrollY > 400) {
+                btn.style.opacity = '1';
+                btn.style.transform = 'translateY(0)';
+            } else {
+                btn.style.opacity = '0';
+                btn.style.transform = 'translateY(20px)';
+            }
+        });
+
+        // --- LÓGICA MODAL ---
+        window.toggleModal = (show) => {
+            const modal = document.getElementById('modal-terms');
+            if (show) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        };
+
         // -----------------
 
         window.currentTab = 'discotecas'; 
