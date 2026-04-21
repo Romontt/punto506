@@ -36,6 +36,12 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        /* Estilos para el Modal */
+        #modal-terms {
+            display: none;
+            backdrop-filter: blur(8px);
+        }
     </style>
 </head>
 <body class="antialiased text-stone-200 bg-mesh min-h-screen custom-scroll">
@@ -56,7 +62,7 @@
                 </div>
             </div>
             
-            <a href="/empleos/publicar.html" onclick="trackPublicarClick()" class="py-2.5 px-5 md:px-8 border border-[#d4a373] text-[#d4a373] text-[9px] font-black uppercase tracking-[0.3em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-500">
+            <a href="/empleos/publicar.html" class="py-2.5 px-5 md:px-8 border border-[#d4a373] text-[#d4a373] text-[9px] font-black uppercase tracking-[0.3em] hover:bg-[#d4a373] hover:text-[#130f0e] transition-all duration-500">
                 + Publicar Puesto
             </a>
         </div>
@@ -97,20 +103,51 @@
         </div>
     </main>
 
-    <footer class="bg-[#0c0a09] border-t border-[#d4a373]/5 py-20">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="w-12 h-12 rounded-full mb-8 mx-auto flex items-center justify-center border border-[#d4a373]/30 bg-black/40">
-                <span class="serif-title text-[10px] text-[#d4a373] font-bold">506</span>
+    <footer class="bg-[#0c0a09] border-t border-[#d4a373]/10 py-16">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center">
+            <div class="w-10 h-10 rounded-full mb-6 flex items-center justify-center border border-[#d4a373]/20 bg-black/40">
+                <span class="serif-title text-[8px] text-[#d4a373] font-bold">506</span>
             </div>
-            <p class="text-[10px] text-stone-500 uppercase tracking-[0.6em] mb-4">
-                &copy; 2026 PUNTO 506 &bull; EL DIRECTORIO COMERCIAL DE POCOCÍ
+
+            <div class="flex flex-wrap justify-center gap-6 md:gap-12 mb-8">
+                <a href="https://punto506.montzucr.com" class="text-[9px] text-stone-400 hover:text-[#d4a373] uppercase tracking-[0.3em] transition-colors">Directorio</a>
+                <button onclick="toggleModal(true)" class="text-[9px] text-stone-400 hover:text-[#d4a373] uppercase tracking-[0.3em] transition-colors underline underline-offset-4 decoration-[#d4a373]/30">Términos y Condiciones</button>
+                <a href="https://wa.me/50662117858" target="_blank" class="text-[9px] text-stone-400 hover:text-[#d4a373] uppercase tracking-[0.3em] transition-colors">Contacto</a>
+            </div>
+
+            <div class="h-[1px] w-12 bg-[#d4a373]/20 mb-6"></div>
+
+            <p class="text-[9px] text-stone-600 uppercase tracking-[0.5em] mb-2">
+                &copy; 2026 PUNTO 506 &bull; POCOCÍ, COSTA RICA
             </p>
-            <div class="h-[1px] w-16 bg-[#d4a373]/20 mx-auto mb-4"></div>
-            <p class="text-[8px] text-stone-700 uppercase tracking-[0.4em]">Crafted with passion by MontZu CR</p>
+            <p class="text-[7px] text-stone-800 uppercase tracking-[0.4em] font-bold">
+                Developed by MontZu CR
+            </p>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <div id="modal-terms" class="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/80">
+        <div class="bg-[#130f0e] border border-[#d4a373]/20 p-8 max-w-lg w-full relative">
+            <button onclick="toggleModal(false)" class="absolute top-4 right-4 text-stone-500 hover:text-[#d4a373]">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <h3 class="serif-title text-[#d4a373] text-lg mb-4 tracking-[0.2em] uppercase text-center">Términos de Uso</h3>
+            <div class="text-stone-400 text-xs leading-relaxed space-y-4 max-h-[60vh] overflow-y-auto pr-4 custom-scroll">
+                <p><strong>Responsabilidad:</strong> Punto 506 funciona exclusivamente como un canal de difusión de vacantes laborales en la zona de Pococí. No somos una agencia de empleo ni intervenimos en los procesos de selección.</p>
+                <p><strong>Contenido:</strong> La veracidad de la información en cada oferta es responsabilidad total de la empresa o persona que publica el anuncio. Recomendamos a los usuarios verificar la autenticidad de las empresas antes de compartir datos sensibles.</p>
+                <p><strong>Limitación:</strong> No nos hacemos responsables por daños, perjuicios o resultados derivados de las interacciones entre reclutadores y aplicantes a través de esta plataforma.</p>
+            </div>
+            <button onclick="toggleModal(false)" class="w-full mt-8 py-3 border border-[#d4a373]/30 text-[#d4a373] text-[10px] uppercase tracking-[0.3em] hover:bg-[#d4a373] hover:text-black transition-all">Entendido</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleModal(show) {
+            const modal = document.getElementById('modal-terms');
+            modal.style.display = show ? 'flex' : 'none';
+            document.body.style.overflow = show ? 'hidden' : 'auto';
+        }
+    </script>
     <script src="empleos.js"></script>
 </body>
 </html>
