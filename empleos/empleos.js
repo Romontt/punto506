@@ -159,6 +159,24 @@ async function renderEmpleos() {
     }).join('');
 }
 
+// --- FUNCIONALIDAD VOLVER AL INICIO ---
+window.scrollToTop = function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+window.addEventListener('scroll', () => {
+    const btn = document.getElementById("btn-top");
+    if (btn) {
+        if (window.scrollY > 300) {
+            btn.style.opacity = "1";
+            btn.style.pointerEvents = "auto";
+        } else {
+            btn.style.opacity = "0";
+            btn.style.pointerEvents = "none";
+        }
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     registrarActividad('visita_empleos', 'Bolsa de Empleo Punto 506');
     renderEmpleos();
