@@ -1,15 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
   <url>
     <loc>https://punto506.montzucr.com/</loc>
-    <lastmod>2026-03-17</lastmod> <changefreq>daily</changefreq>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://punto506.montzucr.com/uykerico/</loc> <lastmod>2026-03-17</lastmod>
+    <loc>https://punto506.montzucr.com/directorio</loc>
+    <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://punto506.montzucr.com/empleos/be</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://punto506.montzucr.com/eventos</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
 
-  </urlset>
+  <url>
+    <loc>https://punto506.montzucr.com/entrevistas</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://punto506.montzucr.com/menu/Drunk_Street_Food</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://punto506.montzucr.com/menu/Uy_ke_rico</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>
