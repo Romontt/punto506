@@ -65,6 +65,13 @@
             );
             border: 1px solid rgba(212, 163, 115, 0.3);
         }
+
+        .footer-link {
+            transition: color 0.3s ease;
+        }
+        .footer-link:hover {
+            color: #d4a373;
+        }
     </style>
 </head>
 <body class="bg-p506-dark text-stone-300 min-h-screen flex flex-col items-center justify-center p-4 md:p-6 selection:bg-p506-gold">
@@ -123,10 +130,29 @@
 
     </nav>
 
-    <footer class="mt-12 md:mt-24 text-center">
-        <div class="opacity-30">
-            <p class="text-[8px] md:text-[10px] uppercase tracking-[0.3em] serif-title mb-1 md:mb-2">Pococí • Limón • Costa Rica</p>
-            <p class="text-[7px] md:text-[8px] uppercase tracking-[0.2em] font-light">© 2026 Crafted by MontZu</p>
+    <footer class="mt-12 md:mt-20 w-full max-w-4xl px-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 border-y border-p506-gold/10 py-10 text-center">
+            <a href="https://wa.me/50662117858" target="_blank" class="footer-link">
+                <p class="text-p506-gold text-[7px] md:text-[8px] uppercase tracking-widest mb-1 font-bold">WhatsApp</p>
+                <p class="text-stone-500 text-[9px] md:text-[10px] font-medium">+506 6211-7858</p>
+            </a>
+            <a href="https://www.instagram.com/punto.506/" target="_blank" class="footer-link">
+                <p class="text-p506-gold text-[7px] md:text-[8px] uppercase tracking-widest mb-1 font-bold">Instagram</p>
+                <p class="text-stone-500 text-[9px] md:text-[10px] font-medium">@punto.506</p>
+            </a>
+            <a href="https://www.facebook.com/punto506cr" target="_blank" class="footer-link">
+                <p class="text-p506-gold text-[7px] md:text-[8px] uppercase tracking-widest mb-1 font-bold">Facebook</p>
+                <p class="text-stone-500 text-[9px] md:text-[10px] font-medium">punto506cr</p>
+            </a>
+            <a href="mailto:punto506@montzucr.com" class="footer-link">
+                <p class="text-p506-gold text-[7px] md:text-[8px] uppercase tracking-widest mb-1 font-bold">Correo</p>
+                <p class="text-stone-500 text-[9px] md:text-[10px] font-medium lowercase">punto506@montzucr.com</p>
+            </a>
+        </div>
+
+        <div class="text-center opacity-40">
+            <p class="text-[8px] md:text-[10px] uppercase tracking-[0.3em] serif-title mb-2">Pococí • Limón • Costa Rica</p>
+            <p class="text-[7px] md:text-[8px] uppercase tracking-[0.2em] font-light italic">© 2026 Crafted by MontZu</p>
         </div>
     </footer>
 
