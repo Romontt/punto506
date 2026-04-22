@@ -3,7 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cartelera de Eventos | Punto 506</title>
+    
+    <title>Cartelera de Eventos | Punto 506 - Pococí</title>
+    <meta name="description" content="Descubre los mejores eventos, conciertos y nightlife en Guápiles y la región de Pococí. Tu guía exclusiva de entretenimiento en Punto 506.">
+    <meta name="keywords" content="Eventos Pococí, Guápiles, Conciertos Costa Rica, Nightlife, El Lab, Lux, Punta Mona, Punto 506">
+    <meta name="author" content="Montzu CR">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Cartelera de Eventos | Punto 506">
+    <meta property="og:description" content="La agenda más exclusiva de eventos en Pococí. No te pierdas lo que sucede en la zona.">
+    <meta property="og:image" content="https://yfqxnjohojtbjevrmbmq.supabase.co/storage/v1/object/public/branding/og-eventos.jpg">
+    <meta property="og:url" content="https://punto506.com/eventos.html">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cartelera de Eventos | Punto 506">
+    <meta name="twitter:description" content="Agenda cultural y de entretenimiento en Pococí.">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;400;800&family=Baskervville:italic&display=swap" rel="stylesheet">
     <style>
@@ -297,6 +320,7 @@
 
         async function registrarActividad(tipo, nombre) {
             try {
+                // Registro interno en Supabase
                 await supabaseAdmin
                     .from('registros_actividad')
                     .insert([{ 
@@ -304,6 +328,11 @@
                         nombre_negocio: nombre, 
                         fecha: new Date().toISOString()
                     }]);
+                
+                // Registro opcional en Google Analytics
+                if(typeof gtag === 'function') {
+                    gtag('event', tipo, { 'event_label': nombre });
+                }
             } catch (err) {
                 console.error("Error analítica:", err);
             }
