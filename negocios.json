@@ -1079,5 +1079,28 @@
   "lat": 10.213836642761098,
   "lng": -83.78916537676214,
   "maps_link": "https://maps.app.goo.gl/6Q2BJakJt2C21dBd7"
+},
+  {
+  "id": 44,
+  "nombre": "Defensa Digital Empresarial",
+  "categoria": "Servicios",
+  "etiquetas": ["Agencia Consultora", "Ciberseguridad", "Criminología Moderna", "Prevención de Riesgos"],
+  "keywords_busqueda": "defensa digital empresarial guápiles ciberseguridad criminología moderna tecnología mitigación riesgos prevenir cibercrimen estándares internacionales Robert Bacon consultoría seguridad digital pococí",
+  "servicios_resumen": "Agencia consultora que integra la criminología moderna con tecnología de vanguardia para mitigar riesgos, prevenir el cibercrimen y asegurar el cumplimiento de estándares internacionales.",
+  "instagram": "null",
+  "facebook": "https://www.facebook.com/profile.php?id=61557945532050",
+  "imagen": "img/logos/defensa-digital-empresarial.webp",
+  "whatsapp": "+50686205378",
+  "descripcion": "Defensa Digital Empresarial se destaca como una agencia consultora especializada en la intersección de la criminología moderna y la tecnología. Su enfoque se centra en proporcionar herramientas estratégicas para mitigar riesgos y prevenir el cibercrimen, apoyando a las organizaciones en el cumplimiento de normativas internacionales con un alto estándar de profesionalismo.",
+  "horario": "Lunes a Viernes: 8:00 a.m. - 5:00 p.m.",
+  "estado_horario": {
+    "tipo": "reserva",
+      "config": null
+    }
+  },
+  "direccion": "Guápiles, Pococí, Limón.",
+  "lat": 10.2128,
+  "lng": -83.7885,
+  "maps_link": "https://www.facebook.com/profile.php?id=61557945532050"
 }
 ]
