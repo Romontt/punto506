@@ -3,7 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bolsa de Empleo | Punto 506</title>
+    
+    <title>Bolsa de Empleo | Punto 506 - Oportunidades Laborales en Pococí</title>
+    <meta name="description" content="Encuentra tu próximo desafío profesional en Pococí. La bolsa de empleo de Punto 506 conecta el talento local con las mejores vacantes en Guápiles y alrededores.">
+    <meta name="keywords" content="Empleos Pococí, Trabajo Guápiles, Vacantes Limón, Bolsa de empleo Costa Rica, Punto 506 empleos, reclutamiento local">
+    <meta name="author" content="MontZu">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://punto506.montzucr.com/empleos/be">
+    <meta property="og:title" content="Bolsa de Empleo | Punto 506 - Talento de Pococí">
+    <meta property="og:description" content="Conectamos el talento de la región con las mejores oportunidades laborales locales.">
+    <meta property="og:image" content="https://punto506.montzucr.com/img/og-preview.webp">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCCTHXBBP7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SCCTHXBBP7');
+    </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Montserrat:wght@700&family=Baskervville:italic&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -171,11 +191,36 @@
             const modal = document.getElementById('modal-terms');
             modal.style.display = show ? 'flex' : 'none';
             document.body.style.overflow = show ? 'hidden' : 'auto';
+            
+            // Track modal view in Analytics
+            if (show && typeof gtag === 'function') {
+                gtag('event', 'view_item', { item_name: 'Terminos y Condiciones Empleo' });
+            }
         }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onscroll = function() {
+            const btn = document.getElementById('btn-top');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.style.opacity = "1";
+            } else {
+                btn.style.opacity = "0";
+            }
+        };
+
+        // Analytics de carga de página
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof gtag === 'function') {
+                gtag('event', 'page_view', { page_title: 'Bolsa de Empleo Punto 506' });
+            }
+        });
     </script>
     <script src="empleos.js"></script>
     <button onclick="scrollToTop()" id="btn-top" class="fixed bottom-8 right-8 w-12 h-12 bg-[#130f0e] border border-[#d4a373]/30 text-[#d4a373] rounded-full flex items-center justify-center opacity-0 transition-all duration-500 z-[60] hover:bg-[#d4a373] hover:text-black">
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
-</button>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+    </button>
 </body>
 </html>
