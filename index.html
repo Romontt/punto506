@@ -3,7 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Punto 506 | Bienvenido</title>
+    
+    <title>Punto 506 | Bienvenido - Directorio, Entrevistas, Empleos y Eventos en Pococí</title>
+    <meta name="description" content="Explora Punto 506: El centro digital de Pococí. Encuentra el directorio comercial premium, historias locales, bolsa de empleo y la mejor cartelera de eventos en Guápiles.">
+    <meta name="keywords" content="Pococí, Guápiles, Directorio comercial, Empleos Pococí, Eventos Pococí, Entrevistas Pococí, Costa Rica, MontZu">
+    <meta name="author" content="MontZu">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://punto506.montzucr.com/">
+    <meta property="og:title" content="Punto 506 | Descubre • Conecta • Destaca">
+    <meta property="og:description" content="Directorio comercial, empleos y cultura local de la región de Pococí.">
+    <meta property="og:image" content="https://punto506.montzucr.com/img/og-preview.webp">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCCTHXBBP7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SCCTHXBBP7');
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -165,6 +185,11 @@
 
         // Registrar visita al cargar
         async function registrarVisita() {
+            // Evento para Google Analytics
+            if (typeof gtag === 'function') {
+                gtag('event', 'page_view', { page_title: 'Punto 506 - Bienvenida' });
+            }
+
             try {
                 await supabaseClient.from('registros_actividad').insert([
                     { tipo_evento: 'visita_pagina', nombre_negocio: 'Punto 506 - Inicio' }
@@ -178,6 +203,14 @@
         async function trackClick(event, nombre) {
             event.preventDefault(); 
             const href = event.currentTarget.getAttribute('href');
+            
+            // Evento para Google Analytics
+            if (typeof gtag === 'function') {
+                gtag('event', 'select_content', { 
+                    content_type: 'welcome_navigation', 
+                    item_id: nombre 
+                });
+            }
             
             try {
                 await supabaseClient.from('registros_actividad').insert([
