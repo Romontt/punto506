@@ -62,11 +62,12 @@
             backdrop-filter: blur(12px);
         }
 
-        /* FUERZA DISEÑO OSCURO Y ELIMINA CUADRO BLANCO DE ONESIGNAL */
+        /* --- ESTILOS PARA ONESIGNAL (MODO OSCURO PREMIUM) --- */
         #onesignal-slidedown-container .onesignal-slidedown-dialog {
             background-color: #130f0e !important;
             border: 1px solid rgba(212, 163, 115, 0.3) !important;
             box-shadow: 0 20px 50px rgba(0,0,0,0.9) !important;
+            border-radius: 2px !important; /* Estética minimalista */
         }
         #onesignal-slidedown-container .onesignal-slidedown-body {
             color: #e7e5e4 !important;
@@ -76,12 +77,22 @@
             background-color: #d4a373 !important;
             color: #130f0e !important;
             font-weight: 800 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.1em !important;
+            border-radius: 2px !important;
         }
         #onesignal-slidedown-container #onesignal-slidedown-cancel-button {
             color: #a8a29e !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.1em !important;
+            font-size: 11px !important;
         }
         #onesignal-slidedown-container .onesignal-slidedown-icon {
             display: none !important;
+        }
+        /* Elimina cualquier residuo blanco de OneSignal */
+        .onesignal-reset {
+            background-color: transparent !important;
         }
     </style>
 
@@ -92,11 +103,10 @@
         OneSignal.init({
           appId: "e817b27c-1a67-4739-886c-1dea8b532224",
           safari_web_id: "web.onesignal.auto.4345f3b9-0648-4376-838e-008c1d802430",
-          language: "es", // Forzado a Español a nivel de SDK
+          language: "es", 
           notifyButton: { enable: false }
         });
 
-        // Configuración manual del prompt para asegurar idioma y diseño
         OneSignal.Slidedown.promptPush({
           force: true,
           options: {
