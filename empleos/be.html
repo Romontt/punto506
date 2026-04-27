@@ -62,7 +62,7 @@
             backdrop-filter: blur(12px);
         }
 
-        /* FIX ONESIGNAL: FUERZA DISEÑO OSCURO Y ELIMINA CUADRO BLANCO */
+        /* FUERZA DISEÑO OSCURO Y ELIMINA CUADRO BLANCO DE ONESIGNAL */
         #onesignal-slidedown-container .onesignal-slidedown-dialog {
             background-color: #130f0e !important;
             border: 1px solid rgba(212, 163, 115, 0.3) !important;
@@ -81,7 +81,7 @@
             color: #a8a29e !important;
         }
         #onesignal-slidedown-container .onesignal-slidedown-icon {
-            display: none !important; /* Limpia el diseño */
+            display: none !important;
         }
     </style>
 
@@ -92,11 +92,11 @@
         OneSignal.init({
           appId: "e817b27c-1a67-4739-886c-1dea8b532224",
           safari_web_id: "web.onesignal.auto.4345f3b9-0648-4376-838e-008c1d802430",
-          language: "es", // Forzado a Español
+          language: "es", // Forzado a Español a nivel de SDK
           notifyButton: { enable: false }
         });
 
-        // Configuración explícita del mensaje para evitar el inglés
+        // Configuración manual del prompt para asegurar idioma y diseño
         OneSignal.Slidedown.promptPush({
           force: true,
           options: {
