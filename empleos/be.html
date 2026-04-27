@@ -62,48 +62,52 @@
             backdrop-filter: blur(12px);
         }
 
-        /* ESTILOS PERSONALIZADOS ONESIGNAL - CORRECCIÓN DE CUADRO BLANCO */
-        #onesignal-slidedown-container .onesignal-slidedown-dialog,
-        #onesignal-slidedown-dialog {
+        /* FIX ONESIGNAL: FUERZA DISEÑO OSCURO Y ELIMINA CUADRO BLANCO */
+        #onesignal-slidedown-container .onesignal-slidedown-dialog {
             background-color: #130f0e !important;
-            background: #130f0e !important;
             border: 1px solid rgba(212, 163, 115, 0.3) !important;
-            border-radius: 4px !important;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.8) !important;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9) !important;
         }
-
-        #onesignal-slidedown-container .onesignal-slidedown-body,
-        #onesignal-slidedown-body {
+        #onesignal-slidedown-container .onesignal-slidedown-body {
             color: #e7e5e4 !important;
             font-family: 'Inter', sans-serif !important;
         }
-
         #onesignal-slidedown-container #onesignal-slidedown-allow-button {
             background-color: #d4a373 !important;
             color: #130f0e !important;
-            font-weight: 700 !important;
-            text-transform: uppercase !important;
+            font-weight: 800 !important;
         }
-
         #onesignal-slidedown-container #onesignal-slidedown-cancel-button {
             color: #a8a29e !important;
-            text-transform: uppercase !important;
         }
-
         #onesignal-slidedown-container .onesignal-slidedown-icon {
-            display: none !important;
+            display: none !important; /* Limpia el diseño */
         }
     </style>
 
-   <script src="OneSignalSDKWorker.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "e817b27c-1a67-4739-886c-1dea8b532224",
-    });
-  });
-</script>
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(function(OneSignal) {
+        OneSignal.init({
+          appId: "e817b27c-1a67-4739-886c-1dea8b532224",
+          safari_web_id: "web.onesignal.auto.4345f3b9-0648-4376-838e-008c1d802430",
+          language: "es", // Forzado a Español
+          notifyButton: { enable: false }
+        });
+
+        // Configuración explícita del mensaje para evitar el inglés
+        OneSignal.Slidedown.promptPush({
+          force: true,
+          options: {
+            siteName: "Punto 506",
+            actionMessage: "¿Quieres recibir alertas de nuevos empleos en Pococí de inmediato?",
+            acceptButtonText: "Sí, avisarme",
+            cancelButtonText: "Tal vez luego"
+          }
+        });
+      });
+    </script>
 </head>
 <body class="antialiased text-stone-200 bg-mesh min-h-screen custom-scroll">
 
@@ -233,7 +237,6 @@
             const modal = document.getElementById('modal-terms');
             modal.style.display = show ? 'flex' : 'none';
             document.body.style.overflow = show ? 'hidden' : 'auto';
-            
             if (show && typeof gtag === 'function') {
                 gtag('event', 'view_item', { item_name: 'Terminos y Condiciones Empleo' });
             }
