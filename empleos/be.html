@@ -62,38 +62,34 @@
             backdrop-filter: blur(12px);
         }
 
-        /* ESTILOS PERSONALIZADOS ONESIGNAL - PUNTO 506 */
-        #onesignal-slidedown-container .onesignal-slidedown-dialog {
+        /* ESTILOS PERSONALIZADOS ONESIGNAL - CORRECCIÓN DE CUADRO BLANCO */
+        #onesignal-slidedown-container .onesignal-slidedown-dialog,
+        #onesignal-slidedown-dialog {
             background-color: #130f0e !important;
+            background: #130f0e !important;
             border: 1px solid rgba(212, 163, 115, 0.3) !important;
             border-radius: 4px !important;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5) !important;
-            max-width: 320px !important;
-            padding: 16px !important;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.8) !important;
         }
-        #onesignal-slidedown-container .onesignal-slidedown-body {
+
+        #onesignal-slidedown-container .onesignal-slidedown-body,
+        #onesignal-slidedown-body {
             color: #e7e5e4 !important;
             font-family: 'Inter', sans-serif !important;
-            font-size: 13px !important;
         }
-        #onesignal-slidedown-container .onesignal-slidedown-footer {
-            margin-top: 16px !important;
-        }
+
         #onesignal-slidedown-container #onesignal-slidedown-allow-button {
             background-color: #d4a373 !important;
             color: #130f0e !important;
             font-weight: 700 !important;
-            font-size: 11px !important;
             text-transform: uppercase !important;
-            border-radius: 2px !important;
-            padding: 8px 16px !important;
         }
+
         #onesignal-slidedown-container #onesignal-slidedown-cancel-button {
-            background-color: transparent !important;
             color: #a8a29e !important;
-            font-size: 11px !important;
             text-transform: uppercase !important;
         }
+
         #onesignal-slidedown-container .onesignal-slidedown-icon {
             display: none !important;
         }
@@ -106,9 +102,9 @@
         OneSignal.init({
           appId: "e817b27c-1a67-4739-886c-1dea8b532224",
           safari_web_id: "web.onesignal.auto.4345f3b9-0648-4376-838e-008c1d802430",
+          language: "es"
         });
 
-        // ESPERA 5 SEGUNDOS Y LANZA EL PROMPT PERSONALIZADO
         setTimeout(function() {
             OneSignal.Slidedown.promptPush({
               force: true,
