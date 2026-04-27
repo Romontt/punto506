@@ -64,14 +64,33 @@
     </style>
 
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "e817b27c-1a67-4739-886c-1dea8b532224",
-    });
-  });
-</script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(function(OneSignal) {
+        OneSignal.init({
+          appId: "e817b27c-1a67-4739-886c-1dea8b532224",
+          safari_web_id: "web.onesignal.auto.4345f3b9-0648-4376-838e-008c1d802430",
+        });
+
+        // Solo lanzamos el prompt si el usuario no está suscrito
+        OneSignal.User.PushSubscription.addEventListener("change", function(event) {
+             // Lógica interna de suscripción
+        });
+
+        // ESPERA 5 SEGUNDOS Y LANZA EL PROMPT
+        setTimeout(function() {
+            OneSignal.Slidedown.promptPush({
+              force: true, // Esto asegura que salga para la prueba
+              options: {
+                siteName: "Punto 506",
+                actionMessage: "¿Quieres recibir alertas de nuevos empleos en Pococí de inmediato?",
+                acceptButtonText: "Sí, avisarme",
+                cancelButtonText: "Tal vez luego"
+              }
+            });
+        }, 5000); // 5000 milisegundos = 5 segundos
+      });
+    </script>
 </head>
 <body class="antialiased text-stone-200 bg-mesh min-h-screen custom-scroll">
 
