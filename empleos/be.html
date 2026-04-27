@@ -61,6 +61,42 @@
             display: none;
             backdrop-filter: blur(12px);
         }
+
+        /* ESTILOS PERSONALIZADOS ONESIGNAL - PUNTO 506 */
+        #onesignal-slidedown-container .onesignal-slidedown-dialog {
+            background-color: #130f0e !important;
+            border: 1px solid rgba(212, 163, 115, 0.3) !important;
+            border-radius: 4px !important;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5) !important;
+            max-width: 320px !important;
+            padding: 16px !important;
+        }
+        #onesignal-slidedown-container .onesignal-slidedown-body {
+            color: #e7e5e4 !important;
+            font-family: 'Inter', sans-serif !important;
+            font-size: 13px !important;
+        }
+        #onesignal-slidedown-container .onesignal-slidedown-footer {
+            margin-top: 16px !important;
+        }
+        #onesignal-slidedown-container #onesignal-slidedown-allow-button {
+            background-color: #d4a373 !important;
+            color: #130f0e !important;
+            font-weight: 700 !important;
+            font-size: 11px !important;
+            text-transform: uppercase !important;
+            border-radius: 2px !important;
+            padding: 8px 16px !important;
+        }
+        #onesignal-slidedown-container #onesignal-slidedown-cancel-button {
+            background-color: transparent !important;
+            color: #a8a29e !important;
+            font-size: 11px !important;
+            text-transform: uppercase !important;
+        }
+        #onesignal-slidedown-container .onesignal-slidedown-icon {
+            display: none !important;
+        }
     </style>
 
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -72,15 +108,10 @@
           safari_web_id: "web.onesignal.auto.4345f3b9-0648-4376-838e-008c1d802430",
         });
 
-        // Solo lanzamos el prompt si el usuario no está suscrito
-        OneSignal.User.PushSubscription.addEventListener("change", function(event) {
-             // Lógica interna de suscripción
-        });
-
-        // ESPERA 5 SEGUNDOS Y LANZA EL PROMPT
+        // ESPERA 5 SEGUNDOS Y LANZA EL PROMPT PERSONALIZADO
         setTimeout(function() {
             OneSignal.Slidedown.promptPush({
-              force: true, // Esto asegura que salga para la prueba
+              force: true,
               options: {
                 siteName: "Punto 506",
                 actionMessage: "¿Quieres recibir alertas de nuevos empleos en Pococí de inmediato?",
@@ -88,7 +119,7 @@
                 cancelButtonText: "Tal vez luego"
               }
             });
-        }, 5000); // 5000 milisegundos = 5 segundos
+        }, 5000);
       });
     </script>
 </head>
@@ -221,7 +252,6 @@
             modal.style.display = show ? 'flex' : 'none';
             document.body.style.overflow = show ? 'hidden' : 'auto';
             
-            // Track modal view in Analytics
             if (show && typeof gtag === 'function') {
                 gtag('event', 'view_item', { item_name: 'Terminos y Condiciones Empleo' });
             }
@@ -240,7 +270,6 @@
             }
         };
 
-        // Analytics de carga de página
         document.addEventListener('DOMContentLoaded', () => {
             if (typeof gtag === 'function') {
                 gtag('event', 'page_view', { page_title: 'Bolsa de Empleo Punto 506' });
