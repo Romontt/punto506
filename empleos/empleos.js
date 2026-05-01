@@ -23,53 +23,19 @@ async function registrarActividad(tipo, detalle) {
     }
 }
 
-// Función global para el botón de publicar
+// Función global para el botón de publicar (llamada desde el HTML)
 window.trackPublicarClick = () => {
     registrarActividad('clic_publicar_empleo', 'Usuario intenta publicar vacante');
 };
 
+// Detectar si es móvil
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-// --- LÓGICA DE ZOOM E HISTORIAL ---
-window.openZoom = function(imgSrc) {
-    const modal = document.getElementById('modal-zoom');
-    const modalImg = document.getElementById('img-zoom');
-    if (!modal || !modalImg) return;
-
-    modalImg.src = imgSrc;
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-
-    // Añadir estado al historial para que el botón "atrás" funcione
-    window.history.pushState({ zoomOpen: true }, "");
-};
-
-window.closeZoom = function() {
-    const modal = document.getElementById('modal-zoom');
-    if (!modal) return;
-    
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-
-    // Si el cierre fue manual (clic en X o fuera), quitamos el estado del historial
-    if (window.history.state && window.history.state.zoomOpen) {
-        window.history.back();
-    }
-};
-
-// Escuchar el botón de atrás del navegador
-window.addEventListener('popstate', (event) => {
-    const modal = document.getElementById('modal-zoom');
-    if (modal && modal.style.display === 'flex') {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-});
 
 // Función global para manejar el contacto
 window.handleContactClick = function(link, contacto, esEmail, titulo, comercio) {
     if (link === '#' || !link) return;
     
+    // Registro de interés en el puesto
     registrarActividad('interes_empleo', `${comercio} | ${titulo}`);
 
     if (!isMobile && esEmail) {
@@ -164,9 +130,7 @@ async function renderEmpleos() {
         return `
             <div class="job-card-new animate-reveal flex flex-col h-full bg-[#1c1614]/40 border border-white/5 rounded-2xl overflow-hidden group hover:border-[#d4a373]/50 transition-all duration-500">
                 
-                <div class="job-image-container relative overflow-hidden bg-black flex items-center justify-center cursor-pointer" 
-                     style="min-height: 320px; max-height: 400px;"
-                     onclick="openZoom('${emp.afiche_url}')">
+                <div class="job-image-container relative overflow-hidden bg-black flex items-center justify-center" style="min-height: 320px; max-height: 400px;">
                     <div class="zoom-overlay">
                         <svg class="w-6 h-6 text-[#d4a373]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
@@ -179,7 +143,7 @@ async function renderEmpleos() {
                     
                     <button onclick="event.stopPropagation(); compartirPuesto('${emp.titulo_puesto}', '${emp.nombre_comercio}')" 
                             class="absolute top-4 left-4 z-20 bg-[#d4a373] text-black p-2.5 rounded-full border border-white/10 transition-transform active:scale-95 backdrop-blur-md flex items-center justify-center shadow-lg shadow-black/50">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                     </button>
 
                     <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 z-10">
@@ -201,6 +165,7 @@ async function renderEmpleos() {
     }).join('');
 }
 
+// --- FUNCIONALIDAD VOLVER AL INICIO ---
 window.scrollToTop = function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 };
