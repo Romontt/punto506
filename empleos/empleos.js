@@ -31,26 +31,11 @@ window.trackPublicarClick = () => {
 // Detectar si es móvil
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-// --- GESTIÓN DE HISTORIAL PARA EL ZOOM DE IMÁGENES ---
-// Al abrir un modal de imagen, añadimos un estado al historial
-window.abrirZoom = function(imgSrc) {
-    window.history.pushState({ modalOpen: true }, '');
-    // ... aquí iría tu lógica actual para abrir el modal (ej: mostrar un div contenedor)
-};
-
-// Escuchar cuando el usuario presiona el botón "atrás"
-window.addEventListener('popstate', (event) => {
-    // Si el modal está abierto, lo cerramos en lugar de salir de la página
-    const modal = document.getElementById('modal-zoom'); // Asegúrate que este sea el ID de tu modal
-    if (modal && modal.style.display === 'flex') {
-        modal.style.display = 'none';
-    }
-});
-
 // Función global para manejar el contacto
 window.handleContactClick = function(link, contacto, esEmail, titulo, comercio) {
     if (link === '#' || !link) return;
     
+    // Registro de interés en el puesto
     registrarActividad('interes_empleo', `${comercio} | ${titulo}`);
 
     if (!isMobile && esEmail) {
@@ -144,13 +129,15 @@ async function renderEmpleos() {
 
         return `
             <div class="glass-card animate-reveal flex flex-col h-full bg-[#1c1614]/40 border border-white/5 rounded-2xl overflow-hidden group hover:border-[#d4a373]/50 transition-all duration-500">
+                
                 <div class="relative overflow-hidden bg-black flex items-center justify-center" style="min-height: 320px; max-height: 400px;">
+                    <div class="zoom-overlay" onclick="event.preventDefault(); event.stopPropagation();"></div>
+
                     <img src="${emp.afiche_url}" 
-                         class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100 cursor-pointer" 
-                         alt="Vacante ${emp.titulo_puesto}"
-                         onclick="abrirZoom('${emp.afiche_url}')">
+                         class="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" 
+                         alt="Vacante ${emp.titulo_puesto}">
                     
-                    <button onclick="event.stopPropagation(); compartirPuesto('${emp.titulo_puesto}', '${emp.nombre_comercio}')" 
+                    <button onclick="event.preventDefault(); event.stopPropagation(); compartirPuesto('${emp.titulo_puesto}', '${emp.nombre_comercio}')" 
                             class="absolute top-4 left-4 z-20 bg-[#d4a373] text-black p-2.5 rounded-full border border-white/10 transition-transform active:scale-95 backdrop-blur-md flex items-center justify-center shadow-lg shadow-black/50">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                     </button>
@@ -174,6 +161,7 @@ async function renderEmpleos() {
     }).join('');
 }
 
+// --- FUNCIONALIDAD VOLVER AL INICIO ---
 window.scrollToTop = function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 };
