@@ -57,17 +57,21 @@
             -webkit-text-fill-color: transparent;
         }
 
-        #modal-terms {
+        #modal-terms, #modal-zoom {
             display: none;
             backdrop-filter: blur(12px);
         }
+
+        /* Estilos Zoom Afiches */
+        .zoom-image { cursor: zoom-in; transition: opacity 0.3s; }
+        .zoom-image:hover { opacity: 0.8; }
 
         /* --- ESTILOS PARA ONESIGNAL (MODO OSCURO PREMIUM) --- */
         #onesignal-slidedown-container .onesignal-slidedown-dialog {
             background-color: #130f0e !important;
             border: 1px solid rgba(212, 163, 115, 0.3) !important;
             box-shadow: 0 20px 50px rgba(0,0,0,0.9) !important;
-            border-radius: 2px !important; /* Estética minimalista */
+            border-radius: 2px !important;
         }
         #onesignal-slidedown-container .onesignal-slidedown-body {
             color: #e7e5e4 !important;
@@ -90,7 +94,6 @@
         #onesignal-slidedown-container .onesignal-slidedown-icon {
             display: none !important;
         }
-        /* Elimina cualquier residuo blanco de OneSignal */
         .onesignal-reset {
             background-color: transparent !important;
         }
@@ -235,11 +238,18 @@
             <h3 class="serif-title text-[#d4a373] text-xl mb-6 tracking-[0.3em] uppercase text-center">Términos de Uso</h3>
             <div class="text-stone-400 text-[11px] leading-relaxed space-y-4 max-h-[50vh] overflow-y-auto pr-4 custom-scroll tracking-wide">
                 <p class="border-l-2 border-[#d4a373]/30 pl-4"><strong class="text-stone-200">Rol de la Plataforma:</strong> Punto 506 actúa únicamente como un puente de comunicación entre empresas y candidatos en Pococí. No somos intermediarios ni responsables de las contrataciones.</p>
-                <p class="border-l-2 border-[#d4a373]/30 pl-4"><strong class="text-stone-200">Veracidad de Datos:</strong> Toda la información contenida en las ofertas de empleo es responsabilidad exclusiva de quien publica. Instamos a los usuarios a no compartir información financiera o claves personales.</p>
-                <p class="border-l-2 border-[#d4a373]/30 pl-4"><strong class="text-stone-200">Exclusión de Responsabilidad:</strong> No nos hacemos responsables por la calidad, legalidad o seguridad de las vacantes publicadas, ni por las consecuencias de las entrevistas o acuerdos laborales resultantes.</p>
+                <p class="border-l-2 border-[#d4a373]/30 pl-4"><strong class="text-stone-200">Veracidad de Datos:</strong> Toda la información contenida en las ofertas de empleo es responsabilidad exclusiva de quien publica.</p>
+                <p class="border-l-2 border-[#d4a373]/30 pl-4"><strong class="text-stone-200">Exclusión de Responsabilidad:</strong> No nos hacemos responsables por la calidad, legalidad o seguridad de las vacantes publicadas.</p>
             </div>
             <button onclick="toggleModal(false)" class="w-full mt-10 py-4 bg-[#d4a373] text-black text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white transition-all duration-500 shadow-lg">Entendido</button>
         </div>
+    </div>
+
+    <div id="modal-zoom" class="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/95 transition-all duration-500" onclick="closeZoom()">
+        <button class="absolute top-6 right-6 text-[#d4a373] hover:scale-110 transition-transform">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <img id="img-zoomed" src="" class="max-w-full max-h-[90vh] object-contain shadow-2xl border border-white/10" onclick="event.stopPropagation()">
     </div>
 
     <script>
@@ -247,10 +257,29 @@
             const modal = document.getElementById('modal-terms');
             modal.style.display = show ? 'flex' : 'none';
             document.body.style.overflow = show ? 'hidden' : 'auto';
-            if (show && typeof gtag === 'function') {
-                gtag('event', 'view_item', { item_name: 'Terminos y Condiciones Empleo' });
-            }
         }
+
+        // Lógica para Zoom de Afiches
+        function openZoom(src) {
+            const modal = document.getElementById('modal-zoom');
+            const img = document.getElementById('img-zoomed');
+            img.src = src;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeZoom() {
+            const modal = document.getElementById('modal-zoom');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Delegación de eventos para capturar clics en imágenes generadas dinámicamente por empleos.js
+        document.getElementById('grid-empleos').addEventListener('click', function(e) {
+            if (e.target.tagName === 'IMG' && e.target.closest('.job-card-new')) {
+                openZoom(e.target.src);
+            }
+        });
 
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
