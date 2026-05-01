@@ -31,6 +31,43 @@ window.trackPublicarClick = () => {
 // Detectar si es móvil
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
+// --- LÓGICA DE ZOOM CON CONTROL DE BOTÓN ATRÁS ---
+window.openZoom = function(imgSrc) {
+    const modal = document.getElementById('modal-zoom');
+    const modalImg = document.getElementById('img-zoom');
+    if (!modal || !modalImg) return;
+
+    modalImg.src = imgSrc;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+
+    // Empujamos un estado al historial para interceptar el botón atrás
+    window.history.pushState({ zoomOpen: true }, "");
+};
+
+window.closeZoom = function() {
+    const modal = document.getElementById('modal-zoom');
+    if (!modal || modal.style.display !== 'flex') return;
+    
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+
+    // Si cerramos manualmente, limpiamos el estado del historial para no dejar basura
+    if (window.history.state && window.history.state.zoomOpen) {
+        window.history.back();
+    }
+};
+
+// Escuchador del botón atrás del navegador o gestos de móvil
+window.addEventListener('popstate', (event) => {
+    const modal = document.getElementById('modal-zoom');
+    // Si el modal está visible, lo cerramos y evitamos que se salga de la página
+    if (modal && modal.style.display === 'flex') {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+});
+
 // Función global para manejar el contacto
 window.handleContactClick = function(link, contacto, esEmail, titulo, comercio) {
     if (link === '#' || !link) return;
@@ -130,7 +167,9 @@ async function renderEmpleos() {
         return `
             <div class="job-card-new animate-reveal flex flex-col h-full bg-[#1c1614]/40 border border-white/5 rounded-2xl overflow-hidden group hover:border-[#d4a373]/50 transition-all duration-500">
                 
-                <div class="job-image-container relative overflow-hidden bg-black flex items-center justify-center" style="min-height: 320px; max-height: 400px;">
+                <div class="job-image-container relative overflow-hidden bg-black flex items-center justify-center cursor-pointer" 
+                     style="min-height: 320px; max-height: 400px;"
+                     onclick="openZoom('${emp.afiche_url}')">
                     <div class="zoom-overlay">
                         <svg class="w-6 h-6 text-[#d4a373]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
