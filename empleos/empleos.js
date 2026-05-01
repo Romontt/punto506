@@ -31,7 +31,7 @@ window.trackPublicarClick = () => {
 // Detectar si es móvil
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-// --- LÓGICA DE ZOOM CON CONTROL DE BOTÓN ATRÁS ---
+// --- LÓGICA DE CONTROL DE MODAL Y BOTÓN ATRÁS ---
 window.openZoom = function(imgSrc) {
     const modal = document.getElementById('modal-zoom');
     const modalImg = document.getElementById('img-zoom');
@@ -41,8 +41,8 @@ window.openZoom = function(imgSrc) {
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 
-    // Empujamos un estado al historial para interceptar el botón atrás
-    window.history.pushState({ zoomOpen: true }, "");
+    // Crear una entrada en el historial para que el botón atrás cierre el modal
+    window.history.pushState({ modalOpen: true }, "");
 };
 
 window.closeZoom = function() {
@@ -52,16 +52,15 @@ window.closeZoom = function() {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
 
-    // Si cerramos manualmente, limpiamos el estado del historial para no dejar basura
-    if (window.history.state && window.history.state.zoomOpen) {
+    // Si cerramos manualmente, regresamos el historial
+    if (window.history.state && window.history.state.modalOpen) {
         window.history.back();
     }
 };
 
-// Escuchador del botón atrás del navegador o gestos de móvil
+// Escuchar el evento popstate para cerrar modal con el botón atrás del móvil
 window.addEventListener('popstate', (event) => {
     const modal = document.getElementById('modal-zoom');
-    // Si el modal está visible, lo cerramos y evitamos que se salga de la página
     if (modal && modal.style.display === 'flex') {
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
