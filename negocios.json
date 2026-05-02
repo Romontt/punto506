@@ -1124,7 +1124,7 @@
     "lng": -83.7850,
     "maps_link": "https://siwa.montzucr.com/"
   },
-  {
+ {
   "id": 46,
   "nombre": "Diay Mae",
   "categoria": "moda y comercio",
@@ -1146,6 +1146,7 @@
       "4": ["09:00", "18:00"],
       "5": ["09:00", "18:00"],
       "6": ["09:00", "18:00"]
+    } 
   },
   "direccion": "Guápiles, Pococí, Limón.",
   "lat": 10.2128,
