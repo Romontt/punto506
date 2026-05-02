@@ -1116,7 +1116,7 @@
     "descripcion": "En la lengua ancestral Bribri, Siwá es el viento y el soplo de vida. Esta tienda nace en Guápiles para ser ese viento fresco que trae lo mejor del mundo para vestir los momentos más importantes de tus hijos con calidad y estilo.",
     "horario": "Tienda Virtual",
     "estado_horario": {
-      "tipo": "abierto",
+      "tipo": "cita",
       "config": null
     },
     "direccion": "75 mts norte y 100 oeste del Super Caribean, Guápiles, Limón.",
@@ -1138,8 +1138,14 @@
   "descripcion": "Tienda virtual en Guápiles, enfocada en ofrecer lo mejor de la moda urbana para hombre. Como distribuidores autorizados de El Perro CR, garantizando prendas de alta calidad, incluyendo estilos oversize y diseños exclusivos que marcan tendencia.",
   "horario": "Lunes a Sábado: 9:00 a.m. - 6:00 p.m.",
   "estado_horario": {
-    "tipo": "abierto",
-    "config": null
+    "tipo": "horario",
+    "config": {
+      "1": ["09:00", "18:00"],
+      "2": ["09:00", "18:00"],
+      "3": ["09:00", "18:00"],
+      "4": ["09:00", "18:00"],
+      "5": ["09:00", "18:00"],
+      "6": ["09:00", "18:00"]
   },
   "direccion": "Guápiles, Pococí, Limón.",
   "lat": 10.2128,
