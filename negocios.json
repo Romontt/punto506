@@ -1101,5 +1101,49 @@
   "lat": 10.2128,
   "lng": -83.7885,
   "maps_link": "https://www.facebook.com/profile.php?id=61557945532050"
+},
+  {
+    "id": 45,
+    "nombre": "Siwá Tienda Virtual",
+    "categoria": "moda y comercio",
+    "etiquetas": ["Ropa Infantil", "Bebés", "Moda Niños", "Tienda Virtual"],
+    "keywords_busqueda": "siwa tienda virtual guápiles ropa infantil bebés niños moda pococí calidad estilo prendas infantiles",
+    "servicios_resumen": "Tienda virtual infantil en Guápiles que ofrece calidad, ternura y estilo en cada prenda seleccionada para los más pequeños.",
+    "instagram": "https://www.instagram.com/tienda_siwa/",
+    "facebook": "https://www.facebook.com/profile.php?id=61588695377540",
+    "imagen": "img/logos/siwa.webp",
+    "whatsapp": "+50683337497",
+    "descripcion": "En la lengua ancestral Bribri, Siwá es el viento y el soplo de vida. Esta tienda nace en Guápiles para ser ese viento fresco que trae lo mejor del mundo para vestir los momentos más importantes de tus hijos con calidad y estilo.",
+    "horario": "Tienda Virtual",
+    "estado_horario": {
+      "tipo": "abierto",
+      "config": null
+    },
+    "direccion": "75 mts norte y 100 oeste del Super Caribean, Guápiles, Limón.",
+    "lat": 10.2166,
+    "lng": -83.7850,
+    "maps_link": "https://siwa.montzucr.com/"
+  },
+  {
+  "id": 46,
+  "nombre": "Diay Mae",
+  "categoria": "moda y comercio",
+  "etiquetas": ["Ropa para Hombre", "Moda Urbana", "Oversize", "Tienda Virtual", "Distribuidor Autorizado"],
+  "keywords_busqueda": "diay mae guápiles tienda virtual ropa hombre el perro cr moda urbana oversize camisetas estilo masculino pococí",
+  "servicios_resumen": "Tienda virtual en Guápiles especializada en moda urbana masculina y distribuidores autorizados de El Perro CR.",
+  "instagram": "https://www.instagram.com/diaymae_/",
+  "facebook": "https://www.facebook.com/profile.php?id=61575363964259",
+  "imagen": "img/logos/diay-mae.webp",
+  "whatsapp": "+50661324879",
+  "descripcion": "Tienda virtual en Guápiles, enfocada en ofrecer lo mejor de la moda urbana para hombre. Como distribuidores autorizados de El Perro CR, garantizando prendas de alta calidad, incluyendo estilos oversize y diseños exclusivos que marcan tendencia.",
+  "horario": "Lunes a Sábado: 9:00 a.m. - 6:00 p.m.",
+  "estado_horario": {
+    "tipo": "abierto",
+    "config": null
+  },
+  "direccion": "Guápiles, Pococí, Limón.",
+  "lat": 10.2128,
+  "lng": -83.7885,
+  "maps_link": "https://www.instagram.com/diaymae_/"
 }
 ]
