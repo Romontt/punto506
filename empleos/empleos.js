@@ -111,6 +111,8 @@ async function renderEmpleos() {
     grid.innerHTML = empleos.map(emp => {
         const contacto = emp.whatsapp_contacto ? emp.whatsapp_contacto.trim() : '';
         const esEmail = contacto.includes('@');
+        // Nueva validación para detectar si es una URL
+        const esPaginaWeb = contacto.startsWith('http') || contacto.startsWith('www');
         
         let linkAccion = '';
         let textoBoton = '';
@@ -121,7 +123,12 @@ async function renderEmpleos() {
         } else if (esEmail) {
             linkAccion = `mailto:${contacto}`;
             textoBoton = !isMobile ? 'Ver Contacto' : 'Enviar Correo';
+        } else if (esPaginaWeb) {
+            // Si es web, aseguramos el protocolo correcto para que abra fuera del dominio actual
+            linkAccion = contacto.startsWith('www') ? `https://${contacto}` : contacto;
+            textoBoton = 'Postular en Sitio Web';
         } else {
+            // Si no es email ni web, procesamos como WhatsApp
             const numLimpio = contacto.replace(/\s+/g, '').replace(/\+/g, '');
             linkAccion = `https://wa.me/${numLimpio}`;
             textoBoton = 'Postular por WhatsApp';
