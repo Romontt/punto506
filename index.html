@@ -4,10 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Punto 506 | Pausa Temporal</title>
-    <meta name="description" content="Punto 506 se encuentra en una pausa temporal. Volveremos pronto con más novedades para Pococí.">
+    <title>Punto 506 | Bienvenido - Directorio, Entrevistas, Empleos y Eventos en Pococí</title>
+    <meta name="description" content="Explora Punto 506: El centro digital de Pococí. Encuentra el directorio comercial premium, historias locales, bolsa de empleo y la mejor cartelera de eventos en Guápiles.">
+    <meta name="keywords" content="Pococí, Guápiles, Directorio comercial, Empleos Pococí, Eventos Pococí, Entrevistas Pococí, Costa Rica, MontZu">
     <meta name="author" content="MontZu">
     <meta name="robots" content="index, follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://punto506.montzucr.com/">
+    <meta property="og:title" content="Punto 506 | Descubre • Conecta • Destaca">
+    <meta property="og:description" content="Directorio comercial, empleos y cultura local de la región de Pococí.">
+    <meta property="og:image" content="https://punto506.montzucr.com/img/og-preview.webp">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SCCTHXBBP7"></script>
     <script>
@@ -52,7 +59,18 @@
             position: relative;
             overflow: hidden;
         }
+        .opcion-card:hover {
+            border-color: rgba(212, 163, 115, 0.6);
+            background: rgba(212, 163, 115, 0.08);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.7);
+        }
         .logo-glow { box-shadow: 0 0 40px rgba(212, 163, 115, 0.15); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-card { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
 
         .custom-logo-circle {
             background: conic-gradient(
@@ -68,17 +86,20 @@
             border: 1px solid rgba(212, 163, 115, 0.3);
         }
 
-        .footer-link { transition: color 0.3s ease; }
-        .footer-link:hover { color: #d4a373; }
+        .footer-link {
+            transition: color 0.3s ease;
+        }
+        .footer-link:hover {
+            color: #d4a373;
+        }
     </style>
 </head>
 <body class="bg-p506-dark text-stone-300 min-h-screen flex flex-col items-center justify-center p-4 md:p-6 selection:bg-p506-gold">
 
-    <!-- HEADER / LOGO -->
-    <header class="text-center mb-8 md:mb-12">
-        <div class="flex flex-col items-center mb-6 group">
+    <header class="text-center mb-10 md:mb-16">
+        <div class="flex flex-col items-center mb-6 md:mb-8 group">
             <div class="w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center custom-logo-circle logo-glow backdrop-blur-sm relative mb-4">
-                <div class="absolute inset-0 rounded-full border border-p506-gold/20 animate-ping"></div>
+                <div class="absolute inset-0 rounded-full border border-p506-gold/20 animate-ping group-hover:animate-none"></div>
                 <span class="serif-title text-3xl md:text-4xl text-p506-gold font-bold z-10 drop-shadow-lg">506</span>
             </div>
             <div class="flex items-center gap-2">
@@ -88,7 +109,7 @@
             </div>
         </div>
 
-        <h1 class="serif-title text-3xl md:text-6xl mb-2 font-bold tracking-[0.2em] md:tracking-[0.3em] text-gradient">Punto 506</h1>
+        <h1 class="serif-title text-3xl md:text-7xl mb-2 md:mb-4 font-bold tracking-[0.2em] md:tracking-[0.3em] text-gradient">Punto 506</h1>
         <div class="flex items-center justify-center gap-2 md:gap-4 font-sans-body">
             <div class="h-[1px] w-6 md:w-12 bg-gradient-to-r from-transparent to-p506-gold/50"></div>
             <p class="text-p506-gold text-[8px] md:text-xs uppercase tracking-[0.3em] md:tracking-[0.6em] font-medium opacity-80">Descubre • Conecta • Destaca</p>
@@ -96,23 +117,43 @@
         </div>
     </header>
 
-    <!-- =======================================================
-         MENÚ ORIGINAL OCULTO EN PAUSA
-         ======================================================= -->
+    <!-- MENÚ ORIGINAL (DESACTIVADO EN PAUSA) -->
     <!-- 
     <nav class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 max-w-6xl w-full">
-        <a href="/directorio" onclick="trackClick(event, 'Punto 506 - Directorio')" class="opcion-card bg-stone-900/20 backdrop-blur-xl p-6 md:p-12 rounded-2xl md:rounded-3xl text-center group animate-card">...</a>
-        <a href="/entrevistas" onclick="trackClick(event, 'Punto 506 - Entrevistas')" class="opcion-card bg-stone-900/20 backdrop-blur-xl p-6 md:p-12 rounded-2xl md:rounded-3xl text-center group animate-card">...</a>
-        <a href="/empleos/be.html" onclick="trackClick(event, 'Punto 506 - Empleos')" class="opcion-card bg-stone-900/20 backdrop-blur-xl p-6 md:p-12 rounded-2xl md:rounded-3xl text-center group animate-card">...</a>
-        <a href="/eventos" onclick="trackClick(event, 'Punto 506 - Eventos')" class="opcion-card bg-p506-gold/[0.03] backdrop-blur-xl p-6 md:p-12 rounded-2xl md:rounded-3xl text-center group animate-card">...</a>
+        <a href="/directorio" onclick="trackClick(event, 'Punto 506 - Directorio')" class="opcion-card bg-stone-900/20 backdrop-blur-xl p-6 md:p-12 rounded-2xl md:rounded-3xl text-center group animate-card" style="animation-delay: 0.1s;">
+            <div class="text-3xl md:text-5xl mb-4 md:mb-8 group-hover:scale-110 transition-transform duration-500">🔍</div>
+            <h2 class="serif-title text-[10px] md:text-sm text-white mb-2 tracking-widest group-hover:text-p506-gold">Directorio</h2>
+            <div class="h-[1px] w-6 md:w-8 bg-p506-gold/20 mx-auto"></div>
+            <p class="mt-3 text-stone-500 text-[8px] md:text-[9px] uppercase tracking-widest font-semibold">Comercios locales</p>
+        </a>
+
+        <a href="/entrevistas" onclick="trackClick(event, 'Punto 506 - Entrevistas')" class="opcion-card bg-stone-900/20 backdrop-blur-xl p-6 md:p-12 rounded-2xl md:rounded-3xl text-center group animate-card" style="animation-delay: 0.2s;">
+            <div class="text-3xl md:text-5xl mb-4 md:mb-8 group-hover:scale-110 transition-transform duration-500">🎙️</div>
+            <h2 class="serif-title text-[10px] md:text-sm text-white mb-2 tracking-widest group-hover:text-p506-gold">Entrevistas</h2>
+            <div class="h-[1px] w-6 md:w-8 bg-p506-gold/20 mx-auto"></div>
+            <p class="mt-3 text-stone-500 text-[8px] md:text-[9px] uppercase tracking-widest font-semibold">Historias de Pococí</p>
+        </a>
+
+        <a href="/empleos/be.html" onclick="trackClick(event, 'Punto 506 - Empleos')" class="opcion-card bg-stone-900/20 backdrop-blur-xl p-6 md:p-12 rounded-2xl md:rounded-3xl text-center group animate-card" style="animation-delay: 0.3s;">
+            <div class="text-3xl md:text-5xl mb-4 md:mb-8 group-hover:scale-110 transition-transform duration-500">💼</div>
+            <h2 class="serif-title text-[10px] md:text-sm text-white mb-2 tracking-widest group-hover:text-p506-gold">Empleos</h2>
+            <div class="h-[1px] w-6 md:w-8 bg-p506-gold/20 mx-auto"></div>
+            <p class="mt-3 text-stone-500 text-[8px] md:text-[9px] uppercase tracking-widest font-semibold">Oportunidades</p>
+        </a>
+
+        <a href="/eventos" onclick="trackClick(event, 'Punto 506 - Eventos')" class="opcion-card bg-p506-gold/[0.03] backdrop-blur-xl p-6 md:p-12 rounded-2xl md:rounded-3xl text-center group animate-card border-p506-gold/40" style="animation-delay: 0.4s;">
+            <div class="absolute top-2 right-2 md:top-4 md:right-4 bg-p506-gold text-black text-[6px] md:text-[7px] px-2 md:px-3 py-0.5 md:py-1 font-black uppercase tracking-widest rounded-full">New</div>
+            <div class="text-3xl md:text-5xl mb-4 md:mb-8 group-hover:scale-110 transition-transform duration-500">🎭</div>
+            <h2 class="serif-title text-[10px] md:text-sm text-p506-gold mb-2 tracking-widest font-bold">Eventos</h2>
+            <div class="h-[1px] w-8 md:w-12 bg-p506-gold mx-auto"></div>
+            <p class="mt-3 text-p506-gold/60 text-[8px] md:text-[9px] uppercase tracking-widest font-semibold">Cartelera Local</p>
+        </a>
     </nav>
     -->
 
-    <!-- =======================================================
-         TARJETA DE AVISO: PAUSA TEMPORAL
-         ======================================================= -->
-    <main class="max-w-xl w-full px-4">
-        <div class="opcion-card bg-stone-900/40 backdrop-blur-xl p-8 md:p-12 rounded-3xl text-center border-p506-gold/30">
+    <!-- SECCIÓN DE AVISO: PAUSA TEMPORAL -->
+    <main class="max-w-xl w-full px-4 animate-card" style="animation-delay: 0.1s;">
+        <div class="opcion-card bg-stone-900/40 backdrop-blur-xl p-8 md:p-12 rounded-3xl text-center border-p506-gold/40">
             <div class="text-4xl md:text-5xl mb-4">⏳</div>
             
             <h2 class="serif-title text-sm md:text-base text-p506-gold mb-3 tracking-widest font-bold">
@@ -133,9 +174,8 @@
         </div>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="mt-12 md:mt-16 w-full max-w-4xl px-4">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 border-y border-p506-gold/10 py-8 text-center">
+    <footer class="mt-12 md:mt-20 w-full max-w-4xl px-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 border-y border-p506-gold/10 py-10 text-center">
             <a href="https://wa.me/50662117858" target="_blank" class="footer-link">
                 <p class="text-p506-gold text-[7px] md:text-[8px] uppercase tracking-widest mb-1 font-bold">WhatsApp</p>
                 <p class="text-stone-500 text-[9px] md:text-[10px] font-medium">+506 6211-7858</p>
@@ -161,23 +201,49 @@
     </footer>
 
     <script>
-        // CONFIGURACIÓN SUPABASE Y REGISTRO
+        // CONFIGURACIÓN SUPABASE
         const SUPABASE_URL = 'https://yfqxnjohojtbjevrmbmq.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcXhuam9ob2p0YmpldnJtYm1xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MjI4ODgsImV4cCI6MjA4ODM5ODg4OH0.ze32GU0sW7EZ5oicnLFlHpthtLcSTUxZ9rlHSyQLFso';
         
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+        // Registrar visita al cargar
         async function registrarVisita() {
+            // Evento para Google Analytics
             if (typeof gtag === 'function') {
-                gtag('event', 'page_view', { page_title: 'Punto 506 - Pausa' });
+                gtag('event', 'page_view', { page_title: 'Punto 506 - Bienvenida' });
             }
 
             try {
                 await supabaseClient.from('registros_actividad').insert([
-                    { tipo_evento: 'visita_pagina', nombre_negocio: 'Punto 506 - En Pausa' }
+                    { tipo_evento: 'visita_pagina', nombre_negocio: 'Punto 506 - Inicio' }
                 ]);
             } catch (err) {
                 console.error("Error al registrar visita:", err);
+            }
+        }
+
+        // Registrar clic y redirigir
+        async function trackClick(event, nombre) {
+            event.preventDefault(); 
+            const href = event.currentTarget.getAttribute('href');
+            
+            // Evento para Google Analytics
+            if (typeof gtag === 'function') {
+                gtag('event', 'select_content', { 
+                    content_type: 'welcome_navigation', 
+                    item_id: nombre 
+                });
+            }
+            
+            try {
+                await supabaseClient.from('registros_actividad').insert([
+                    { tipo_evento: 'click_opcion', nombre_negocio: nombre }
+                ]);
+            } catch (err) {
+                console.error("Error tracking click", err);
+            } finally {
+                window.location.href = href; 
             }
         }
 
