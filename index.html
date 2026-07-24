@@ -168,9 +168,18 @@
                 Agradecemos profundamente a la comunidad de Guápiles, Pococí y a todos los comercios locales que han formado parte de este espacio.
             </p>
 
-            <span class="inline-block bg-p506-gold/10 border border-p506-gold/30 text-p506-gold text-[9px] md:text-[10px] uppercase tracking-[0.2em] px-4 py-2 rounded-full font-bold">
-                ¡Nos vemos muy pronto!
-            </span>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <span class="inline-block bg-p506-gold/10 border border-p506-gold/30 text-p506-gold text-[9px] md:text-[10px] uppercase tracking-[0.2em] px-4 py-2 rounded-full font-bold">
+                    ¡Nos vemos muy pronto!
+                </span>
+
+                <a href="https://wa.me/50661961136?text=Hola,%20tengo%20una%20sugerencia%20para%20Punto%20506:" 
+                   target="_blank" 
+                   onclick="trackClick(event, 'Punto 506 - Sugerencia WhatsApp')"
+                   class="inline-flex items-center gap-2 bg-p506-gold/20 hover:bg-p506-gold/30 border border-p506-gold/50 text-p506-gold text-[9px] md:text-[10px] uppercase tracking-[0.2em] px-4 py-2 rounded-full font-bold transition-all duration-300 hover:scale-105">
+                    💡 Enviar Sugerencia
+                </a>
+            </div>
         </div>
     </main>
 
@@ -227,6 +236,7 @@
         async function trackClick(event, nombre) {
             event.preventDefault(); 
             const href = event.currentTarget.getAttribute('href');
+            const isExternal = event.currentTarget.getAttribute('target') === '_blank';
             
             // Evento para Google Analytics
             if (typeof gtag === 'function') {
@@ -243,7 +253,11 @@
             } catch (err) {
                 console.error("Error tracking click", err);
             } finally {
-                window.location.href = href; 
+                if (isExternal) {
+                    window.open(href, '_blank');
+                } else {
+                    window.location.href = href; 
+                }
             }
         }
 
